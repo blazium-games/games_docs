@@ -8,8 +8,7 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Find guides and references for blazium.games and related projects
-        in one place.
+        Find guides and references for blazium.games.
       </>
     ),
   },
