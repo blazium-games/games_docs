@@ -87,6 +87,23 @@ const config = {
                 label: 'Introduction',
                 to: '/docs/intro',
               },
+              {
+                label: 'Graphical Assets Guidelines',
+                to: '/docs/graphical_assets_guidelines',
+              },
+            ],
+          },
+          {
+            title: 'Socials',
+            items: [
+              {
+                label: 'Discord',
+                to: 'https://blazium.app/chat',
+              },
+              {
+                label: 'Twitter',
+                to: 'https://x.com/BlaziumGames',
+              },
             ],
           },
         ],
