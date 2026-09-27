@@ -12,6 +12,7 @@ This is the documentation for [Blazium Games](https://blazium.games), the store 
 - **[Cursor plugin](./cursor-plugin.md)**: the official plugin bundles the MCP server with skills for common workflows.
 - **[Deploy builds](./deploy.md)**: upload builds with blazium-cli, the API, or GitHub Actions.
 - **[Crash reporting](./crash-reporting.md)**: send crashes and events from your game.
+- **[Linked accounts and sign-in](./linked-accounts.md)**: link GitHub, X, or Discord, log in with them, and unlink them.
 - **[Graphical assets guidelines](./graphical_assets_guidelines.md)**: image sizes for your store page.
 
 ## Help
