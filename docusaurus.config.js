@@ -116,6 +116,9 @@ const config = {
             items: [
               {label: 'Terms of Service', href: 'https://blazium.games/terms-of-service'},
               {label: 'Privacy Policy', href: 'https://blazium.games/privacy-policy'},
+              {label: 'Permissions', to: '/docs/legal/permissions'},
+              {label: 'GitHub API disclosure', to: '/docs/legal/github-api-disclosure'},
+              {label: 'Subprocessors', to: '/docs/legal/subprocessors'},
             ],
           },
           {

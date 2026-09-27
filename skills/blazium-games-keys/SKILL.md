@@ -56,6 +56,11 @@ OAuth grants and project-bound MCP keys are managed at https://blazium.games/set
 - Removing an admin revokes their key for the project.
 - The owner can turn off MCP access for admins on the project's MCP tab (website only). That revokes admins' keys and blocks their account keys and OAuth for that project.
 
+## Read-only tokens
+
+If the user approved the connection with **Read-only access**, the token only has `mcp:read`. Rotation tools then fail with HTTP 403, code 4031 ("This token is read-only"). Ask the user to reconnect without the read-only option, or to rotate on the website.
+
 ## Docs
 
-https://blazium-games.github.io/games_docs/docs/mcp/access-and-keys
+- https://blazium-games.github.io/games_docs/docs/mcp/access-and-keys
+- Permissions, scopes, and error codes: https://blazium-games.github.io/games_docs/docs/legal/permissions
