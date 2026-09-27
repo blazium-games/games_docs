@@ -37,7 +37,7 @@ That is the only use. We do not call the GitHub API again after sign-in.
 - We never use GitHub data for advertising.
 - We never use GitHub data to train AI or machine-learning models.
 - We never sell GitHub data or share it with third parties, except the [subprocessors](./subprocessors.md) that host our service.
-- We only keep your GitHub user ID, so you can sign in again.
+- We only keep your GitHub user ID, so you can sign in again, plus your GitHub login if you link GitHub from [Linked accounts](https://blazium.games/settings/connections).
 
 ## Revoking access and deleting data
 

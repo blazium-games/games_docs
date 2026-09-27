@@ -34,8 +34,9 @@ These are not subprocessors, because we operate them on our own servers:
 
 ## Accounts you connect are not subprocessors
 
-If you sign in with GitHub, GitHub is acting for you, not for us. What GitHub does with your data is covered by GitHub's own privacy statement.
-See the [GitHub API disclosure](./github-api-disclosure.md) for what we read from GitHub.
+If you sign in with GitHub, or link GitHub, X, or Discord at [Linked accounts](https://blazium.games/settings/connections), that service is acting for you, not for us.
+What it does with your data is covered by its own privacy policy. We only receive the account's user ID and username (and, for GitHub sign-in, the details in our [GitHub API disclosure](./github-api-disclosure.md)).
+See [Permissions & Scopes](./permissions.md) for the exact scopes we request from each one.
 
 ## Contact
 

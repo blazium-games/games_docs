@@ -24,13 +24,42 @@ Scopes requested: `read:user` and `user:email`.
 
 ### What we store
 - Your GitHub user ID, so we can recognize you next time.
+- If you link GitHub from [Linked accounts](https://blazium.games/settings/connections), also your GitHub login, so the page can show which account is linked.
 - Your name and avatar are only used to pre-fill account setup; you can change them.
-- The GitHub access token is used once during sign-in and is never stored.
+- The GitHub access token is used once during sign-in or linking and is never stored.
 
 ### We will never
 - Write to your repositories, issues, or any other GitHub data.
 - Act on GitHub on your behalf.
 - Ask for more scopes without updating this page first.
+
+## Linking X
+
+You can link an X account from [Linked accounts](https://blazium.games/settings/connections). Linking is optional and X cannot be used to sign in.
+
+Scopes requested: `users.read` and `tweet.read`. X requires `tweet.read` alongside `users.read` to read your profile; we do not read your posts.
+
+### What we store
+- Your X user ID and username. Nothing else.
+- The X access token is used once while linking and is never stored. We do not request offline access, so we get no refresh token.
+
+### We will never
+- Post, like, repost, follow, or send messages on X for you.
+- Read your posts, timeline, or direct messages.
+
+## Linking Discord
+
+You can link a Discord account from [Linked accounts](https://blazium.games/settings/connections). Linking is optional and Discord cannot be used to sign in.
+
+Scopes requested: `identify` and `email`.
+
+### What we store
+- Your Discord user ID and username. Nothing else.
+- Discord returns your email address with the `email` scope. We read it while linking but do not store it.
+- The Discord access token is used once while linking and is never stored.
+
+### We will never
+- Join servers, read your servers or messages, or send messages for you.
 
 ## MCP access (OAuth)
 
@@ -80,7 +109,10 @@ You can change your choice at any time with **Cookie settings** in the blazium.g
 
 ## Revoking access
 
+- **Linked accounts:** unlink GitHub, X, or Discord at [blazium.games/settings/connections](https://blazium.games/settings/connections). To unlink GitHub you need a password on your account, so you can still sign in.
 - **GitHub:** remove Blazium Games under [GitHub > Settings > Applications > Authorized OAuth Apps](https://github.com/settings/applications).
+- **X:** remove Blazium Games under [X > Settings > Security and account access > Apps and sessions](https://x.com/settings/connected_apps).
+- **Discord:** remove Blazium Games under Discord **User Settings > Authorized Apps**.
 - **MCP keys and tokens:** rotate keys at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). OAuth access tokens expire after 1 hour and refresh tokens after 30 days; all of them stop working when your account is deleted.
 - **Everything:** email [privacy@blazium.games](mailto:privacy@blazium.games) to delete your account. See the [Privacy Policy](https://blazium.games/privacy-policy#6-deleting-your-account).
 
