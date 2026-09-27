@@ -12,7 +12,7 @@ The canonical versions of these pages live on blazium.games. The copies here are
 | --- | --- |
 | [Privacy Policy](https://blazium.games/privacy-policy) | What is collected, the 1-year analytics retention, cookies, and account deletion. |
 | [Terms of Service](https://blazium.games/terms-of-service) | The terms for using Blazium Games. |
-| [Permissions & Scopes](./permissions.md) | GitHub sign-in scopes, X and Discord linking scopes, MCP scopes, keys, and cookies, plus how scopes behave for developers. |
+| [Permissions & Scopes](./permissions.md) | GitHub, X and Discord sign-in and linking scopes, MCP scopes, keys, and cookies, plus how scopes behave for developers. |
 | [GitHub API disclosure](./github-api-disclosure.md) | What is read from GitHub and the commitments made about it. |
 | [Subprocessors](./subprocessors.md) | Third-party services that process data for Blazium Games. |
 
