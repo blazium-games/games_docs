@@ -1,0 +1,8 @@
+{
+  "label": "Legal and privacy",
+  "position": 7,
+  "link": {
+    "type": "doc",
+    "id": "legal/index"
+  }
+}
