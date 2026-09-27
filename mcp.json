@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "blazium-games": {
+      "type": "http",
+      "url": "https://mcp.blazium.games/mcp"
+    }
+  }
+}

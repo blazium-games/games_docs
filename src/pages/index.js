@@ -22,6 +22,11 @@ function HomepageHeader() {
             to="/docs/intro">
             Documentation
           </Link>
+          <Link
+            className="button button--secondary button--lg margin-left--md"
+            to="/docs/mcp">
+            Connect MCP
+          </Link>
         </div>
       </div>
     </header>

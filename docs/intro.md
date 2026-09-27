@@ -4,5 +4,19 @@ sidebar_position: 1
 
 # Introduction
 
-This site provides documentation, guides, and references for [blazium.games](https://blazium.games) and
-its ecosystem. Content will be expanded as projects evolve.
+This is the documentation for [Blazium Games](https://blazium.games), the store and developer platform for games, applications, mods, and game assets.
+
+## Start here
+
+- **[MCP](./mcp/index.md)**: connect Cursor, VS Code, Claude Code, or any MCP client so an AI agent can manage your store pages, builds, analytics, and crash reports.
+- **[Cursor plugin](./cursor-plugin.md)**: the official plugin bundles the MCP server with skills for common workflows.
+- **[Deploy builds](./deploy.md)**: upload builds with blazium-cli, the API, or GitHub Actions.
+- **[Crash reporting](./crash-reporting.md)**: send crashes and events from your game.
+- **[Graphical assets guidelines](./graphical_assets_guidelines.md)**: image sizes for your store page.
+
+## Help
+
+- Support: [support@blazium.games](mailto:support@blazium.games)
+- Privacy: [privacy@blazium.games](mailto:privacy@blazium.games)
+- Community: [Discord](https://blazium.app/chat)
+- Source for this site and the Cursor plugin: [blazium-games/games_docs](https://github.com/blazium-games/games_docs)

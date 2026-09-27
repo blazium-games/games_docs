@@ -1,0 +1,34 @@
+{
+  "name": "blazium-games",
+  "displayName": "Blazium Games",
+  "version": "1.0.0",
+  "description": "Manage Blazium Games store pages, analytics, crash reports, builds, and deploy credentials from Cursor. Includes the hosted Blazium Games MCP server and skills for store pages, CI deploys, crash reporting, crash debugging, analytics, and key management.",
+  "author": {
+    "name": "Blazium Games",
+    "email": "support@blazium.games"
+  },
+  "homepage": "https://blazium-games.github.io/games_docs/docs/mcp",
+  "repository": "https://github.com/blazium-games/games_docs",
+  "license": "MIT",
+  "keywords": [
+    "blazium",
+    "blazium-games",
+    "gamedev",
+    "game-distribution",
+    "crash-reporting",
+    "analytics",
+    "deploy",
+    "mcp"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "blazium",
+    "gamedev",
+    "mcp",
+    "crash-reporting",
+    "ci-cd"
+  ],
+  "logo": "assets/logo.svg",
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json"
+}

@@ -1,0 +1,5 @@
+{
+  "label": "MCP",
+  "position": 2,
+  "link": { "type": "doc", "id": "mcp/index" }
+}
