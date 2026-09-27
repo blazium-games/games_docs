@@ -14,18 +14,27 @@ Canonical version: https://blazium.games/permissions
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
 It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [GitHub API disclosure](./github-api-disclosure.md) and [Subprocessors](./subprocessors.md).
 
-## GitHub sign-in
+## Linked accounts and sign-in
+
+You can link GitHub, X, and Discord from [Linked accounts](https://blazium.games/settings/connections) and then use any of them to log in.
+
+- Only a linked account can log in. We never match a GitHub, X, or Discord account to yours by email, and signing in never links an account for you.
+- Once you unlink an account, it can no longer be used to log in.
+- If your account has no password, you must keep at least one account linked.
+- Linking does not create a Blazium Games account. Create one with email first.
+- After a linked account proves who you are, we still email you a sign-in code unless you have already verified that browser.
+- If your account is already set up, signing in never sends you to account setup and never pre-fills anything from GitHub, X, or Discord.
+
+## GitHub
 
 Scopes requested: `read:user` and `user:email`.
 
 ### Why we need it
-- To let you sign in or sign up with your GitHub account, and to link GitHub to an existing account.
-- We read your GitHub user ID, login, name, avatar, and your primary verified email address.
+- To link GitHub to your account and let you log in with it.
+- We read your GitHub user ID, login, and your primary verified email address. GitHub must report a verified email or sign-in and linking stop; we do not store the email or use it to find your account.
 
 ### What we store
-- Your GitHub user ID, so we can recognize you next time.
-- If you link GitHub from [Linked accounts](https://blazium.games/settings/connections), also your GitHub login, so the page can show which account is linked.
-- Your name and avatar are only used to pre-fill account setup; you can change them.
+- Your GitHub user ID and login, so we can recognize the linked account and show which one is linked.
 - The GitHub access token is used once during sign-in or linking and is never stored.
 
 ### We will never
@@ -33,30 +42,26 @@ Scopes requested: `read:user` and `user:email`.
 - Act on GitHub on your behalf.
 - Ask for more scopes without updating this page first.
 
-## Linking X
-
-You can link an X account from [Linked accounts](https://blazium.games/settings/connections). Linking is optional and X cannot be used to sign in.
+## X
 
 Scopes requested: `users.read` and `tweet.read`. X requires `tweet.read` alongside `users.read` to read your profile; we do not read your posts.
 
 ### What we store
 - Your X user ID and username. Nothing else.
-- The X access token is used once while linking and is never stored. We do not request offline access, so we get no refresh token.
+- The X access token is used once during sign-in or linking and is never stored. We do not request offline access, so we get no refresh token.
 
 ### We will never
 - Post, like, repost, follow, or send messages on X for you.
 - Read your posts, timeline, or direct messages.
 
-## Linking Discord
-
-You can link a Discord account from [Linked accounts](https://blazium.games/settings/connections). Linking is optional and Discord cannot be used to sign in.
+## Discord
 
 Scopes requested: `identify` and `email`.
 
 ### What we store
 - Your Discord user ID and username. Nothing else.
-- Discord returns your email address with the `email` scope. We read it while linking but do not store it.
-- The Discord access token is used once while linking and is never stored.
+- Discord returns your email address with the `email` scope. We read it but do not store it or use it to find your account.
+- The Discord access token is used once during sign-in or linking and is never stored.
 
 ### We will never
 - Join servers, read your servers or messages, or send messages for you.
@@ -98,8 +103,8 @@ Sign-in cookies are always on because the site does not work without them. Analy
 | `BG_T` | Your signed-in session. | 7 days | No |
 | `BG_UD` | Your display name, username, and avatar for the header. | 7 days | No |
 | `BG_DEV` | Remembers a browser that verified an emailed sign-in code. Survives logout. | 30 days | No |
-| `BG_NEXT` | Returns you to the page you came from after GitHub sign-in. | 15 minutes | No |
-| `BG_SETUP` | Finishes account setup after a first GitHub sign-in. | 15 minutes | No |
+| `BG_NEXT` | Returns you to the page you came from after logging in with GitHub, X, or Discord. | 15 minutes | No |
+| `BG_SETUP` | Finishes setup for an account that never completed it, after logging in with a linked account. | 15 minutes | No |
 | `BG_CONSENT` | Remembers your cookie banner choice. | 1 year | No |
 | `_ga`, `_ga_*` | Google Analytics. | Up to 2 years (set by Google) | Yes |
 
@@ -109,7 +114,8 @@ You can change your choice at any time with **Cookie settings** in the blazium.g
 
 ## Revoking access
 
-- **Linked accounts:** unlink GitHub, X, or Discord at [blazium.games/settings/connections](https://blazium.games/settings/connections). To unlink GitHub you need a password on your account, so you can still sign in.
+- **Linked accounts:** unlink GitHub, X, or Discord at [blazium.games/settings/connections](https://blazium.games/settings/connections). An unlinked account can no longer log in. If you have no password, the last linked account cannot be removed until you set one or link another.
+- Removing Blazium Games in the other service's settings does not unlink it here. Unlink it at [blazium.games/settings/connections](https://blazium.games/settings/connections) to stop it logging in.
 - **GitHub:** remove Blazium Games under [GitHub > Settings > Applications > Authorized OAuth Apps](https://github.com/settings/applications).
 - **X:** remove Blazium Games under [X > Settings > Security and account access > Apps and sessions](https://x.com/settings/connected_apps).
 - **Discord:** remove Blazium Games under Discord **User Settings > Authorized Apps**.
