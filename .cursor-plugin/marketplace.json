@@ -1,0 +1,13 @@
+{
+  "name": "blazium-games-plugin-marketplace",
+  "owner": {
+    "name": "Blazium Games"
+  },
+  "plugins": [
+    {
+      "name": "blazium-games",
+      "source": "./",
+      "description": "Manage Blazium Games store pages, builds, crash reports, analytics, and deploy keys. Includes MCP functionality and skills."
+    }
+  ]
+}

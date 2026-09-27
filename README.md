@@ -1,0 +1,67 @@
+# Blazium Games for Cursor
+
+The official Blazium Games plugin for Cursor, and the source of the [Blazium Games documentation](https://blazium-games.github.io/games_docs/).
+
+The plugin teaches Cursor how to use [Blazium Games](https://blazium.games): create and edit store pages, ship builds from CI, wire up crash reporting, debug crashes, read analytics, and rotate keys, all through the hosted Blazium Games MCP server.
+
+## Install
+
+Add `blazium-games/games_docs` from **Cursor Settings > Plugins**, then enable **Blazium Games**.
+
+The first time the agent uses a Blazium Games tool, Cursor opens a browser for the Blazium Games sign-in and consent page. No key is stored in the plugin.
+
+Full guide: [Cursor plugin docs](https://blazium-games.github.io/games_docs/docs/cursor-plugin).
+
+## What's included
+
+- The hosted [Blazium Games MCP server](https://blazium-games.github.io/games_docs/docs/mcp) at `https://mcp.blazium.games/mcp` ([mcp.json](mcp.json)).
+- Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
+
+| Skill | What it does |
+|-------|--------------|
+| [blazium-games-get-started](skills/blazium-games-get-started/SKILL.md) | Connects the server, verifies the account, and routes to the right skill |
+| [blazium-games-store-page](skills/blazium-games-store-page/SKILL.md) | Creates and edits store pages |
+| [blazium-games-deploy](skills/blazium-games-deploy/SKILL.md) | Ships builds from CI or blazium-cli |
+| [blazium-games-crash-reporting](skills/blazium-games-crash-reporting/SKILL.md) | Sends crashes and events from a game |
+| [blazium-games-debug-crash](skills/blazium-games-debug-crash/SKILL.md) | Triages crashes and maps them to your code |
+| [blazium-games-analytics](skills/blazium-games-analytics/SKILL.md) | Summarizes store page traffic |
+| [blazium-games-keys](skills/blazium-games-keys/SKILL.md) | Inspects and rotates MCP and deploy keys |
+
+## Authentication
+
+- **OAuth (default):** choose your whole account or a single project on the consent page, and optionally **Read-only access**.
+- **API key:** for headless use, create a key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) and send it as `Authorization: Bearer bgames_mcp_...`. See [Access and keys](https://blazium-games.github.io/games_docs/docs/mcp/access-and-keys).
+
+Never commit keys to a repository.
+
+## Repository layout
+
+| Path | Contents |
+|------|----------|
+| `.cursor-plugin/` | Plugin and marketplace manifests |
+| `mcp.json` | MCP server config shipped with the plugin |
+| `skills/` | Agent skills |
+| `docs/`, `src/`, `static/` | Docusaurus documentation site |
+| `scripts/check-plugin.mjs` | Validates manifests, skills, links, and MCP coverage |
+
+## Contributing
+
+Issues and pull requests are welcome.
+
+```bash
+npm ci
+npm start                       # docs site at http://localhost:3000/games_docs/
+npm run build                   # production build; fails on broken links
+node scripts/check-plugin.mjs   # plugin check (add --offline to skip the live server card)
+```
+
+The plugin check fetches the live [server card](https://mcp.blazium.games/.well-known/mcp/server-card.json) and fails if any tool, prompt, or resource is missing from the skill references or the [MCP reference page](docs/mcp/reference.md).
+
+## Contact
+
+- Support: [support@blazium.games](mailto:support@blazium.games)
+- Privacy: [privacy@blazium.games](mailto:privacy@blazium.games)
+
+## License
+
+[MIT](LICENSE)

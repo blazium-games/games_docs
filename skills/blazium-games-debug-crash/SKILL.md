@@ -1,0 +1,72 @@
+---
+name: blazium-games-debug-crash
+description: Investigate Blazium Games crash reports. Lists recent crashes, reads the stack excerpt and metadata, downloads dumps, logs, or stackwalk output, maps the crash to a build and source code, and proposes a fix. Use when the user asks to look at crashes, debug a crash, or triage crash reports for a Blazium Games project.
+license: MIT
+---
+
+# Blazium Games: Debug a Crash
+
+Go from "players are crashing" to a root cause and a fix in the user's code.
+
+## Invoke This Skill When
+
+- "What are my latest crashes?", "debug this crash", "why is my game crashing?"
+- The user pastes a crash id from https://blazium.games
+- After `blazium-games-crash-reporting` verifies reports arrive
+
+## Prerequisites
+
+- The `blazium-games` MCP server is connected (read access is enough)
+- The game's source code is open in the workspace (for Phase 4)
+
+## Phase 1: Find the crash
+
+1. Call `list_game_crashes` with the game `uid`.
+2. Group by `build_id`, OS, and arch. Many crashes on one build usually means a regression in that build.
+3. Pick the crash the user named, or the most recent one on the newest build.
+
+## Phase 2: Read the report
+
+Call `get_crash` with `uid` and `crash_id`. Key fields:
+
+| Field | Meaning |
+|-------|---------|
+| `build_id`, `os`, `arch` | Which build and platform crashed |
+| `user_message` | What the player said they were doing |
+| `has_dump`, `has_log`, `has_stack` | Which artifacts can be downloaded |
+| `analysis` | Server-side analysis, if already run |
+| `metadata` | Reporter metadata (engine version, custom fields) |
+
+Call `get_game_build` with the `build_id` to get the version and channel.
+
+## Phase 3: Download artifacts
+
+Call `request_crash_download` with `kind`:
+
+- `stack`: symbolicated stackwalk output. Start here.
+- `log`: the log tail (`log.txt`).
+- `dump`: the minidump (`dump.dmp`) for a native debugger.
+
+Each call returns a private `url` valid for 1 hour (`expires_in: 3600`). Fetch it promptly; do not share it or paste it into public places.
+
+## Phase 4: Map to code
+
+1. Take the top frames from the stack that belong to the user's code (skip engine and OS frames).
+2. Search the workspace for those functions and files.
+3. Check out or inspect the commit matching the build version when possible, so line numbers line up.
+4. Read the log tail for the last actions before the crash.
+
+## Phase 5: Report
+
+Give the user:
+
+- One sentence root cause
+- The file and function, with a code reference
+- The builds and platforms affected, and how many reports
+- A proposed fix, and a test or reproduction step
+
+If the dump has no symbols, say so and suggest exporting with debug symbols for the next build.
+
+## Docs
+
+https://blazium-games.github.io/games_docs/docs/crash-reporting#reading-crashes
