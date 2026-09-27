@@ -46,6 +46,8 @@ That is the only use. We do not call the GitHub API again after sign-in or linki
 - Revoke Blazium Games at any time under [GitHub > Settings > Applications > Authorized OAuth Apps](https://github.com/settings/applications). This does not unlink GitHub here, so unlink it as well if you want to stop GitHub sign-in.
 - To delete your account and the GitHub link, email [privacy@blazium.games](mailto:privacy@blazium.games). We process deletion requests within 30 days. See the [Privacy Policy](https://blazium.games/privacy-policy#6-deleting-your-account) for what deletion covers.
 
+See also the [X API disclosure](./x-api-disclosure.md), the [Discord API disclosure](./discord-api-disclosure.md), [Permissions & Scopes](./permissions.md), and the [Linked accounts and sign-in](../linked-accounts.md) guide.
+
 ## Contact
 
 Questions about this disclosure: [privacy@blazium.games](mailto:privacy@blazium.games).

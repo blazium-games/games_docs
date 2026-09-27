@@ -12,7 +12,8 @@ Canonical version: https://blazium.games/permissions
 **Effective Date: September 26, 2026**
 
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
-It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [GitHub API disclosure](./github-api-disclosure.md) and [Subprocessors](./subprocessors.md).
+It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), and [Discord](./discord-api-disclosure.md).
+For step-by-step instructions, see the [Linked accounts and sign-in](../linked-accounts.md) guide.
 
 ## Linked accounts and sign-in
 
@@ -42,9 +43,15 @@ Scopes requested: `read:user` and `user:email`.
 - Act on GitHub on your behalf.
 - Ask for more scopes without updating this page first.
 
+Details: [GitHub API disclosure](./github-api-disclosure.md).
+
 ## X
 
 Scopes requested: `users.read` and `tweet.read`. X requires `tweet.read` alongside `users.read` to read your profile; we do not read your posts.
+
+### Why we need it
+- To link X to your account and let you log in with it.
+- We make one request to X's `/2/users/me` and read your X user ID and username. X also returns your display name, which we ignore.
 
 ### What we store
 - Your X user ID and username. Nothing else.
@@ -53,18 +60,28 @@ Scopes requested: `users.read` and `tweet.read`. X requires `tweet.read` alongsi
 ### We will never
 - Post, like, repost, follow, or send messages on X for you.
 - Read your posts, timeline, or direct messages.
+- Ask for more scopes without updating this page first.
+
+Details: [X API disclosure](./x-api-disclosure.md).
 
 ## Discord
 
 Scopes requested: `identify` and `email`.
 
+### Why we need it
+- To link Discord to your account and let you log in with it.
+- We make one request to Discord's `/users/@me` and read your Discord user ID and username.
+
 ### What we store
 - Your Discord user ID and username. Nothing else.
-- Discord returns your email address with the `email` scope. We read it but do not store it or use it to find your account.
+- Discord includes your email address, display name, and avatar in its reply. We ignore them: we do not store your Discord email or use it to find your account.
 - The Discord access token is used once during sign-in or linking and is never stored.
 
 ### We will never
 - Join servers, read your servers or messages, or send messages for you.
+- Ask for more scopes without updating this page first.
+
+Details: [Discord API disclosure](./discord-api-disclosure.md).
 
 ## MCP access (OAuth)
 
