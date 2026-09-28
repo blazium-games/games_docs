@@ -21,6 +21,32 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `request_mcp_key` | none | account, write | Issue a new MCP API key and invalidate every previous one. Returns the secret once |
 | `request_deploy_key` | `uid` | write | Issue a new upload `access_token` and `secret_key` for a game and invalidate the previous ones. Returns secrets once |
 
+## Account and payments
+
+Amounts are integer US cents. Agents pay only from the stored balance, and only after the human approves the quoted total. Workflow: [blazium-games-purchases](../../blazium-games-purchases/SKILL.md).
+
+| Tool | Inputs | Access | What it does |
+|------|--------|--------|--------------|
+| `get_account` | none | account | Email verification, balances, and what the account may do (publish, upload, download, buy) |
+| `request_email_code` | none | account, write | Email a verification code to the human |
+| `verify_email` | `code` | account, write | Verify the email with the code the human read from their inbox |
+| `get_wallet` | none | account | Credit, pending, and available balances with fee, refund, and cash-out rules |
+| `list_wallet_transactions` | `limit` (1-200, default 50), `before` | account | Ledger entries, newest first |
+| `get_payment_options` | none | account | Card top-up link option and x402 USDC networks with fees |
+| `create_top_up_link` | `amount_cents` (500-50000) | account, write | Card Checkout link for the human; agents cannot pay by card |
+| `create_x402_top_up` | `amount_cents`, `network` (default Base) | account, write | x402 payment requirements to sign with the agent's own wallet |
+| `pay_with_x402` | `top_up_id`, `payment_payload` | account, write | Submit the signed payment; credit is added after on-chain settlement |
+| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | account, write | Price, tax, and `total_cents` to show the human |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | account, write | Buy a license from the balance within the agent's monthly limit |
+| `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | account, write | Donate to a free game from the balance |
+| `list_library` | none | account | Owned games with refund windows and playtime |
+| `get_download_link` | `file_id` | account | 5-minute signed URL for a build file; needs a verified email and, for paid games, a license |
+| `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | write | Set price or donations. Owners and game admins only |
+| `list_game_sales` | `uid` | | Sales, donations, refunds, and seller earnings for a game you manage |
+| `get_agent_policy` | none | account | This agent's purchase switch and monthly limit; only the human changes them, on the website |
+
+Payout setup and cash-out are website-only.
+
 ## Field values
 
 - `visibility`: `draft`, `invisible`, or `public`
@@ -37,3 +63,12 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4030` | Not allowed for this game |
 | `4031` | Token is read-only |
 | `4006` | Build not found |
+| `4096` | Email not verified; use `request_email_code` and `verify_email` |
+| `4020` | Not enough balance; top up first |
+| `4221` | No billing address for tax; top up by card once or buy on the website |
+| `4023` | Buy the game before downloading it |
+| `4094` | Total changed since the quote; confirm again with the human |
+| `4099` | File still being scanned |
+| `4212` | Purchases are off for this agent; the human enables them in MCP settings |
+| `4213` | Over this agent's monthly limit |
+| `4083` | Website only |

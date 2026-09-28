@@ -18,6 +18,7 @@ Register a build, upload its files, and keep the returned `build_id` for crash r
 
 - The `blazium-games` MCP server is connected with write access (see `blazium-games-get-started`)
 - A store page exists. If not, run `blazium-games-store-page` first
+- The game owner's email is verified. Uploads for an unverified owner fail with code `4096`. Check with `get_account` (`email_verified`); if needed, call `request_email_code`, ask the human for the code, and call `verify_email`. A game admin cannot verify for the owner
 - For the CLI path: [blazium-cli](https://github.com/blazium-games/blazium-cli/releases)
 
 ## Phase 1: Read deploy info
@@ -94,6 +95,9 @@ asset:
 | `4039` | Build not found (register it first) |
 | `4041` | Missing `channel`, `os`, `arch`, or `checksum` |
 | `4042` | File is not a `.zip` |
+| `4096` | The project owner must verify their email before uploading |
+
+Uploaded build files are private. Players download them through short-lived links after verifying their email, and paid games also need a license.
 
 ## Phase 4: GitHub Actions
 
