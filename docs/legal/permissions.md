@@ -111,8 +111,9 @@ When you approve a tool, it gets a token with one or both of these scopes:
 AI tools connected through MCP can buy games and send donations for you, but only if you allow it.
 
 ### How it is limited
-- Every agent starts with purchases **off** and a $0 monthly limit. Each MCP API key and each OAuth-connected app is a separate agent with its own switch and limit.
-- You turn purchases on and set the limit at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) (up to $1,000 per calendar month, UTC). Agents cannot change their own limits.
+- Every agent starts on **Ask me each time**: each purchase or donation waits until you approve it by the emailed link or code. Each MCP API key and each OAuth-connected app is a separate agent with its own setting.
+- At [blazium.games/settings/mcp](https://blazium.games/settings/mcp) you can let an agent spend on its own: unlimited, or up to a monthly, yearly, or one-time limit (up to $1,000, UTC periods). Anything beyond the limit waits for your approval. Agents cannot change their own limits.
+- An approval covers one purchase, for the amount shown, and expires after 30 minutes.
 - The limit counts each purchase's total, including tax. Refunded purchases stop counting.
 - Buying needs a token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy.
 - Agents pay only from your account balance, never by card. They cannot cash out, set up payouts, or request refunds.
@@ -121,7 +122,7 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 
 ### We will never
 - Let an agent charge your card.
-- Let an agent spend more than the limit you set.
+- Let an agent spend beyond the limit you set without your approval.
 
 ## Keys
 
@@ -153,7 +154,7 @@ You can change your choice at any time with **Cookie settings** in the blazium.g
 - **GitHub:** remove Blazium Games under [GitHub > Settings > Applications > Authorized OAuth Apps](https://github.com/settings/applications).
 - **X:** remove Blazium Games under [X > Settings > Security and account access > Apps and sessions](https://x.com/settings/connected_apps).
 - **Discord:** remove Blazium Games under Discord **User Settings > Authorized Apps**.
-- **Agent spending:** turn purchases off for any agent at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
+- **Agent spending:** set any agent back to **Ask me each time** at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
 - **MCP keys and tokens:** rotate keys at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). OAuth access tokens expire after 1 hour and refresh tokens after 30 days; all of them stop working when your account is deleted.
 - **Everything:** email [privacy@blazium.games](mailto:privacy@blazium.games) to delete your account. See the [Privacy Policy](https://blazium.games/privacy-policy#6-deleting-your-account).
 
@@ -166,8 +167,10 @@ These are the responses your MCP client, script, or CI job will see.
 | A token without `mcp:write` makes anything other than a `GET` or `HEAD` request (for example `create_game`, `update_game`, `request_deploy_key`, `request_mcp_key`) | 403 | 4031 | This token is read-only |
 | A project token is used for a different game | 403 | 4030 | This token is limited to one project |
 | The game's owner turned off MCP access for admins, and an admin's token is used on it | 403 | 4080 | The project owner has turned off MCP access for admins |
-| A project token tries to buy, or purchases are off for this agent | 403 | 4212 | Purchases are turned off for this agent, or the token can't make purchases |
-| An agent purchase would go over its monthly limit | 402 | 4213 | This purchase would exceed the agent's monthly spending limit |
+| A project token tries to buy | 403 | 4212 | This token can't make purchases |
+| An agent purchase needs your approval (no limit set, or over the limit) | 202 | 4214 | Approval required; the response includes the approval |
+| You denied the agent's request | 403 | 4215 | The account owner denied this request |
+| The agent sent a wrong or expired approval code | 400 | 4216 | Wrong or expired code |
 | An agent tries to pay by card | 403 | 4082 | Agents pay from the balance |
 | An MCP token is used for wallet setup, cash-out, or agent limits | 403 | 4083 or 4081 | Only available on blazium.games |
 | The account's email is not verified and it tries to buy, download, or cash out | 403 | 4096 | Verify your email first |

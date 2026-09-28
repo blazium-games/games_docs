@@ -45,13 +45,15 @@ Amounts are integer US cents. See [Payments](../payments/index.md) for the rules
 | `create_x402_top_up` | `amount_cents`, `network` | x402 payment requirements for a USDC top-up. Account only, write |
 | `pay_with_x402` | `top_up_id`, `payment_payload` | Submits the signed x402 payment. Credit arrives after settlement. Account only, write |
 | `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | Price, tax, and total. Show the total to the human first. Account only, write |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | Buys a license from the balance within this agent's limit. Account only, write |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | Buys a license from the balance. Beyond this agent's limit it returns `approval_required`; retry with the same key once approved. Account only, write |
 | `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | Donates to a free game from the balance. Account only, write |
 | `list_library` | none | Owned games with refund windows and playtime. Account only |
 | `get_download_link` | `file_id` | 5-minute signed URL for a build file. Needs a verified email and, for paid games, a license. Account only |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | Owners and game admins. Write |
 | `list_game_sales` | `uid` | Sales, donations, refunds, and seller earnings |
-| `get_agent_policy` | none | This agent's purchase switch and monthly limit. Changed only on the website. Account only |
+| `get_agent_policy` | none | This agent's limit mode (`unset`, `unlimited`, `monthly`, `yearly`, `one_time`), limit, and spend in the period. Changed only on the website. Account only |
+| `get_approval` | `approval_id` | State of a purchase approval: `pending`, `approved`, `denied`, `expired`, or `used`. Account only |
+| `confirm_approval` | `approval_id`, `code` | Approves with the 6-digit code the human read from their email. Account only, write |
 
 Cash-out and payout setup are website-only.
 
@@ -99,6 +101,11 @@ Tool errors return `API <status>: <body>`.
 | `4023` | Buy the game before downloading it |
 | `4094` | The total changed since the quote; confirm again with the human |
 | `4099` | The file is still being scanned |
-| `4212` | Purchases are turned off for this agent |
-| `4213` | The purchase would exceed this agent's monthly limit |
+| `4212` | This token can't make purchases |
+| `4214` | Waiting for the human's approval (HTTP 202, returned as a normal result) |
+| `4215` | The human denied the request |
+| `4216` | Wrong or expired approval code |
+| `4095` | The idempotency key belongs to a different purchase |
+| `4097` | The approval was already used |
+| `4098` | The approval was already decided or expired |
 | `4083` | Website only (payout setup and cash-out) |

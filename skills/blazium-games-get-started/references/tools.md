@@ -37,13 +37,15 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `create_x402_top_up` | `amount_cents`, `network` (default Base) | account, write | x402 payment requirements to sign with the agent's own wallet |
 | `pay_with_x402` | `top_up_id`, `payment_payload` | account, write | Submit the signed payment; credit is added after on-chain settlement |
 | `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | account, write | Price, tax, and `total_cents` to show the human |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | account, write | Buy a license from the balance within the agent's monthly limit |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | account, write | Buy a license from the balance; beyond the agent's limit returns `approval_required` |
 | `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | account, write | Donate to a free game from the balance |
 | `list_library` | none | account | Owned games with refund windows and playtime |
 | `get_download_link` | `file_id` | account | 5-minute signed URL for a build file; needs a verified email and, for paid games, a license |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | write | Set price or donations. Owners and game admins only |
 | `list_game_sales` | `uid` | | Sales, donations, refunds, and seller earnings for a game you manage |
-| `get_agent_policy` | none | account | This agent's purchase switch and monthly limit; only the human changes them, on the website |
+| `get_agent_policy` | none | account | This agent's limit mode, limit, and spend in the period; only the human changes them, on the website |
+| `get_approval` | `approval_id` | account | State of a purchase approval |
+| `confirm_approval` | `approval_id`, `code` | account, write | Approve with the 6-digit code the human read from their email |
 
 Payout setup and cash-out are website-only.
 
@@ -69,6 +71,8 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4023` | Buy the game before downloading it |
 | `4094` | Total changed since the quote; confirm again with the human |
 | `4099` | File still being scanned |
-| `4212` | Purchases are off for this agent; the human enables them in MCP settings |
-| `4213` | Over this agent's monthly limit |
+| `4212` | This token can't make purchases |
+| `4214` | Waiting for the human's approval (a normal result, not an error) |
+| `4215` | The human denied the request |
+| `4216` | Wrong or expired approval code |
 | `4083` | Website only |
