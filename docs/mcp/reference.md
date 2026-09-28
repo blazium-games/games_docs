@@ -18,7 +18,7 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `list_games` | none | Games you own or administer, and pending admin invites |
 | `get_game` | `uid` | One game's settings |
 | `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name` | New game page. Account only, write |
-| `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility` | Update a page. Write |
+| `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility` | Update a page. Setting `public` fails with `4225` until the listing check passes. Write |
 | `get_game_analytics` | `uid` | Visitor analytics |
 | `list_game_crashes` | `uid` | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | One crash report including stack excerpt |
@@ -30,6 +30,18 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `get_game_build` | `uid`, `build_id` | One build, its files, and crash reporter headers |
 | `request_mcp_key` | none | New account key. **Revokes all previous account keys.** Account only, write |
 | `request_deploy_key` | `uid` | New upload keys for CLI and CI. **Revokes that project's previous upload keys.** Write |
+
+### Listings
+
+See [Listings and search](../listings.md) for the allowed values and the listing check.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `validate_listing` | `uid` | Listing check: `ready`, `errors` (block going public), `warnings`, `passes`, plus the current taxonomy and allowed values |
+| `update_game_taxonomy` | `uid` (required), `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max` | Only the fields you pass change. Write |
+| `set_similar_games` | `uid`, `games` (up to 10 uids or vanity names) | Replaces the similar titles; an empty list clears them. Write |
+| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, or `gallery`), `url` | Fetches an https image (PNG, JPEG, GIF, or WebP, up to 2048 px and 10 MB) and sets it. Without `url` it returns the upload route instead. Write |
+| `scan_status` | `uid` | Scan state and history of every build file, plus files removed in the last 30 days because their scan failed |
 
 ### Account and payments
 
@@ -115,3 +127,6 @@ Tool errors return `API <status>: <body>`.
 | `4097` | The approval was already used |
 | `4098` | The approval was already decided or expired |
 | `4083` | Website only (payout setup and cash-out) |
+| `4071` | A taxonomy value isn't allowed; `validate_listing` lists the allowed values |
+| `4072` | A similar title isn't a public game, or is this game |
+| `4225` | The listing check failed, so the page can't go public (HTTP 422, report in `data.lint`) |

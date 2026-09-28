@@ -20,6 +20,11 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `list_mcp_keys` | none | account | MCP API key prefixes. Secrets are never returned |
 | `request_mcp_key` | none | account, write | Issue a new MCP API key and invalidate every previous one. Returns the secret once |
 | `request_deploy_key` | `uid` | write | Issue a new upload `access_token` and `secret_key` for a game and invalidate the previous ones. Returns secrets once |
+| `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
+| `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max` | write | Set the taxonomy; only passed fields change |
+| `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
+| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`), `url` | write | Set an image from an https URL (PNG, JPEG, GIF, WebP; 2048 px, 10 MB) |
+| `scan_status` | `uid` | | Virus-scan state and history per build file, and files removed for failing the scan |
 
 ## Account and payments
 
@@ -76,3 +81,6 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4215` | The human denied the request |
 | `4216` | Wrong or expired approval code |
 | `4083` | Website only |
+| `4071` | Taxonomy value not allowed |
+| `4072` | Similar title isn't a public game, or is this game |
+| `4225` | Listing check failed; the page can't go public yet. Run `validate_listing` |
