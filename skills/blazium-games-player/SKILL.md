@@ -1,6 +1,6 @@
 ---
 name: blazium-games-player
-description: Connect an agent to a Blazium Games account as a player through the player MCP server at mcp.blazium.games/player. Checks the account and email, reads the wallet and library, explains player scopes and spending limits, and routes to purchases or downloads. Use when the user wants an agent to act for them as a player on Blazium Games, set up the player MCP server, or check what they own or can spend.
+description: Connect an agent to a Blazium Games account as a player through the player MCP server at mcp.blazium.games/player. Checks the account and email, reads the wallet and library, searches the catalog, explains player scopes and spending limits, and routes to purchases, installs, or launches. Use when the user wants an agent to act for them as a player on Blazium Games, find a game to play, set up the player MCP server, or check what they own or can spend.
 license: MIT
 ---
 
@@ -37,6 +37,9 @@ The player server acts for one player. It sees the account, wallet, and library,
 |---|---|
 | Buy, donate, or top up | [purchases](../blazium-games-purchases/SKILL.md) |
 | See what they own | `get_library` |
+| Find something to play | `search_catalog` with their constraints (for example `session_bucket: 15m`, `players: 2`, `os: windows`), then `get_game_details` on the best matches. Say why each one fits using `why_short` |
+| Install a game they own or a free game | `install_build`, then give them the `blazium://install/<uid>` link. If it fails because the scan isn't clean, don't offer another way to download that file |
+| Play a game | `launch_game`, then give them the `blazium://game/<uid>` link |
 | Download a game they own or a free game | Phase 5 of [purchases](../blazium-games-purchases/SKILL.md) |
 
 ## Errors

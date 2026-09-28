@@ -1,12 +1,12 @@
 ---
 title: Player MCP
 sidebar_position: 5
-description: Connect an agent to your Blazium Games account as a player to check your wallet and library, top up, buy games within your spending limit, and download.
+description: Connect an agent to your Blazium Games account as a player to search the catalog, check your wallet and library, top up, buy games within your spending limit, and install or launch them through the Blazium launcher.
 ---
 
 # Player MCP
 
-The player server acts for you as a player. It can see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, and fetch download links. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
+The player server acts for you as a player. It can search the catalog, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
 
 | | Developer server | Player server |
 |---|---|---|
@@ -72,6 +72,12 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `get_library` | none | read | Games you own, with refund windows and play time |
 | `get_download_link` | `file_id` | read | 5-minute signed URL for a build file |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
+| `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `session_bucket`, `net`, `players`, `os`, `arch`, `sort`, `page`, `page_size` | read | Public games with a score, scan state, platforms, and a short reason for each match. See [Listings and search](../listings.md#search) |
+| `get_game_details` | `uid` | read | Description, taxonomy, price, files with scan state and checksum, similar titles, and whether you own it |
+| `install_build` | `uid`, `build_id`, `os`, `arch` | read | Checks your license and the virus scan, then returns the file checksum, a 5-minute `download_url`, and a `blazium://install/<uid>` link for the launcher. Refuses any file that isn't `clean` |
+| `launch_game` | `uid` | read | Returns the `blazium://game/<uid>` link that opens the game in the launcher, and whether you own it and a clean build exists |
+
+`install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and the Blazium launcher does the rest.
 
 ## Resources
 

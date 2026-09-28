@@ -23,6 +23,10 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `get_library` | read | Owned games, refund windows, play time |
 | `get_download_link` | read | 5-minute signed download URL |
 | `get_agent_policy` | read | This agent's spending limit |
+| `search_catalog` | read | Search public games by text, genres, tags, tone, session length, network mode, players, and platform |
+| `get_game_details` | read | One listing: taxonomy, price, files with scan state and checksum, similar titles, ownership |
+| `install_build` | read | License and scan check, checksum, 5-minute download URL, and a `blazium://install/<uid>` hand-off. Fails unless the file is clean |
+| `launch_game` | read | `blazium://game/<uid>` hand-off link for the launcher |
 
 ## Resources
 

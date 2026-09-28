@@ -1,6 +1,6 @@
 ---
 name: blazium-games-store-page
-description: Create or update a Blazium Games store page. Drafts the name, tagline, and description from a pitch, creates the page as a draft, updates copy, sets a price or donations, and changes visibility. Use when the user wants to create a game page, write store copy, rename a game, price a game, accept donations, or publish a page on Blazium Games.
+description: Create or update a Blazium Games store page. Drafts the name, tagline, and description from a pitch, creates the page as a draft, updates copy, fills in the taxonomy, images, and similar titles until the listing check passes, sets a price or donations, and changes visibility. Use when the user wants to create a game page, write store copy, rename a game, price a game, accept donations, or publish a page on Blazium Games.
 license: MIT
 ---
 
@@ -51,6 +51,17 @@ Call `update_game` with `uid` and any of `name`, `tagline`, `description`, `visi
 
 Before switching to `public`, confirm with the user and make sure the owner is verified. `invisible` keeps the page reachable by link but out of listings.
 
+## Phase 3b: Listing (required before public)
+
+A page can't go public until the listing check passes (`4225` otherwise).
+
+1. Call `validate_listing`. It returns `errors`, `warnings`, and the allowed values.
+2. Fix the taxonomy with `update_game_taxonomy`: at least 3 `tags`; for games also `genres`, `session_bucket`, `players_min`/`players_max`, `net`, and `inputs`; for mods and assets `engines`. Only use values from the check's vocabulary (`4071` otherwise). Ask the user rather than guessing player counts, network mode, or content warnings.
+3. Images: `set_media` with `kind` `cover`, `thumbnail`, or `gallery` (4 gallery images needed) and an https image URL the user gave you. Without a URL, tell the user to upload on the website.
+4. A clean build: ship one with `blazium-games-deploy`, then check `scan_status` until a file is `clean`. If a file is `infected` or `error`, tell the user; it was removed and must be rebuilt and uploaded again.
+5. Optionally `set_similar_games` with up to 10 public titles the user names.
+6. Call `validate_listing` again; when `ready` is true, set `visibility` to `public`.
+
 ## Phase 4: Price or donations (optional)
 
 Call `set_game_price` with `uid` and:
@@ -68,8 +79,9 @@ Details: https://blazium-games.github.io/games_docs/docs/payments/selling
 
 Call `get_game` and give the user the page URL (`page_url` from `get_deploy_info`, or `https://<owner>.blazium.games/<vanity_name>`).
 
-Images, videos, and changelogs are managed on the website or through builds (`blazium-games-deploy`). Image sizes: https://blazium-games.github.io/games_docs/docs/graphical_assets_guidelines
+Videos and changelogs are managed on the website or through builds (`blazium-games-deploy`). Image sizes: https://blazium-games.github.io/games_docs/docs/graphical_assets_guidelines
 
 ## Docs
 
-https://blazium-games.github.io/games_docs/docs/mcp/reference
+- https://blazium-games.github.io/games_docs/docs/listings
+- https://blazium-games.github.io/games_docs/docs/mcp/reference
