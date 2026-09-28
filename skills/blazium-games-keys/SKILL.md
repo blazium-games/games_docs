@@ -39,7 +39,9 @@ Ask the user to confirm and to name where the new secret will be stored.
 
 ## Phase 3: Rotate
 
-Call the matching tool. The secret is returned once. Tell the user to store it (CI secret, password manager, or a gitignored `.env`) and then stop repeating it.
+Call the matching tool with an `idempotency_key` you make up (for example `rotate-deploy-<uid>-<date>`). Over MCP the first call returns `approval_required` (code `4214`) with an `approval_id` and `confirm_url`, and the account owner gets an email with a link and a 6-digit code. Ask the human to approve, then either call `confirm_approval` with the code they read to you or poll `get_approval` until `approved`. Call the rotation tool again with the same `idempotency_key`. Each approval works once. If the human denies it you get `4215`; stop.
+
+The secret is returned once. Tell the user to store it (CI secret, password manager, or a gitignored `.env`) and then stop repeating it.
 
 ## Phase 4: Update consumers
 
@@ -58,7 +60,7 @@ OAuth grants and project-bound MCP keys are managed at https://blazium.games/set
 
 ## Read-only tokens
 
-If the user approved the connection with **Read-only access**, the token only has `mcp:read`. Rotation tools then fail with HTTP 403, code 4031 ("This token is read-only"). Ask the user to reconnect without the read-only option, or to rotate on the website.
+If the user approved the connection with **Read-only access**, the token only has `mcp:read`. Rotation tools then fail with HTTP 403, code 4031 ("This token is read-only"). Ask the user to reconnect without the read-only option, or to rotate on the website. A token from a narrower preset without `mcp:keys.manage` gets `4073`; reconnect with the **Keys** or **Full access** preset.
 
 ## Docs
 

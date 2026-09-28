@@ -41,8 +41,8 @@ Create a player key at [blazium.games/settings/mcp](https://blazium.games/settin
 
 | Scope | Allows |
 |---|---|
-| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy |
-| `player:write` | Email verification, play time, confirming an approval with the emailed code |
+| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game |
+| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta |
 | `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game` |
 
 A route outside this list returns `4033`. A missing `player:buy` returns `4212`; any other missing scope returns `4031`.
@@ -74,8 +74,12 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
 | `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `session_bucket`, `net`, `players`, `os`, `arch`, `sort`, `page`, `page_size` | read | Public games with a score, scan state, platforms, and a short reason for each match. See [Listings and search](../listings.md#search) |
 | `get_game_details` | `uid` | read | Description, taxonomy, price, files with scan state and checksum, similar titles, and whether you own it |
-| `install_build` | `uid`, `build_id`, `os`, `arch` | read | Checks your license and the virus scan, then returns the file checksum, a 5-minute `download_url`, and a `blazium://install/<uid>` link for the launcher. Refuses any file that isn't `clean` |
+| `install_build` | `uid`, `build_id`, `os`, `arch`, `channel` | read | Checks your license and the virus scan, then returns the file checksum, a 5-minute `download_url`, and a `blazium://install/<uid>` link for the launcher. Uses the channel you follow unless you pass `stable` or `beta`. Refuses any file that isn't `clean` |
 | `launch_game` | `uid` | read | Returns the `blazium://game/<uid>` link that opens the game in the launcher, and whether you own it and a clean build exists |
+| `set_channel` | `uid`, `channel` (`stable` or `beta`) | write | Joins or leaves a game's beta. Beta builds then show up in `get_game_details` and `install_build` |
+| `why_should_i_trust_this` | `uid` | read | The developer, how each current file was uploaded, its scan history and checksum, and anything worth a second look (a file that isn't clean, no scan history, a beta build). It never calls a file safe; a clean scan only means no known malware was found |
+
+Games list the channels you can join in `get_game_details` (`channels`). A beta download link for a game whose beta you haven't joined returns `4074`.
 
 `install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and the Blazium launcher does the rest.
 

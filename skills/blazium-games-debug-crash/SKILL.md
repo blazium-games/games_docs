@@ -21,9 +21,9 @@ Go from "players are crashing" to a root cause and a fix in the user's code.
 
 ## Phase 1: Find the crash
 
-1. Call `list_game_crashes` with the game `uid`.
-2. Group by `build_id`, OS, and arch. Many crashes on one build usually means a regression in that build.
-3. Pick the crash the user named, or the most recent one on the newest build.
+1. Call `list_crash_groups` with the game `uid`. Each group is one cause (top stack frames, or the crash message and platform before a stackwalk), busiest first, with counts per build and a `sample_crash_id`.
+2. A group whose reports all come from the newest build usually means a regression in that build.
+3. Pick the crash the user named, or the `sample_crash_id` of the biggest group. `list_game_crashes` lists individual reports when you need more than the sample.
 
 ## Phase 2: Read the report
 
@@ -64,6 +64,7 @@ Give the user:
 - The file and function, with a code reference
 - The builds and platforms affected, and how many reports
 - A proposed fix, and a test or reproduction step
+- If the build is live on `stable` and crashing badly, offer `rollback_channel` (needs write access). Players go back to the previous build and nothing is deleted
 
 If the dump has no symbols, say so and suggest exporting with debug symbols for the next build.
 

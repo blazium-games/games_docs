@@ -28,8 +28,41 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `get_deploy_info` | `uid` | Upload, crash, and page URLs, build list, and deploy key prefixes. No secrets |
 | `list_game_builds` | `uid` | Builds. `build_id` is the build UID for CI and crash reporters (`X-Build-Id`), not a version string |
 | `get_game_build` | `uid`, `build_id` | One build, its files, and crash reporter headers |
-| `request_mcp_key` | none | New account key. **Revokes all previous account keys.** Account only, write |
-| `request_deploy_key` | `uid` | New upload keys for CLI and CI. **Revokes that project's previous upload keys.** Write |
+| `request_mcp_key` | `idempotency_key` (optional) | New account key. **Revokes all previous account keys.** Needs the human's approval. Account only, write |
+| `request_deploy_key` | `uid`, `idempotency_key` (optional) | New upload keys for CLI and CI. **Revokes that project's previous upload keys.** Needs the human's approval. Write |
+
+### Releases and trust
+
+Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or your own lowercase name. Each channel points at one build. A clean upload moves its channel forward on its own; `promote_build` and `rollback_channel` move it by hand. Players see the build each channel points at, plus anything uploaded after the last move. `dev` is only visible to the game's owner and admins, and `beta` only to players who joined the beta.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `list_channels` | `uid` | Each channel's build, expiry, beta subscriber count, and the last 50 promote, rollback, and upload events |
+| `promote_build` | `uid`, `channel`, `build_id`, `expires_in_hours` (0-2160), `idempotency_key` | Points a channel at a build whose files passed the virus scan. `expires_in_hours` hides the channel from players after that. Promoting to `stable` needs the human's approval. Write |
+| `rollback_channel` | `uid`, `channel` | Moves the channel back to the build it pointed at before. Nothing is deleted. Write |
+| `list_crash_groups` | `uid` | Crash reports grouped by cause, busiest first, with counts per build and a `sample_crash_id` for `get_crash` |
+| `get_build_provenance` | `uid`, `file_uid` | Uploader, how it was uploaded (`deploy_key` with an 8-character `key_ref`, or `website`), upload time, checksum, and scan history. Never returns a secret |
+
+Crash groups use the top stack frames once a minidump has been stackwalked, and the crash message, app version, and OS before that. Grouping runs every 10 minutes.
+
+### Approvals for risky actions
+
+Over MCP, rotating an account or deploy key, creating an account or game key, promoting to `stable`, and deleting a game or build wait for the account owner. The call returns HTTP 202 with code `4214`, an `approval_id`, and a `confirm_url`, and the owner gets an email with a link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once. On the website these actions don't need an approval.
+
+### Scopes
+
+`mcp:read` and `mcp:write` cover every developer tool. OAuth consent can grant narrower scopes instead:
+
+| Scope | Covers |
+|-------|--------|
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, media, admins |
+| `mcp:build.write` | Builds, channels, deploy info, scan status |
+| `mcp:crash.read` | Crash reports, crash groups, crash analysis |
+| `mcp:analytics.read` | Visitor analytics and events |
+| `mcp:keys.manage` | Deploy keys and MCP keys |
+| `mcp:money` | Pricing, sales, wallet, purchases, library, downloads |
+
+Every developer token can read the profile, account, and game pages. A write scope also reads its own group. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Read-only** (`mcp:read`), and **Full access**.
 
 ### Listings
 
@@ -118,7 +151,7 @@ Tool errors return `API <status>: <body>`.
 | `4221` | No billing address for tax; top up by card once or buy on the website |
 | `4023` | Buy the game before downloading it |
 | `4094` | The total changed since the quote; confirm again with the human |
-| `4099` | The file is still being scanned |
+| `4099` | The file is still being scanned, or the build has no clean file to promote |
 | `4212` | This token can't make purchases (project token, or a player token without `player:buy`) |
 | `4214` | Waiting for the human's approval (HTTP 202, returned as a normal result) |
 | `4215` | The human denied the request |
@@ -130,3 +163,7 @@ Tool errors return `API <status>: <body>`.
 | `4071` | A taxonomy value isn't allowed; `validate_listing` lists the allowed values |
 | `4072` | A similar title isn't a public game, or is this game |
 | `4225` | The listing check failed, so the page can't go public (HTTP 422, report in `data.lint`) |
+| `4073` | The token's scopes don't cover this tool |
+| `4074` | The file isn't on a channel you can see (for example a beta build when you haven't joined the beta) |
+| `4075` | The channel has no earlier build to roll back to |
+| `4226` | Invalid channel name or `expires_in_hours` out of range (HTTP 422) |

@@ -18,8 +18,13 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `list_game_builds` | `uid` | | Up to 50 builds. Each `build_id` is the `X-Build-Id` for crash reporters |
 | `get_game_build` | `uid`, `build_id` | | One build with its files and crash reporter headers |
 | `list_mcp_keys` | none | account | MCP API key prefixes. Secrets are never returned |
-| `request_mcp_key` | none | account, write | Issue a new MCP API key and invalidate every previous one. Returns the secret once |
-| `request_deploy_key` | `uid` | write | Issue a new upload `access_token` and `secret_key` for a game and invalidate the previous ones. Returns secrets once |
+| `request_mcp_key` | `idempotency_key` | account, write | Issue a new MCP API key and invalidate every previous one. Waits for the human's approval, then returns the secret once |
+| `request_deploy_key` | `uid`, `idempotency_key` | write | Issue a new upload `access_token` and `secret_key` for a game and invalidate the previous ones. Waits for the human's approval, then returns secrets once |
+| `list_channels` | `uid` | | Channel pointers (stable, beta, dev, custom), expiry, beta subscribers, and history |
+| `promote_build` | `uid`, `channel`, `build_id`, `expires_in_hours`, `idempotency_key` | write | Point a channel at a clean build. `stable` waits for the human's approval |
+| `rollback_channel` | `uid`, `channel` | write | Move a channel back to its previous build |
+| `list_crash_groups` | `uid` | | Crash reports grouped by cause with counts per build and a sample crash id |
+| `get_build_provenance` | `uid`, `file_uid` | | Uploader, deploy key reference, upload time, checksum, and scan history of a file |
 | `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
 | `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max` | write | Set the taxonomy; only passed fields change |
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
@@ -84,3 +89,7 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4071` | Taxonomy value not allowed |
 | `4072` | Similar title isn't a public game, or is this game |
 | `4225` | Listing check failed; the page can't go public yet. Run `validate_listing` |
+| `4073` | The token's scopes don't cover this tool; reconnect with a wider preset |
+| `4074` | File isn't on a channel this account can see |
+| `4075` | Nothing to roll back to |
+| `4226` | Invalid channel name or expiry |
