@@ -6,7 +6,7 @@ description: Send crash reports, dumps, logs, and custom events from your game t
 
 # Crash reporting
 
-Games send crashes to `https://api.blazium.games/api/v1/public/crashes`. Reports appear on your game's dashboard and through the MCP tools `list_game_crashes` and `get_crash`.
+Games send crashes to `https://api.blazium.online/api/v1/public/crashes`. Reports appear on your game's dashboard and through the MCP tools `list_game_crashes` and `get_crash`.
 
 Crash ingest needs no secret. It identifies the game with two headers:
 
@@ -25,7 +25,7 @@ Set these in Project Settings under `application/crash_reporter/`:
 |---------|-------|
 | `enabled` | `true` |
 | `upload_mode` | `InEngine`, `Sidecar`, or `Both` |
-| `endpoint` | `https://api.blazium.games/api/v1/public/crashes` |
+| `endpoint` | `https://api.blazium.online/api/v1/public/crashes` |
 | `app_id` | The game uid |
 | `build_id` | The build UID |
 | `app_version` | The build version |
@@ -40,7 +40,7 @@ For the sidecar consent UI, place the [crash reporter](https://github.com/blaziu
 Create the report:
 
 ```http
-POST https://api.blazium.games/api/v1/public/crashes
+POST https://api.blazium.online/api/v1/public/crashes
 X-App-Id: <game uid>
 X-Build-Id: <build_id>
 Content-Type: application/json
@@ -70,7 +70,7 @@ Upload each file with `PUT` to its `url`, as the raw body or a multipart `file` 
 ## Custom events
 
 ```http
-POST https://api.blazium.games/api/v1/public/events
+POST https://api.blazium.online/api/v1/public/events
 X-App-Id: <game uid>
 X-Build-Id: <build_id>
 Content-Type: application/json

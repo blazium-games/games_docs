@@ -27,7 +27,7 @@ Call `get_deploy_info` with the game's `uid` or vanity name. It returns (no secr
 
 | Field | Use |
 |-------|-----|
-| `endpoints.upload_build` | `https://api.blazium.games/api/v1/tool/upload/build` |
+| `endpoints.upload_build` | `https://api.blazium.online/api/v1/tool/upload/build` |
 | `endpoints.crash_ingest` | Crash reporter endpoint |
 | `endpoints.events_ingest` | Custom events endpoint |
 | `builds[]`, `latest_build_id` | Existing builds and their `build_id` |
@@ -44,7 +44,7 @@ Tell the user to store them as CI secrets (for example GitHub Actions secrets `B
 
 ## Phase 3: Upload with blazium-cli (recommended)
 
-`blazium-cli games` reads `BLAZIUM_ACCESS_TOKEN`, `BLAZIUM_SECRET_KEY`, and optionally `BLAZIUM_API_URL` (default `https://api.blazium.games/api/v1`) and `BLAZIUM_UPLOAD_URL` (default `https://upload.blazium.games/api/v1`).
+`blazium-cli games` reads `BLAZIUM_ACCESS_TOKEN`, `BLAZIUM_SECRET_KEY`, and optionally `BLAZIUM_API_URL` (default `https://api.blazium.online/api/v1`) and `BLAZIUM_UPLOAD_URL` (default `https://uploader.blazium.online/api/v1`).
 
 1. Generate `build.yml` once: `blazium-cli games genbuild --version 1.0.0`
 2. Add changelog entries: `blazium-cli games addchangelog --title "..." --description "..."`
@@ -76,7 +76,7 @@ asset:
 
 ## Phase 3 (alternative): Upload API directly
 
-1. `POST https://api.blazium.games/api/v1/tool/upload/build` with headers `X-Access-Token` and `X-Secret-Key` and JSON:
+1. `POST https://api.blazium.online/api/v1/tool/upload/build` with headers `X-Access-Token` and `X-Secret-Key` and JSON:
 
    ```json
    { "version": "1.0.0", "build_type": "game", "os": "windows", "arch": "x86_64",
@@ -86,7 +86,7 @@ asset:
 
    The same version, type, OS, arch, and channel update one build instead of creating another. The response includes `build_id`.
 
-2. `POST https://upload.blazium.games/api/v1/tool/upload/files` (multipart, same headers) with fields `build_id`, `os`, `arch`, `channel`, `checksum` (SHA-256 hex of the zip), and `file` (a `.zip`, max 5 GB). Large uploads can resume with `X-Upload-Session-ID` and `Content-Range`.
+2. `POST https://uploader.blazium.online/api/v1/tool/upload/files` (multipart, same headers) with fields `build_id`, `os`, `arch`, `channel`, `checksum` (SHA-256 hex of the zip), and `file` (a `.zip`, max 5 GB). Large uploads can resume with `X-Upload-Session-ID` and `Content-Range`.
 
 | Error code | Meaning |
 |------------|---------|

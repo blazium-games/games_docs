@@ -6,7 +6,7 @@ license: MIT
 
 # Blazium Games: Crash Reporting
 
-Wire a game to `POST https://api.blazium.games/api/v1/public/crashes` so crashes show up in `list_game_crashes`.
+Wire a game to `POST https://api.blazium.online/api/v1/public/crashes` so crashes show up in `list_game_crashes`.
 
 ## Invoke This Skill When
 
@@ -36,7 +36,7 @@ Set these in Project Settings under `application/crash_reporter/`:
 |---------|-------|
 | `enabled` | `true` |
 | `upload_mode` | `InEngine`, `Sidecar`, or `Both` |
-| `endpoint` | `https://api.blazium.games/api/v1/public/crashes` |
+| `endpoint` | `https://api.blazium.online/api/v1/public/crashes` |
 | `app_id` | the game uid (`X-App-Id`) |
 | `build_id` | the build UID (`X-Build-Id`) |
 | `app_version` | the build version |
@@ -53,7 +53,7 @@ In CI, write `build_id` into the project before exporting, so each exported bina
 1. Create the report:
 
    ```http
-   POST https://api.blazium.games/api/v1/public/crashes
+   POST https://api.blazium.online/api/v1/public/crashes
    X-App-Id: <game uid>
    X-Build-Id: <build_id>
    Content-Type: application/json
@@ -75,7 +75,7 @@ In CI, write `build_id` into the project before exporting, so each exported bina
 ## Phase 3: Custom events (optional)
 
 ```http
-POST https://api.blazium.games/api/v1/public/events
+POST https://api.blazium.online/api/v1/public/events
 X-App-Id: <game uid>
 X-Build-Id: <build_id>
 Content-Type: application/json
