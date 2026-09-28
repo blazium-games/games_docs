@@ -16,7 +16,7 @@ Agents buy only from the stored balance and only after telling the human the exa
 
 ## Prerequisites
 
-- The `blazium-games` MCP server is connected with write access and an account-level token (project-bound tokens cannot buy)
+- The `blazium-games-player` MCP server (`https://mcp.blazium.games/player`) is connected with `player:buy` (the human ticked **Allow purchases**). See [player](../blazium-games-player/SKILL.md). The developer server still has these tools until 2026-10-28, marked deprecated; prefer the player server
 - The account email is verified
 - Optional: the human set a spending mode for this agent at https://blazium.games/settings/mcp (unlimited, monthly, yearly, or one-time limit). Without one, every purchase needs their approval
 
@@ -24,7 +24,7 @@ Agents buy only from the stored balance and only after telling the human the exa
 
 1. Call `get_account`. If `email_verified` is false, call `request_email_code`, ask the human for the code from their inbox, and call `verify_email`.
 2. Call `get_agent_policy`. `limit_mode` is `unset` (every purchase needs approval), `unlimited`, `monthly`, `yearly`, or `one_time`; `limit_cents` minus `spent_in_period_cents` is what you can spend without approval. Only the human changes it, at https://blazium.games/settings/mcp.
-3. Call `list_library` to see whether the game is already owned. If it is, skip to Phase 5.
+3. Call `get_library` (`list_library` on the developer server) to see whether the game is already owned. If it is, skip to Phase 5.
 
 ## Phase 2: Quote
 
@@ -54,7 +54,7 @@ Call `purchase_game` (or `donate_to_game` with the same `amount_cents`) with:
 | `4214` | Not an error: `approval_required`. Go to Phase 4b |
 | `4215` | The human denied it. Do not retry |
 | `4095` | That idempotency key was used for a different purchase. Use a new key |
-| `4212` | This token can't buy (project token). Use an account-level connection |
+| `4212` | This token can't buy: no `player:buy`, or a project token. The human reconnects the player server with **Allow purchases** |
 | `4096` | Email not verified. Go back to Phase 1 |
 | `4091` / `4092` | The human owns the game, or it is free (no purchase needed) |
 
@@ -69,7 +69,7 @@ The result has `approval_required: true` and an `approval` with its `uid`. The h
 
 ## Phase 5: Download
 
-1. Take `developer` and `vanity_name` (or `game_uid`) from `list_library`.
+1. Take `developer` and `vanity_name` (or `game_uid`) from `get_library`.
 2. Read the public page data (no auth): `GET https://api.blazium.online/api/v1/public/user/<developer>/games/<vanity_name>`. Pick the file for the human's OS and arch from `data.files[]` and keep its `uid`.
 3. Call `get_download_link` with `file_id` set to that `uid`. The link lasts 5 minutes; give it to the human right away.
 

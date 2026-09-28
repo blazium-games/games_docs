@@ -11,6 +11,8 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const offline = process.argv.includes('--offline');
 const serverCardURL =
   process.env.SERVER_CARD_URL || 'https://mcp.blazium.games/.well-known/mcp/server-card.json';
+const playerServerCardURL =
+  process.env.PLAYER_SERVER_CARD_URL || 'https://mcp.blazium.games/.well-known/mcp/player-server-card.json';
 
 const errors = [];
 const fail = (msg) => errors.push(msg);
@@ -121,18 +123,18 @@ function checkLinks() {
   }
 }
 
-async function checkServerCard() {
+async function checkServerCard(url, skill, docsPage) {
   if (offline) {
-    console.log('Skipping server card coverage (--offline).');
+    console.log(`Skipping server card coverage for ${url} (--offline).`);
     return;
   }
   let card;
   try {
-    const res = await fetch(serverCardURL, { headers: { accept: 'application/json' } });
+    const res = await fetch(url, { headers: { accept: 'application/json' } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     card = await res.json();
   } catch (err) {
-    fail(`server card: could not fetch ${serverCardURL} (${err.message})`);
+    fail(`server card: could not fetch ${url} (${err.message})`);
     return;
   }
 
@@ -142,26 +144,28 @@ async function checkServerCard() {
     ...(card.resources || []).map((r) => ['resource', r.uri]),
     ...(card.resourceTemplates || []).map((r) => ['resource template', r.uriTemplate]),
   ].filter(([, v]) => v);
-  if (expected.length === 0) fail('server card: no capabilities listed');
+  if (expected.length === 0) fail(`server card ${url}: no capabilities listed`);
 
-  const refsText = walk(join(root, 'skills', 'blazium-games-get-started', 'references'), '.md')
+  const refsDir = join(root, 'skills', skill, 'references');
+  const refsText = walk(refsDir, '.md')
     .map((f) => readFileSync(f, 'utf8'))
     .join('\n');
-  const docsRef = join(root, 'docs', 'mcp', 'reference.md');
+  const docsRef = join(root, 'docs', 'mcp', docsPage);
   const docsText = existsSync(docsRef) ? readFileSync(docsRef, 'utf8') : '';
-  if (!docsText) fail('docs/mcp/reference.md: missing');
+  if (!docsText) fail(`docs/mcp/${docsPage}: missing`);
 
   for (const [kind, value] of expected) {
-    if (!refsText.includes(value)) fail(`skills references: ${kind} "${value}" is not documented`);
-    if (docsText && !docsText.includes(value)) fail(`docs/mcp/reference.md: ${kind} "${value}" is not documented`);
+    if (!refsText.includes(value)) fail(`${rel(refsDir)}: ${kind} "${value}" is not documented`);
+    if (docsText && !docsText.includes(value)) fail(`docs/mcp/${docsPage}: ${kind} "${value}" is not documented`);
   }
-  console.log(`Server card: ${expected.length} capabilities checked.`);
+  console.log(`Server card ${url}: ${expected.length} capabilities checked.`);
 }
 
 checkManifests();
 checkSkills();
 checkLinks();
-await checkServerCard();
+await checkServerCard(serverCardURL, 'blazium-games-get-started', 'reference.md');
+await checkServerCard(playerServerCardURL, 'blazium-games-player', 'player.md');
 
 if (errors.length) {
   console.error(`Plugin check failed with ${errors.length} error(s):`);

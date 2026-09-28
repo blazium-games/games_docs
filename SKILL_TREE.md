@@ -15,13 +15,14 @@ New to Blazium Games in Cursor? Start with [blazium-games-get-started](skills/bl
 | [blazium-games-debug-crash](skills/blazium-games-debug-crash/SKILL.md) | Triage and fix crashes | `list_game_crashes`, `get_crash`, `request_crash_download` |
 | [blazium-games-analytics](skills/blazium-games-analytics/SKILL.md) | Summarize page traffic | `get_game_analytics` |
 | [blazium-games-keys](skills/blazium-games-keys/SKILL.md) | Inspect and rotate credentials | `list_mcp_keys`, `request_mcp_key`, `request_deploy_key` |
+| [blazium-games-player](skills/blazium-games-player/SKILL.md) | Connect the player server, check the account, wallet, library, and spending limit | `get_account`, `get_library`, `get_agent_policy` |
 | [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buy, donate, top up, and download with the human's approval | `quote_purchase`, `purchase_game`, `get_wallet` |
 
 ## Typical paths
 
 - **New game:** get-started, store-page, deploy, crash-reporting
 - **Sell a game:** store-page (verify email, set a price), deploy
-- **Buy a game:** purchases
+- **Buy a game:** player, purchases
 - **Existing game, new build:** deploy, crash-reporting
 - **Players report crashes:** debug-crash
 - **Leaked key:** keys
