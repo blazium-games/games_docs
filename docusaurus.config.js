@@ -109,6 +109,8 @@ const config = {
               {label: 'Access and keys', to: '/docs/mcp/access-and-keys'},
               {label: 'OAuth and discovery', to: '/docs/mcp/oauth'},
               {label: 'Reference', to: '/docs/mcp/reference'},
+              {label: 'Player MCP', to: '/docs/mcp/player'},
+              {label: 'Versioning', to: '/docs/mcp/versioning'},
               {label: 'Cursor plugin', to: '/docs/cursor-plugin'},
             ],
           },

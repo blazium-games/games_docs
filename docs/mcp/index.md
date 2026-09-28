@@ -18,6 +18,8 @@ The Blazium Games MCP server lets AI agents create and update game pages, read a
 
 Manage access at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
 
+Want an agent to buy, top up, or download games for you as a player? Use the separate [player server](./player.md) at `https://mcp.blazium.games/player`.
+
 :::tip Using Cursor?
 
 Install the [Blazium Games Cursor plugin](../cursor-plugin.md). It adds this server plus skills that walk the agent through store pages, deploys, and crash debugging.
@@ -86,4 +88,6 @@ Never commit a key. Keep it in your client's config or a secret store.
 - [Access and keys](./access-and-keys.md): what account and project access can do, admins, and rotation
 - [OAuth and discovery](./oauth.md): OAuth details for client authors
 - [Reference](./reference.md): every tool, prompt, and resource
+- [Player MCP](./player.md): the player server, its scopes, and player keys
+- [Versioning](./versioning.md): what can change and how much notice you get
 - [Deploy builds](../deploy.md) and [Crash reporting](../crash-reporting.md)

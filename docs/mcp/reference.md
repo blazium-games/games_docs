@@ -1,10 +1,12 @@
 ---
 title: Reference
 sidebar_position: 4
-description: Every tool, prompt, and resource exposed by the Blazium Games MCP server.
+description: Every tool, prompt, and resource exposed by the Blazium Games developer MCP server.
 ---
 
 # Reference
+
+This page covers the developer server at `https://mcp.blazium.games/mcp`. The player server is on [Player MCP](./player.md).
 
 `uid` accepts a game uid or its vanity name. "Account only" means a project-bound token is refused. "Write" means the token needs `mcp:write`.
 
@@ -32,6 +34,8 @@ description: Every tool, prompt, and resource exposed by the Blazium Games MCP s
 ### Account and payments
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
+
+The wallet, top-up, purchase, donation, `get_agent_policy`, `list_library`, and `get_download_link` tools and the `wallet` and `library` resources are deprecated on this server and removed after 2026-10-28. Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -94,6 +98,8 @@ Tool errors return `API <status>: <body>`.
 | `4010` | Not authenticated |
 | `4030` | Not allowed for this game |
 | `4031` | Token is read-only |
+| `4032` | Token mixes developer (`mcp:*`) and player (`player:*`) scopes |
+| `4033` | This route isn't available to this server's tokens (for example a player token on a developer route) |
 | `4006` | Build not found |
 | `4096` | The account email is not verified |
 | `4020` | Not enough balance; top up first |
@@ -101,7 +107,7 @@ Tool errors return `API <status>: <body>`.
 | `4023` | Buy the game before downloading it |
 | `4094` | The total changed since the quote; confirm again with the human |
 | `4099` | The file is still being scanned |
-| `4212` | This token can't make purchases |
+| `4212` | This token can't make purchases (project token, or a player token without `player:buy`) |
 | `4214` | Waiting for the human's approval (HTTP 202, returned as a normal result) |
 | `4215` | The human denied the request |
 | `4216` | Wrong or expired approval code |

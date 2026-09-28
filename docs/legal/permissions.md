@@ -85,19 +85,23 @@ Details: [Discord API disclosure](./discord-api-disclosure.md).
 
 ## MCP access (OAuth)
 
-AI tools such as Cursor, VS Code, and Claude Code connect to the Blazium Games MCP server at `https://mcp.blazium.games/mcp`.
-When you approve a tool, it gets a token with one or both of these scopes:
+AI tools such as Cursor, VS Code, and Claude Code connect to one of two Blazium Games MCP servers. The developer server at `https://mcp.blazium.games/mcp` manages your games. The player server at `https://mcp.blazium.games/player` acts for you as a player.
+When you approve a tool, it gets a token for one server only, with one or more of that server's scopes. A token never holds scopes for both servers, and neither server accepts the other's tokens or keys.
 
-| Scope | Allows |
-| --- | --- |
-| `mcp:read` | Reading your games, builds, analytics, crash reports, setup details, balance, and library. |
-| `mcp:write` | Creating and updating game pages, setting prices, issuing deploy keys, and buying from your balance within the limits you set, in addition to everything `mcp:read` allows. |
+| Scope | Server | Allows |
+| --- | --- | --- |
+| `mcp:read` | Developer | Reading your games, builds, analytics, crash reports, setup details, balance, and library. |
+| `mcp:write` | Developer | Creating and updating game pages, setting prices, issuing deploy keys, and (until October 28, 2026) buying from your balance within the limits you set, in addition to everything `mcp:read` allows. |
+| `player:read` | Player | Reading your account, balance, wallet history, quotes, library, approvals, and download links. |
+| `player:write` | Player | Verifying your email, recording play time, and confirming an approval with the code you give the tool. |
+| `player:buy` | Player | Topping up and buying games or donating from your balance within the limits you set. Granted only if you tick **Allow purchases**. |
 
 ### Why we need it
 - So your AI tool can manage your store pages and read your game's data without you pasting passwords.
 
 ### How it is limited
-- The consent screen has a **Read-only access** option. Tick it and the tool only gets `mcp:read`; any attempt to change data is refused.
+- The consent screen has a **Read-only access** option. Tick it and the tool only gets `mcp:read` (or `player:read`); any attempt to change data is refused.
+- On the player server the tool can't buy unless you tick **Allow purchases**.
 - A token is either for your whole account or for a single game (project). A project token is refused for any other game.
 - Access tokens last 1 hour. Refresh tokens last 30 days, each refresh issues a new one, and they stop working if your account is deleted.
 - Every request made with an MCP key or token is recorded in an audit log (key, game, method, and path).
@@ -115,7 +119,7 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 - At [blazium.games/settings/mcp](https://blazium.games/settings/mcp) you can let an agent spend on its own: unlimited, or up to a monthly, yearly, or one-time limit (up to $1,000, UTC periods). Anything beyond the limit waits for your approval. Agents cannot change their own limits.
 - An approval covers one purchase, for the amount shown, and expires after 30 minutes.
 - The limit counts each purchase's total, including tax. Refunded purchases stop counting.
-- Buying needs a token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy.
+- Buying needs a player token with `player:buy`, or until October 28, 2026 a developer token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy.
 - Agents pay only from your account balance, never by card. They cannot cash out, set up payouts, or request refunds.
 - Your email must be verified before agents can buy.
 - Each agent purchase is recorded with the agent that made it, and shows in your wallet transactions and library.
@@ -127,6 +131,7 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 ## Keys
 
 - **MCP keys** (account keys and project keys) are shown once when you create them and are stored only as a hash. You can rotate them at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) or on a game's MCP tab; rotating invalidates the previous key.
+- **Player keys** (starting `bgames_play_`) work only on the player server. They are shown once, stored only as a hash, and rotated at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) separately from MCP keys.
 - **Deploy keys** let blazium-cli or CI upload builds for one game. Issuing a new deploy key invalidates the previous one.
 
 ## Cookies
@@ -168,6 +173,10 @@ These are the responses your MCP client, script, or CI job will see.
 | A project token is used for a different game | 403 | 4030 | This token is limited to one project |
 | The game's owner turned off MCP access for admins, and an admin's token is used on it | 403 | 4080 | The project owner has turned off MCP access for admins |
 | A project token tries to buy | 403 | 4212 | This token can't make purchases |
+| A player token without `player:buy` tries to top up or buy | 403 | 4212 | This token can't make purchases; reconnect and allow purchases |
+| A player token is used outside the player routes | 403 | 4033 | Player tokens cannot use this route |
+| A developer token is used on a player route | 403 | 4033 | Player routes need a player token |
+| A token holds both developer and player scopes | 403 | 4032 | This token mixes developer and player scopes |
 | An agent purchase needs your approval (no limit set, or over the limit) | 202 | 4214 | Approval required; the response includes the approval |
 | You denied the agent's request | 403 | 4215 | The account owner denied this request |
 | The agent sent a wrong or expired approval code | 400 | 4216 | Wrong or expired code |

@@ -55,7 +55,7 @@ npm run build                   # production build; fails on broken links
 node scripts/check-plugin.mjs   # plugin check (add --offline to skip the live server card)
 ```
 
-The plugin check fetches the live [server card](https://mcp.blazium.games/.well-known/mcp/server-card.json) and fails if any tool, prompt, or resource is missing from the skill references or the [MCP reference page](docs/mcp/reference.md).
+The plugin check fetches the live [developer server card](https://mcp.blazium.games/.well-known/mcp/server-card.json) and [player server card](https://mcp.blazium.games/.well-known/mcp/player-server-card.json) and fails if any tool, prompt, or resource is missing from the skill references or the [MCP reference page](docs/mcp/reference.md) and [Player MCP page](docs/mcp/player.md).
 
 ## Contact
 
