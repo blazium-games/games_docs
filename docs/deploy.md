@@ -97,6 +97,14 @@ checksum=<sha256 hex of the zip>, file=@game.zip
 | `4041` | Missing `channel`, `os`, `arch`, or `checksum` |
 | `4042` | File is not a `.zip` |
 
+## Channels
+
+Each channel (`stable`, `beta`, `dev`, or your own lowercase name) points at one build. When an upload passes the virus scan, its channel moves to that build if it's newer. Players see the build each channel points at; `beta` only for players who joined the beta on the store page, and `dev` only for you and your game admins.
+
+On the **Builds** tab of your game you can promote a build to a channel, set an expiry, roll a channel back to its previous build, and see the history. Over MCP use `list_channels`, `promote_build`, and `rollback_channel`. Promoting to `stable` over MCP waits for your approval by email.
+
+Every file records how it was uploaded (deploy key reference or website) and its scan history. Players see a short line under the scan badge, and `GET /api/v1/public/games/{game_uid}/files/{file_uid}/provenance` returns the full record.
+
 ## GitHub Actions
 
 ```yaml

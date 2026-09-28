@@ -92,8 +92,14 @@ When you approve a tool, it gets a token for one server only, with one or more o
 | --- | --- | --- |
 | `mcp:read` | Developer | Reading your games, builds, analytics, crash reports, setup details, balance, and library. |
 | `mcp:write` | Developer | Creating and updating game pages, setting prices, issuing deploy keys, and (until October 28, 2026) buying from your balance within the limits you set, in addition to everything `mcp:read` allows. |
-| `player:read` | Player | Reading your account, balance, wallet history, quotes, library, approvals, and download links. |
-| `player:write` | Player | Verifying your email, recording play time, and confirming an approval with the code you give the tool. |
+| `mcp:catalog.write` | Developer | Changing game pages (text, taxonomy, similar titles, images, admins). Reads of your profile and games are always included. |
+| `mcp:build.write` | Developer | Managing builds and release channels, and reading deploy info and scan status. |
+| `mcp:crash.read` | Developer | Reading crash reports and crash groups, and running crash analysis. |
+| `mcp:analytics.read` | Developer | Reading visitor analytics and custom events. |
+| `mcp:keys.manage` | Developer | Listing and rotating deploy keys and MCP keys. |
+| `mcp:money` | Developer | Pricing, sales, wallet, library, and downloads. |
+| `player:read` | Player | Reading your account, balance, wallet history, quotes, library, approvals, download links, and the builds you can see. |
+| `player:write` | Player | Verifying your email, recording play time, confirming an approval with the code you give the tool, and joining or leaving a game's beta. |
 | `player:buy` | Player | Topping up and buying games or donating from your balance within the limits you set. Granted only if you tick **Allow purchases**. |
 
 ### Why we need it
@@ -101,7 +107,9 @@ When you approve a tool, it gets a token for one server only, with one or more o
 
 ### How it is limited
 - The consent screen has a **Read-only access** option. Tick it and the tool only gets `mcp:read` (or `player:read`); any attempt to change data is refused.
+- On the developer server you can pick a narrower preset on the consent screen (store page, CI, crash triage, keys, money, or read-only), so the tool only gets the scopes that job needs.
 - On the player server the tool can't buy unless you tick **Allow purchases**.
+- Over MCP, rotating or creating keys, promoting a build to stable, and deleting a game or build wait until you approve them by the emailed link or code, even with full access.
 - A token is either for your whole account or for a single game (project). A project token is refused for any other game.
 - Access tokens last 1 hour. Refresh tokens last 30 days, each refresh issues a new one, and they stop working if your account is deleted.
 - Every request made with an MCP key or token is recorded in an audit log (key, game, method, and path).
@@ -177,7 +185,9 @@ These are the responses your MCP client, script, or CI job will see.
 | A player token is used outside the player routes | 403 | 4033 | Player tokens cannot use this route |
 | A developer token is used on a player route | 403 | 4033 | Player routes need a player token |
 | A token holds both developer and player scopes | 403 | 4032 | This token mixes developer and player scopes |
+| A token's narrower developer scopes don't cover the route | 403 | 4073 | This token's scopes don't cover this route |
 | An agent purchase needs your approval (no limit set, or over the limit) | 202 | 4214 | Approval required; the response includes the approval |
+| An agent rotates or creates a key, promotes to stable, or deletes a game or build | 202 | 4214 | Approval required; the response includes the approval |
 | You denied the agent's request | 403 | 4215 | The account owner denied this request |
 | The agent sent a wrong or expired approval code | 400 | 4216 | Wrong or expired code |
 | An agent tries to pay by card | 403 | 4082 | Agents pay from the balance |

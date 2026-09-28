@@ -12,7 +12,7 @@ This page is for MCP client authors. If you use Cursor, VS Code, or Claude Code,
 
 - PKCE `S256` is required. `resource` is optional; when sent it must be `https://mcp.blazium.games/mcp` or `https://mcp.blazium.games` (RFC 8707).
 - Access tokens last one hour. The token response includes a refresh token (30 days, rotated on every use), so clients renew without asking you to sign in again.
-- Scopes: `mcp:read`, `mcp:write`. Both are granted when the client asks for none, unless the user ticks **Read-only access**.
+- Scopes: `mcp:read`, `mcp:write`, and the narrower `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, and `mcp:money` (see [Scopes](./reference.md#scopes)). `mcp:read mcp:write` is granted when the client asks for none, unless the user ticks **Read-only access** or picks a preset on the consent page. The player server uses `player:read`, `player:write`, and `player:buy`.
 - Authorization responses include `iss` (RFC 9207). Errors and Deny are sent back to the client as `error=...` (RFC 6749).
 - Dynamic Client Registration (RFC 7591) at `https://mcp.blazium.games/oauth/register` accepts https redirects, loopback `http://127.0.0.1` and `http://localhost` on any port, and app schemes such as `cursor://` and `vscode://` (RFC 8252). Public clients use `none`; confidential clients may use `client_secret_post` or `client_secret_basic`.
 - Client ID Metadata Documents (an https `client_id`) are supported; only the document's `redirect_uris` are accepted.
