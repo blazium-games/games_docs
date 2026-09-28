@@ -63,7 +63,7 @@ asset:
 Register the build:
 
 ```http
-POST https://api.blazium.games/api/v1/tool/upload/build
+POST https://api.blazium.online/api/v1/tool/upload/build
 X-Access-Token: <access_token>
 X-Secret-Key: <secret_key>
 Content-Type: application/json
@@ -76,7 +76,7 @@ Content-Type: application/json
 The response includes `build_id`. Then upload the zip:
 
 ```http
-POST https://upload.blazium.games/api/v1/tool/upload/files
+POST https://uploader.blazium.online/api/v1/tool/upload/files
 X-Access-Token: <access_token>
 X-Secret-Key: <secret_key>
 Content-Type: multipart/form-data

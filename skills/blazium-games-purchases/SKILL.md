@@ -59,7 +59,7 @@ Call `purchase_game` (or `donate_to_game` with the same `amount_cents`) with:
 ## Phase 5: Download
 
 1. Take `developer` and `vanity_name` (or `game_uid`) from `list_library`.
-2. Read the public page data (no auth): `GET https://api.blazium.games/api/v1/public/user/<developer>/games/<vanity_name>`. Pick the file for the human's OS and arch from `data.files[]` and keep its `uid`.
+2. Read the public page data (no auth): `GET https://api.blazium.online/api/v1/public/user/<developer>/games/<vanity_name>`. Pick the file for the human's OS and arch from `data.files[]` and keep its `uid`.
 3. Call `get_download_link` with `file_id` set to that `uid`. The link lasts 5 minutes; give it to the human right away.
 
 Free games can be downloaded the same way without buying. If the error is `4099`, the file is still being scanned; try again later.
