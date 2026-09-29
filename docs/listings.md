@@ -21,8 +21,22 @@ A public listing has to describe the game well enough for players and agents to 
 | `session_bucket` | How long one sitting usually lasts: `15m`, `1h`, `3h`, or `endless` |
 | `net` | `offline`, `local`, `online`, or `local_online` |
 | `players_min`, `players_max` | 1 to 64 |
+| `authorship` | `human`, `human_agent`, or `agent_heavy`. See [Made with](#made-with) |
+| `authorship_credit` | Optional credit line, up to 120 characters |
 
 A value outside these lists returns `4071`.
+
+## Made with
+
+The **Made with** field says who made the game, shown as a label on the store page and in search results:
+
+| Value | Label |
+|---|---|
+| `human` | Made by people |
+| `human_agent` | People with AI agents |
+| `agent_heavy` | Mostly AI agents |
+
+It is optional and never affects ranking. `authorship_credit` adds a short plain-text credit, for example "Art by Sam, code with Cursor". Players can filter search by it.
 
 ## Listing check
 
@@ -55,6 +69,58 @@ These are set over the developer MCP (`declare_dependency`, `declare_engine_comp
 - **Engine compatibility** lists up to 10 engine version ranges, each with an optional renderer and platform. A `max_version` of `4.3` covers `4.3.x`. The store page shows them as **Works with**.
 - **License kind** is one of `cc0`, `cc-by`, `cc-by-sa`, `paid`, `source-available`, or `proprietary`, shown as **License**.
 
+## Works with
+
+A mod that `supports` a game is checked against that game's current builds. The check compares the mod's engine compatibility ranges with each build's `engine_version` (set with `chauffeur build --engine-version` or `engine_version` in build.yml), per platform.
+
+| Status | Meaning |
+|---|---|
+| `compatible` | The build's engine version is inside one of the mod's ranges |
+| `incompatible` | The mod has ranges for this engine and platform, and none cover the build |
+| `unknown` | The build has no engine version, or the mod has no range for this engine or platform |
+
+A game's overall status is the worst across its platforms. The mod's store page shows it for each supported game's stable build, and `GET /api/v1/public/games/{uid}` returns it as `mod_compat`. The mod's developers can see the stable and beta builds per platform with the MCP `mod_compat` tool or `GET /api/v1/private/games/{uid}/mod-compat`.
+
+## Bundle check
+
+Every uploaded build records a SHA-256 for each file inside its zip. The bundle check compares the files of 1 KB or more in one of your builds against the files of asset packs (game and dev assets) on the store, so you can confirm you have the right to ship what you bundled. It never blocks anything and players never see it.
+
+| Status | Meaning |
+|---|---|
+| `owned` | The pack is yours |
+| `licensed` | You bought a license for it, or it is `cc0` |
+| `attribution` | It is `cc-by` or `cc-by-sa`: credit the author |
+| `unlicensed` | No license on record. Buy one, or remove the files |
+
+Open **Symbols and bundle check** under a build on the Builds tab, or use the MCP `bundle_check` tool. Each match lists up to 5 of your file paths.
+
+When two different developers upload identical files, staff review it. Your upload is never blocked.
+
+## Launch health
+
+Games that send the [standard events](./crash-reporting.md#standard-events) get a launch health band for each build, recomputed every hour from the last 30 days:
+
+| Band | Store label | Rule |
+|---|---|---|
+| `excellent` | Launches reliably | At least 98% of devices sent `boot_ok`, and at most 1% crashed before it |
+| `healthy` | Launches well | At least 93% `boot_ok`, at most 3% crash on boot |
+| `mixed` | Mixed launch reports | At least 80% `boot_ok`, at most 10% crash on boot |
+| `problematic` | Launch problems reported | Below mixed |
+| `unrated` | Not enough launch data | Fewer than 20 devices |
+
+The store page and search show the band of the newest stable build. The Builds tab shows every build's band and device count; the MCP `get_build_health` tool also returns the raw counts and median session length.
+
+## Shelves
+
+The home page has two shelves. Each shows up to 12 listings in an order that changes daily:
+
+| Shelf | What qualifies |
+|---|---|
+| `tonight` (Something for tonight) | Public games with a 15-minute session length, a clean stable download for the player's OS, and a newest stable build rated `excellent` or `healthy` |
+| `unheard_of` (Unheard of) | Games and applications published in the last 60 days that pass the listing check, have a clean stable download, and have been played on fewer than 50 devices. A listing shows for up to 14 days from its first `boot_ok` |
+
+Both need a verified owner. `GET https://api.blazium.online/api/v1/public/shelves/{shelf}?os=windows` returns a shelf without sign-in, and the player MCP `get_shelf` tool reads it.
+
 ## Build scans
 
 Every uploaded file is virus-scanned before it can be downloaded. The scan state shows on the store page next to each download, with the file's SHA-256 checksum, and on the Builds tab of the edit page.
@@ -83,9 +149,10 @@ The Builds tab also lists files removed in the last 30 days because their scan d
 | `engine` | Listings made with this engine (`engines`) or declaring compatibility with it |
 | `engine_version`, `renderer` | Only listings whose declared compatibility covers this version or renderer |
 | `license` | One license kind |
+| `authorship` | `human`, `human_agent`, or `agent_heavy`. Filters only; it never changes ranking |
 | `sort` | `relevance` (default with `q` or `tags`), `newest` (default otherwise), or `updated` |
 | `page`, `page_size` | `page_size` is 1 to 50, default 20 |
 
-Each result has the listing fields, `engines`, `license_kind`, `scan` (the best scan state across the game's files), `platforms` (clean builds only), `score`, and `matched_tags`.
+Each result has the listing fields, `engines`, `license_kind`, `authorship`, `health` (the launch health band), `scan` (the best scan state across the game's files), `platforms` (clean builds only), `score`, and `matched_tags`.
 
-`GET /api/v1/public/games/{uid}` returns one listing with its taxonomy, license kind, engine compatibility, dependencies (`relations.uses` and `relations.used_by`), files, scan states, checksums, similar titles, and newest changelog. `GET /api/v1/public/games/{uid}/relations` returns just the dependencies, license kind, and compatibility.
+`GET /api/v1/public/games/{uid}` returns one listing with its taxonomy, made-with fields, launch health, editions (`skus`), license kind, engine compatibility, dependencies (`relations.uses` and `relations.used_by`), `mod_compat` for mods, files, scan states, checksums, similar titles, and newest changelog. `GET /api/v1/public/games/{uid}/relations` returns just the dependencies, license kind, and compatibility.

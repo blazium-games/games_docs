@@ -21,7 +21,7 @@ Full guide: [Cursor plugin docs](https://blazium-games.github.io/games_docs/docs
 |-------|--------------|
 | [blazium-games-get-started](skills/blazium-games-get-started/SKILL.md) | Connects the server, verifies the account, and routes to the right skill |
 | [blazium-games-store-page](skills/blazium-games-store-page/SKILL.md) | Creates and edits store pages |
-| [blazium-games-deploy](skills/blazium-games-deploy/SKILL.md) | Ships builds from CI or blazium-cli |
+| [blazium-games-deploy](skills/blazium-games-deploy/SKILL.md) | Ships builds and symbols from CI or the chauffeur CLI |
 | [blazium-games-crash-reporting](skills/blazium-games-crash-reporting/SKILL.md) | Sends crashes and events from a game |
 | [blazium-games-debug-crash](skills/blazium-games-debug-crash/SKILL.md) | Triages crashes and maps them to your code |
 | [blazium-games-analytics](skills/blazium-games-analytics/SKILL.md) | Summarizes store page traffic |

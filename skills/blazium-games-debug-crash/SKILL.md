@@ -17,16 +17,16 @@ Go from "players are crashing" to a root cause and a fix in the user's code.
 ## Prerequisites
 
 - The `blazium-games` MCP server is connected (read access is enough)
-- The game's source code is open in the workspace (for Phase 4)
+- The game's source code is open in the workspace (for step 4, Map to code)
 
-## Phase 1: Find the crash
+## 1. Find the crash
 
 1. Call `list_crash_groups` with the game `uid`. Each group is one cause (top stack frames, or the crash message and platform before a stackwalk), most recently seen first (up to 100 groups), with counts per build and a `sample_crash_id`.
 2. A group whose reports all come from the newest build usually means a regression in that build.
 3. Pick the crash the user named, or the `sample_crash_id` of the group with the highest count. `list_game_crashes` lists individual reports when you need more than the sample.
 4. Call `list_bug_tickets` for the player's side: what they were doing, in their words. A ticket with an attached dump or log has a `crash_id` you can read like any other crash.
 
-## Phase 2: Read the report
+## 2. Read the report
 
 Call `get_crash` with `uid` and `crash_id`. Key fields:
 
@@ -40,7 +40,7 @@ Call `get_crash` with `uid` and `crash_id`. Key fields:
 
 Call `get_game_build` with the `build_id` to get the version and channel.
 
-## Phase 3: Download artifacts
+## 3. Download artifacts
 
 Call `request_crash_download` with `kind`:
 
@@ -50,14 +50,14 @@ Call `request_crash_download` with `kind`:
 
 Each call returns a private `url` valid for 1 hour (`expires_in: 3600`). Fetch it promptly; do not share it or paste it into public places.
 
-## Phase 4: Map to code
+## 4. Map to code
 
 1. Take the top frames from the stack that belong to the user's code (skip engine and OS frames).
 2. Search the workspace for those functions and files.
 3. Check out or inspect the commit matching the build version when possible, so line numbers line up.
 4. Read the log tail for the last actions before the crash.
 
-## Phase 5: Report
+## 5. Report
 
 Give the user:
 

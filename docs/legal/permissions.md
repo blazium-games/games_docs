@@ -141,7 +141,7 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 
 - **MCP keys** (account keys and project keys) are shown once when you create them and are stored only as a hash. You can rotate them at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) or on a game's MCP tab; rotating invalidates the previous key.
 - **Player keys** (starting `bgames_play_`) work only on the player server. They are shown once, stored only as a hash, and rotated at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) separately from MCP keys.
-- **Deploy keys** let blazium-cli or CI upload builds for one game. Issuing a new deploy key invalidates the previous one.
+- **Deploy keys** let the chauffeur CLI or CI upload builds and debug symbols for one game. Issuing a new deploy key invalidates the previous one.
 
 ## Cookies
 
@@ -202,7 +202,7 @@ These are the responses your MCP client, script, or CI job will see.
 
 ### Deploy keys
 
-- A deploy key is an `access_token` and `secret_key` pair for one game. blazium-cli reads them from `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`.
+- A deploy key is an `access_token` and `secret_key` pair for one game. The chauffeur CLI reads them from `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`.
 - `request_deploy_key` returns the secret once and invalidates every previous deploy key for that game, so update your CI secrets right away.
 - Deploy keys can only register builds, upload build files, and upload build images. They cannot edit the store page text or settings, and they cannot read analytics or crash reports.
 - See [Deploy builds](../deploy.md) and [Access and keys](../mcp/access-and-keys.md).

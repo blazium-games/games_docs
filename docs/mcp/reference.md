@@ -45,6 +45,29 @@ Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or
 
 Crash groups use the top stack frames once a minidump has been stackwalked, and the crash message, app version, and OS before that. Grouping runs every 10 minutes.
 
+### Build health, symbols and bundle check
+
+MCP never uploads files. Symbols, builds and store images are uploaded with the [chauffeur CLI](../cli/index.md) and the game's deploy key; these tools read and delete them.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `get_build_health` | `uid` | The last 50 builds with `devices`, `boot_ok`, `crash_on_boot`, `median_session_seconds` and `band` over the last 30 days, plus the listing's public band and what each band means. See [Launch health](../listings.md#launch-health) |
+| `list_build_symbols` | `uid`, `build_id` | Breakpad symbol files for a build: `module_name`, `debug_id`, `os`, `arch`, `size`, `checksum`, and the `chauffeur symbols` command to upload more |
+| `delete_build_symbols` | `uid`, `build_id`, `symbol_uid` (optional) | Deletes one symbol file, or all of the build's symbol files when `symbol_uid` is empty. Write (`mcp:build.write`) |
+| `upload_symbols_info` | `uid`, `build_id` | The exact `chauffeur symbols` command for the build, its limits, and a link to [Symbols](../cli/symbols.md). Uploads nothing |
+| `bundle_check` | `uid`, `build_id` | Informational. Compares the files inside the build's zip with asset packs sold on the store and reports each match as `owned`, `licensed`, `attribution` (cc-by, credit needed) or `unlicensed`, with sample paths |
+| `mod_compat` | `uid` (a mod), `game` (optional) | Compares the mod's [engine compatibility](#dependencies-compatibility-and-license) with the engine version of each supported game's current builds, per channel and platform: `compatible`, `incompatible` or `unknown` |
+
+### Editions
+
+A game can sell up to 8 editions. When it has any active edition, its listed price is the cheapest one and `set_game_price` can't change it (`4164`). Owners upgrade by paying the difference, at least 50 cents. See [Selling](../payments/selling.md#editions).
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `list_skus` | `uid` | Editions with `slug`, `name`, `kind`, `price_cents`, `active`, `sort_order` and, for bundles, `bundle_asset_uids` |
+| `upsert_sku` | `uid`, `sku_uid` (to replace), `slug`, `name`, `description`, `kind`, `price_cents` (99-50000), `bundle_asset_uids`, `active`, `sort_order` (0-100) | `kind` is `standard`, `deluxe`, `beta_access` (also grants the beta channel) or `bundle` (also grants 1 to 10 of your other listings). Without `sku_uid` it creates one. Write (`mcp:money`) |
+| `delete_sku` | `uid`, `sku_uid` | Retires an edition. Owners keep it; nobody can buy it any more. Write (`mcp:money`) |
+
 ### Player feedback
 
 Players review games they own and file bug tickets from the [player server](./player.md) or the store page.
@@ -91,11 +114,11 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 | Scope | Covers |
 |-------|--------|
 | `mcp:catalog.write` | Game pages, taxonomy, similar titles, dependencies, engine compatibility, license kind, media, review replies |
-| `mcp:build.write` | Builds, channels, deploy info, scan status |
+| `mcp:build.write` | Builds, channels, deploy info, scan status, symbols, bundle check |
 | `mcp:crash.read` | Crash reports, crash groups, crash analysis, bug tickets, including `update_bug_ticket` |
 | `mcp:analytics.read` | Visitor analytics and events |
 | `mcp:keys.manage` | Deploy keys, MCP keys, MCP access for admins, and project admins |
-| `mcp:money` | Pricing, sales, game keys and gift links, wallet, purchases, library, downloads |
+| `mcp:money` | Pricing, editions, sales, game keys and gift links, wallet, purchases, library, downloads |
 
 Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Read-only** (`mcp:read`), and **Full access**.
 
@@ -106,9 +129,9 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 | Tool | Inputs | Notes |
 |------|--------|-------|
 | `validate_listing` | `uid` | Listing check: `ready`, `errors` (block going public), `warnings`, `passes`, plus the current taxonomy and allowed values |
-| `update_game_taxonomy` | `uid` (required), `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max` | Only the fields you pass change. Write |
+| `update_game_taxonomy` | `uid` (required), `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit` | Only the fields you pass change. `authorship` is the [made-with label](../listings.md#made-with) (`human`, `human_agent`, `agent_heavy`, or empty to clear) and `authorship_credit` an optional credit line up to 120 characters. Write |
 | `set_similar_games` | `uid`, `games` (up to 10 uids or vanity names) | Replaces the similar titles; an empty list clears them. Write |
-| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, or `gallery`), `url` | Fetches an https image (PNG, JPEG, GIF, or WebP, up to 2048 px and 10 MB) and sets it. Without `url` it returns the upload route instead. Write |
+| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, or `gallery`), `url` | Fetches an https image (PNG, JPEG, GIF, or WebP, up to 2048 px and 10 MB) and sets it. Without `url` it returns the matching [`chauffeur media`](../cli/media.md) command for images on disk. Write |
 | `scan_status` | `uid` | Scan state and history of every build file, plus files removed in the last 30 days because their scan failed |
 
 ### Account and payments
@@ -233,13 +256,19 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4080` | The project owner turned off MCP access for admins |
 | `4081` | Agent spending limits and MCP access settings can only be changed on the website |
 | `4082` | Agents pay from the balance, not by card; or only the owner can change MCP access for admins |
-| `4090` | Already done: you already own the game, or the dump, log, or stackwalk for a crash isn't available yet |
+| `4090` | Already done: you already own the game, or the crash has no dump, log, or stackwalk to download |
 | `4091` | You can't buy your own game |
 | `4092` | The game is free |
 | `4093` | The game doesn't accept donations |
 | `4100` | The top-up expired; create a new one |
 | `4130` | Too many crash metadata keys (64) or analytics events in one request (HTTP 413) |
 | `4290` | Too many requests, crash reports for the day, analysis requests, or redeem attempts (HTTP 429) |
+| `4155` | Invalid edition: slug, name, kind, price, bundle listings or order (HTTP 422) |
+| `4156` | The game already has 8 editions (HTTP 422) |
+| `4157` | The player already owns this edition or a higher one (HTTP 409) |
+| `4158` | A standard analytics event is missing a field or has one out of range (see [Crash reporting](../crash-reporting.md#standard-events)) |
+| `4164` | The price comes from the game's editions; change them with `upsert_sku` instead of `set_game_price` (HTTP 409) |
+| `4165` | This game sells beta access as an edition; buy it to join the beta (HTTP 402, editions in `data.skus`) |
 | `5030` | A download URL couldn't be signed; try again |
 | `5031` | Email codes aren't configured on the server |
 | `5032` | Payments, or a sign-in provider, aren't configured on the server |

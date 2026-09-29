@@ -38,10 +38,26 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `create_gift_link` | `uid`, `pool`, `note` | write | A single-use redeem link for one person, shown once |
 | `list_key_pools` | `uid` | | Pools with size, redeemed, unredeemed, and gift link counts |
 | `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
-| `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max` | write | Set the taxonomy; only passed fields change |
+| `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit` | write | Set the taxonomy and the made-with label (`human`, `human_agent`, `agent_heavy`, empty clears; credit up to 120 characters); only passed fields change |
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
-| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`), `url` | write | Set an image from an https URL (PNG, JPEG, GIF, WebP; 2048 px, 10 MB) |
+| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`), `url` | write | Set an image from an https URL (PNG, JPEG, GIF, WebP; 2048 px, 10 MB). Without `url` it returns the `chauffeur media` command for local files |
 | `scan_status` | `uid` | | Virus-scan state and history per build file, and files removed for failing the scan |
+
+## Builds, health and editions
+
+MCP never uploads files: builds, symbols and store images go through the chauffeur CLI with the game's deploy key.
+
+| Tool | Inputs | Access | What it does |
+|------|--------|--------|--------------|
+| `get_build_health` | `uid` | | Per-build devices, boot-ok and crash-on-boot counts, median session and band over 30 days (`excellent`, `healthy`, `mixed`, `problematic`, or `unrated` below 20 devices) |
+| `list_build_symbols` | `uid`, `build_id` | | Breakpad symbol files for a build, plus the `chauffeur symbols` command |
+| `delete_build_symbols` | `uid`, `build_id`, `symbol_uid` | write | Delete one symbol file, or all of them when `symbol_uid` is empty |
+| `upload_symbols_info` | `uid`, `build_id` | | The exact `chauffeur symbols` command and limits for a build. Uploads nothing |
+| `bundle_check` | `uid`, `build_id` | | Informational: store asset packs found inside the build and whether each is `owned`, `licensed`, `attribution`, or `unlicensed` |
+| `mod_compat` | `uid` (a mod), `game` | | The mod's engine compatibility against each supported game's current builds: `compatible`, `incompatible`, or `unknown` |
+| `list_skus` | `uid` | | Editions with slug, kind, price, active flag, order, and bundle listings |
+| `upsert_sku` | `uid`, `sku_uid`, `slug`, `name`, `description`, `kind`, `price_cents`, `bundle_asset_uids`, `active`, `sort_order` | write | Create an edition, or replace one when `sku_uid` is set. Kinds: `standard`, `deluxe`, `beta_access`, `bundle`. Up to 8; the listed price follows the cheapest active one |
+| `delete_sku` | `uid`, `sku_uid` | write | Retire an edition; owners keep it |
 
 ## Account and payments
 
@@ -88,7 +104,7 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4031` | Token is read-only |
 | `4034` | Buying moved to the player server, or only the project owner can manage admins |
 | `4040` | Not found (the message says what) |
-| `4090` | Already done: the game is already owned, or the crash file isn't available yet |
+| `4090` | Already done: the game is already owned, or the crash has no such file to download |
 | `4091` | You can't buy your own game |
 | `4092` | The game is free |
 | `4093` | The game doesn't accept donations |
@@ -106,8 +122,11 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4083` | Website only |
 | `4071` | Taxonomy value not allowed |
 | `4072` | Similar title isn't a public game, or is this game |
-| `4225` | Listing check failed; the page can't go public yet. Run `validate_listing` |
+| `4225` | Listing check failed, so the page can't go public. Run `validate_listing` |
 | `4073` | The token's scopes don't cover this tool; reconnect with a wider preset |
 | `4074` | File isn't on a channel this account can see |
 | `4075` | Nothing to roll back to |
 | `4226` | Invalid channel name or expiry |
+| `4155` | Invalid edition |
+| `4156` | The game already has 8 editions |
+| `4164` | The price comes from the editions; change them with `upsert_sku` |

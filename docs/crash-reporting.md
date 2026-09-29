@@ -83,6 +83,88 @@ Content-Type: application/json
 
 Send up to 100 events per request; more returns `4130` (`413`). The response is `202`. Use a random per-install id, not a hardware identifier.
 
+## Standard events
+
+Six event names have fixed meanings. Send them from every build and your listing gets a [launch health band](./listings.md#launch-health), and new games can appear on the [Unheard of shelf](./listings.md#shelves).
+
+| Event | When | Fields |
+|-------|------|--------|
+| `session_start` | The game process started | |
+| `boot_ok` | The first frame of the main menu or first scene rendered | `device_uid` (required), `ms` since start (optional, 0 to 600000) |
+| `first_input` | The player's first key, click or touch | `ms` since start (optional, 0 to 600000) |
+| `session_end` | The game is closing normally | `seconds` played this session (required, whole number 0 to 86400) |
+| `quit` | The player chose to quit | |
+| `crash` | Sent by the crash reporter, or on the next launch after an unclean exit | `device_uid` (required) |
+
+If any standard event in a request has a missing or out-of-range field, the whole request is refused with `4158` and the message names the event's index. Other event names are stored as custom events.
+
+A `crash` before a device's first `boot_ok` counts as a crash on boot. Health counts devices, so send the same random `device_uid` from every event of one install.
+
+A Blazium or Godot autoload can send them:
+
+```gdscript
+extends Node
+
+const ENDPOINT := "https://api.blazium.online/api/v1/public/events"
+const APP_ID := "<game uid>"
+const BUILD_ID := "<build_id>"
+
+var _device_uid := ""
+var _started_ms := 0
+var _input_sent := false
+
+func _ready() -> void:
+	_started_ms = Time.get_ticks_msec()
+	_device_uid = _load_device_uid()
+	_send("session_start")
+	await get_tree().process_frame
+	_send("boot_ok", {"ms": _elapsed_ms()})
+
+func _input(event: InputEvent) -> void:
+	if _input_sent or not (event is InputEventKey or event is InputEventMouseButton or event is InputEventScreenTouch or event is InputEventJoypadButton):
+		return
+	_input_sent = true
+	_send("first_input", {"ms": _elapsed_ms()})
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		_send("session_end", {"seconds": _session_seconds()})
+
+func quit_game() -> void:
+	_send("quit")
+	_send("session_end", {"seconds": _session_seconds()})
+	get_tree().quit()
+
+func _elapsed_ms() -> int:
+	return mini(Time.get_ticks_msec() - _started_ms, 600000)
+
+func _session_seconds() -> int:
+	return mini((Time.get_ticks_msec() - _started_ms) / 1000, 86400)
+
+func _load_device_uid() -> String:
+	var path := "user://device_uid"
+	if FileAccess.file_exists(path):
+		return FileAccess.get_file_as_string(path).strip_edges()
+	var uid := Crypto.new().generate_random_bytes(16).hex_encode()
+	FileAccess.open(path, FileAccess.WRITE).store_string(uid)
+	return uid
+
+func _send(name: String, fields := {}) -> void:
+	var ev := {"event": name, "anonymous": true, "device_uid": _device_uid}
+	ev.merge(fields)
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(func(_r, _c, _h, _b): http.queue_free())
+	http.request(ENDPOINT, ["Content-Type: application/json", "X-App-Id: " + APP_ID, "X-Build-Id: " + BUILD_ID],
+		HTTPClient.METHOD_POST, JSON.stringify({"events": [ev]}))
+```
+
+Set `BUILD_ID` for each export (see [CI](./cli/ci.md#crash-reporter-ids)). Requests sent while the window is closing may not finish; set `get_tree().auto_accept_quit = false` and quit after the request completes if you need every `session_end`. Ask players for consent where your privacy policy requires it.
+
+## Symbols
+
+Reports with a minidump are stackwalked with the Breakpad symbols uploaded for their build. Without symbols, stacks only show addresses. Upload them with `chauffeur symbols`; see [Symbols](./cli/symbols.md).
+
 ## Reading crashes
 
 With the MCP server connected, ask your agent to list recent crashes. It uses:

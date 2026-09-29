@@ -12,7 +12,7 @@ This page is for MCP client authors. If you use Cursor, VS Code, or Claude Code,
 
 - PKCE `S256` is required, and the `code_verifier` must be 43 to 128 unreserved characters (RFC 7636). `resource` is optional; when sent it must be `https://mcp.blazium.games/mcp` or `https://mcp.blazium.games` (or `https://mcp.blazium.games/player` for the player server) (RFC 8707).
 - Access tokens last one hour. The token response includes a refresh token, rotated on every use, so clients renew without asking you to sign in again. Rotation keeps the original 30-day expiry: after 30 days the user signs in again.
-- Each refresh token works once. Presenting a spent one revokes every token from that sign-in, so a stolen refresh token stops working as soon as either party uses it. Refresh tokens issued before this rule fail once and the user signs in again.
+- Each refresh token works once. Presenting a spent one revokes every token from that sign-in, so a stolen refresh token stops working as soon as either party uses it.
 - Authorization codes work once and expire after 10 minutes.
 - The consent page is protected against cross-site requests: Allow and Deny only work from the page itself.
 - Scopes: `mcp:read`, `mcp:write`, and the narrower `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, and `mcp:money` (see [Scopes](./reference.md#scopes)). `mcp:read mcp:write` is granted when the client asks for none, unless the user ticks **Read-only access** or picks a preset on the consent page. The player server uses `player:read`, `player:write`, and `player:buy`.

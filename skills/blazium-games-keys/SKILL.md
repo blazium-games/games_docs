@@ -11,7 +11,7 @@ Blazium Games has two kinds of credentials:
 | Credential | Used by | Rotate with | List with |
 |------------|---------|-------------|-----------|
 | MCP API key (`bgames_mcp_...`) | MCP clients without OAuth | `request_mcp_key` | `list_mcp_keys` |
-| Deploy key (`access_token` + `secret_key`) | `blazium-cli`, CI uploads | `request_deploy_key` | `get_deploy_info` (`keys[]`) |
+| Deploy key (`access_token` + `secret_key`) | chauffeur CLI and CI uploads (builds, symbols, store images) | `request_deploy_key` | `get_deploy_info` (`keys[]`) |
 
 ## Invoke This Skill When
 
@@ -23,12 +23,12 @@ Blazium Games has two kinds of credentials:
 - The `blazium-games` MCP server is connected with write access
 - MCP key tools need an account-level token
 
-## Phase 1: Inspect
+## 1. Inspect
 
 - MCP keys: call `list_mcp_keys`. Only prefixes are returned.
 - Deploy keys: call `get_deploy_info` with the game `uid` and read `keys[]` (`uid`, `prefix`, `created_at`).
 
-## Phase 2: Warn
+## 2. Warn
 
 Rotation is immediate and destructive:
 
@@ -37,13 +37,13 @@ Rotation is immediate and destructive:
 
 Ask the user to confirm and to name where the new secret will be stored.
 
-## Phase 3: Rotate
+## 3. Rotate
 
 Call the matching tool with an `idempotency_key` you make up (for example `rotate-deploy-<uid>-<date>`). Over MCP the first call returns HTTP 202 with `approval_required: true` (code `4214`), `email_sent`, and an `approval` object. Pass `approval.uid` as `approval_id`, and give the human `approval.confirm_url`; the account owner also gets an email with the link and a 6-digit code. Ask the human to approve, then either call `confirm_approval` with the code they read to you or poll `get_approval` until `approved`. A project-bound token can't call either (`4030`), so wait for the human to say they approved from the email. Call the rotation tool again with the same `idempotency_key`. Each approval works once. If the human denies it you get `4215`; stop.
 
 The secret is returned once. Tell the user to store it (CI secret, password manager, or a gitignored `.env`) and then stop repeating it.
 
-## Phase 4: Update consumers
+## 4. Update consumers
 
 - MCP key: update the `Authorization: Bearer` header in each MCP client config.
 - Deploy key: update `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY` in every CI system, for example with `gh secret set BLAZIUM_ACCESS_TOKEN`.

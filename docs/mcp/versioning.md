@@ -25,6 +25,17 @@ Write clients that ignore fields they don't know.
 
 Anything scheduled for removal is listed under `deprecations` on the server card with its replacement and the earliest removal date, and the tool description starts with "Deprecated here". It keeps working for at least 30 days after it is first listed.
 
+## Recent additions
+
+Developer server 1.11:
+
+- Editions: `list_skus`, `upsert_sku`, and `delete_sku`. `set_game_price` returns `4164` while a listing has editions
+- Builds: `get_build_health`, `list_build_symbols`, `delete_build_symbols`, `upload_symbols_info`, `bundle_check`, and `mod_compat`
+- `update_game_taxonomy` accepts `authorship` and `authorship_credit`
+- `set_media` without `url` returns the `chauffeur media` command to upload a local file
+
+Player server: `get_shelf`, `sku` on `quote_purchase` and `purchase_game`, and `authorship` on `search_catalog`.
+
 ## Current deprecations
 
 | Server | What | Replacement | Removed after |

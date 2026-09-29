@@ -32,8 +32,8 @@ const FeatureList = [
     to: '/docs/deploy',
     description: (
       <>
-        Ship builds from CI with blazium-cli and collect crash reports, dumps,
-        and events from your players.
+        Ship builds and symbols from CI with the chauffeur CLI and collect crash
+        reports, dumps, and events from your players.
       </>
     ),
   },
