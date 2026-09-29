@@ -23,7 +23,7 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `get_library` | read | Owned games, refund windows, play time |
 | `get_download_link` | read | 5-minute signed download URL |
 | `get_agent_policy` | read | This agent's spending limit |
-| `search_catalog` | read | Search public games by text, genres, tags, tone, session length, network mode, players, and platform |
+| `search_catalog` | read | Search public games, tools, and assets by text, genres, tags, tone, session length, network mode, players, platform, engine and version, renderer, and license |
 | `get_game_details` | read | One listing: taxonomy, price, files with scan state and checksum, similar titles, ownership |
 | `install_build` | read | License and scan check, checksum, 5-minute download URL, and a `blazium://install/<uid>` hand-off. Uses the channel the human follows unless `channel` is given. Fails unless the file is clean |
 | `launch_game` | read | `blazium://game/<uid>` hand-off link for the launcher |
@@ -38,6 +38,7 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `list_friends` | read | Friends with presence, plus incoming and sent requests with their `request_uid` |
 | `send_friend_request` | write | Send a request by username (20 per day, verified email). Accepts theirs if they already asked |
 | `respond_friend_request` | write | Accept or decline an incoming request |
+| `redeem_key` | write | Redeem a game key or gift link the human gave you; a game they already own leaves the key unused |
 
 ## Resources
 

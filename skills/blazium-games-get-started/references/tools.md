@@ -28,6 +28,14 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `list_reviews` | `uid`, `unreplied`, `page` | | Player reviews with the summary (enjoyed, quality average and counts, would play with friends) |
 | `reply_to_review` | `uid`, `review_uid`, `text` | write | Public reply to a review; empty text removes it |
 | `list_bug_tickets` | `uid`, `status` | | Player bug tickets with counts by status; attachments carry a `crash_id` |
+| `declare_dependency` | `uid`, `target_uid`, `kind`, `remove` | write | Link to another public listing: `uses`, `supports`, or `made_with` |
+| `list_dependents` | `uid` | | What a listing uses and which listings use it, plus license kind and compatibility |
+| `declare_engine_compat` | `uid`, `compat` | write | Replace the engine version ranges (engine, min/max version, renderer, platform) |
+| `declare_license` | `uid`, `license_kind` | write | `cc0`, `cc-by`, `cc-by-sa`, `paid`, `source-available`, or `proprietary` |
+| `create_key_pool` | `uid`, `name`, `campaign` | write | A named pool for redeemable game keys |
+| `grant_keys` | `uid`, `pool`, `n`, `campaign`, `idempotency_key` | write | Create 1-5000 keys; returns a one-time `csv_url` (1 hour). Over 100 needs the owner's approval |
+| `create_gift_link` | `uid`, `pool`, `note` | write | A single-use redeem link for one person, shown once |
+| `list_key_pools` | `uid` | | Pools with size, redeemed, unredeemed, and gift link counts |
 | `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
 | `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max` | write | Set the taxonomy; only passed fields change |
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |

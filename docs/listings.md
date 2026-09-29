@@ -47,6 +47,14 @@ Pages that were already public on September 28, 2026 have a 30-day grace period.
 
 List up to 10 public games that players of yours would also like, most similar first. They show on your store page and feed recommendations. A title that isn't public, or your own game, returns `4072`.
 
+## Dependencies, compatibility and license
+
+These are set over the developer MCP (`declare_dependency`, `declare_engine_compat`, `declare_license`; see the [reference](./mcp/reference.md#dependencies-compatibility-and-license)).
+
+- **Dependencies** link your listing to other public listings: it `uses` an asset pack or plugin, `supports` a game or tool (for mods and plugins), or was `made_with` a tool. Your page shows them under **Uses**, and the other listing shows yours under **Used by**. Up to 50 links.
+- **Engine compatibility** lists up to 10 engine version ranges, each with an optional renderer and platform. A `max_version` of `4.3` covers `4.3.x`. The store page shows them as **Works with**.
+- **License kind** is one of `cc0`, `cc-by`, `cc-by-sa`, `paid`, `source-available`, or `proprietary`, shown as **License**.
+
 ## Build scans
 
 Every uploaded file is virus-scanned before it can be downloaded. The scan state shows on the store page next to each download, with the file's SHA-256 checksum, and on the Builds tab of the edit page.
@@ -72,9 +80,12 @@ The Builds tab also lists files removed in the last 30 days because their scan d
 | `session_bucket`, `net` | One value each |
 | `players` | Only games that support this many players |
 | `os`, `arch` | Only games with a clean build for this platform |
+| `engine` | Listings made with this engine (`engines`) or declaring compatibility with it |
+| `engine_version`, `renderer` | Only listings whose declared compatibility covers this version or renderer |
+| `license` | One license kind |
 | `sort` | `relevance` (default with `q` or `tags`), `newest` (default otherwise), or `updated` |
 | `page`, `page_size` | `page_size` is 1 to 50, default 20 |
 
-Each result has the listing fields, `scan` (the best scan state across the game's files), `platforms` (clean builds only), `score`, and `matched_tags`.
+Each result has the listing fields, `engines`, `license_kind`, `scan` (the best scan state across the game's files), `platforms` (clean builds only), `score`, and `matched_tags`.
 
-`GET /api/v1/public/games/{uid}` returns one listing with its taxonomy, files, scan states, checksums, similar titles, and newest changelog.
+`GET /api/v1/public/games/{uid}` returns one listing with its taxonomy, license kind, engine compatibility, dependencies (`relations.uses` and `relations.used_by`), files, scan states, checksums, similar titles, and newest changelog. `GET /api/v1/public/games/{uid}/relations` returns just the dependencies, license kind, and compatibility.
