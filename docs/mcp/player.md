@@ -1,12 +1,12 @@
 ---
 title: Player MCP
 sidebar_position: 5
-description: Connect an agent to your Blazium Games account as a player to search the catalog, check your wallet and library, top up, buy games within your spending limit, and install or launch them through the Blazium launcher.
+description: Connect an agent to your Blazium Games account as a player to get recommendations with reasons, search the catalog, review games and report bugs, check your wallet and library, top up, buy games within your spending limit, and install or launch them through the Blazium launcher.
 ---
 
 # Player MCP
 
-The player server acts for you as a player. It can search the catalog, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
+The player server acts for you as a player. It can recommend games and say why, search the catalog, review games you own and report bugs, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
 
 | | Developer server | Player server |
 |---|---|---|
@@ -41,8 +41,8 @@ Create a player key at [blazium.games/settings/mcp](https://blazium.games/settin
 
 | Scope | Allows |
 |---|---|
-| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game |
-| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta |
+| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review |
+| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, taste feedback, bug reports |
 | `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game` |
 
 A route outside this list returns `4033`. A missing `player:buy` returns `4212`; any other missing scope returns `4031`.
@@ -78,10 +78,34 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `launch_game` | `uid` | read | Returns the `blazium://game/<uid>` link that opens the game in the launcher, and whether you own it and a clean build exists |
 | `set_channel` | `uid`, `channel` (`stable` or `beta`) | write | Joins or leaves a game's beta. Beta builds then show up in `get_game_details` and `install_build` |
 | `why_should_i_trust_this` | `uid` | read | The developer, how each current file was uploaded, its scan history and checksum, and anything worth a second look (a file that isn't clean, no scan history, a beta build). It never calls a file safe; a clean scan only means no known malware was found |
+| `recommend` | `intent`, `minutes`, `party_size`, `like_uid`, `os`, `arch`, `asset_type`, `include_owned`, `limit` (1-10) | read | Games for right now, each with the `reasons` it was picked and any `cautions`. See [Recommendations](#recommendations) |
+| `why_this` | `uid`, `intent`, `minutes`, `party_size`, `like_uid`, `os`, `arch` | read | One game scored against the same inputs: reasons, cautions, and the `blockers` that keep it out of `recommend` |
+| `write_review` | `uid`, `enjoyed`, `quality` (1-5), `would_play_with_friends`, `text`, `delete` | write | Creates or updates your review of a game you own. One review per game; `delete` removes it |
+| `taste_feedback` | `uid`, `more_like`, `clear` | write | More (`true`) or less (`false`) like this game in `recommend`. `clear` removes it |
+| `report_bug` | `uid`, `message`, `build_id`, `os`, `arch`, `include_dump`, `include_log` | write | Files a bug ticket with the developers. `include_dump` and `include_log` return one-time upload URLs (`PUT`, 24 hours) |
 
 Games list the channels you can join in `get_game_details` (`channels`). A beta download link for a game whose beta you haven't joined returns `4074`.
 
 `install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and the Blazium launcher does the rest.
+
+## Recommendations
+
+`recommend` gives the same answer for the same inputs; no model picks the games. It only considers public games with a clean build for your platform (when you pass `os`), and skips games you own or already liked unless you pass `include_owned`. Each game is scored in this order:
+
+1. **Session fit**: its session length (`15m`, `1h`, `3h`, or endless) against the `minutes` you have.
+2. **Intent**: words from `intent` matched against the listing's genres, tags, tone, name, tagline, and description. When you give an intent, a game that matches none of its words is left out.
+3. **Taste**: tags and genres shared with games you liked (`taste_feedback` more like, a review where you enjoyed it, an hour or more of play time, or `like_uid`), and titles the developer lists as similar to them.
+4. **Reviews**: at least 3 reviews, with 70% or more of reviewers saying they enjoyed it.
+5. **Crashes**: games with 5 or more crash reports in the last 14 days rank lower and get a caution.
+6. **Freshness**: a small, capped boost for listings updated in the last 14 days. It never counts as a reason on its own.
+
+Every result lists `reasons`, each naming the listing field it matched. A game with nothing to cite is left out rather than padded in. `party_size` keeps only games that support that many players. Games you marked less like this never appear. `why_this` explains any one game, including why it was left out.
+
+## Reviews and bug reports
+
+You can review and report bugs for games you own: games you bought, and free games you've downloaded (a free game counts once you download it, and stops counting if it later gets a price). You need a verified email, and developers can't review their own games (`4077`). Enjoyed and quality are separate: a well-made game you didn't enjoy can be quality 5 and enjoyed "no". Reviews appear on the store page, where the developer can reply. Review text is never used for ranking; `recommend` only counts whether reviewers enjoyed the game.
+
+A bug report goes to the game's developers, up to 10 per day (`4291`). Attached dumps and logs are only visible to the developers.
 
 ## Resources
 
@@ -93,4 +117,4 @@ Games list the channels you can join in `get_game_details` (`channels`). A beta 
 
 ## Moving from the developer server
 
-Until 2026-10-28 the developer server still lists `get_wallet`, `list_wallet_transactions`, `get_payment_options`, `create_top_up_link`, `create_x402_top_up`, `pay_with_x402`, `quote_purchase`, `purchase_game`, `donate_to_game`, `get_agent_policy`, `list_library`, and `get_download_link`, marked deprecated. After that date they are only on `/player`. `list_library` is named `get_library` here. See [Versioning](./versioning.md).
+Until 2026-10-28 the developer server still lists `get_wallet`, `list_wallet_transactions`, `get_payment_options`, `create_top_up_link`, `create_x402_top_up`, `pay_with_x402`, `quote_purchase`, `purchase_game`, `donate_to_game`, `get_agent_policy`, `list_library`, and `get_download_link`, marked deprecated. After that date they are only on `/player`, and purchases or top-ups made with a developer token return `4034`. `list_library` is named `get_library` here. See [Versioning](./versioning.md).

@@ -86,6 +86,7 @@ With the MCP server connected, ask your agent to list recent crashes. It uses:
 
 - `list_crash_groups` for reports grouped by cause, busiest first, with counts per build
 - `list_game_crashes` for recent reports
+- `list_bug_tickets` for bug reports players filed, with a `crash_id` when they attached a dump or log
 - `get_crash` for metadata, the player's message, and the stack excerpt
 - `request_crash_download` with `kind` `stack`, `log`, or `dump` for a private link valid for 1 hour
 
