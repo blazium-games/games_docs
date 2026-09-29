@@ -29,6 +29,11 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `launch_game` | read | `blazium://game/<uid>` hand-off link for the launcher |
 | `set_channel` | write | Join (`beta`) or leave (`stable`) a game's beta |
 | `why_should_i_trust_this` | read | Developer, upload provenance, scan history, checksums, and cautions for the current files. Never claims a file is safe |
+| `recommend` | read | Games for right now from `minutes`, `party_size`, `intent`, `like_uid`, and platform. Deterministic; every result has `reasons` citing listing fields. Pass the reasons on instead of inventing your own |
+| `why_this` | read | One game against the same inputs: score, reasons, cautions, and the `blockers` that keep it out of `recommend` |
+| `write_review` | write | Create, update, or `delete` the human's review of a game they own: `enjoyed` and `quality` (1-5) are separate, plus `would_play_with_friends` and `text`. Only write what the human said |
+| `taste_feedback` | write | `more_like` true or false for a game, or `clear` |
+| `report_bug` | write | File a bug ticket with the developers (10 per day); `include_dump` / `include_log` return one-time upload URLs |
 
 ## Resources
 

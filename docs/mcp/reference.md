@@ -45,6 +45,18 @@ Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or
 
 Crash groups use the top stack frames once a minidump has been stackwalked, and the crash message, app version, and OS before that. Grouping runs every 10 minutes.
 
+### Player feedback
+
+Players review games they own and file bug tickets from the [player server](./player.md) or the store page.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `list_reviews` | `uid`, `unreplied`, `page` | Reviews, newest first, with the summary: `count`, `enjoyed`, `quality_avg`, `quality_counts` (1 to 5), and `would_play_with_friends`. `unreplied` lists only reviews without a reply |
+| `reply_to_review` | `uid`, `review_uid`, `text` | Public reply shown under the review on the store page (up to 2000 characters). Empty text removes it. Write |
+| `list_bug_tickets` | `uid`, `status` (`open`, `fixed`, `closed`) | Tickets, newest first, with counts by status. A ticket with an attached dump or log has a `crash_id` for `get_crash` and `request_crash_download` |
+
+Only the game's owner and admins can read bug tickets and download their attachments.
+
 ### Approvals for risky actions
 
 Over MCP, rotating an account or deploy key, creating an account or game key, promoting to `stable`, and deleting a game or build wait for the account owner. The call returns HTTP 202 with code `4214`, an `approval_id`, and a `confirm_url`, and the owner gets an email with a link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once. On the website these actions don't need an approval.
@@ -55,9 +67,9 @@ Over MCP, rotating an account or deploy key, creating an account or game key, pr
 
 | Scope | Covers |
 |-------|--------|
-| `mcp:catalog.write` | Game pages, taxonomy, similar titles, media, admins |
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, media, admins, review replies |
 | `mcp:build.write` | Builds, channels, deploy info, scan status |
-| `mcp:crash.read` | Crash reports, crash groups, crash analysis |
+| `mcp:crash.read` | Crash reports, crash groups, crash analysis, bug tickets |
 | `mcp:analytics.read` | Visitor analytics and events |
 | `mcp:keys.manage` | Deploy keys and MCP keys |
 | `mcp:money` | Pricing, sales, wallet, purchases, library, downloads |
@@ -80,7 +92,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The wallet, top-up, purchase, donation, `get_agent_policy`, `list_library`, and `get_download_link` tools and the `wallet` and `library` resources are deprecated on this server and removed after 2026-10-28. Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The wallet, top-up, purchase, donation, `get_agent_policy`, `list_library`, and `get_download_link` tools and the `wallet` and `library` resources are deprecated on this server and removed after 2026-10-28. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -167,3 +179,8 @@ Tool errors return `API <status>: <body>`.
 | `4074` | The file isn't on a channel you can see (for example a beta build when you haven't joined the beta) |
 | `4075` | The channel has no earlier build to roll back to |
 | `4226` | Invalid channel name or `expires_in_hours` out of range (HTTP 422) |
+| `4034` | Buying and top-ups moved to the player server; developer tokens can't buy from 2026-10-29 |
+| `4076` | Reviews and bug reports need a copy of the game (bought, or downloaded if it's free) |
+| `4077` | You can't review your own game |
+| `4227` | Invalid review: `enjoyed` missing, `quality` outside 1 to 5, or text too long (HTTP 422) |
+| `4291` | Too many bug reports today (10 per player per day, HTTP 429) |

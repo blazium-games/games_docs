@@ -25,6 +25,9 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `rollback_channel` | `uid`, `channel` | write | Move a channel back to its previous build |
 | `list_crash_groups` | `uid` | | Crash reports grouped by cause with counts per build and a sample crash id |
 | `get_build_provenance` | `uid`, `file_uid` | | Uploader, deploy key reference, upload time, checksum, and scan history of a file |
+| `list_reviews` | `uid`, `unreplied`, `page` | | Player reviews with the summary (enjoyed, quality average and counts, would play with friends) |
+| `reply_to_review` | `uid`, `review_uid`, `text` | write | Public reply to a review; empty text removes it |
+| `list_bug_tickets` | `uid`, `status` | | Player bug tickets with counts by status; attachments carry a `crash_id` |
 | `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
 | `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max` | write | Set the taxonomy; only passed fields change |
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
