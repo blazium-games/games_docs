@@ -129,6 +129,9 @@ const config = {
           {
             title: 'Community',
             items: [
+              {label: 'Support', href: 'https://blazium.games/support'},
+              {label: 'Report a bug', href: 'https://github.com/blazium-games/support/issues'},
+              {label: 'Status', href: 'https://status.blazium.games'},
               {label: 'Discord', href: 'https://blazium.app/chat'},
               {label: 'Twitter', href: 'https://x.com/BlaziumGames'},
               {label: 'GitHub', href: 'https://github.com/blazium-games/games_docs'},

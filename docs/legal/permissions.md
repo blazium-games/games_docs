@@ -109,7 +109,7 @@ When you approve a tool, it gets a token for one server only, with one or more o
 - The consent screen has a **Read-only access** option. Tick it and the tool only gets `mcp:read` (or `player:read`); any attempt to change data is refused.
 - On the developer server you can pick a narrower preset on the consent screen (store page, CI, crash triage, keys, money, or read-only), so the tool only gets the scopes that job needs.
 - On the player server the tool can't buy unless you tick **Allow purchases**.
-- Over MCP, rotating or creating MCP and deploy keys, deleting a deploy key, promoting a build to stable, deleting a game or build, creating game keys, and adding a project admin wait until you approve them by the emailed link or code, even with full access.
+- Over MCP, rotating or creating MCP and deploy keys, deleting a deploy key, promoting a build to stable, deleting a game or build, creating more than 100 game keys at once, and adding a project admin wait until you approve them by the emailed link or code, even with full access.
 - A token is either for your whole account or for a single game (project). A project token is refused (error 4030) for any other game and for account-level actions: your profile, balance, wallet, library, account analytics, MCP keys, creating games, and buying.
 - Access tokens last 1 hour. Refresh tokens last 30 days from when you approved the tool. Each refresh issues a new refresh token and the old one stops working; if an old one is used again, the whole chain is revoked and the tool has to ask you again. All of them stop working if your account is deleted.
 - Every request made with an MCP key or token is recorded in an audit log (key, game, method, and path).
@@ -204,5 +204,5 @@ These are the responses your MCP client, script, or CI job will see.
 
 - A deploy key is an `access_token` and `secret_key` pair for one game. The chauffeur CLI reads them from `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`.
 - `request_deploy_key` returns the secret once and invalidates every previous deploy key for that game, so update your CI secrets right away.
-- Deploy keys can only register builds, upload build files, and upload build images. They cannot edit the store page text or settings, and they cannot read analytics or crash reports.
+- Deploy keys can only register builds, upload build files and debug symbols, upload store images, and read the game's basic details (`chauffeur info`). They cannot edit the store page text or settings, and they cannot read analytics or crash reports.
 - See [Deploy builds](../deploy.md) and [Access and keys](../mcp/access-and-keys.md).

@@ -19,7 +19,9 @@ This is the documentation for [Blazium Games](https://blazium.games), the store 
 
 ## Help
 
-- Support: [support@blazium.games](mailto:support@blazium.games)
+- Support: [blazium.games/support](https://blazium.games/support) or [support@blazium.games](mailto:support@blazium.games)
+- Bug reports: [blazium-games/support](https://github.com/blazium-games/support/issues)
+- Service status: [status.blazium.games](https://status.blazium.games)
 - Privacy: [privacy@blazium.games](mailto:privacy@blazium.games)
 - Community: [Discord](https://blazium.app/chat)
 - Source for this site and the Cursor plugin: [blazium-games/games_docs](https://github.com/blazium-games/games_docs)

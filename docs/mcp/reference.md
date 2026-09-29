@@ -43,7 +43,7 @@ Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or
 | `list_crash_groups` | `uid` | Up to 100 crash groups, most recently seen first, with `first_seen`, `last_seen`, counts per build, and a `sample_crash_id` for `get_crash` |
 | `get_build_provenance` | `uid`, `file_uid` | Uploader, how it was uploaded (`deploy_key` with an 8-character `key_ref`, or `website`), upload time, checksum, and scan history. Never returns a secret |
 
-Crash groups use the top stack frames once a minidump has been stackwalked, and the crash message, app version, and OS before that. Grouping runs every 10 minutes.
+Crash groups use the top stack frames once a minidump has been stackwalked, and the crash message, app version, and OS before that. A new report can take a few minutes to join a group.
 
 ### Build health, symbols and bundle check
 

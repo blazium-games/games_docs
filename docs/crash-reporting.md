@@ -176,6 +176,6 @@ With the MCP server connected, ask your agent to list recent crashes. It uses:
 - `get_crash` for metadata, the player's message, and the stack excerpt
 - `request_crash_download` with `kind` `stack`, `log`, or `dump` for a private link valid for 1 hour
 
-Reports with a minidump are stackwalked on the server, and grouped by their top stack frames. Until then they are grouped by the crash message, app version, and OS. Grouping runs every 10 minutes, so a new report can take a few minutes to join a group.
+Reports with a minidump are stackwalked on the server, and grouped by their top stack frames. Until then they are grouped by the crash message, app version, and OS. A new report can take a few minutes to join a group.
 
 In Cursor, the `blazium-games-debug-crash` skill runs this whole flow and maps the stack to your code.

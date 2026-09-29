@@ -16,21 +16,21 @@ We will update this page before adding a new subprocessor.
 
 | Subprocessor | What it does for us | Data involved | Location |
 | --- | --- | --- | --- |
-| DigitalOcean | App Platform hosting, Managed PostgreSQL, Spaces object storage, and the CDN at `cdn.blazium.online`. | All account, game, analytics, and crash data; uploaded files and builds. | United States |
+| DigitalOcean | Cloud hosting, databases, file storage, and content delivery. | All account, game, analytics, and crash data; uploaded files and builds. | United States |
 | GitHub | GitHub Actions for our CI, and GitHub Pages for this documentation. Signing in with GitHub is covered below. | Source code and build logs. | United States |
 | Google Analytics | Site usage statistics. **Only runs if you accept analytics cookies.** | Pages visited, device and browser details, approximate location. | United States |
 | Google STUN server | Part of the browser fingerprint used for visit analytics. **Only contacted if you accept analytics cookies.** | Your IP address, as seen by Google's server. | United States |
 | Fontshare | Serves the Nunito web font on blazium.games. | Your IP address and browser details, as with any web request. | India / global CDN |
 | Stripe | Card payments (Checkout), sales tax calculation (Stripe Tax), refunds, disputes, USDC payment records, and payouts to developers through Stripe Connect. | Email address, display name, an internal account ID, billing address, payment details (entered on Stripe's pages, never sent to us), purchase and top-up amounts, and for developers the identity, tax, and bank details Stripe Connect collects. For balance purchases with no billing address, your IP address is used to estimate tax. | United States |
 | Coinbase (Developer Platform) | Checks and settles USDC top-ups made with x402. | The signed payment from your wallet, including your wallet address, the amount, and the network. | United States |
-| Discord | Staff alerts: new crash reports (including the player's message) and mail sent to @blazium.games addresses are forwarded to a private staff channel. | Crash report details, email sender, subject, and body. | United States |
+| Discord | Internal team communication and operational notifications. | Limited details from support messages, crash reports, and account or payment events. | United States |
 
 ## What we run ourselves
 
 These are not subprocessors, because we operate them on our own servers:
 
-- **Mail server:** a self-hosted Postfix server with DKIM signing handles mail to and from @blazium.games.
-- **Virus scanning:** uploaded files are scanned with ClamAV.
+- **Mail:** our own mail service handles mail to and from @blazium.games.
+- **Virus scanning:** uploaded files are scanned with an open-source malware scanner.
 - **Country lookup:** we turn IP addresses into countries with a local copy of the MaxMind GeoLite2 database. No IP address is sent to MaxMind. This product includes GeoLite2 data created by MaxMind, available from [maxmind.com](https://www.maxmind.com).
 - **Logs:** request and error logs are written by our own services.
 

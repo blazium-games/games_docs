@@ -43,7 +43,3 @@ chauffeur sends the checksum with the upload, and the server recomputes it from 
 The Builds tab on the website, `chauffeur builds list`, and MCP `scan_status` all show the scan state. Every file also records how it was uploaded (the first characters of the deploy key, or the website) and its scan history. Anyone can read that record at `GET /api/v1/public/games/{game_uid}/files/{file_uid}/provenance`.
 
 The server also reads the zip's list of files, which powers the [bundle check](../listings.md#bundle-check).
-
-## Duplicate files
-
-If a clean upload is byte-for-byte identical to a file in another owner's listing, Blazium staff are notified to review it. This doesn't block the upload or change your listing. It exists to catch re-uploads of someone else's game.

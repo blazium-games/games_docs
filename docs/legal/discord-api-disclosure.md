@@ -43,7 +43,7 @@ That is the only use. We make one Discord API request per link or sign-in and no
 - We only keep your Discord user ID and username, so the linked account can log in and the settings page can show which one is linked.
 - We will not ask for more scopes without updating this page first.
 
-Separately, our staff alerts are posted to a private Discord channel we own. That is covered on [Subprocessors](./subprocessors.md) and does not involve your Discord account.
+We also use Discord for internal team communication; this never involves your Discord account.
 
 ## Revoking access and deleting data
 

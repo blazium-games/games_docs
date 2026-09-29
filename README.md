@@ -48,7 +48,7 @@ Never commit keys to a repository.
 
 ## Contributing
 
-Issues and pull requests are welcome.
+Pull requests for the docs and plugin are welcome. Report bugs in Blazium Games itself, including the MCP servers, at [blazium-games/support](https://github.com/blazium-games/support/issues).
 
 ```bash
 npm ci
@@ -61,7 +61,9 @@ The plugin check fetches the live [developer server card](https://mcp.blazium.ga
 
 ## Contact
 
-- Support: [support@blazium.games](mailto:support@blazium.games)
+- Support: [blazium.games/support](https://blazium.games/support) or [support@blazium.games](mailto:support@blazium.games)
+- Bug reports: [blazium-games/support](https://github.com/blazium-games/support/issues)
+- Service status: [status.blazium.games](https://status.blazium.games)
 - Privacy: [privacy@blazium.games](mailto:privacy@blazium.games)
 
 ## License

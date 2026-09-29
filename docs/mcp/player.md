@@ -102,9 +102,9 @@ Games list the channels you can join in `get_game_details` (`channels`). A beta 
 2. **Friends**: a friend playing it right now, or else friends who own it. Only friends who share their activity count.
 3. **Intent**: words from `intent` matched against the listing's genres, tags, tone, name, tagline, and description. When you give an intent, a game that matches none of its words is left out.
 4. **Taste**: tags and genres shared with games you liked (`taste_feedback` more like, a review where you enjoyed it, an hour or more of play time, or `like_uid`), and titles the developer lists as similar to them.
-5. **Reviews**: at least 3 reviews, with 70% or more of reviewers saying they enjoyed it.
-6. **Crashes**: games with 5 or more crash reports in the last 14 days rank lower and get a caution.
-7. **Freshness**: a small, capped boost for listings updated in the last 14 days. It never counts as a reason on its own.
+5. **Reviews**: enough reviews, with most reviewers saying they enjoyed it.
+6. **Crashes**: games with many recent crash reports rank lower and get a caution.
+7. **Freshness**: a small, capped boost for recently updated listings. It never counts as a reason on its own.
 
 Every result lists `reasons`, each naming the listing field it matched. A game with nothing to cite is left out rather than padded in. `party_size` keeps only games that support that many players. Games you marked less like this never appear. `why_this` explains any one game, including why it was left out.
 
@@ -112,7 +112,7 @@ Every result lists `reasons`, each naming the listing field it matched. A game w
 
 You can review and report bugs for games you own: games you bought, and free games you've downloaded (a free game counts once you download it, and stops counting if it later gets a price). You need a verified email, and developers can't review their own games (`4077`). Enjoyed and quality are separate: a well-made game you didn't enjoy can be quality 5 and enjoyed "no". Reviews appear on the store page, where the developer can reply. Review text is never used for ranking; `recommend` only counts whether reviewers enjoyed the game.
 
-A bug report goes to the game's developers, up to 10 per day (`4291`). Attached dumps and logs are only visible to the developers.
+A bug report goes to the game's developers, up to 10 per day (`4291`). Attached dumps and logs can only be downloaded by the game's developers and our staff.
 
 ## Friends
 

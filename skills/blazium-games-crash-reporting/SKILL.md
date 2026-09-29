@@ -123,7 +123,7 @@ Check with `list_build_symbols`. Details: https://blazium-games.github.io/games_
 
 1. Trigger a test crash (or send the JSON above with `curl`).
 2. Call `list_game_crashes` and confirm the new report and its `build_id`.
-3. Run the game once and check that the events arrive with `get_game_analytics`. `get_build_health` rates a build after 20 devices.
+3. Run the game once and check that the events arrive with `get_game_analytics`. `get_build_health` rates a build once enough devices have launched it.
 4. Hand off to `blazium-games-debug-crash` to read the crash.
 
 If nothing arrives, check that `X-Build-Id` belongs to this game (`get_game_build`) and that the endpoint is the `crash_ingest` URL from `get_deploy_info`.
