@@ -184,3 +184,6 @@ Tool errors return `API <status>: <body>`.
 | `4077` | You can't review your own game |
 | `4227` | Invalid review: `enjoyed` missing, `quality` outside 1 to 5, or text too long (HTTP 422) |
 | `4291` | Too many bug reports today (10 per player per day, HTTP 429) |
+| `4078` | Already friends, or the friend request was already sent (HTTP 409) |
+| `4228` | You can't send a friend request to yourself (HTTP 422) |
+| `4292` | Too many friend requests today (20 per day, HTTP 429) |

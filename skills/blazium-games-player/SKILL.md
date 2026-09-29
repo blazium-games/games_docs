@@ -1,6 +1,6 @@
 ---
 name: blazium-games-player
-description: Connect an agent to a Blazium Games account as a player through the player MCP server at mcp.blazium.games/player. Checks the account and email, reads the wallet and library, recommends games with cited reasons, searches the catalog, writes reviews and bug reports, explains player scopes and spending limits, and routes to purchases, installs, or launches. Use when the user wants an agent to act for them as a player on Blazium Games, find a game to play, review a game, report a bug, set up the player MCP server, or check what they own or can spend.
+description: Connect an agent to a Blazium Games account as a player through the player MCP server at mcp.blazium.games/player. Checks the account and email, reads the wallet and library, recommends games with cited reasons, searches the catalog, writes reviews and bug reports, shows what friends are playing, explains player scopes and spending limits, and routes to purchases, installs, or launches. Use when the user wants an agent to act for them as a player on Blazium Games, find a game to play, review a game, report a bug, set up the player MCP server, or check what they own or can spend.
 license: MIT
 ---
 
@@ -43,6 +43,8 @@ The player server acts for one player. It sees the account, wallet, and library,
 | "More like this" / "not for me" | `taste_feedback` with `more_like` true or false |
 | Review a game they own | Ask whether they enjoyed it and, separately, its quality from 1 to 5, then `write_review` with their words. Never write a review they didn't give you |
 | Report a bug | `report_bug` with what happened and how to reproduce it. If they have a crash dump or log, set `include_dump` / `include_log` and upload the file with `PUT` to the returned URL |
+| "What are my friends playing?" | `games_friends_play`; live games come first, then the last 14 days |
+| Add or answer a friend | `send_friend_request` with the username they gave you, or `list_friends` then `respond_friend_request`. Only send requests the human asked for |
 | Install a game they own or a free game | `install_build`, then give them the `blazium://install/<uid>` link. If it fails because the scan isn't clean, don't offer another way to download that file |
 | Play a game | `launch_game`, then give them the `blazium://game/<uid>` link |
 | Download a game they own or a free game | Phase 5 of [purchases](../blazium-games-purchases/SKILL.md) |
@@ -58,6 +60,8 @@ The player server acts for one player. It sees the account, wallet, and library,
 | `4076` | Reviews and bug reports need a copy of the game: buy it, or download it if it's free |
 | `4077` | The human is a developer of this game and can't review it |
 | `4291` | Too many bug reports today; try tomorrow |
+| `4078` | Already friends, or the request was already sent |
+| `4292` | Too many friend requests today; try tomorrow |
 
 ## References
 
