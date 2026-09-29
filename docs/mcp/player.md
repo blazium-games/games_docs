@@ -41,8 +41,8 @@ Create a player key at [blazium.games/settings/mcp](https://blazium.games/settin
 
 | Scope | Allows |
 |---|---|
-| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review |
-| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, taste feedback, bug reports |
+| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review, friends and what they're playing |
+| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, taste feedback, bug reports, friend requests, presence and activity sharing |
 | `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game` |
 
 A route outside this list returns `4033`. A missing `player:buy` returns `4212`; any other missing scope returns `4031`.
@@ -83,6 +83,10 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `write_review` | `uid`, `enjoyed`, `quality` (1-5), `would_play_with_friends`, `text`, `delete` | write | Creates or updates your review of a game you own. One review per game; `delete` removes it |
 | `taste_feedback` | `uid`, `more_like`, `clear` | write | More (`true`) or less (`false`) like this game in `recommend`. `clear` removes it |
 | `report_bug` | `uid`, `message`, `build_id`, `os`, `arch`, `include_dump`, `include_log` | write | Files a bug ticket with the developers. `include_dump` and `include_log` return one-time upload URLs (`PUT`, 24 hours) |
+| `games_friends_play` | `live_only` | read | What your friends are playing now, then what they played in the last 14 days, with store links. See [Friends](#friends) |
+| `list_friends` | none | read | Friends with their presence (playing, online, offline) and pending requests with their `request_uid` |
+| `send_friend_request` | `username` | write | Sends a friend request. If that person already asked you, it accepts theirs |
+| `respond_friend_request` | `request_uid`, `accept` | write | Accepts or declines an incoming request |
 
 Games list the channels you can join in `get_game_details` (`channels`). A beta download link for a game whose beta you haven't joined returns `4074`.
 
@@ -93,11 +97,12 @@ Games list the channels you can join in `get_game_details` (`channels`). A beta 
 `recommend` gives the same answer for the same inputs; no model picks the games. It only considers public games with a clean build for your platform (when you pass `os`), and skips games you own or already liked unless you pass `include_owned`. Each game is scored in this order:
 
 1. **Session fit**: its session length (`15m`, `1h`, `3h`, or endless) against the `minutes` you have.
-2. **Intent**: words from `intent` matched against the listing's genres, tags, tone, name, tagline, and description. When you give an intent, a game that matches none of its words is left out.
-3. **Taste**: tags and genres shared with games you liked (`taste_feedback` more like, a review where you enjoyed it, an hour or more of play time, or `like_uid`), and titles the developer lists as similar to them.
-4. **Reviews**: at least 3 reviews, with 70% or more of reviewers saying they enjoyed it.
-5. **Crashes**: games with 5 or more crash reports in the last 14 days rank lower and get a caution.
-6. **Freshness**: a small, capped boost for listings updated in the last 14 days. It never counts as a reason on its own.
+2. **Friends**: a friend playing it right now, or else friends who own it. Only friends who share their activity count.
+3. **Intent**: words from `intent` matched against the listing's genres, tags, tone, name, tagline, and description. When you give an intent, a game that matches none of its words is left out.
+4. **Taste**: tags and genres shared with games you liked (`taste_feedback` more like, a review where you enjoyed it, an hour or more of play time, or `like_uid`), and titles the developer lists as similar to them.
+5. **Reviews**: at least 3 reviews, with 70% or more of reviewers saying they enjoyed it.
+6. **Crashes**: games with 5 or more crash reports in the last 14 days rank lower and get a caution.
+7. **Freshness**: a small, capped boost for listings updated in the last 14 days. It never counts as a reason on its own.
 
 Every result lists `reasons`, each naming the listing field it matched. A game with nothing to cite is left out rather than padded in. `party_size` keeps only games that support that many players. Games you marked less like this never appear. `why_this` explains any one game, including why it was left out.
 
@@ -106,6 +111,12 @@ Every result lists `reasons`, each naming the listing field it matched. A game w
 You can review and report bugs for games you own: games you bought, and free games you've downloaded (a free game counts once you download it, and stops counting if it later gets a price). You need a verified email, and developers can't review their own games (`4077`). Enjoyed and quality are separate: a well-made game you didn't enjoy can be quality 5 and enjoyed "no". Reviews appear on the store page, where the developer can reply. Review text is never used for ranking; `recommend` only counts whether reviewers enjoyed the game.
 
 A bug report goes to the game's developers, up to 10 per day (`4291`). Attached dumps and logs are only visible to the developers.
+
+## Friends
+
+Add friends by username from the agent or at [blazium.games/friends](https://blazium.games/friends). You need a verified email to send requests, and you can send up to 20 a day (`4292`). Sending a request to someone who already asked you makes you friends right away. Adding yourself returns `4228`, and asking someone you're already friends with or already asked returns `4078`.
+
+Friends see whether you're online and which game you're playing, plus the public games you played in the last 14 days. "Playing" comes from the play-time heartbeat your launcher or game sends, and lasts 10 minutes after the last one. Unlisted and draft games are never shown. Turn off **Activity sharing** on the friends page to hide all of it; you then also drop out of your friends' recommendations.
 
 ## Resources
 

@@ -98,8 +98,8 @@ When you approve a tool, it gets a token for one server only, with one or more o
 | `mcp:analytics.read` | Developer | Reading visitor analytics and custom events. |
 | `mcp:keys.manage` | Developer | Listing and rotating deploy keys and MCP keys. |
 | `mcp:money` | Developer | Pricing, sales, wallet, library, and downloads. |
-| `player:read` | Player | Reading your account, balance, wallet history, quotes, library, approvals, download links, the builds you can see, your reviews, and recommendations. |
-| `player:write` | Player | Verifying your email, recording play time, confirming an approval with the code you give the tool, joining or leaving a game's beta, writing or deleting your reviews, "more/less like this" feedback, and filing bug reports. |
+| `player:read` | Player | Reading your account, balance, wallet history, quotes, library, approvals, download links, the builds you can see, your reviews, recommendations, and your friends and what they're playing. |
+| `player:write` | Player | Verifying your email, recording play time, confirming an approval with the code you give the tool, joining or leaving a game's beta, writing or deleting your reviews, "more/less like this" feedback, filing bug reports, sending and answering friend requests, and setting your presence and activity sharing. |
 | `player:buy` | Player | Topping up and buying games or donating from your balance within the limits you set. Granted only if you tick **Allow purchases**. |
 
 ### Why we need it

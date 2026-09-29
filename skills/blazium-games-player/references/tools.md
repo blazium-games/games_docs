@@ -34,6 +34,10 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `write_review` | write | Create, update, or `delete` the human's review of a game they own: `enjoyed` and `quality` (1-5) are separate, plus `would_play_with_friends` and `text`. Only write what the human said |
 | `taste_feedback` | write | `more_like` true or false for a game, or `clear` |
 | `report_bug` | write | File a bug ticket with the developers (10 per day); `include_dump` / `include_log` return one-time upload URLs |
+| `games_friends_play` | read | What friends are playing now, then what they played in the last 14 days; `live_only` skips the recent list |
+| `list_friends` | read | Friends with presence, plus incoming and sent requests with their `request_uid` |
+| `send_friend_request` | write | Send a request by username (20 per day, verified email). Accepts theirs if they already asked |
+| `respond_friend_request` | write | Accept or decline an incoming request |
 
 ## Resources
 
