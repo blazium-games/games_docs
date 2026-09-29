@@ -8,7 +8,7 @@ description: Connect Cursor, VS Code, Claude Code, or any MCP client to the host
 
 # MCP for Blazium Games
 
-The Blazium Games MCP server lets AI agents create and update game pages, read analytics and crash reports, list builds, and issue deploy credentials.
+The Blazium Games MCP server lets AI agents create and update game pages, ship and promote builds, read analytics, crash reports, reviews, and bug tickets, manage game keys, and issue deploy credentials. Version 1.10.0 has 57 developer tools (45 after 2026-10-28) and 33 player tools.
 
 | | |
 |---|---|
@@ -54,10 +54,10 @@ claude mcp add --transport http blazium-games https://mcp.blazium.games/mcp
 On the consent screen you choose what the client may manage:
 
 - **Account**: every project you own or administer.
-- **A single project**: only that project.
-- **Read-only access**: the client can read but not change anything. Write tools return `403` with code `4031`.
+- **A single project**: only that project. Account-level tools (profile, account, keys, setup, creating games, payments) return `403` with code `4030`.
+- **What it may do**: a preset such as **Store page**, **CI**, **Crash triage**, **Keys**, **Money**, **Read-only**, or **Full access**. See [Scopes](./reference.md#scopes). Read-only write calls return `403` with code `4031`.
 
-Access renews automatically for 30 days, then the client asks you to sign in again.
+Access renews automatically for 30 days from when you approved it, then the client asks you to sign in again. Each renewal replaces the refresh token; if an old one is ever used again, the whole chain is revoked and the client has to ask you again.
 
 ## Option B: API key
 

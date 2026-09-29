@@ -85,17 +85,45 @@ build_id=<build_id>, os=windows, arch=x86_64, channel=stable,
 checksum=<sha256 hex of the zip>, file=@game.zip
 ```
 
-- `file` must be a `.zip`, up to 5 GB.
-- Large uploads can resume with `X-Upload-Session-ID` and `Content-Range`.
+- `file` must be a `.zip`, up to 5 GB. Folders inside the zip are kept as they are.
+- `os` is one of `windows`, `macos`, `linux`, `android`, `ios`, or `web`.
+- `arch` is one of `x86_64`, `x86`, `arm64`, `arm32`, `arm`, `universal`, `wasm32`, or `wasm`.
+- `channel` is lowercase letters, digits, `-`, and `_`, starting with a letter or digit, up to 32 characters.
+- `checksum` is the SHA-256 of the zip as 64 hex characters (a `sha256:` prefix is accepted).
 - Instead of `build_id`, you can send `build` plus `build_type` and `version`.
+- The game owner must have a verified email before files can be uploaded.
+
+### Chunked uploads
+
+For large or unreliable connections, open a session first:
+
+```http
+POST https://uploader.blazium.online/api/v1/tool/upload/sessions
+X-Access-Token: <access_token>
+X-Secret-Key: <secret_key>
+Content-Type: application/x-www-form-urlencoded
+
+filename=game.zip&total_size=<bytes>&checksum=<sha256 hex>&os=windows&arch=x86_64&channel=stable&build_id=<build_id>
+```
+
+The `201` response has `session_id`, `expected_size`, `current_size`, and `expires_at` (6 hours). Then send the chunks in order to `/api/v1/tool/upload/files`, each as a multipart `file` part with `X-Upload-Session-ID: <session_id>` and `Content-Range: bytes <start>-<end>/<total_size>`. Each chunk returns `202` with `current_size` until the last one, which finishes the upload like a single request. After a failed chunk, resume from the `current_size` in the error. Each game can have up to 8 open sessions.
 
 | Code | Meaning |
 |------|---------|
-| `4026` | Missing required field when registering |
+| `4020` / `4021` | Missing `X-Access-Token` or `X-Secret-Key` |
+| `4022` / `4023` | Deploy key not found, or revoked |
+| `4026` | Missing or too-long field when registering (`version` up to 32 characters, `title` up to 255, up to 100 changelog items) |
+| `4037` | Missing `file`, or a form that could not be read |
 | `4038` | Missing build identification |
 | `4039` | Build not found; register it first |
-| `4041` | Missing `channel`, `os`, `arch`, or `checksum` |
-| `4042` | File is not a `.zip` |
+| `4041` | Invalid `checksum`, `os`, `arch`, or `channel`, or the file is not a `.zip` |
+| `4043` | Larger than 5 GB, or larger than the chunk's `Content-Range` (`413`) |
+| `4044` | Missing or invalid `X-Upload-Session-ID` / `Content-Range`, or a chunk that does not continue the session |
+| `4045` | Upload session not found or expired |
+| `4046` | Checksum mismatch |
+| `4047` | Another chunk for the same session is still uploading (`409`) |
+| `4096` | The game owner has not verified their email |
+| `4290` / `4291` | Too many uploads, chunks, or open sessions for this game (`429`) |
 
 ## Channels
 

@@ -4,10 +4,11 @@ The server at `https://mcp.blazium.games/mcp` accepts OAuth 2.1 access tokens or
 
 ## OAuth (recommended)
 
-- Discovery: `https://mcp.blazium.games/.well-known/oauth-protected-resource/mcp` and `/.well-known/oauth-authorization-server`
-- PKCE `S256`, dynamic client registration, and client ID metadata documents are supported
-- Scopes: `mcp:read` and `mcp:write`
-- Access tokens last 1 hour. Refresh tokens last 30 days and rotate on every use, so the client renews silently
+- Discovery: `https://mcp.blazium.games/.well-known/oauth-protected-resource/mcp` and `/.well-known/oauth-authorization-server` (player server: the same paths ending in `/player`)
+- PKCE `S256` (verifier 43-128 characters), dynamic client registration, and client ID metadata documents are supported
+- Scopes: `mcp:read`, `mcp:write`, and the narrower `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, `mcp:money`
+- Access tokens last 1 hour. Refresh tokens rotate on every use, so the client renews silently, but the sign-in still ends 30 days after it started
+- Each refresh token works once. Reusing a spent one revokes the whole sign-in; the user then reconnects
 - Details: https://blazium-games.github.io/games_docs/docs/mcp/oauth
 
 On the consent page the user picks:
@@ -15,7 +16,8 @@ On the consent page the user picks:
 | Choice | Effect |
 |--------|--------|
 | Account | All games the user owns or admins, plus account tools |
-| Single project | Only that game. `get_profile`, `get_setup`, `list_mcp_keys`, `request_mcp_key`, `create_game`, and `blazium-games://me` are refused |
+| Single project | Only that game. Account tools (`get_profile`, `get_setup`, `list_mcp_keys`, `request_mcp_key`, `create_game`, `get_account`, approvals, payments, `blazium-games://me`) and other games return `403` code `4030` |
+| Preset | **Store page**, **CI**, **Crash triage**, **Keys**, **Money**, or **Full access**. A tool outside the preset returns `4073` |
 | Read-only access | Only `mcp:read` is granted. Any write returns `403` code `4031` "This token is read-only" |
 
 Revoke grants at https://blazium.games/settings/mcp.
@@ -39,7 +41,7 @@ For headless agents and CI:
 }
 ```
 
-Keys start with `bgames_mcp_`. Issuing a new account key invalidates every previous account key. A game admin can also create a project key bound to one game from that game's settings.
+Keys start with `bgames_mcp_`. Issuing a new account key invalidates every previous account key. The owner and each admin can also create their own project key bound to one game from that game's MCP tab. Player keys start with `bgames_play_` and only work on `https://mcp.blazium.games/player`.
 
 ## Rules for agents
 

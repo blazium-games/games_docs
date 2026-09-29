@@ -109,9 +109,9 @@ When you approve a tool, it gets a token for one server only, with one or more o
 - The consent screen has a **Read-only access** option. Tick it and the tool only gets `mcp:read` (or `player:read`); any attempt to change data is refused.
 - On the developer server you can pick a narrower preset on the consent screen (store page, CI, crash triage, keys, money, or read-only), so the tool only gets the scopes that job needs.
 - On the player server the tool can't buy unless you tick **Allow purchases**.
-- Over MCP, rotating or creating keys, promoting a build to stable, and deleting a game or build wait until you approve them by the emailed link or code, even with full access.
-- A token is either for your whole account or for a single game (project). A project token is refused for any other game.
-- Access tokens last 1 hour. Refresh tokens last 30 days, each refresh issues a new one, and they stop working if your account is deleted.
+- Over MCP, rotating or creating MCP and deploy keys, deleting a deploy key, promoting a build to stable, deleting a game or build, creating game keys, and adding a project admin wait until you approve them by the emailed link or code, even with full access.
+- A token is either for your whole account or for a single game (project). A project token is refused (error 4030) for any other game and for account-level actions: your profile, balance, wallet, library, account analytics, MCP keys, creating games, and buying.
+- Access tokens last 1 hour. Refresh tokens last 30 days from when you approved the tool. Each refresh issues a new refresh token and the old one stops working; if an old one is used again, the whole chain is revoked and the tool has to ask you again. All of them stop working if your account is deleted.
 - Every request made with an MCP key or token is recorded in an audit log (key, game, method, and path).
 
 ### We will never
@@ -127,7 +127,8 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 - At [blazium.games/settings/mcp](https://blazium.games/settings/mcp) you can let an agent spend on its own: unlimited, or up to a monthly, yearly, or one-time limit (up to $1,000, UTC periods). Anything beyond the limit waits for your approval. Agents cannot change their own limits.
 - An approval covers one purchase, for the amount shown, and expires after 30 minutes.
 - The limit counts each purchase's total, including tax. Refunded purchases stop counting.
-- Buying needs a player token with `player:buy`, or until October 28, 2026 a developer token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy.
+- Buying needs a player token with `player:buy`, or until October 28, 2026 a developer token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy (error 4030).
+- From October 28, 2026 the developer server no longer buys: its buying tools are removed and direct requests get error 4034. Use the player server instead.
 - Agents pay only from your account balance, never by card. They cannot cash out, set up payouts, or request refunds.
 - Your email must be verified before agents can buy.
 - Each agent purchase is recorded with the agent that made it, and shows in your wallet transactions and library.
@@ -144,7 +145,7 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 
 ## Cookies
 
-Sign-in cookies are always on because the site does not work without them. Analytics cookies are only set if you accept them in the cookie banner.
+Sign-in cookies are always on because the site does not work without them. They are HTTPS-only, hidden from page scripts, and `SameSite=Lax`, so other sites can't make signed-in requests with them. Analytics cookies are only set if you accept them in the cookie banner.
 
 | Cookie | Purpose | Lifetime | Needs consent |
 | --- | --- | --- | --- |

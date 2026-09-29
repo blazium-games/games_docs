@@ -31,7 +31,7 @@ Add the server to your client with no token:
 }
 ```
 
-Your client discovers OAuth from `https://mcp.blazium.games/.well-known/oauth-protected-resource/player` and opens the Blazium Games consent page. There is no project picker. Tick **Allow purchases** only if the agent should buy for you; without it the token has `player:read player:write` and every purchase call returns `4212`. Tick **Read-only access** to grant `player:read` only.
+Your client discovers OAuth from `https://mcp.blazium.games/.well-known/oauth-protected-resource/player` (authorization server metadata at `/.well-known/oauth-authorization-server/player`) and opens the Blazium Games consent page, which lists what the player tools can do. There is no project picker. Tick **Allow purchases** only if the agent should buy for you; without it the token has `player:read player:write` and every purchase call returns `4212`. Tick **Read-only access** to grant `player:read` only.
 
 ## Connect with a player key
 
@@ -117,7 +117,7 @@ A bug report goes to the game's developers, up to 10 per day (`4291`). Attached 
 
 Add friends by username from the agent or at [blazium.games/friends](https://blazium.games/friends). You need a verified email to send requests, and you can send up to 20 a day (`4292`). Sending a request to someone who already asked you makes you friends right away. Adding yourself returns `4228`, and asking someone you're already friends with or already asked returns `4078`.
 
-Friends see whether you're online and which game you're playing, plus the public games you played in the last 14 days. "Playing" comes from the play-time heartbeat your launcher or game sends, and lasts 10 minutes after the last one. Unlisted and draft games are never shown. Turn off **Activity sharing** on the friends page to hide all of it; you then also drop out of your friends' recommendations.
+Friends see whether you're online and which game you're playing, plus the public games you played in the last 14 days. "Playing" comes from the play-time heartbeat your launcher or game sends, and lasts 10 minutes after the last one; there is no separate presence tool. Unlisted and draft games are never shown. Turn off **Activity sharing** on the friends page to hide all of it; you then also drop out of your friends' recommendations.
 
 ## Resources
 
@@ -129,4 +129,4 @@ Friends see whether you're online and which game you're playing, plus the public
 
 ## Moving from the developer server
 
-Until 2026-10-28 the developer server still lists `get_wallet`, `list_wallet_transactions`, `get_payment_options`, `create_top_up_link`, `create_x402_top_up`, `pay_with_x402`, `quote_purchase`, `purchase_game`, `donate_to_game`, `get_agent_policy`, `list_library`, and `get_download_link`, marked deprecated. After that date they are only on `/player`, and purchases or top-ups made with a developer token return `4034`. `list_library` is named `get_library` here. See [Versioning](./versioning.md).
+Until 2026-10-28 the developer server still lists `get_wallet`, `list_wallet_transactions`, `get_payment_options`, `create_top_up_link`, `create_x402_top_up`, `pay_with_x402`, `quote_purchase`, `purchase_game`, `donate_to_game`, `get_agent_policy`, `list_library`, and `get_download_link`, marked deprecated. At the end of that day they disappear from `/mcp`, even on a server that is already running, and are only on `/player`; purchases or top-ups made with a developer token then return `4034`. `list_library` is named `get_library` here. See [Versioning](./versioning.md).

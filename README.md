@@ -2,7 +2,7 @@
 
 The official Blazium Games plugin for Cursor, and the source of the [Blazium Games documentation](https://blazium-games.github.io/games_docs/).
 
-The plugin teaches Cursor how to use [Blazium Games](https://blazium.games): create and edit store pages, ship builds from CI, wire up crash reporting, debug crashes, read analytics, and rotate keys, all through the hosted Blazium Games MCP server.
+The plugin teaches Cursor how to use [Blazium Games](https://blazium.games): create and edit store pages, ship builds from CI, wire up crash reporting, debug crashes, read analytics, and manage keys through the hosted developer MCP server, and find, review, and buy games through the player MCP server.
 
 ## Install
 
@@ -14,7 +14,7 @@ Full guide: [Cursor plugin docs](https://blazium-games.github.io/games_docs/docs
 
 ## What's included
 
-- The hosted [Blazium Games MCP server](https://blazium-games.github.io/games_docs/docs/mcp) at `https://mcp.blazium.games/mcp` ([mcp.json](mcp.json)).
+- The hosted [Blazium Games MCP server](https://blazium-games.github.io/games_docs/docs/mcp) at `https://mcp.blazium.games/mcp` and the [player server](https://blazium-games.github.io/games_docs/docs/mcp/player) at `https://mcp.blazium.games/player` ([mcp.json](mcp.json)).
 - Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 
 | Skill | What it does |
@@ -26,10 +26,12 @@ Full guide: [Cursor plugin docs](https://blazium-games.github.io/games_docs/docs
 | [blazium-games-debug-crash](skills/blazium-games-debug-crash/SKILL.md) | Triages crashes and maps them to your code |
 | [blazium-games-analytics](skills/blazium-games-analytics/SKILL.md) | Summarizes store page traffic |
 | [blazium-games-keys](skills/blazium-games-keys/SKILL.md) | Inspects and rotates MCP and deploy keys |
+| [blazium-games-player](skills/blazium-games-player/SKILL.md) | Acts as a player: recommendations, catalog search, reviews, bug reports, friends |
+| [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buys games and donates from the balance within spending limits |
 
 ## Authentication
 
-- **OAuth (default):** choose your whole account or a single project on the consent page, and optionally **Read-only access**.
+- **OAuth (default):** choose your whole account or a single project on the consent page, and a preset such as **CI**, **Crash triage**, or **Read-only**. The player server has its own consent with `player:read`, `player:write`, and `player:buy`.
 - **API key:** for headless use, create a key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) and send it as `Authorization: Bearer bgames_mcp_...`. See [Access and keys](https://blazium-games.github.io/games_docs/docs/mcp/access-and-keys).
 
 Never commit keys to a repository.

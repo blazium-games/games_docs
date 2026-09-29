@@ -1,8 +1,8 @@
 {
   "name": "blazium-games",
   "displayName": "Blazium Games",
-  "version": "1.0.0",
-  "description": "Manage Blazium Games store pages, analytics, crash reports, builds, and deploy credentials from Cursor. Includes the hosted Blazium Games MCP server and skills for store pages, CI deploys, crash reporting, crash debugging, analytics, and key management.",
+  "version": "1.1.0",
+  "description": "Manage Blazium Games store pages, builds, channels, crash reports, bug tickets, reviews, analytics, and keys from Cursor, and find, review, and buy games as a player. Includes the hosted developer and player MCP servers and skills for store pages, CI deploys, crash reporting, crash debugging, analytics, keys, playing, and purchases.",
   "author": {
     "name": "Blazium Games",
     "email": "support@blazium.games"
@@ -18,7 +18,8 @@
     "crash-reporting",
     "analytics",
     "deploy",
-    "mcp"
+    "mcp",
+    "player"
   ],
   "category": "developer-tools",
   "tags": [

@@ -24,7 +24,9 @@ AI agents connected through the [MCP server](../mcp/index.md) can buy games and 
 
 Limits go up to $1,000. They count each purchase's total, including tax; refunded purchases do not count. Each MCP API key and each OAuth client is a separate agent with its own mode. Only you can change these settings, on the website; agents can read them with `get_agent_policy`.
 
-Agents need a token with `mcp:write` for the whole account. Project-bound tokens cannot buy.
+Agents buy through the [player server](../mcp/player.md) at `https://mcp.blazium.games/player`, with a token that has `player:buy` (tick **Allow purchases** on the consent page or when creating a player key). Without it, purchase calls return `4212`.
+
+The developer server's buying tools are deprecated and stop working on 2026-10-29 (`4034`). Until then they need a token with `mcp:write` for the whole account; project-bound tokens get `4030`.
 
 ## How an agent buys
 
@@ -61,7 +63,13 @@ Agents always pay from the balance. If it is too low (`4020`), the agent can:
 | `4097` | This approval was already used |
 | `4098` | This approval was already decided or expired |
 | `4096` | The account email is not verified |
-| `4212` | This token can't make purchases (project token, or an unknown agent) |
+| `4212` | This token can't make purchases (no `player:buy`, a project token, or an unknown agent) |
+| `4030` | A project-bound developer token called an account-level tool |
+| `4034` | Buying moved to the player server; developer tokens can't buy after the cutoff |
+| `4090` | You already own the game |
+| `4091` | You can't buy your own game |
+| `4092` | The game is free; add it from the store page instead |
+| `4093` | The game doesn't accept donations |
 | `4020` | Not enough balance |
 | `4221` | No billing address on file for tax. Top up by card once, or buy on the website |
 | `4094` | The total changed; quote again |

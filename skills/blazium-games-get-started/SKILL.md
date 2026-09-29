@@ -16,7 +16,7 @@ Connect to the hosted Blazium Games MCP server at `https://mcp.blazium.games/mcp
 
 ## Prerequisites
 
-- A Blazium Games account (sign up at https://blazium.games/register)
+- A Blazium Games account (sign up at https://blazium.games/signup)
 - The `blazium-games` MCP server enabled in Cursor (this plugin ships it in `mcp.json`)
 
 ## Phase 1: Connect
@@ -37,8 +37,10 @@ The plugin registers the server as:
 On first use Cursor opens a browser for OAuth. On the consent page the user chooses:
 
 - **Account**: every game they own or admin, plus account tools such as `create_game` and `request_mcp_key`.
-- **A single project**: only that game. Account-only tools return an error.
-- **Read-only access** (checkbox): the token can only read. Write tools return `403` with code `4031`.
+- **A single project**: only that game. Account-only tools return `403` with code `4030`.
+- **A preset**: **Store page**, **CI**, **Crash triage**, **Keys**, **Money**, **Read-only**, or **Full access**. A tool outside the preset returns `4073`; a write with a read-only token returns `4031`.
+
+For playing and buying as a player, the plugin also ships `blazium-games-player` at `https://mcp.blazium.games/player`, which has its own consent. See the `blazium-games-player` skill.
 
 If OAuth is not possible (headless CI, remote agents), use an API key instead. See [references/auth.md](references/auth.md).
 
@@ -46,13 +48,15 @@ If OAuth is not possible (headless CI, remote agents), use an API key instead. S
 
 1. Call `get_profile`. A username confirms the connection.
 2. Call `get_setup` to see the account, games, public URLs, and key prefixes. It never returns secrets.
-3. If `get_setup` fails with "account-level", the token is bound to one project. Use `list_games` instead.
+3. If `get_setup` fails with `4030`, the token is bound to one project. Use `list_games` instead.
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
 | `401` / auth prompt loops | Token expired or revoked | Reconnect the server in Cursor Settings > MCP |
 | `403` code `4031` | Read-only token | Reconnect without "Read-only access" |
-| "account-level" error | Project-bound token | Reconnect choosing "Account" |
+| `403` code `4030` | Project-bound token calling an account-level tool or another game | Reconnect choosing "Account" |
+| `403` code `4073` | The preset doesn't cover this tool | Reconnect with a wider preset |
+| `approval_required` (`4214`) | The action waits for the account owner | Ask the human to open the emailed link, then retry with the same `idempotency_key` |
 | `API 404` on a game | Wrong uid or vanity name | Call `list_games` and use the `uid` |
 
 ## Phase 3: Route
@@ -65,6 +69,8 @@ If OAuth is not possible (headless CI, remote agents), use an API key instead. S
 | Investigate a crash | `blazium-games-debug-crash` |
 | Read visitor analytics | `blazium-games-analytics` |
 | Rotate MCP or deploy keys | `blazium-games-keys` |
+| Find, review, or play games as a player | `blazium-games-player` |
+| Buy a game or donate | `blazium-games-purchases` |
 
 ## References
 

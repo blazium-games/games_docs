@@ -32,7 +32,7 @@ Call `get_deploy_info` with the game's `uid` or vanity name. It returns (no secr
 | `endpoints.events_ingest` | Custom events endpoint |
 | `builds[]`, `latest_build_id` | Existing builds and their `build_id` |
 | `keys[]` | Prefixes of existing deploy keys |
-| `env` | Env var names to set in CI |
+| `env` | Env var names to set in CI (`BLAZIUM_ACCESS_TOKEN`, `BLAZIUM_SECRET_KEY`, `BLAZIUM_API_URL`, `BLAZIUM_UPLOAD_URL`) plus `BLAZIUM_GAMES_APP_ID` and the latest `BLAZIUM_GAMES_BUILD_ID` for crash reporting |
 
 ## Phase 2: Get deploy credentials
 
@@ -86,16 +86,29 @@ asset:
 
    The same version, type, OS, arch, and channel update one build instead of creating another. The response includes `build_id`.
 
-2. `POST https://uploader.blazium.online/api/v1/tool/upload/files` (multipart, same headers) with fields `build_id`, `os`, `arch`, `channel`, `checksum` (SHA-256 hex of the zip), and `file` (a `.zip`, max 5 GB). Large uploads can resume with `X-Upload-Session-ID` and `Content-Range`.
+2. `POST https://uploader.blazium.online/api/v1/tool/upload/files` (multipart, same headers) with fields `build_id`, `os`, `arch`, `channel`, `checksum` (SHA-256 hex of the zip), and `file` (a `.zip`, max 5 GB). Folders inside the zip are kept.
+
+   - `os`: `windows`, `macos`, `linux`, `android`, `ios`, or `web`
+   - `arch`: `x86_64`, `x86`, `arm64`, `arm32`, `arm`, `universal`, `wasm32`, or `wasm`
+   - `channel`: lowercase letters, digits, `-`, `_`; starts with a letter or digit; up to 32 characters
+
+3. For large files, open a session first: `POST https://uploader.blazium.online/api/v1/tool/upload/sessions` (same headers, form fields `filename`, `total_size`, `checksum`, `os`, `arch`, `channel`, and `build_id`). The `201` response has `session_id`, `expected_size`, `current_size`, and `expires_at` (6 hours). Send the chunks in order to `/tool/upload/files` as multipart `file` parts with `X-Upload-Session-ID` and `Content-Range: bytes <start>-<end>/<total>`. Each returns `202` until the last one finishes the upload. On an error, resume from its `current_size`.
 
 | Error code | Meaning |
 |------------|---------|
-| `4026` | Missing required field on build registration |
+| `4020`-`4023` | Missing, unknown, or revoked deploy key headers |
+| `4026` | Missing or too-long field on build registration |
+| `4037` | Missing `file`, or a form that could not be read |
 | `4038` | Missing build identification on file upload |
 | `4039` | Build not found (register it first) |
-| `4041` | Missing `channel`, `os`, `arch`, or `checksum` |
-| `4042` | File is not a `.zip` |
+| `4041` | Invalid `checksum`, `os`, `arch`, or `channel`, or the file is not a `.zip` |
+| `4043` | Over 5 GB, or larger than the chunk's `Content-Range` (`413`) |
+| `4044` | Missing or invalid session headers, or a chunk that doesn't continue the session (resume from `current_size`) |
+| `4045` | Upload session not found or expired; open a new one |
+| `4046` | Checksum mismatch; recompute the SHA-256 of the zip |
+| `4047` | Another chunk for this session is still uploading; wait and retry |
 | `4096` | The project owner must verify their email before uploading |
+| `4290` / `4291` | Too many uploads or open sessions for this game; wait and retry |
 
 Uploaded build files are private. Players download them through short-lived links after verifying their email, and paid games also need a license.
 
@@ -131,7 +144,7 @@ Check the [blazium-cli releases](https://github.com/blazium-games/blazium-cli/re
 
 ## Phase 5: Hand off to crash reporting
 
-Call `list_game_builds` and give the new `build_id` to the crash reporter as `X-Build-Id` (env `BLAZIUM_GAMES_BUILD_ID`). Continue with `blazium-games-crash-reporting`.
+Call `list_game_builds` and give the new `build_id` to the crash reporter as `X-Build-Id`: in Blazium Engine, write it into the export's `application/crash_reporter/build_id` project setting. `blazium-cli games build` and `get_deploy_info` print it as `BLAZIUM_GAMES_BUILD_ID` so CI can pass it to the export step. Continue with `blazium-games-crash-reporting`.
 
 ## Docs
 

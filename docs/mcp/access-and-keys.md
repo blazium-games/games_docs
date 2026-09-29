@@ -11,14 +11,22 @@ description: Account versus project access, project keys and admins, read-only t
 Account access (an account key, or OAuth with **Account**) reaches every project you own or administer. Project access (your project key, or OAuth with one project) reaches only that project:
 
 - `list_games` and `blazium-games://games` return only that project.
-- Account-only: `get_profile`, `get_setup`, `list_mcp_keys`, `request_mcp_key`, `create_game`, and `blazium-games://me`.
-- Everything else for that project works: page details and updates, analytics, crashes, builds, deploy info, and `request_deploy_key`.
+- Account-only tools return `403` with code `4030`: `get_profile`, `get_setup`, `list_mcp_keys`, `request_mcp_key`, `create_game`, `get_account`, `request_email_code`, `verify_email`, `get_approval`, `confirm_approval`, the deprecated wallet, purchase, and library tools, and the `blazium-games://me`, `wallet`, and `library` resources.
+- Everything else for that project works: page details and updates, analytics, crashes, bug tickets, reviews, builds, channels, deploy info, key pools, and `request_deploy_key`. Calls for any other game return `4030`.
+- Approvals requested with a project token are approved from the owner's email, since the token can't call `get_approval` or `confirm_approval`.
 
-## Read and write
+## Read, write, and narrower scopes
 
-OAuth tokens carry the scopes `mcp:read` and `mcp:write`. A token without `mcp:write` (for example when you tick **Read-only access** on the consent page) can only read. Any change, such as `create_game`, `update_game`, `request_mcp_key`, or `request_deploy_key`, returns `403` with code `4031` "This token is read-only".
+OAuth tokens carry `mcp:read` and `mcp:write`, or narrower scopes per area: `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, and `mcp:money`. The consent page offers presets for them (**Store page**, **CI**, **Crash triage**, **Keys**, **Money**, **Read-only**, **Full access**); see [Scopes](./reference.md#scopes).
 
-API keys and website sessions have both scopes.
+- A token without any write scope (for example when you tick **Read-only access**) can only read. Any change returns `403` with code `4031` "This token is read-only".
+- A call outside the token's scopes, such as `update_game` with a **CI** token, returns `4073`.
+
+API keys and website sessions have every scope.
+
+## Approvals
+
+Over MCP, rotating an account or deploy key, deleting a deploy key, creating more than 100 game keys at once, adding a project admin, promoting to `stable`, and deleting a game or build wait for the account owner, even with full access. The call returns an `approval` whose `confirm_url` the owner opens (they also get an email with the link and a 6-digit code). Once approved, the agent repeats the call with the same `idempotency_key`. See [Approvals for risky actions](./reference.md#approvals-for-risky-actions).
 
 ## Project keys and admins
 
