@@ -22,7 +22,7 @@ Linking is managed at [Settings > Linked accounts](https://blazium.games/setting
 4. Approve Blazium Games on the other service.
 5. You return to Linked accounts with "*Name* account linked." The row now shows **Linked as @username** and the date.
 
-A provider marked **Not available yet** is not set up on our side, so it cannot be linked right now.
+A provider marked **Not available** can't be linked.
 
 ## Log in with a linked account
 

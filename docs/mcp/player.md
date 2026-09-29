@@ -64,16 +64,17 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `create_top_up_link` | `amount_cents` | buy | Card Checkout link for you to add balance |
 | `create_x402_top_up` | `amount_cents`, `network` | buy | x402 payment requirements for a USDC top-up |
 | `pay_with_x402` | `top_up_id`, `payment_payload` | buy | Submits the signed x402 payment |
-| `quote_purchase` | `uid`, `kind`, `amount_cents` | read | Price, tax, and total. The agent shows you the total first |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | buy | Buys a license from your balance. Beyond the limit it returns `approval_required` |
+| `quote_purchase` | `uid`, `kind`, `amount_cents`, `sku` | read | Price, tax, and total. The agent shows you the total first. `sku` is an edition uid or slug from `get_game_details`; empty quotes the cheapest edition, and owners of a cheaper edition are quoted the upgrade price |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key`, `sku` | buy | Buys a license (or an edition upgrade) from your balance, with the same `sku` as the quote. Beyond the limit it returns `approval_required` |
 | `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | buy | Donates to a free game from your balance |
 | `get_approval` | `approval_id` | read | `pending`, `approved`, `denied`, `expired`, or `used` |
 | `confirm_approval` | `approval_id`, `code` | write | Approves with the 6-digit code you read to the agent |
 | `get_library` | none | read | Games you own, with refund windows and play time |
 | `get_download_link` | `file_id` | read | 5-minute signed URL for a build file |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
-| `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `sort`, `page`, `page_size` | read | Public games, tools, and assets with a score, scan state, platforms, and a short reason for each match. See [Listings and search](../listings.md#search) |
-| `get_game_details` | `uid` | read | Description, taxonomy, price, license kind, engine compatibility, what it uses and what uses it, files with scan state and checksum, similar titles, and whether you own it |
+| `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `authorship`, `sort`, `page`, `page_size` | read | Public games, tools, and assets with a score, scan state, platforms, made-with label, launch-health band, and a short reason for each match. See [Listings and search](../listings.md#search) |
+| `get_shelf` | `kind` (`tonight` or `unheard_of`), `os` | read | A short curated shelf. `tonight` has short-session games with a healthy, clean build for `os`; `unheard_of` has recent listings few people have found. The order rotates daily. See [Shelves](../listings.md#shelves) |
+| `get_game_details` | `uid` | read | Description, taxonomy, price, editions (`skus`), made-with label, launch health, license kind, engine compatibility, what it uses and what uses it, files with scan state and checksum, similar titles, and whether you own it |
 | `install_build` | `uid`, `build_id`, `os`, `arch`, `channel` | read | Checks your license and the virus scan, then returns the file checksum, a 5-minute `download_url`, and a `blazium://install/<uid>` link for the launcher. Uses the channel you follow unless you pass `stable` or `beta`. Refuses any file that isn't `clean` |
 | `launch_game` | `uid` | read | Returns the `blazium://game/<uid>` link that opens the game in the launcher, and whether you own it and a clean build exists |
 | `set_channel` | `uid`, `channel` (`stable` or `beta`) | write | Joins or leaves a game's beta. Beta builds then show up in `get_game_details` and `install_build` |

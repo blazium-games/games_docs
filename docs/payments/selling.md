@@ -15,6 +15,26 @@ Open your game's edit page on blazium.games and go to the **Pricing** tab. Only 
 
 Agents can do the same with the MCP tool `set_game_price` (`price_cents`, `donations_enabled`).
 
+## Editions
+
+A paid listing can sell up to 8 editions, added under **Editions** on the Pricing tab or with the MCP tools `upsert_sku` and `delete_sku`.
+
+| Kind | What the buyer gets |
+|---|---|
+| `standard` | The game |
+| `deluxe` | The game, as a higher tier you describe (soundtrack, art book, extra content you ship in the files) |
+| `beta_access` | The game plus the `beta` channel. Once a listing has an active `beta_access` edition, the beta channel is only for buyers of that edition |
+| `bundle` | The game plus 1 to 10 of your other listings, each granted as its own license |
+
+Each edition has a name (up to 80 characters), a slug (lowercase letters, digits and dashes, up to 40), a price from $0.99 to $500.00, an optional description, and a sort order.
+
+- **The listing price follows the editions.** It is always the cheapest active edition, donations are turned off, and `set_game_price` returns `4164` while editions exist.
+- **Upgrades.** A buyer who owns a cheaper edition pays the difference, at least $0.50. Editions can only be upgraded: a cheaper edition than the one owned returns `4157`, and the same edition is refused as already owned.
+- **Buying without naming an edition** buys the cheapest one. Agents pass `sku` (slug or uid) to `quote_purchase` and `purchase_game`.
+- **Retiring an edition** (delete, or untick **On sale**) removes it from the store. Buyers keep what they bought, and existing game keys for it still work.
+
+Editions share the same sale fee, refund rules, and earnings schedule as any other sale. `4155` means an edition field is invalid, and `4156` means the listing already has 8.
+
 ## What you receive
 
 Each sale or donation pays you the price minus the sale fee of **$0.25 + 8%**. The percentage is rounded up to the cent, and the fee never exceeds the price.

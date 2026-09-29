@@ -21,16 +21,16 @@ Create and edit the public page at `https://<username>.blazium.games/<vanity_nam
 - Creating a page needs an account-level token (a project-bound token can only edit its own game)
 - Going public, setting a price, and uploading need the owner's email verified. Check with `get_account`; if `email_verified` is false, call `request_email_code`, ask the human for the code from their inbox, then call `verify_email`. Updates that set `visibility` to `public` fail with code `4096` until then
 
-## Phase 1: Find or create
+## 1. Find or create
 
-1. Call `list_games`. If a game matches the user's project, use its `uid` and go to Phase 3.
+1. Call `list_games`. If a game matches the user's project, use its `uid` and go to step 3 (Update).
 2. Otherwise draft copy. Use the `draft_game_page` prompt with a short `pitch`, or write:
    - `name`
    - `tagline`: one line
    - `description`: markdown, two short paragraphs, facts only
 3. Confirm the copy with the user.
 
-## Phase 2: Create
+## 2. Create
 
 Call `create_game`:
 
@@ -45,24 +45,24 @@ Call `create_game`:
 
 Keep the returned `uid`.
 
-## Phase 3: Update
+## 3. Update
 
 Call `update_game` with `uid` and any of `name`, `tagline`, `description`, `visibility`. To polish existing copy, run the `improve_game_copy` prompt with the current description first.
 
 Before switching to `public`, confirm with the user and make sure the owner is verified. `invisible` keeps the page reachable by link but out of listings.
 
-## Phase 3b: Listing (required before public)
+## 3b. Listing (required before public)
 
 A page can't go public until the listing check passes (`4225` otherwise).
 
 1. Call `validate_listing`. It returns `errors`, `warnings`, and the allowed values.
-2. Fix the taxonomy with `update_game_taxonomy`: at least 3 `tags`; for games also `genres`, `session_bucket`, `players_min`/`players_max`, `net`, and `inputs`; for mods and assets `engines`. Only use values from the check's vocabulary (`4071` otherwise). Ask the user rather than guessing player counts, network mode, or content warnings.
-3. Images: `set_media` with `kind` `cover`, `thumbnail`, or `gallery` (4 gallery images needed) and an https image URL the user gave you. Without a URL, tell the user to upload on the website.
+2. Fix the taxonomy with `update_game_taxonomy`: at least 3 `tags`; for games also `genres`, `session_bucket`, `players_min`/`players_max`, `net`, and `inputs`; for mods and assets `engines`. Only use values from the check's vocabulary (`4071` otherwise). Ask the user rather than guessing player counts, network mode, or content warnings. Ask whether to set `authorship` (`human`, `human_agent`, or `agent_heavy`) and an optional `authorship_credit`; never pick it for them.
+3. Images: a cover, a thumbnail, and at least 4 gallery images (PNG, JPEG, GIF or WebP, 512 to 2048 px, up to 10 MB). If the user has files, give them the `chauffeur media` commands (`set_media` without `url` returns them), for example `chauffeur media cover art/cover.png` and `chauffeur media add shots/*.png`, run with the game's deploy key. If they gave you an https image URL, `set_media` with `kind` and `url` also works. See https://blazium-games.github.io/games_docs/docs/cli/media
 4. A clean build: ship one with `blazium-games-deploy`, then check `scan_status` until a file is `clean`. If a file is `infected` or `error`, tell the user; it was removed and must be rebuilt and uploaded again.
 5. Optionally `set_similar_games` with up to 10 public titles the user names.
 6. Call `validate_listing` again; when `ready` is true, set `visibility` to `public`.
 
-## Phase 4: Price or donations (optional)
+## 4. Price or donations (optional)
 
 Call `set_game_price` with `uid` and:
 
@@ -71,11 +71,13 @@ Call `set_game_price` with `uid` and:
 | `price_cents` | `0` for free, or `99` to `50000` ($0.99 to $500) |
 | `donations_enabled` | Free games only. Donations are $1 to $500 |
 
+To sell several editions (standard, deluxe, beta access, or a bundle with the user's other listings), use `upsert_sku` instead; up to 8 per listing. The listing price then follows the cheapest edition and `set_game_price` returns `4164`.
+
 Tell the user what they will receive before setting it: each sale or donation pays the price minus $0.25 + 8% (a $10 game pays $8.95). Earnings unlock after 7 days or 2 hours of the buyer's play, and cash-out (8% plus Stripe's payout fee, $25 minimum) is on the website. Paid games can only be downloaded by buyers. Sales are listed by `list_game_sales`.
 
 Details: https://blazium-games.github.io/games_docs/docs/payments/selling
 
-## Phase 5: Verify
+## 5. Verify
 
 Call `get_game` and give the user the page URL (`page_url` from `get_deploy_info`, or `https://<owner>.blazium.games/<vanity_name>`).
 

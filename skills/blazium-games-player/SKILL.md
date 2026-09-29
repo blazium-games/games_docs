@@ -12,9 +12,9 @@ The player server acts for one player. It sees the account, wallet, and library,
 
 - "Connect my Blazium Games account as a player", "set up the Blazium Games player server"
 - "What games do I own on Blazium Games?", "how much can this agent spend?"
-- Before [purchases](../blazium-games-purchases/SKILL.md) when the player server isn't connected yet
+- Before [purchases](../blazium-games-purchases/SKILL.md) when the player server isn't connected
 
-## Phase 1: Connect
+## 1. Connect
 
 1. Check whether a `blazium-games-player` server is connected. If not, ask the human to add it:
 
@@ -25,13 +25,13 @@ The player server acts for one player. It sees the account, wallet, and library,
 2. On the consent page the human ticks **Allow purchases** only if you should buy for them. A player key (`bgames_play_...`) from https://blazium.games/settings/mcp works too.
 3. A developer key (`bgames_mcp_...`) or developer OAuth token is refused here, and a player token is refused by the developer server. Never try to reuse one for the other.
 
-## Phase 2: Check the account
+## 2. Check the account
 
 1. Call `get_account`. If `email_verified` is false, call `request_email_code`, ask the human for the code from their inbox, and call `verify_email`. Downloading and buying need a verified email.
 2. Call `get_agent_policy` to see this agent's limit: `unset` (every purchase needs approval), `unlimited`, `monthly`, `yearly`, or `one_time`. Only the human changes it, on the website.
 3. Call `get_wallet` for the available balance.
 
-## Phase 3: Route
+## 3. Route
 
 | The human wants to | Do |
 |---|---|
@@ -48,7 +48,7 @@ The player server acts for one player. It sees the account, wallet, and library,
 | Redeem a key or gift link | `redeem_key` with the code or link they gave you. `4084` means they already own it and the key is still unused |
 | Install a game they own or a free game | `install_build`, then give them the `blazium://install/<uid>` link. If it fails because the scan isn't clean, don't offer another way to download that file |
 | Play a game | `launch_game`, then give them the `blazium://game/<uid>` link |
-| Download a game they own or a free game | Phase 5 of [purchases](../blazium-games-purchases/SKILL.md) |
+| Download a game they own or a free game | Step 5 (Download) of [purchases](../blazium-games-purchases/SKILL.md) |
 
 ## Errors
 

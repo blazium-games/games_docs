@@ -1,12 +1,14 @@
 ---
 title: Deploy builds
 sidebar_position: 4
-description: Upload game builds to Blazium Games with blazium-cli, the upload API, or GitHub Actions.
+description: Upload game builds, debug symbols, and store images to Blazium Games with the chauffeur CLI, the upload API, or GitHub Actions.
 ---
 
 # Deploy builds
 
 A deploy has two steps: register a build (version, OS, arch, channel), then upload its files as a zip. Every build gets a `build_id` that crash reporters send as `X-Build-Id`.
+
+Uploads go through the [chauffeur CLI](./cli/index.md) or the upload API with the game's deploy key. The website and MCP can list, promote, and delete builds and symbols, but not upload them.
 
 ## 1. Get deploy keys
 
@@ -22,21 +24,21 @@ Store them as CI secrets, for example GitHub Actions secrets `BLAZIUM_ACCESS_TOK
 
 The MCP tool `get_deploy_info` returns every URL below for your game, plus recent builds and key prefixes. It never returns secrets.
 
-## 2a. Upload with blazium-cli
+## 2a. Upload with chauffeur
 
-Download [blazium-cli](https://github.com/blazium-games/blazium-cli/releases). It reads `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY` from the environment (or `--access` and `--secret`).
+[Install chauffeur](./cli/index.md#install). It reads `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY` from the environment (or `--access` and `--secret-stdin`).
 
 ```bash
-blazium-cli games genbuild --version 1.0.0
-blazium-cli games addchangelog --title "Launch" --description "First public build"
-blazium-cli games build --asset build.yml --os windows --arch x86_64 --channel stable
-blazium-cli games setfiles --version 1.0.0 --os windows --arch x86_64 --files ./export/windows
-blazium-cli games addfiles --asset addfiles.yml
+chauffeur genbuild --version 1.0.0
+chauffeur addchangelog --title "Launch" --description "First public build"
+chauffeur build --asset build.yml --os windows --arch x86_64
+chauffeur setfiles --version 1.0.0 --os windows --arch x86_64 --files ./export/windows
+chauffeur addfiles --asset addfiles.yml
 ```
 
 - `genbuild` writes `build.yml`, and `setfiles` writes `addfiles.yml`.
-- `build` registers the build and prints its `build_id`. The same version, type, OS, arch, and channel update the existing build.
-- `addfiles` zips the files, computes a SHA-256 checksum, and uploads them to the matching build. Run `build` first.
+- `build` registers the build and prints its `build_id` as `BLAZIUM_GAMES_BUILD_ID`. The same version, type, OS, arch, and channel update the existing build.
+- `addfiles` reuses the matching build, zips the files, computes a SHA-256 checksum, and uploads them. Files over 64 MB go up in resumable 16 MB chunks.
 
 `build.yml`:
 
@@ -48,15 +50,30 @@ asset:
   type: "game"
   description: "First release"
   version: 1.0.0
+  engine_version: "4.3"
   platforms:
     - os: windows
       arch: x86_64
       channel: stable
   changelog:
-    - item:
-        title: "Launch"
-        description: "First public build"
+    - title: "Launch"
+      description: "First public build"
 ```
+
+Every command and field is in the [chauffeur CLI](./cli/index.md) section.
+
+## Symbols and store images
+
+chauffeur also uploads the files that aren't builds. The website and MCP can list and delete them, but uploads only go through chauffeur and the deploy key.
+
+```bash
+chauffeur symbols --build-id "$BLAZIUM_GAMES_BUILD_ID" ./symbols   # Breakpad .sym files
+chauffeur media cover art/cover.png
+chauffeur media thumbnail art/thumbnail.png
+chauffeur media add shots/*.png
+```
+
+See [Symbols](./cli/symbols.md) and [Store images](./cli/media.md).
 
 ## 2b. Upload with the API
 
@@ -148,18 +165,20 @@ jobs:
       BLAZIUM_SECRET_KEY: ${{ secrets.BLAZIUM_SECRET_KEY }}
     steps:
       - uses: actions/checkout@v4
-      # Export your game into ./export/linux here.
-      - name: Install blazium-cli
+      - name: Install chauffeur
         run: |
-          curl -fsSL -o blazium-cli https://github.com/blazium-games/blazium-cli/releases/latest/download/blazium-cli-linux-x86_64
-          chmod +x blazium-cli
+          curl -fsSL -o chauffeur.zip https://cdn.blazium.online/tools/chauffeur/linux-amd64/latest/archive/default
+          unzip -o chauffeur.zip chauffeur && chmod +x chauffeur
       - name: Register build
-        run: ./blazium-cli games build --asset build.yml --os linux --arch x86_64 --channel stable
+        run: ./chauffeur build --asset build.yml --os linux --arch x86_64
+      # Export your game into ./export/linux here.
       - name: Upload files
         run: |
-          ./blazium-cli games setfiles --version "${GITHUB_REF_NAME#v}" --os linux --arch x86_64 --files ./export/linux
-          ./blazium-cli games addfiles --asset addfiles.yml
+          ./chauffeur setfiles --version "${GITHUB_REF_NAME#v}" --os linux --arch x86_64 --files ./export/linux
+          ./chauffeur addfiles --asset addfiles.yml
 ```
+
+For a platform matrix, GitLab CI, and reading the `build_id` from `--json` output, see [CI](./cli/ci.md).
 
 ## Next
 

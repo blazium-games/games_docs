@@ -19,7 +19,7 @@ Connect to the hosted Blazium Games MCP server at `https://mcp.blazium.games/mcp
 - A Blazium Games account (sign up at https://blazium.games/signup)
 - The `blazium-games` MCP server enabled in Cursor (this plugin ships it in `mcp.json`)
 
-## Phase 1: Connect
+## 1. Connect
 
 The plugin registers the server as:
 
@@ -44,7 +44,7 @@ For playing and buying as a player, the plugin also ships `blazium-games-player`
 
 If OAuth is not possible (headless CI, remote agents), use an API key instead. See [references/auth.md](references/auth.md).
 
-## Phase 2: Verify
+## 2. Verify
 
 1. Call `get_profile`. A username confirms the connection.
 2. Call `get_setup` to see the account, games, public URLs, and key prefixes. It never returns secrets.
@@ -59,7 +59,7 @@ If OAuth is not possible (headless CI, remote agents), use an API key instead. S
 | `approval_required` (`4214`) | The action waits for the account owner | Ask the human to open the emailed link, then retry with the same `idempotency_key` |
 | `API 404` on a game | Wrong uid or vanity name | Call `list_games` and use the `uid` |
 
-## Phase 3: Route
+## 3. Route
 
 | Goal | Skill |
 |------|-------|

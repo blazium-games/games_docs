@@ -18,12 +18,12 @@ Summarize store page traffic for one game.
 
 - The `blazium-games` MCP server is connected (read access is enough)
 
-## Phase 1: Fetch
+## 1. Fetch
 
 1. Resolve the game with `list_games` if the user did not give a `uid`.
 2. Call `get_game_analytics` with `uid` (or read `blazium-games://games/{uid}/analytics`).
 
-## Phase 2: Interpret
+## 2. Interpret
 
 | Field | Meaning |
 |-------|---------|
@@ -35,7 +35,7 @@ Summarize store page traffic for one game.
 
 Analytics are aggregate. Individual visitors are not identifiable through the MCP.
 
-## Phase 3: Summarize
+## 3. Summarize
 
 Report in a few sentences:
 
