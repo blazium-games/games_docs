@@ -92,14 +92,14 @@ When you approve a tool, it gets a token for one server only, with one or more o
 | --- | --- | --- |
 | `mcp:read` | Developer | Reading your games, builds, analytics, crash reports, setup details, balance, and library. |
 | `mcp:write` | Developer | Creating and updating game pages, setting prices, issuing deploy keys, and (until October 28, 2026) buying from your balance within the limits you set, in addition to everything `mcp:read` allows. |
-| `mcp:catalog.write` | Developer | Changing game pages (text, taxonomy, similar titles, images, admins) and replying to player reviews. Reads of your profile and games are always included. |
+| `mcp:catalog.write` | Developer | Changing game pages (text, taxonomy, similar titles, dependencies, engine compatibility, license kind, images, admins) and replying to player reviews. Reads of your profile and games are always included. |
 | `mcp:build.write` | Developer | Managing builds and release channels, and reading deploy info and scan status. |
 | `mcp:crash.read` | Developer | Reading crash reports, crash groups, and player bug tickets, and running crash analysis. |
 | `mcp:analytics.read` | Developer | Reading visitor analytics and custom events. |
 | `mcp:keys.manage` | Developer | Listing and rotating deploy keys and MCP keys. |
-| `mcp:money` | Developer | Pricing, sales, wallet, library, and downloads. |
+| `mcp:money` | Developer | Pricing, sales, game keys and gift links, wallet, library, and downloads. |
 | `player:read` | Player | Reading your account, balance, wallet history, quotes, library, approvals, download links, the builds you can see, your reviews, recommendations, and your friends and what they're playing. |
-| `player:write` | Player | Verifying your email, recording play time, confirming an approval with the code you give the tool, joining or leaving a game's beta, writing or deleting your reviews, "more/less like this" feedback, filing bug reports, sending and answering friend requests, and setting your presence and activity sharing. |
+| `player:write` | Player | Verifying your email, recording play time, confirming an approval with the code you give the tool, joining or leaving a game's beta, writing or deleting your reviews, "more/less like this" feedback, filing bug reports, sending and answering friend requests, setting your presence and activity sharing, and redeeming game keys. |
 | `player:buy` | Player | Topping up and buying games or donating from your balance within the limits you set. Granted only if you tick **Allow purchases**. |
 
 ### Why we need it

@@ -45,6 +45,7 @@ The player server acts for one player. It sees the account, wallet, and library,
 | Report a bug | `report_bug` with what happened and how to reproduce it. If they have a crash dump or log, set `include_dump` / `include_log` and upload the file with `PUT` to the returned URL |
 | "What are my friends playing?" | `games_friends_play`; live games come first, then the last 14 days |
 | Add or answer a friend | `send_friend_request` with the username they gave you, or `list_friends` then `respond_friend_request`. Only send requests the human asked for |
+| Redeem a key or gift link | `redeem_key` with the code or link they gave you. `4084` means they already own it and the key is still unused |
 | Install a game they own or a free game | `install_build`, then give them the `blazium://install/<uid>` link. If it fails because the scan isn't clean, don't offer another way to download that file |
 | Play a game | `launch_game`, then give them the `blazium://game/<uid>` link |
 | Download a game they own or a free game | Phase 5 of [purchases](../blazium-games-purchases/SKILL.md) |
@@ -62,6 +63,7 @@ The player server acts for one player. It sees the account, wallet, and library,
 | `4291` | Too many bug reports today; try tomorrow |
 | `4078` | Already friends, or the request was already sent |
 | `4292` | Too many friend requests today; try tomorrow |
+| `4042` / `4079` | The key isn't valid, or was already redeemed |
 
 ## References
 

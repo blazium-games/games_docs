@@ -72,8 +72,8 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `get_library` | none | read | Games you own, with refund windows and play time |
 | `get_download_link` | `file_id` | read | 5-minute signed URL for a build file |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
-| `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `session_bucket`, `net`, `players`, `os`, `arch`, `sort`, `page`, `page_size` | read | Public games with a score, scan state, platforms, and a short reason for each match. See [Listings and search](../listings.md#search) |
-| `get_game_details` | `uid` | read | Description, taxonomy, price, files with scan state and checksum, similar titles, and whether you own it |
+| `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `sort`, `page`, `page_size` | read | Public games, tools, and assets with a score, scan state, platforms, and a short reason for each match. See [Listings and search](../listings.md#search) |
+| `get_game_details` | `uid` | read | Description, taxonomy, price, license kind, engine compatibility, what it uses and what uses it, files with scan state and checksum, similar titles, and whether you own it |
 | `install_build` | `uid`, `build_id`, `os`, `arch`, `channel` | read | Checks your license and the virus scan, then returns the file checksum, a 5-minute `download_url`, and a `blazium://install/<uid>` link for the launcher. Uses the channel you follow unless you pass `stable` or `beta`. Refuses any file that isn't `clean` |
 | `launch_game` | `uid` | read | Returns the `blazium://game/<uid>` link that opens the game in the launcher, and whether you own it and a clean build exists |
 | `set_channel` | `uid`, `channel` (`stable` or `beta`) | write | Joins or leaves a game's beta. Beta builds then show up in `get_game_details` and `install_build` |
@@ -87,6 +87,7 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `list_friends` | none | read | Friends with their presence (playing, online, offline) and pending requests with their `request_uid` |
 | `send_friend_request` | `username` | write | Sends a friend request. If that person already asked you, it accepts theirs |
 | `respond_friend_request` | `request_uid`, `accept` | write | Accepts or declines an incoming request |
+| `redeem_key` | `code` | write | Redeems a game key (`XXXXX-XXXXX-XXXXX-XXXXX`) or a gift link (the whole link or the code at its end) and adds the game to your library. If you already own it, the key stays unused (`4084`) |
 
 Games list the channels you can join in `get_game_details` (`channels`). A beta download link for a game whose beta you haven't joined returns `4074`.
 

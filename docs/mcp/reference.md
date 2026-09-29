@@ -57,9 +57,31 @@ Players review games they own and file bug tickets from the [player server](./pl
 
 Only the game's owner and admins can read bug tickets and download their attachments.
 
+### Dependencies, compatibility and license
+
+These show on the store page as **Uses / Used by**, **License** and **Works with**, and players filter [`search_catalog`](./player.md) by them.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `declare_dependency` | `uid`, `target_uid`, `kind` (`uses`, `supports`, or `made_with`), `remove` | Links your listing to another public listing: it uses that asset pack or plugin, it's a mod or plugin that supports that game or tool, or it was made with that tool. Up to 50 links. `remove` drops one. Write |
+| `list_dependents` | `uid` | What a public listing uses (`uses`) and which public listings declared a link to it (`used_by`), with its `license_kind` and `compat` |
+| `declare_engine_compat` | `uid`, `compat` (up to 10 of `engine`, `min_version`, `max_version`, `renderer`, `platform`) | Replaces the list; an empty list clears it. Either version may be empty to leave that end open, and a `max_version` of `4.3` covers `4.3.x`. Write |
+| `declare_license` | `uid`, `license_kind` | `cc0`, `cc-by`, `cc-by-sa`, `paid`, `source-available`, or `proprietary`; empty clears it. Write |
+
+### Game keys
+
+Keys give a game to someone for free, for press, bundles, or giveaways. Each code works once and adds the game to the redeemer's library (a license with source `key`). Players redeem at [blazium.games/redeem](https://blazium.games/redeem) or with `redeem_key` on the player server. Pools can also be managed on the **Game keys** tab of the project page.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `create_key_pool` | `uid`, `name`, `campaign` | A named pool, such as Press or a bundle. Up to 50 per game. Write |
+| `grant_keys` | `uid`, `pool`, `n` (1 to 5000), `campaign`, `idempotency_key` | Creates `n` codes. They come back once, as a `csv_url` that can be downloaded one time within an hour; the codes are stored hashed and can't be shown again. More than 100 at once needs the owner's approval (see below). Write |
+| `create_gift_link` | `uid`, `pool`, `note` | A single-use `https://blazium.games/redeem/...` link for one person, shown once. Write |
+| `list_key_pools` | `uid` | Pools with `size`, `redeemed`, `unredeemed`, and `gift_links` |
+
 ### Approvals for risky actions
 
-Over MCP, rotating an account or deploy key, creating an account or game key, promoting to `stable`, and deleting a game or build wait for the account owner. The call returns HTTP 202 with code `4214`, an `approval_id`, and a `confirm_url`, and the owner gets an email with a link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once. On the website these actions don't need an approval.
+Over MCP, rotating an account or deploy key, creating an account or game key, creating more than 100 game keys at once, promoting to `stable`, and deleting a game or build wait for the account owner. The call returns HTTP 202 with code `4214`, an `approval_id`, and a `confirm_url`, and the owner gets an email with a link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once. On the website these actions don't need an approval.
 
 ### Scopes
 
@@ -67,12 +89,12 @@ Over MCP, rotating an account or deploy key, creating an account or game key, pr
 
 | Scope | Covers |
 |-------|--------|
-| `mcp:catalog.write` | Game pages, taxonomy, similar titles, media, admins, review replies |
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, dependencies, engine compatibility, license kind, media, admins, review replies |
 | `mcp:build.write` | Builds, channels, deploy info, scan status |
 | `mcp:crash.read` | Crash reports, crash groups, crash analysis, bug tickets |
 | `mcp:analytics.read` | Visitor analytics and events |
 | `mcp:keys.manage` | Deploy keys and MCP keys |
-| `mcp:money` | Pricing, sales, wallet, purchases, library, downloads |
+| `mcp:money` | Pricing, sales, game keys and gift links, wallet, purchases, library, downloads |
 
 Every developer token can read the profile, account, and game pages. A write scope also reads its own group. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Read-only** (`mcp:read`), and **Full access**.
 
@@ -187,3 +209,11 @@ Tool errors return `API <status>: <body>`.
 | `4078` | Already friends, or the friend request was already sent (HTTP 409) |
 | `4228` | You can't send a friend request to yourself (HTTP 422) |
 | `4292` | Too many friend requests today (20 per day, HTTP 429) |
+| `4229` | Invalid dependency: unknown kind, a non-public target, a link to itself, or more than 50 links (HTTP 422) |
+| `4230` | Invalid engine compatibility: engine or renderer not a slug, a version without numbers, or `min_version` above `max_version` (HTTP 422) |
+| `4231` | Unknown license kind (HTTP 422) |
+| `4232` | Invalid key pool request: missing name, more than 50 pools, `n` outside 1 to 5000, or a pool over 100,000 keys (HTTP 422) |
+| `4042` | That key or gift link isn't valid (HTTP 404) |
+| `4079` | That key was already redeemed (HTTP 409) |
+| `4084` | The player already has this game; the key stays unused (HTTP 409) |
+| `4103` | The key CSV was already downloaded or has expired (HTTP 410) |
