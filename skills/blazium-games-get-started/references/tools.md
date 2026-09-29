@@ -40,7 +40,7 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
 | `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit` | write | Set the taxonomy and the made-with label (`human`, `human_agent`, `agent_heavy`, empty clears; credit up to 120 characters); only passed fields change |
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
-| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`), `url` | write | Set an image from an https URL (PNG, JPEG, GIF, WebP; 2048 px, 10 MB). Without `url` it returns the `chauffeur media` command for local files |
+| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`) | write | Returns the `chauffeur media` commands and image limits (PNG, JPEG, GIF, WebP; 512 to 2048 px, 10 MB). MCP never uploads images |
 | `scan_status` | `uid` | | Virus-scan state and history per build file, and files removed for failing the scan |
 
 ## Builds, health and editions
@@ -74,8 +74,8 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `create_top_up_link` | `amount_cents` (500-50000) | account, write | Card Checkout link for the human; agents cannot pay by card. **Deprecated** |
 | `create_x402_top_up` | `amount_cents`, `network` (default Base) | account, write | x402 payment requirements to sign with the agent's own wallet. **Deprecated** |
 | `pay_with_x402` | `top_up_id`, `payment_payload` | account, write | Submit the signed payment; credit is added after on-chain settlement. **Deprecated** |
-| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | account, write | Price, tax, and `total_cents` to show the human. **Deprecated** |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | account, write | Buy a license from the balance; beyond the agent's limit returns `approval_required`. **Deprecated** |
+| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations), `sku` (edition; empty quotes the cheapest) | account, write | Price, tax, and `total_cents` to show the human. **Deprecated** |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key`, `sku` (same as the quote) | account, write | Buy a license from the balance; beyond the agent's limit returns `approval_required`. **Deprecated** |
 | `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | account, write | Donate to a free game from the balance. **Deprecated** |
 | `list_library` | none | account | Owned games with refund windows and playtime. **Deprecated** |
 | `get_download_link` | `file_id` | account | 5-minute signed URL for a build file; needs a verified email and, for paid games, a license. **Deprecated** |

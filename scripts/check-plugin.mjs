@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Validates the Cursor plugin: manifests, skill front matter, relative links,
-// and that every capability on the live MCP server card is documented.
+// that every capability on the live MCP server card is documented, and that the
+// version and tool counts in docs/mcp match the live cards. --offline skips the
+// live-card checks.
 // Usage: node scripts/check-plugin.mjs [--offline]
 
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
@@ -123,20 +125,50 @@ function checkLinks() {
   }
 }
 
-async function checkServerCard(url, skill, docsPage) {
-  if (offline) {
-    console.log(`Skipping server card coverage for ${url} (--offline).`);
-    return;
-  }
-  let card;
+async function fetchCard(url) {
   try {
     const res = await fetch(url, { headers: { accept: 'application/json' } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    card = await res.json();
+    return await res.json();
   } catch (err) {
     fail(`server card: could not fetch ${url} (${err.message})`);
-    return;
+    return null;
   }
+}
+
+// checkDocCounts fails when the version or tool counts written in docs/mcp
+// differ from the live server cards.
+function checkDocCounts(dev, player) {
+  const version = dev.serverInfo?.version;
+  const devTools = (dev.tools || []).length;
+  const deprecated = new Set([dev.deprecations || []].flat().flatMap((d) => d.tools || [])).size;
+  const playerTools = (player.tools || []).length;
+  const checks = [
+    [/Version (\d+\.\d+\.\d+)/g, version, 'version'],
+    [/(\d+) developer tools/g, String(devTools), 'developer tool count'],
+    [/\((\d+) after \d{4}-\d{2}-\d{2}\)/g, String(devTools - deprecated), 'developer tool count after removal'],
+    [/(\d+) player tools/g, String(playerTools), 'player tool count'],
+    [/lists (\d+) tools instead of/g, String(devTools - deprecated), 'developer tool count after removal'],
+    [/tools instead of (\d+)/g, String(devTools), 'developer tool count'],
+  ];
+  for (const file of walk(join(root, 'docs', 'mcp'), '.md')) {
+    const text = readFileSync(file, 'utf8');
+    for (const [re, want, label] of checks) {
+      for (const [, got] of text.matchAll(re)) {
+        if (want && got !== want) fail(`${rel(file)}: ${label} is ${got}, live server card says ${want}`);
+      }
+    }
+  }
+  console.log(`Doc counts checked against version ${version}: ${devTools} developer (${devTools - deprecated} after removal), ${playerTools} player tools.`);
+}
+
+async function checkServerCard(url, skill, docsPage) {
+  if (offline) {
+    console.log(`Skipping server card coverage for ${url} (--offline).`);
+    return null;
+  }
+  const card = await fetchCard(url);
+  if (!card) return null;
 
   const expected = [
     ...(card.tools || []).map((t) => ['tool', t.name]),
@@ -159,13 +191,15 @@ async function checkServerCard(url, skill, docsPage) {
     if (docsText && !docsText.includes(value)) fail(`docs/mcp/${docsPage}: ${kind} "${value}" is not documented`);
   }
   console.log(`Server card ${url}: ${expected.length} capabilities checked.`);
+  return card;
 }
 
 checkManifests();
 checkSkills();
 checkLinks();
-await checkServerCard(serverCardURL, 'blazium-games-get-started', 'reference.md');
-await checkServerCard(playerServerCardURL, 'blazium-games-player', 'player.md');
+const devCard = await checkServerCard(serverCardURL, 'blazium-games-get-started', 'reference.md');
+const playerCard = await checkServerCard(playerServerCardURL, 'blazium-games-player', 'player.md');
+if (devCard && playerCard) checkDocCounts(devCard, playerCard);
 
 if (errors.length) {
   console.error(`Plugin check failed with ${errors.length} error(s):`);

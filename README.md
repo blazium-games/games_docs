@@ -44,7 +44,7 @@ Never commit keys to a repository.
 | `mcp.json` | MCP server config shipped with the plugin |
 | `skills/` | Agent skills |
 | `docs/`, `src/`, `static/` | Docusaurus documentation site |
-| `scripts/check-plugin.mjs` | Validates manifests, skills, links, and MCP coverage |
+| `scripts/check-plugin.mjs` | Validates manifests, skills, links, MCP coverage, and the version and tool counts in the docs |
 
 ## Contributing
 
@@ -57,7 +57,9 @@ npm run build                   # production build; fails on broken links
 node scripts/check-plugin.mjs   # plugin check (add --offline to skip the live server card)
 ```
 
-The plugin check fetches the live [developer server card](https://mcp.blazium.games/.well-known/mcp/server-card.json) and [player server card](https://mcp.blazium.games/.well-known/mcp/player-server-card.json) and fails if any tool, prompt, or resource is missing from the skill references or the [MCP reference page](docs/mcp/reference.md) and [Player MCP page](docs/mcp/player.md).
+The plugin check fetches the live [developer server card](https://mcp.blazium.games/.well-known/mcp/server-card.json) and [player server card](https://mcp.blazium.games/.well-known/mcp/player-server-card.json) and fails if any tool, prompt, or resource is missing from the skill references or the [MCP reference page](docs/mcp/reference.md) and [Player MCP page](docs/mcp/player.md). It also fails when the server version or tool counts written in `docs/mcp/*.md` differ from the live cards. These checks need network access; `--offline` skips them and still checks manifests, skills and links.
+
+The site itself is static and makes no API calls, so `npm start` works offline.
 
 ## Contact
 

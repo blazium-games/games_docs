@@ -8,7 +8,7 @@ description: Connect Cursor, VS Code, Claude Code, or any MCP client to the host
 
 # MCP for Blazium Games
 
-The Blazium Games MCP server lets AI agents create and update game pages, ship and promote builds, read analytics, crash reports, reviews, and bug tickets, manage game keys, and issue deploy credentials. Version 1.10.0 has 57 developer tools (45 after 2026-10-28) and 33 player tools.
+The Blazium Games MCP server lets AI agents create and update game pages, ship and promote builds, read analytics, crash reports, reviews, and bug tickets, manage game keys, and issue deploy credentials. Version 1.11.0 has 66 developer tools (54 after 2026-10-28) and 34 player tools.
 
 | | |
 |---|---|

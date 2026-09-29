@@ -32,7 +32,7 @@ Developer server 1.11:
 - Editions: `list_skus`, `upsert_sku`, and `delete_sku`. `set_game_price` returns `4164` while a listing has editions
 - Builds: `get_build_health`, `list_build_symbols`, `delete_build_symbols`, `upload_symbols_info`, `bundle_check`, and `mod_compat`
 - `update_game_taxonomy` accepts `authorship` and `authorship_credit`
-- `set_media` without `url` returns the `chauffeur media` command to upload a local file
+- `set_media` returns the `chauffeur media` commands to upload local files (it no longer accepts `url`)
 
 Player server: `get_shelf`, `sku` on `quote_purchase` and `purchase_game`, and `authorship` on `search_catalog`.
 

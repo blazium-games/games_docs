@@ -6,7 +6,7 @@ license: MIT
 
 # Blazium Games: Deploy Builds
 
-Register a build, upload its files, and keep the returned `build_id` for crash reporting. Uploads (builds, symbols, store images from files) only go through the chauffeur CLI or the upload API with the game's deploy key; MCP and the website can list and delete them but not upload.
+Register a build, upload its files, and keep the returned `build_id` for crash reporting. Builds and symbols only upload through the chauffeur CLI or the upload API with the game's deploy key. Store images upload through chauffeur or the game's edit page on the website. MCP can list and delete them but never uploads.
 
 ## Invoke This Skill When
 

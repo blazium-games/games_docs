@@ -6,7 +6,7 @@ description: Install chauffeur, the Blazium Games upload tool for builds, debug 
 
 # chauffeur CLI
 
-`chauffeur` is the Blazium Games upload tool. Everything that sends files to the store goes through it or the [upload API](../deploy.md#2b-upload-with-the-api): builds, per-platform files, Breakpad debug symbols and store page images. The website and the MCP server can list and delete these, but they never upload them.
+`chauffeur` is the Blazium Games upload tool. Everything that sends files to the store goes through it or the [upload API](../deploy.md#2b-upload-with-the-api): builds, per-platform files, Breakpad debug symbols and store page images. The MCP server can list and delete these but never uploads them. The website can also upload store page images (cover, thumbnail and gallery) on the game's edit page.
 
 chauffeur authenticates with the game's [deploy key](./authentication.md), so it runs the same way on your machine and in CI.
 
