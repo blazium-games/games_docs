@@ -7,7 +7,7 @@
     {
       "name": "blazium-games",
       "source": "./",
-      "description": "Manage Blazium Games store pages, builds, crash reports, analytics, and deploy keys. Includes MCP functionality and skills."
+      "description": "Manage Blazium Games store pages, builds, crash reports, analytics, and keys, and find, review, and buy games as a player. Includes the developer and player MCP servers and skills."
     }
   ]
 }

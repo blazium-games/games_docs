@@ -60,12 +60,15 @@ The `201` response contains the report `id` and an `uploads` object with a `dump
 | `max_bytes` | 64 MB |
 | `filename` | `dump.dmp` or `log.txt` |
 
-Upload each file with `PUT` to its `url`, as the raw body or a multipart `file` part.
+Upload each file with `PUT` to its `url`, as the raw body or a multipart `file` part. Each game has a daily limit on upload URLs. Past it, the report is still stored but `uploads` is empty.
 
 | Code | Meaning |
 |------|---------|
+| `4001` | Invalid JSON body |
 | `4010` | Missing `X-App-Id` or `X-Build-Id` |
-| `4030` | Unknown app or build |
+| `4030` | Unknown app id, or a `build_id` that does not belong to that app |
+| `4130` | `metadata` has more than 64 keys (`413`) |
+| `4290` | The game reached its daily crash report limit (`429`); try again tomorrow |
 
 ## Custom events
 
@@ -78,15 +81,16 @@ Content-Type: application/json
 { "events": [ { "event": "level_complete", "anonymous": true, "device_uid": "<random per install>" } ] }
 ```
 
-Send up to 100 events per request. The response is `202`. Use a random per-install id, not a hardware identifier.
+Send up to 100 events per request; more returns `4130` (`413`). The response is `202`. Use a random per-install id, not a hardware identifier.
 
 ## Reading crashes
 
 With the MCP server connected, ask your agent to list recent crashes. It uses:
 
-- `list_crash_groups` for reports grouped by cause, busiest first, with counts per build
+- `list_crash_groups` for reports grouped by cause, most recently seen first (up to 100 groups), with counts per build
 - `list_game_crashes` for recent reports
 - `list_bug_tickets` for bug reports players filed, with a `crash_id` when they attached a dump or log
+- `update_bug_ticket` to mark a player bug report `fixed` or `closed`, or reopen it with `open`
 - `get_crash` for metadata, the player's message, and the stack excerpt
 - `request_crash_download` with `kind` `stack`, `log`, or `dump` for a private link valid for 1 hour
 

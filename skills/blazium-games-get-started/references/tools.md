@@ -1,6 +1,6 @@
 # Blazium Games MCP tools
 
-All tools call the Blazium Games API on behalf of the connected user. `uid` accepts a game uid or its vanity name. Tools marked **account** need an account-level token; tools marked **write** need the `mcp:write` scope.
+All tools call the Blazium Games API on behalf of the connected user. `uid` accepts a game uid or its vanity name. Tools marked **account** need an account-level token (a project token gets `4030`); tools marked **write** need `mcp:write` or the narrower write scope for that tool's group. Tools marked **deprecated** are removed from this server on 2026-10-28; use the player server at `https://mcp.blazium.games/player` instead.
 
 | Tool | Inputs | Access | What it does |
 |------|--------|--------|--------------|
@@ -23,11 +23,12 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `list_channels` | `uid` | | Channel pointers (stable, beta, dev, custom), expiry, beta subscribers, and history |
 | `promote_build` | `uid`, `channel`, `build_id`, `expires_in_hours`, `idempotency_key` | write | Point a channel at a clean build. `stable` waits for the human's approval |
 | `rollback_channel` | `uid`, `channel` | write | Move a channel back to its previous build |
-| `list_crash_groups` | `uid` | | Crash reports grouped by cause with counts per build and a sample crash id |
+| `list_crash_groups` | `uid` | | Up to 100 crash groups by cause, most recently seen first, with counts per build and a sample crash id |
 | `get_build_provenance` | `uid`, `file_uid` | | Uploader, deploy key reference, upload time, checksum, and scan history of a file |
 | `list_reviews` | `uid`, `unreplied`, `page` | | Player reviews with the summary (enjoyed, quality average and counts, would play with friends) |
 | `reply_to_review` | `uid`, `review_uid`, `text` | write | Public reply to a review; empty text removes it |
 | `list_bug_tickets` | `uid`, `status` | | Player bug tickets with counts by status; attachments carry a `crash_id` |
+| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, `closed`) | write | Mark a ticket fixed or closed, or reopen it; covered by `mcp:crash.read` |
 | `declare_dependency` | `uid`, `target_uid`, `kind`, `remove` | write | Link to another public listing: `uses`, `supports`, or `made_with` |
 | `list_dependents` | `uid` | | What a listing uses and which listings use it, plus license kind and compatibility |
 | `declare_engine_compat` | `uid`, `compat` | write | Replace the engine version ranges (engine, min/max version, renderer, platform) |
@@ -51,20 +52,20 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `get_account` | none | account | Email verification, balances, and what the account may do (publish, upload, download, buy) |
 | `request_email_code` | none | account, write | Email a verification code to the human |
 | `verify_email` | `code` | account, write | Verify the email with the code the human read from their inbox |
-| `get_wallet` | none | account | Credit, pending, and available balances with fee, refund, and cash-out rules |
-| `list_wallet_transactions` | `limit` (1-200, default 50), `before` | account | Ledger entries, newest first |
-| `get_payment_options` | none | account | Card top-up link option and x402 USDC networks with fees |
-| `create_top_up_link` | `amount_cents` (500-50000) | account, write | Card Checkout link for the human; agents cannot pay by card |
-| `create_x402_top_up` | `amount_cents`, `network` (default Base) | account, write | x402 payment requirements to sign with the agent's own wallet |
-| `pay_with_x402` | `top_up_id`, `payment_payload` | account, write | Submit the signed payment; credit is added after on-chain settlement |
-| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | account, write | Price, tax, and `total_cents` to show the human |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | account, write | Buy a license from the balance; beyond the agent's limit returns `approval_required` |
-| `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | account, write | Donate to a free game from the balance |
-| `list_library` | none | account | Owned games with refund windows and playtime |
-| `get_download_link` | `file_id` | account | 5-minute signed URL for a build file; needs a verified email and, for paid games, a license |
+| `get_wallet` | none | account | Credit, pending, and available balances with fee, refund, and cash-out rules. **Deprecated** |
+| `list_wallet_transactions` | `limit` (1-200, default 50), `before` | account | Ledger entries, newest first. **Deprecated** |
+| `get_payment_options` | none | account | Card top-up link option and x402 USDC networks with fees. **Deprecated** |
+| `create_top_up_link` | `amount_cents` (500-50000) | account, write | Card Checkout link for the human; agents cannot pay by card. **Deprecated** |
+| `create_x402_top_up` | `amount_cents`, `network` (default Base) | account, write | x402 payment requirements to sign with the agent's own wallet. **Deprecated** |
+| `pay_with_x402` | `top_up_id`, `payment_payload` | account, write | Submit the signed payment; credit is added after on-chain settlement. **Deprecated** |
+| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | account, write | Price, tax, and `total_cents` to show the human. **Deprecated** |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | account, write | Buy a license from the balance; beyond the agent's limit returns `approval_required`. **Deprecated** |
+| `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | account, write | Donate to a free game from the balance. **Deprecated** |
+| `list_library` | none | account | Owned games with refund windows and playtime. **Deprecated** |
+| `get_download_link` | `file_id` | account | 5-minute signed URL for a build file; needs a verified email and, for paid games, a license. **Deprecated** |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | write | Set price or donations. Owners and game admins only |
 | `list_game_sales` | `uid` | | Sales, donations, refunds, and seller earnings for a game you manage |
-| `get_agent_policy` | none | account | This agent's limit mode, limit, and spend in the period; only the human changes them, on the website |
+| `get_agent_policy` | none | account | This agent's limit mode, limit, and spend in the period; only the human changes them, on the website. **Deprecated** |
 | `get_approval` | `approval_id` | account | State of a purchase approval |
 | `confirm_approval` | `approval_id`, `code` | account, write | Approve with the 6-digit code the human read from their email |
 
@@ -83,8 +84,14 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | Code | Meaning |
 |------|---------|
 | `4010` | Not authenticated |
-| `4030` | Not allowed for this game |
+| `4030` | Not allowed: the game isn't yours, or a project token called an account-level tool or another game. Reconnect with **Account** |
 | `4031` | Token is read-only |
+| `4034` | Buying moved to the player server, or only the project owner can manage admins |
+| `4040` | Not found (the message says what) |
+| `4090` | Already done: the game is already owned, or the crash file isn't available yet |
+| `4091` | You can't buy your own game |
+| `4092` | The game is free |
+| `4093` | The game doesn't accept donations |
 | `4006` | Build not found |
 | `4096` | Email not verified; use `request_email_code` and `verify_email` |
 | `4020` | Not enough balance; top up first |

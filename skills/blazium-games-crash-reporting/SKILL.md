@@ -69,8 +69,13 @@ In CI, write `build_id` into the project before exporting, so each exported bina
 
 | Error code | Meaning |
 |------------|---------|
+| `4001` | Invalid JSON body |
 | `4010` | Missing `X-App-Id` or `X-Build-Id` |
-| `4030` | Unknown app or build |
+| `4030` | Unknown app id, or a `build_id` that doesn't belong to that app. Use the `build_id` from `list_game_builds`, not a version string |
+| `4130` | `metadata` has more than 64 keys (`413`) |
+| `4290` | The game hit its daily crash report limit (`429`); retry tomorrow |
+
+Past the daily upload limit the report is still stored but `uploads` is empty.
 
 ## Phase 3: Custom events (optional)
 
@@ -83,7 +88,7 @@ Content-Type: application/json
 { "events": [ { "event": "level_complete", "anonymous": true, "device_uid": "<random per install>" } ] }
 ```
 
-Up to 100 events per request; the response is `202`. Use a random per-install id, not hardware identifiers.
+Up to 100 events per request (more returns `4130`); the response is `202`. Use a random per-install id, not hardware identifiers.
 
 ## Phase 4: Verify
 

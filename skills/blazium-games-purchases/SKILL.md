@@ -56,7 +56,12 @@ Call `purchase_game` (or `donate_to_game` with the same `amount_cents`) with:
 | `4095` | That idempotency key was used for a different purchase. Use a new key |
 | `4212` | This token can't buy: no `player:buy`, or a project token. The human reconnects the player server with **Allow purchases** |
 | `4096` | Email not verified. Go back to Phase 1 |
-| `4091` / `4092` | The human owns the game, or it is free (no purchase needed) |
+| `4090` | The human already owns the game. Skip to Phase 5 |
+| `4091` | It's the human's own game; they can't buy it |
+| `4092` | The game is free; no purchase needed. Skip to Phase 5 |
+| `4093` | The game doesn't accept donations |
+| `4030` | A project-bound developer token. Use the player server instead |
+| `4034` | Buying moved to the player server; the developer copies no longer work. Use `blazium-games-player` |
 
 ## Phase 4b: Approval
 
@@ -86,7 +91,7 @@ Top-ups add a processing fee (shown by `get_payment_options`). Credit can be spe
 
 ## Rules to tell the human when relevant
 
-- Refunds are only through support@blazium.games, within 7 days and before 2 hours of play.
+- Refunds are only through support@blazium.games: purchases within 7 days and before 2 hours of play, donations within 7 days.
 - Cash-out and payout setup are website-only.
 
 ## Docs

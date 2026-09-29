@@ -8,7 +8,7 @@ description: Every tool, prompt, and resource exposed by the Blazium Games devel
 
 This page covers the developer server at `https://mcp.blazium.games/mcp`. The player server is on [Player MCP](./player.md).
 
-`uid` accepts a game uid or its vanity name. "Account only" means a project-bound token is refused. "Write" means the token needs `mcp:write`.
+`uid` accepts a game uid or its vanity name. "Account only" means a project-bound token is refused with `4030`. "Write" means the token needs `mcp:write` or the narrower write scope for that tool's group (see [Scopes](#scopes)). "Deprecated" tools are removed on 2026-10-28 (see [Account and payments](#account-and-payments)).
 
 ## Tools
 
@@ -40,7 +40,7 @@ Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or
 | `list_channels` | `uid` | Each channel's build, expiry, beta subscriber count, and the last 50 promote, rollback, and upload events |
 | `promote_build` | `uid`, `channel`, `build_id`, `expires_in_hours` (0-2160), `idempotency_key` | Points a channel at a build whose files passed the virus scan. `expires_in_hours` hides the channel from players after that. Promoting to `stable` needs the human's approval. Write |
 | `rollback_channel` | `uid`, `channel` | Moves the channel back to the build it pointed at before. Nothing is deleted. Write |
-| `list_crash_groups` | `uid` | Crash reports grouped by cause, busiest first, with counts per build and a `sample_crash_id` for `get_crash` |
+| `list_crash_groups` | `uid` | Up to 100 crash groups, most recently seen first, with `first_seen`, `last_seen`, counts per build, and a `sample_crash_id` for `get_crash` |
 | `get_build_provenance` | `uid`, `file_uid` | Uploader, how it was uploaded (`deploy_key` with an 8-character `key_ref`, or `website`), upload time, checksum, and scan history. Never returns a secret |
 
 Crash groups use the top stack frames once a minidump has been stackwalked, and the crash message, app version, and OS before that. Grouping runs every 10 minutes.
@@ -54,6 +54,7 @@ Players review games they own and file bug tickets from the [player server](./pl
 | `list_reviews` | `uid`, `unreplied`, `page` | Reviews, newest first, with the summary: `count`, `enjoyed`, `quality_avg`, `quality_counts` (1 to 5), and `would_play_with_friends`. `unreplied` lists only reviews without a reply |
 | `reply_to_review` | `uid`, `review_uid`, `text` | Public reply shown under the review on the store page (up to 2000 characters). Empty text removes it. Write |
 | `list_bug_tickets` | `uid`, `status` (`open`, `fixed`, `closed`) | Tickets, newest first, with counts by status. A ticket with an attached dump or log has a `crash_id` for `get_crash` and `request_crash_download` |
+| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, or `closed`) | Marks a ticket fixed or closed, or reopens it with `open`. Covered by `mcp:crash.read` |
 
 Only the game's owner and admins can read bug tickets and download their attachments.
 
@@ -81,7 +82,7 @@ Keys give a game to someone for free, for press, bundles, or giveaways. Each cod
 
 ### Approvals for risky actions
 
-Over MCP, rotating an account or deploy key, creating an account or game key, creating more than 100 game keys at once, promoting to `stable`, and deleting a game or build wait for the account owner. The call returns HTTP 202 with code `4214`, an `approval_id`, and a `confirm_url`, and the owner gets an email with a link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once. On the website these actions don't need an approval.
+Over MCP, rotating an account or deploy key, deleting a deploy key, creating more than 100 game keys at once, adding a project admin, promoting to `stable`, and deleting a game or build wait for the account owner, even with full access. The call returns HTTP 202 with `approval_required: true`, code `4214`, `email_sent`, and an `approval` object whose `uid` you pass as `approval_id` and whose `confirm_url` the owner can open. The owner also gets an email with the link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once and expires if nobody decides. Project tokens can't use `get_approval` or `confirm_approval` (`4030`), so approve those from the email. On the website these actions don't need an approval.
 
 ### Scopes
 
@@ -89,14 +90,14 @@ Over MCP, rotating an account or deploy key, creating an account or game key, cr
 
 | Scope | Covers |
 |-------|--------|
-| `mcp:catalog.write` | Game pages, taxonomy, similar titles, dependencies, engine compatibility, license kind, media, admins, review replies |
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, dependencies, engine compatibility, license kind, media, review replies |
 | `mcp:build.write` | Builds, channels, deploy info, scan status |
-| `mcp:crash.read` | Crash reports, crash groups, crash analysis, bug tickets |
+| `mcp:crash.read` | Crash reports, crash groups, crash analysis, bug tickets, including `update_bug_ticket` |
 | `mcp:analytics.read` | Visitor analytics and events |
-| `mcp:keys.manage` | Deploy keys and MCP keys |
+| `mcp:keys.manage` | Deploy keys, MCP keys, MCP access for admins, and project admins |
 | `mcp:money` | Pricing, sales, game keys and gift links, wallet, purchases, library, downloads |
 
-Every developer token can read the profile, account, and game pages. A write scope also reads its own group. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Read-only** (`mcp:read`), and **Full access**.
+Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Read-only** (`mcp:read`), and **Full access**.
 
 ### Listings
 
@@ -114,27 +115,27 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The wallet, top-up, purchase, donation, `get_agent_policy`, `list_library`, and `get_download_link` tools and the `wallet` and `library` resources are deprecated on this server and removed after 2026-10-28. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 45 tools instead of 57. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
 | `get_account` | none | Email verification, balances, and what the account may do. Account only |
 | `request_email_code` | none | Emails a verification code to the account owner. Account only, write |
 | `verify_email` | `code` | Verifies the email with the code the human received. Account only, write |
-| `get_wallet` | none | Credit, pending, and available balances plus fee and refund rules. Account only |
-| `list_wallet_transactions` | `limit` (1-200), `before` | Ledger entries, newest first. Account only |
-| `get_payment_options` | none | Card top-up and x402 USDC networks with fees. Account only |
-| `create_top_up_link` | `amount_cents` | Card Checkout link for the human to add balance. Account only, write |
-| `create_x402_top_up` | `amount_cents`, `network` | x402 payment requirements for a USDC top-up. Account only, write |
-| `pay_with_x402` | `top_up_id`, `payment_payload` | Submits the signed x402 payment. Credit arrives after settlement. Account only, write |
-| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | Price, tax, and total. Show the total to the human first. Account only, write |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | Buys a license from the balance. Beyond this agent's limit it returns `approval_required`; retry with the same key once approved. Account only, write |
-| `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | Donates to a free game from the balance. Account only, write |
-| `list_library` | none | Owned games with refund windows and playtime. Account only |
-| `get_download_link` | `file_id` | 5-minute signed URL for a build file. Needs a verified email and, for paid games, a license. Account only |
+| `get_wallet` | none | Credit, pending, and available balances plus fee and refund rules. Account only. **Deprecated** |
+| `list_wallet_transactions` | `limit` (1-200), `before` | Ledger entries, newest first. Account only. **Deprecated** |
+| `get_payment_options` | none | Card top-up and x402 USDC networks with fees. Account only. **Deprecated** |
+| `create_top_up_link` | `amount_cents` | Card Checkout link for the human to add balance. Account only, write. **Deprecated** |
+| `create_x402_top_up` | `amount_cents`, `network` | x402 payment requirements for a USDC top-up. Account only, write. **Deprecated** |
+| `pay_with_x402` | `top_up_id`, `payment_payload` | Submits the signed x402 payment. Credit arrives after settlement. Account only, write. **Deprecated** |
+| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | Price, tax, and total. Show the total to the human first. Account only, write. **Deprecated** |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | Buys a license from the balance. Beyond this agent's limit it returns `approval_required`; retry with the same key once approved. Account only, write. **Deprecated** |
+| `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | Donates to a free game from the balance. Account only, write. **Deprecated** |
+| `list_library` | none | Owned games with refund windows and playtime. Account only. **Deprecated** |
+| `get_download_link` | `file_id` | 5-minute signed URL for a build file. Needs a verified email and, for paid games, a license. Account only. **Deprecated** |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | Owners and game admins. Write |
 | `list_game_sales` | `uid` | Sales, donations, refunds, and seller earnings |
-| `get_agent_policy` | none | This agent's limit mode (`unset`, `unlimited`, `monthly`, `yearly`, `one_time`), limit, and spend in the period. Changed only on the website. Account only |
+| `get_agent_policy` | none | This agent's limit mode (`unset`, `unlimited`, `monthly`, `yearly`, `one_time`), limit, and spend in the period. Changed only on the website. Account only. **Deprecated** |
 | `get_approval` | `approval_id` | State of a purchase approval: `pending`, `approved`, `denied`, `expired`, or `used`. Account only |
 | `confirm_approval` | `approval_id`, `code` | Approves with the 6-digit code the human read from their email. Account only, write |
 
@@ -165,17 +166,19 @@ Field values:
 | `blazium-games://games/{uid}/crashes` | Crash reports |
 | `blazium-games://games/{uid}/deploy` | Non-secret deploy endpoints and key prefixes |
 | `blazium-games://games/{uid}/builds` | Builds and crash reporter `build_id` values |
-| `blazium-games://wallet` | Stored balance and payment rules. Account only |
-| `blazium-games://library` | Owned games and licenses. Account only |
+| `blazium-games://wallet` | Stored balance and payment rules. Account only. **Deprecated** |
+| `blazium-games://library` | Owned games and licenses. Account only. **Deprecated** |
+
+Template `{uid}` values must be a uid or vanity name made of letters, digits, `-` and `_`. Anything else, including dots or slashes, returns an error instead of calling the API.
 
 ## Errors
 
-Tool errors return `API <status>: <body>`.
+Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`4056`, `4090`–`4093`) are reused by different routes, so read the message along with the code.
 
 | Code | Meaning |
 |------|---------|
 | `4010` | Not authenticated |
-| `4030` | Not allowed for this game |
+| `4030` | Not allowed: the game isn't yours, or a project token called an account-level tool or another game |
 | `4031` | Token is read-only |
 | `4032` | Token mixes developer (`mcp:*`) and player (`player:*`) scopes |
 | `4033` | This route isn't available to this server's tokens (for example a player token on a developer route) |
@@ -217,3 +220,27 @@ Tool errors return `API <status>: <body>`.
 | `4079` | That key was already redeemed (HTTP 409) |
 | `4084` | The player already has this game; the key stays unused (HTTP 409) |
 | `4103` | The key CSV was already downloaded or has expired (HTTP 410) |
+| `4034` | Also: only the project owner can add admins or remove other admins |
+| `4040` | Not found (game, build file, crash, crash group, bug ticket, review, approval, purchase, top-up, key, or user; the message says which) |
+| `4043` | Key pool or key export not found |
+| `4050` | `price_cents` must be 0 or between 99 and 50000 |
+| `4051` | Donations are only available on free games |
+| `4052` | Donation `amount_cents` must be between 100 and 50000 |
+| `4053` | `kind` must be `purchase` or `donation` |
+| `4054` | Only the balance can pay here; card payments go through the store page |
+| `4055` | `idempotency_key` is required (up to 100 characters) |
+| `4056` | Top-up amount out of range |
+| `4080` | The project owner turned off MCP access for admins |
+| `4081` | Agent spending limits and MCP access settings can only be changed on the website |
+| `4082` | Agents pay from the balance, not by card; or only the owner can change MCP access for admins |
+| `4090` | Already done: you already own the game, or the dump, log, or stackwalk for a crash isn't available yet |
+| `4091` | You can't buy your own game |
+| `4092` | The game is free |
+| `4093` | The game doesn't accept donations |
+| `4100` | The top-up expired; create a new one |
+| `4130` | Too many crash metadata keys (64) or analytics events in one request (HTTP 413) |
+| `4290` | Too many requests, crash reports for the day, analysis requests, or redeem attempts (HTTP 429) |
+| `5030` | A download URL couldn't be signed; try again |
+| `5031` | Email codes aren't configured on the server |
+| `5032` | Payments, or a sign-in provider, aren't configured on the server |
+| `5033` | x402 top-ups aren't configured on the server |
