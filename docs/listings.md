@@ -94,11 +94,9 @@ Every uploaded build records a SHA-256 for each file inside its zip. The bundle 
 
 Open **Symbols and bundle check** under a build on the Builds tab, or use the MCP `bundle_check` tool. Each match lists up to 5 of your file paths.
 
-When two different developers upload identical files, staff review it. Your upload is never blocked.
-
 ## Launch health
 
-Games that send the [standard events](./crash-reporting.md#standard-events) get a launch health band for each build, recomputed every hour from the last 30 days:
+Games that send the [standard events](./crash-reporting.md#standard-events) get a launch health band for each build, recomputed regularly from recent launches:
 
 | Band | Store label | Rule |
 |---|---|---|
@@ -106,7 +104,7 @@ Games that send the [standard events](./crash-reporting.md#standard-events) get 
 | `healthy` | Launches well | At least 93% `boot_ok`, at most 3% crash on boot |
 | `mixed` | Mixed launch reports | At least 80% `boot_ok`, at most 10% crash on boot |
 | `problematic` | Launch problems reported | Below mixed |
-| `unrated` | Not enough launch data | Fewer than 20 devices |
+| `unrated` | Not enough launch data | Not enough devices have launched it yet |
 
 The store page and search show the band of the newest stable build. The Builds tab shows every build's band and device count; the MCP `get_build_health` tool also returns the raw counts and median session length.
 
@@ -117,7 +115,7 @@ The home page has two shelves. Each shows up to 12 listings in an order that cha
 | Shelf | What qualifies |
 |---|---|
 | `tonight` (Something for tonight) | Public games with a 15-minute session length, a clean stable download for the player's OS, and a newest stable build rated `excellent` or `healthy` |
-| `unheard_of` (Unheard of) | Games and applications published in the last 60 days that pass the listing check, have a clean stable download, and have been played on fewer than 50 devices. A listing shows for up to 14 days from its first `boot_ok` |
+| `unheard_of` (Unheard of) | Recently published games and applications that pass the listing check, have a clean stable download, and haven't been played on many devices yet. A listing shows for a limited time after its first `boot_ok` |
 
 Both need a verified owner. `GET https://api.blazium.online/api/v1/public/shelves/{shelf}?os=windows` returns a shelf without sign-in, and the player MCP `get_shelf` tool reads it.
 

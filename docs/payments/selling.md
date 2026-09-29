@@ -50,7 +50,7 @@ Buyers pay tax and any card fee on top of the price, so those never come out of 
 
 ## When earnings become available
 
-New earnings are **pending**. They become **available** once the purchase can no longer be refunded: after 7 days, or as soon as the buyer has played for 2 hours. A settlement job moves them every hour. See [Wallet and cash-out](./wallet-and-cash-out.md).
+New earnings are **pending**. They become **available** once the purchase can no longer be refunded: after 7 days, or as soon as the buyer has played for 2 hours. See [Wallet and cash-out](./wallet-and-cash-out.md).
 
 If a purchase is refunded or charged back, its earnings are taken back from your balance and the sale fee is not charged.
 

@@ -14,7 +14,7 @@ A purchase can be refunded until **7 days** have passed or you have played for *
 
 Email [support@blazium.games](mailto:support@blazium.games) from your account email with the game name and, if you have it, the purchase ID from your wallet transactions. Refunds are not available through the site buttons or MCP.
 
-Staff can refund outside the window at their discretion, for example for a broken build.
+We may refund outside the window at our discretion, for example for a broken build.
 
 ## What you get back
 

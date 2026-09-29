@@ -23,6 +23,6 @@ For how to link, log in with, and unlink GitHub, X, and Discord, see the [Linked
 ## Contacts
 
 - Privacy questions and account deletion: [privacy@blazium.games](mailto:privacy@blazium.games). Deletion requests are processed within 30 days.
-- Everything else: [support@blazium.games](mailto:support@blazium.games).
+- Everything else: [support@blazium.games](mailto:support@blazium.games), or see [Support](https://blazium.games/support).
 
 For how payments work in practice, see [Payments](../payments/index.md).
