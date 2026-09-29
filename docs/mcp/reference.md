@@ -47,7 +47,7 @@ Crash groups use the top stack frames once a minidump has been stackwalked, and 
 
 ### Build health, symbols and bundle check
 
-MCP never uploads files. Symbols, builds and store images are uploaded with the [chauffeur CLI](../cli/index.md) and the game's deploy key; these tools read and delete them.
+MCP never uploads files. Symbols and builds are uploaded with the [chauffeur CLI](../cli/index.md) and the game's deploy key. Store images are uploaded with chauffeur or on the game's edit page on the website. These tools read and delete them.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -131,14 +131,14 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 | `validate_listing` | `uid` | Listing check: `ready`, `errors` (block going public), `warnings`, `passes`, plus the current taxonomy and allowed values |
 | `update_game_taxonomy` | `uid` (required), `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit` | Only the fields you pass change. `authorship` is the [made-with label](../listings.md#made-with) (`human`, `human_agent`, `agent_heavy`, or empty to clear) and `authorship_credit` an optional credit line up to 120 characters. Write |
 | `set_similar_games` | `uid`, `games` (up to 10 uids or vanity names) | Replaces the similar titles; an empty list clears them. Write |
-| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, or `gallery`), `url` | Fetches an https image (PNG, JPEG, GIF, or WebP, up to 2048 px and 10 MB) and sets it. Without `url` it returns the matching [`chauffeur media`](../cli/media.md) command for images on disk. Write |
+| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, or `gallery`) | Returns the matching [`chauffeur media`](../cli/media.md) commands and the image limits (PNG, JPEG, GIF, or WebP, 512 to 2048 px per side, up to 10 MB). MCP never uploads images; use chauffeur or the website. Write |
 | `scan_status` | `uid` | Scan state and history of every build file, plus files removed in the last 30 days because their scan failed |
 
 ### Account and payments
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 45 tools instead of 57. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 54 tools instead of 66. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -151,8 +151,8 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources a
 | `create_top_up_link` | `amount_cents` | Card Checkout link for the human to add balance. Account only, write. **Deprecated** |
 | `create_x402_top_up` | `amount_cents`, `network` | x402 payment requirements for a USDC top-up. Account only, write. **Deprecated** |
 | `pay_with_x402` | `top_up_id`, `payment_payload` | Submits the signed x402 payment. Credit arrives after settlement. Account only, write. **Deprecated** |
-| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations) | Price, tax, and total. Show the total to the human first. Account only, write. **Deprecated** |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key` | Buys a license from the balance. Beyond this agent's limit it returns `approval_required`; retry with the same key once approved. Account only, write. **Deprecated** |
+| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations), `sku` (edition uid or slug; empty quotes the cheapest) | Price, tax, and total. Show the total to the human first. Account only, write. **Deprecated** |
+| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key`, `sku` (the same edition passed to `quote_purchase`) | Buys a license from the balance. Beyond this agent's limit it returns `approval_required`; retry with the same key once approved. Account only, write. **Deprecated** |
 | `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | Donates to a free game from the balance. Account only, write. **Deprecated** |
 | `list_library` | none | Owned games with refund windows and playtime. Account only. **Deprecated** |
 | `get_download_link` | `file_id` | 5-minute signed URL for a build file. Needs a verified email and, for paid games, a license. Account only. **Deprecated** |

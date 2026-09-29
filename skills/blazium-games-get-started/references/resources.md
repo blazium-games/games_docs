@@ -8,8 +8,8 @@ Resources return JSON. `{uid}` accepts a game uid or vanity name.
 |-----|------|----------|
 | `blazium-games://me` | `me` | Authenticated user (account tokens only) |
 | `blazium-games://games` | `games` | Games list |
-| `blazium-games://wallet` | `wallet` | Stored balance and payment rules (account tokens only) |
-| `blazium-games://library` | `library` | Owned games and licenses (account tokens only) |
+| `blazium-games://wallet` | `wallet` | Stored balance and payment rules (account tokens only). **Deprecated**: removed from this server after 2026-10-28; use the player server |
+| `blazium-games://library` | `library` | Owned games and licenses (account tokens only). **Deprecated**: removed from this server after 2026-10-28; use the player server |
 
 ## Resource templates
 

@@ -74,7 +74,7 @@ If OAuth is not possible (headless CI, remote agents), use an API key instead. S
 
 ## References
 
-- [references/tools.md](references/tools.md): every tool, its inputs, and the API it calls
+- [references/tools.md](references/tools.md): every tool, its inputs, the access it needs, and what it does
 - [references/resources.md](references/resources.md): `blazium-games://` resources and templates
 - [references/prompts.md](references/prompts.md): server prompts
 - [references/auth.md](references/auth.md): OAuth, API keys, scopes, and project binding

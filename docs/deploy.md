@@ -64,7 +64,7 @@ Every command and field is in the [chauffeur CLI](./cli/index.md) section.
 
 ## Symbols and store images
 
-chauffeur also uploads the files that aren't builds. The website and MCP can list and delete them, but uploads only go through chauffeur and the deploy key.
+chauffeur also uploads the files that aren't builds. MCP can list and delete them but never uploads. Symbols only upload through chauffeur and the deploy key; store images can also be uploaded on the game's edit page on the website.
 
 ```bash
 chauffeur symbols --build-id "$BLAZIUM_GAMES_BUILD_ID" ./symbols   # Breakpad .sym files
@@ -129,6 +129,8 @@ The `201` response has `session_id`, `expected_size`, `current_size`, and `expir
 |------|---------|
 | `4020` / `4021` | Missing `X-Access-Token` or `X-Secret-Key` |
 | `4022` / `4023` | Deploy key not found, or revoked |
+| `4024` | Deploy key not found or invalid for this game (`401`) |
+| `4025` | The request isn't authenticated as a game (`401`) |
 | `4026` | Missing or too-long field when registering (`version` up to 32 characters, `title` up to 255, up to 100 changelog items) |
 | `4037` | Missing `file`, or a form that could not be read |
 | `4038` | Missing build identification |
@@ -139,6 +141,8 @@ The `201` response has `session_id`, `expected_size`, `current_size`, and `expir
 | `4045` | Upload session not found or expired |
 | `4046` | Checksum mismatch |
 | `4047` | Another chunk for the same session is still uploading (`409`) |
+| `4048` | The file record couldn't be created; try again (`500`) |
+| `5020` | A symbol file couldn't be stored; try again (`502`) |
 | `4096` | The game owner has not verified their email |
 | `4290` / `4291` | Too many uploads, chunks, or open sessions for this game (`429`) |
 
