@@ -73,7 +73,7 @@ Call `set_game_price` with `uid` and:
 
 To sell several editions (standard, deluxe, beta access, or a bundle with the user's other listings), use `upsert_sku` instead; up to 8 per listing. The listing price then follows the cheapest edition and `set_game_price` returns `4164`.
 
-Tell the user what they will receive before setting it: each sale or donation pays the price minus $0.25 + 8% (a $10 game pays $8.95). Earnings unlock after 7 days or 2 hours of the buyer's play, and cash-out (8% plus Stripe's payout fee, $25 minimum) is on the website. Paid games can only be downloaded by buyers. Sales are listed by `list_game_sales`.
+Tell the user what they will receive before setting it: each sale or donation pays the price minus $0.25 + 8% (a $10 game pays $8.95). Earnings unlock 7 days after each sale, and cash-out (8% plus Stripe's payout fee, $25 minimum) is on the website. Paid games can only be downloaded by buyers. Sales are listed by `list_game_sales`.
 
 Details: https://blazium-games.github.io/games_docs/docs/payments/selling
 

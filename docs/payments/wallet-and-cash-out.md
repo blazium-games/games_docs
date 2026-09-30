@@ -16,7 +16,9 @@ Your [wallet](https://blazium.games/settings/wallet) shows three amounts:
 
 When you buy from your balance, credit is used first, then available earnings.
 
-Pending earnings become available after 7 days, or as soon as the buyer has played 2 hours, whichever comes first.
+Pending earnings become available 7 days after the sale. Playtime can end the buyer's right to a refund sooner, but it never releases earnings early.
+
+If a balance goes negative, for example because a top-up was refunded or disputed, the debt is repaid from your other balance first. Until then it is subtracted from what you can spend and cash out.
 
 The wallet page also lists every transaction: sales, purchases, top-ups, refunds, and cash-outs.
 
@@ -44,3 +46,7 @@ If a transfer fails or is reversed, the full amount returns to your available ba
 ## Chargebacks
 
 If a buyer disputes a card payment, the license is revoked and that sale's earnings are held back from your balance. If the dispute is won, they are restored.
+
+## Partial refunds
+
+If support refunds part of a card payment, the buyer keeps the game and your earnings from that sale shrink in proportion. The Blazium Games fee shrinks the same way.
