@@ -42,7 +42,7 @@ Call `create_game`:
 | `visibility` | Start with `draft`. Options: `draft`, `invisible`, `public` |
 | `asset_type` | `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset` |
 | `vanity_name` | URL slug, lowercase with dashes |
-| `parent` | Required for `tool`, `mod`, and `plugin`: `{"game": "uid-or-vanity"}` for a listing on Blazium Games, or `{"external_name": "...", "external_url": "https://..."}` for a game that isn't. Ask the user which game it's for |
+| `parent` | Required for `tool`, `mod`, and `plugin` before they can go public: `{"game": "uid-or-vanity"}` for a listing on Blazium Games, or `{"external_name": "...", "external_url": "https://..."}` for a game that isn't. Ask the user which game it's for |
 | `adult` | `true` only if the user says it has sexual content or nudity. Adult pages are hidden from search, recommendations, and search engines, and need the player's opt-in |
 | `indexable` | `false` keeps the page out of search engines and AI crawlers. Default `true` |
 

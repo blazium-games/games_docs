@@ -24,12 +24,12 @@ The Settings tab says whether the page can be indexed right now. Other pages sti
 
 | URL | Contents |
 |---|---|
-| `https://blazium.games/sitemap.xml` | The storefront's public pages, every developer profile with an indexable listing, and every indexable store page and press page |
+| `https://blazium.games/sitemap.xml` | The storefront's public pages, every developer profile with an indexable listing, and every indexable store page |
 | `https://<you>.blazium.games/sitemap.xml` | Your profile, and your indexable store pages and their press pages |
 | `https://blazium.games/robots.txt` | Points to the root sitemap |
 | `https://<you>.blazium.games/robots.txt` | Points to your sitemap and the root sitemap, and keeps crawlers off embed pages (`/<game>/embed`) |
 
-Sitemaps list listings whose owner has a verified email. They refresh every ten minutes. `GET https://api.blazium.online/api/v1/public/sitemap` returns the same data as JSON.
+Sitemaps list listings whose owner has a verified email and a finished account. The data behind them refreshes every ten minutes, and responses may be cached for up to an hour. `GET https://api.blazium.online/api/v1/public/sitemap` returns the same data as JSON.
 
 ## llms.txt
 
@@ -41,4 +41,4 @@ Sitemaps list listings whose owner has a verified email. They refresh every ten 
 
 ## Structured data
 
-Indexable store pages include [JSON-LD](https://json-ld.org): a `VideoGame` for games, or a `SoftwareApplication` for everything else, with the tagline, cover image, developer, genres, price, operating systems, player count for games, tags and community tags as keywords, the review rating when there are reviews, and `isBasedOn` for a listing with a parent game.
+Indexable store pages include [JSON-LD](https://json-ld.org): a `VideoGame` for games, mods and plugins, or a `SoftwareApplication` for everything else, with the tagline, cover image, developer, genres, price, operating systems, player count (games, mods and plugins), tags and community tags as keywords, the review rating when there are reviews, and `isBasedOn` when the parent game is on Blazium Games.

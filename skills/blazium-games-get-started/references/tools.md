@@ -8,7 +8,7 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `get_setup` | none | account | Account, games, public URLs, and key prefixes. No secrets |
 | `list_games` | none | | Games the user owns or admins, plus pending admin invites |
 | `get_game` | `uid` | | One game's settings and store page fields |
-| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | account, write | Create a store page. Tools, mods and plugins need a `parent`. Needs developer mode on the account (`4105`) |
+| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | account, write | Create a store page. Tools, mods and plugins need a `parent` before they can go public. Needs developer mode on the account (`4105`) |
 | `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | write | Update a store page; only passed fields change. An empty `parent` object clears it |
 | `get_game_analytics` | `uid` | | Visitor analytics: views, unique visitors, countries, actions |
 | `list_game_crashes` | `uid` | | Recent crash reports |
@@ -51,7 +51,7 @@ A tool, mod or plugin names the game it is for with `parent` on `create_game` or
 |------|--------|--------|--------------|
 | `set_mod_settings` | `uid`, `install_path`, `loader`, `instructions` | write | Mods and plugins only (`4234` otherwise). Relative install path, lowercase loader slug (for example `bepinex`), markdown instructions up to 8000 characters. Replaces all three |
 | `get_press_kit` | `uid` | | The press kit behind the listing's `/press` page and `press.zip` |
-| `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | write | Replace the press kit; omitted fields are cleared. https links only; up to 20 features, awards, links and quotes, and 50 credits |
+| `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | write | Replace the whole press kit; omitted fields are cleared, so read it with `get_press_kit` first. https links only; up to 20 features, awards, links and quotes, and 50 credits |
 | `hide_community_tag` | `uid`, `tag`, `show` | write | Hide a player-suggested tag from the store page, or show it again with `show`. Without `tag`, lists every suggestion with its vote count |
 
 ## Builds, health and editions

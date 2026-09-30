@@ -19,7 +19,7 @@ Tick **Adult content (sexual content or nudity)** on the **Settings** tab of the
 An adult listing:
 
 - Shows only to signed-in players who confirmed they are 18 or older and turned on adult content. Signed-out visitors get a 404 (`4004`); signed-in players who haven't opted in see a page that explains how to turn it on (`4104`, HTTP 403).
-- Is left out of search, recommendations, shelves, friends' activity, the tools and mods rows of other games, popular tags, sitemaps, and llms.txt for everyone who hasn't opted in, and is never indexed by search engines. See [SEO and indexing](./seo-and-indexing.md).
+- Is left out of search, recommendations, and the tools and mods rows of other games for everyone who hasn't opted in, and out of shelves, friends' activity, popular tags, sitemaps, and llms.txt for everyone. It is never indexed by search engines. See [SEO and indexing](./seo-and-indexing.md).
 - Shows an **18+** badge on its store page.
 
 You and your project's admins always see your own adult listings.

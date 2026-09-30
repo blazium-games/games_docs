@@ -18,17 +18,17 @@ Pick the type on the **Settings** tab of the edit page, or pass `asset_type` to 
 |---|---|---|
 | `game` | A game | None |
 | `application` | Standalone software, such as a launcher or music tool | Optional |
-| `tool` | A tool or utility for one game, such as a level editor or save manager | Required |
-| `mod` | Changes a game's content | Required |
-| `plugin` | Extends a game or engine without changing its content | Required |
+| `tool` | A tool or utility for one game, such as a level editor or save manager | Required to go public |
+| `mod` | Changes a game's content | Required to go public |
+| `plugin` | Extends a game or engine without changing its content | Required to go public |
 | `game_asset` | Art, audio or other content for making games | None |
 | `dev_asset` | Code, shaders, plugins for engines and other development assets | None |
 
 ## Parent games, tools, mods and plugins
 
-Tools, mods and plugins name the game they are for; applications may. The parent is either a game or application on Blazium Games, or an external game with a name and an `https://` link. Set it on the **Settings** tab, or with `parent` on `create_game` and `update_game` (`{"game": "uid-or-vanity"}` or `{"external_name": "...", "external_url": "https://..."}`). A parent that isn't a game or application, the listing itself, or an external parent without an https link returns `4233`. Changing the type to one without a parent drops it.
+Tools, mods and plugins name the game they are for; applications may. The parent is either a game or application on Blazium Games, or an external game with a name and an `https://` link. Set it on the **Settings** tab, or with `parent` on `create_game` and `update_game` (`{"game": "uid-or-vanity"}` or `{"external_name": "...", "external_url": "https://..."}`). A parent that isn't a game or application, the listing itself, an external parent without an https link, or another developer's listing that isn't public returns `4233`. Changing the type to one without a parent drops it.
 
-The parent's store page shows public children in two rows, each split into **From the developer** (the parent's owner or admins) and **Community**:
+The parent's store page shows public children in two rows, each item marked **From the developer** (the parent's owner or admins) or **Community**; the full lists split them into **From the developer** and **From the community**:
 
 - **Tools and utilities**: tools and applications. The full list is at `/<game>/tools`.
 - **Mods and plugins**: mods and plugins. The full list is at `/<game>/mods`.
@@ -64,7 +64,7 @@ The tags field on the Listing tab suggests popular tags as you type. `GET https:
 
 Players who own a game and have played it for at least an hour can suggest up to 5 tags for it, from the store page or with the player MCP `suggest_tag` tool. A tag appears under **Players say** on the store page once 3 players suggest it, up to 10 tags, most suggested first. Tags you already set yourself aren't repeated.
 
-You can hide any suggested tag on the **Community tags** tab of the edit page or with the `hide_community_tag` MCP tool, and show it again later. Hiding keeps the votes. Search matches community tags along with your own.
+You can hide any suggested tag on the **Player tags** tab of the edit page or with the `hide_community_tag` MCP tool, and show it again later. Hiding keeps the votes. Search matches community tags along with your own.
 
 Playtime comes from the play-time heartbeat of the launcher and the game. It will move to playtime verified by the Blazium SDK once that ships.
 

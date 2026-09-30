@@ -17,7 +17,7 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `get_profile` | none | Current user. Account only |
 | `list_games` | none | Games you own or administer, and pending admin invites |
 | `get_game` | `uid` | One game's settings |
-| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | New store page. Tools, mods and plugins need a `parent`. Needs [developer mode](../developer-mode.md) (`4105`). Account only, write |
+| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | New store page. Tools, mods and plugins need a `parent` before they can go public. Needs [developer mode](../developer-mode.md) (`4105`). Account only, write |
 | `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | Update a page; only the fields you pass change. Setting `public` fails with `4225` until the listing check passes. An empty `parent` object clears the parent. Write |
 | `get_game_analytics` | `uid` | Visitor analytics |
 | `list_game_crashes` | `uid` | Recent crash reports |
@@ -100,7 +100,7 @@ A tool, mod or plugin names the game it is for with `parent` on `create_game` or
 |------|--------|-------|
 | `set_mod_settings` | `uid`, `install_path`, `loader`, `instructions` | Mods and plugins only (`4234` otherwise). `install_path` is relative to the game folder (for example `mods/my-mod`), `loader` a lowercase slug such as `bepinex`, `instructions` markdown up to 8000 characters. Replaces all three. Write |
 | `get_press_kit` | `uid` | The press kit behind the listing's `/press` page and `press.zip` |
-| `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | Replaces the press kit; fields you leave out are cleared. Links must be https. Up to 20 features, awards, links and quotes, 50 credits. See [Press kit](../press-kit.md). Write |
+| `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | Replaces the whole press kit; fields you leave out are cleared, so read it with `get_press_kit` first. Links must be https. Up to 20 features, awards, links and quotes, 50 credits. See [Press kit](../press-kit.md). Write |
 | `hide_community_tag` | `uid`, `tag`, `show` | Hides a player-suggested tag from the store page, or shows it again with `show`. Without `tag` it lists every suggestion with its vote count. See [Community tags](../listings.md#community-tags). Write |
 
 ### Game keys

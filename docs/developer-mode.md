@@ -16,7 +16,7 @@ Every Blazium Games account can play, buy, review, and use the [player MCP](./mc
 
 The header menu then shows **Dashboard** and **Analytics**, and [New project](https://blazium.games/new) opens the project form. Without developer mode the menu shows **Publish your games** instead, which links to this setting.
 
-Accounts that already owned a project, helped run one as an admin, or held a developer MCP key on September 30, 2026 were switched on automatically.
+Accounts that already owned a project, helped run one as an admin, or held a developer MCP key on September 30, 2026 were switched on automatically. Settings asks them to accept the current terms with **Accept the new terms**, and shows **Turn off developer mode** only after that.
 
 ## What needs it
 
