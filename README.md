@@ -50,6 +50,8 @@ Never commit keys to a repository.
 
 Pull requests for the docs and plugin are welcome. Report bugs in Blazium Games itself, including the MCP servers, at [blazium-games/support](https://github.com/blazium-games/support/issues).
 
+You need Node.js 22 or newer.
+
 ```bash
 npm ci
 npm start                       # docs site at http://localhost:3000/games_docs/
