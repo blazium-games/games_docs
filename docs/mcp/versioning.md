@@ -27,6 +27,15 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer server 1.12:
+
+- Tools, mods and plugins: `asset_type` gains `tool` and `plugin`; `create_game` and `update_game` accept `parent`, `adult` and `indexable`, and `update_game` accepts `asset_type`
+- `update_game_taxonomy` accepts `ai_uses`
+- New tools: `set_mod_settings`, `get_press_kit`, `set_press_kit`, and `hide_community_tag`
+- Signing in and creating developer, project or deploy keys need [developer mode](../developer-mode.md) on the account (`4105`)
+
+Player server 1.12: `suggest_tag`, `list_game_addons`, and `exclude_warnings` and `ai_uses` on `search_catalog`. Adult listings stay out of search and recommendations unless the player opted in.
+
 Developer server 1.11:
 
 - Editions: `list_skus`, `upsert_sku`, and `delete_sku`. `set_game_price` returns `4164` while a listing has editions

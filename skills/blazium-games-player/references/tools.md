@@ -23,14 +23,16 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `get_library` | read | Owned games, refund windows, play time |
 | `get_download_link` | read | 5-minute signed download URL |
 | `get_agent_policy` | read | This agent's spending limit |
-| `search_catalog` | read | Search public games, tools, and assets by text, genres, tags, tone, session length, network mode, players, platform, engine and version, renderer, license, and made-with label (`authorship`) |
+| `search_catalog` | read | Search public games, tools, mods, and assets by text, genres, tags (including community tags), tone, session length, network mode, players, platform, engine and version, renderer, license, made-with label (`authorship`), `ai_uses`, and `exclude_warnings`. Adult listings only appear if the human turned on adult content |
+| `list_game_addons` | read | Mods and plugins, or tools and applications, made for a game (`kind`: `mods`, `tools`, or empty for both); `same_creator` marks the developer's own |
+| `suggest_tag` | write | Suggest a tag for a game the human owns and played for an hour (`4237` before that), or `remove` it; up to 5 per game. Without `tag`, returns their suggestions. Only suggest tags the human chose |
 | `get_shelf` | read | A short curated shelf: `tonight` (short sessions with a healthy, clean build for the human's `os`) or `unheard_of` (recent listings few people have found). The order rotates daily |
 | `get_game_details` | read | One listing: taxonomy, price, files with scan state and checksum, similar titles, ownership |
 | `install_build` | read | License and scan check, checksum, 5-minute download URL, and a `blazium://install/<uid>` hand-off. Uses the channel the human follows unless `channel` is given. Fails unless the file is clean |
 | `launch_game` | read | `blazium://game/<uid>` hand-off link for the launcher |
 | `set_channel` | write | Join (`beta`) or leave (`stable`) a game's beta |
 | `why_should_i_trust_this` | read | Developer, upload provenance, scan history, checksums, and cautions for the current files. Never claims a file is safe |
-| `recommend` | read | Games for right now from `minutes`, `party_size`, `intent`, `like_uid`, and platform. Deterministic; every result has `reasons` citing listing fields. Pass the reasons on instead of inventing your own |
+| `recommend` | read | Listings of one `asset_type` (default `game`) for right now from `minutes`, `party_size`, `intent`, `like_uid`, and platform. Deterministic; every result has `reasons` citing listing fields. Pass the reasons on instead of inventing your own |
 | `why_this` | read | One game against the same inputs: score, reasons, cautions, and the `blockers` that keep it out of `recommend` |
 | `write_review` | write | Create, update, or `delete` the human's review of a game they own: `enjoyed` and `quality` (1-5) are separate, plus `would_play_with_friends` and `text`. Only write what the human said |
 | `taste_feedback` | write | `more_like` true or false for a game, or `clear` |

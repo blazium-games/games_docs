@@ -8,8 +8,8 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `get_setup` | none | account | Account, games, public URLs, and key prefixes. No secrets |
 | `list_games` | none | | Games the user owns or admins, plus pending admin invites |
 | `get_game` | `uid` | | One game's settings and store page fields |
-| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name` | account, write | Create a store page |
-| `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility` | write | Update a store page |
+| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | account, write | Create a store page. Tools, mods and plugins need a `parent`. Needs developer mode on the account (`4105`) |
+| `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | write | Update a store page; only passed fields change. An empty `parent` object clears it |
 | `get_game_analytics` | `uid` | | Visitor analytics: views, unique visitors, countries, actions |
 | `list_game_crashes` | `uid` | | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | | One crash with metadata, analysis, and stack availability |
@@ -38,10 +38,21 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `create_gift_link` | `uid`, `pool`, `note` | write | A single-use redeem link for one person, shown once |
 | `list_key_pools` | `uid` | | Pools with size, redeemed, unredeemed, and gift link counts |
 | `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
-| `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit` | write | Set the taxonomy and the made-with label (`human`, `human_agent`, `agent_heavy`, empty clears; credit up to 120 characters); only passed fields change |
+| `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit`, `ai_uses` | write | Set the taxonomy, the made-with label (`human`, `human_agent`, `agent_heavy`, empty clears; credit up to 120 characters), and the generative AI disclosure (`art`, `audio`, `code`, `text`, `voice`, `runtime`; empty list means none); only passed fields change |
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
 | `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`) | write | Returns the `chauffeur media` commands and image limits (PNG, JPEG, GIF, WebP; 512 to 2048 px, 10 MB). MCP never uploads images |
 | `scan_status` | `uid` | | Virus-scan state and history per build file, and files removed for failing the scan |
+
+## Tools, mods and press
+
+A tool, mod or plugin names the game it is for with `parent` on `create_game` or `update_game`: `{"game": "uid-or-vanity"}` for a listing on Blazium Games, or `{"external_name": "...", "external_url": "https://..."}` for one that isn't. The parent's store page lists it under **Tools and utilities** or **Mods and plugins**.
+
+| Tool | Inputs | Access | What it does |
+|------|--------|--------|--------------|
+| `set_mod_settings` | `uid`, `install_path`, `loader`, `instructions` | write | Mods and plugins only (`4234` otherwise). Relative install path, lowercase loader slug (for example `bepinex`), markdown instructions up to 8000 characters. Replaces all three |
+| `get_press_kit` | `uid` | | The press kit behind the listing's `/press` page and `press.zip` |
+| `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | write | Replace the press kit; omitted fields are cleared. https links only; up to 20 features, awards, links and quotes, and 50 credits |
+| `hide_community_tag` | `uid`, `tag`, `show` | write | Hide a player-suggested tag from the store page, or show it again with `show`. Without `tag`, lists every suggestion with its vote count |
 
 ## Builds, health and editions
 
@@ -90,7 +101,9 @@ Payout setup and cash-out are website-only.
 ## Field values
 
 - `visibility`: `draft`, `invisible`, or `public`
-- `asset_type`: `game`, `application`, `mod`, `game_asset`, or `dev_asset`
+- `asset_type`: `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset`
+- `adult`: marks 18+ content (sexual content or nudity); hidden from search, recommendations and search engines
+- `indexable`: `false` keeps the store page out of search engines and AI crawlers
 - `build_id`: the build UID (for example `004e044e-...`), not a version string
 
 ## Errors
@@ -130,3 +143,7 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4155` | Invalid edition |
 | `4156` | The game already has 8 editions |
 | `4164` | The price comes from the editions; change them with `upsert_sku` |
+| `4105` | Developer mode is off; the human turns it on at blazium.games/settings |
+| `4233` | Invalid parent |
+| `4234` | Invalid mod settings |
+| `4235` | Invalid press kit |

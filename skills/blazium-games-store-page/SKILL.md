@@ -18,7 +18,7 @@ Create and edit the public page at `https://<username>.blazium.games/<vanity_nam
 ## Prerequisites
 
 - The `blazium-games` MCP server is connected with write access
-- Creating a page needs an account-level token (a project-bound token can only edit its own game)
+- Creating a page needs an account-level token (a project-bound token can only edit its own game) and developer mode on the account. `4105` means it's off: the human turns it on at https://blazium.games/settings and accepts the developer terms. Never turn it on for them
 - Going public, setting a price, and uploading need the owner's email verified. Check with `get_account`; if `email_verified` is false, call `request_email_code`, ask the human for the code from their inbox, then call `verify_email`. Updates that set `visibility` to `public` fail with code `4096` until then
 
 ## 1. Find or create
@@ -40,14 +40,19 @@ Call `create_game`:
 | `tagline` | One line |
 | `description` | Markdown |
 | `visibility` | Start with `draft`. Options: `draft`, `invisible`, `public` |
-| `asset_type` | `game`, `application`, `mod`, `game_asset`, or `dev_asset` |
+| `asset_type` | `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset` |
 | `vanity_name` | URL slug, lowercase with dashes |
+| `parent` | Required for `tool`, `mod`, and `plugin`: `{"game": "uid-or-vanity"}` for a listing on Blazium Games, or `{"external_name": "...", "external_url": "https://..."}` for a game that isn't. Ask the user which game it's for |
+| `adult` | `true` only if the user says it has sexual content or nudity. Adult pages are hidden from search, recommendations, and search engines, and need the player's opt-in |
+| `indexable` | `false` keeps the page out of search engines and AI crawlers. Default `true` |
 
 Keep the returned `uid`.
 
 ## 3. Update
 
-Call `update_game` with `uid` and any of `name`, `tagline`, `description`, `visibility`. To polish existing copy, run the `improve_game_copy` prompt with the current description first.
+Call `update_game` with `uid` and any of `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent`. An empty `parent` object clears it. To polish existing copy, run the `improve_game_copy` prompt with the current description first.
+
+For mods and plugins, set how to install them with `set_mod_settings` (`install_path` relative to the game folder, `loader` such as `bepinex`, markdown `instructions`). For press coverage, fill the press kit with `set_press_kit`; it powers the page's `/press` page and `press.zip`. Players can suggest tags; list them with `hide_community_tag` without a `tag`, and hide one only when the user asks.
 
 Before switching to `public`, confirm with the user and make sure the owner is verified. `invisible` keeps the page reachable by link but out of listings.
 
@@ -56,7 +61,7 @@ Before switching to `public`, confirm with the user and make sure the owner is v
 A page can't go public until the listing check passes (`4225` otherwise).
 
 1. Call `validate_listing`. It returns `errors`, `warnings`, and the allowed values.
-2. Fix the taxonomy with `update_game_taxonomy`: at least 3 `tags`; for games also `genres`, `session_bucket`, `players_min`/`players_max`, `net`, and `inputs`; for mods and assets `engines`. Only use values from the check's vocabulary (`4071` otherwise). Ask the user rather than guessing player counts, network mode, or content warnings. Ask whether to set `authorship` (`human`, `human_agent`, or `agent_heavy`) and an optional `authorship_credit`; never pick it for them.
+2. Fix the taxonomy with `update_game_taxonomy`: at least 3 `tags`; for games also `genres`, `session_bucket`, `players_min`/`players_max`, `net`, and `inputs`; for mods and assets `engines`. Only use values from the check's vocabulary (`4071` otherwise). Ask the user rather than guessing player counts, network mode, or content warnings. Ask whether to set `authorship` (`human`, `human_agent`, or `agent_heavy`) and an optional `authorship_credit`; never pick it for them. Ask which parts used generative AI and set `ai_uses` (`art`, `audio`, `code`, `text`, `voice`, `runtime`, or an empty list for none) from their answer. Tools, mods, and plugins also need a `parent`, and plugins an engine.
 3. Images: a cover, a thumbnail, and at least 4 gallery images (PNG, JPEG, GIF or WebP, 512 to 2048 px, up to 10 MB). MCP never uploads images. Give the user the `chauffeur media` commands (`set_media` returns them), for example `chauffeur media cover art/cover.png` and `chauffeur media add shots/*.png`, run with the game's deploy key, or point them to the game's edit page on the website. See https://blazium-games.github.io/games_docs/docs/cli/media
 4. A clean build: ship one with `blazium-games-deploy`, then check `scan_status` until a file is `clean`. If a file is `infected` or `error`, tell the user; it was removed and must be rebuilt and uploaded again.
 5. Optionally `set_similar_games` with up to 10 public titles the user names.
@@ -86,4 +91,7 @@ Videos and changelogs are managed on the website or through builds (`blazium-gam
 ## Docs
 
 - https://blazium-games.github.io/games_docs/docs/listings
+- https://blazium-games.github.io/games_docs/docs/content-rules
+- https://blazium-games.github.io/games_docs/docs/press-kit
+- https://blazium-games.github.io/games_docs/docs/developer-mode
 - https://blazium-games.github.io/games_docs/docs/mcp/reference
