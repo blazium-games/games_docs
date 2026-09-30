@@ -1,7 +1,7 @@
 {
   "name": "blazium-games",
   "displayName": "Blazium Games",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Manage Blazium Games store pages, builds, channels, crash reports, bug tickets, reviews, analytics, and keys from Cursor, and find, review, and buy games as a player. Includes the hosted developer and player MCP servers and skills for store pages, CI deploys, crash reporting, crash debugging, analytics, keys, playing, and purchases.",
   "author": {
     "name": "Blazium Games",

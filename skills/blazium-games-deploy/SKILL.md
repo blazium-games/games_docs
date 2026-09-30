@@ -39,6 +39,8 @@ Call `get_deploy_info` with the game's `uid` or vanity name. It returns (no secr
 
 If the user already has an access token and secret stored in CI, skip this step.
 
+Issuing a key needs developer mode on the account; `4105` means the human must turn it on at https://blazium.games/settings first.
+
 Otherwise **warn first**: `request_deploy_key` immediately invalidates every previous deploy key for that game, which breaks any pipeline still using an old key. After the user confirms, call `request_deploy_key` with the `uid`. It returns `access_token` and `secret_key` once.
 
 Tell the user to store them as CI secrets (for example GitHub Actions secrets `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`) or in their shell environment. Do not write them into files that are committed. Do not repeat them after they are stored, and don't pass the secret with `--secret` (other processes can see it).
@@ -77,6 +79,19 @@ asset:
 
 Set `engine_version` so mods can show whether they work with the build.
 
+### Several apps (dedicated server, editor, launcher)
+
+A project can ship more than one app, each with its own builds and channels. Add an `app` block to both YAML files, or pass `--app server --app-name "Dedicated Server"` to `build`, `addfiles`, `genbuild`, and `setfiles`:
+
+```yaml
+asset:
+  app:
+    id: server
+    name: Dedicated Server
+```
+
+`id` is 1-32 lowercase letters, digits, or dashes; leave the block out for the main app. The store page groups downloads by app, and clean files of a non-main app are stored as `<game>-<app>-<channel>-<os>-<arch>.zip`. A build is only reused within its own app.
+
 Other chauffeur commands:
 
 | Task | Command |
@@ -107,6 +122,7 @@ Use this only when chauffeur can't run.
    - `os`: `windows`, `macos`, `linux`, `android`, `ios`, or `web`
    - `arch`: `x86_64`, `x86`, `arm64`, `arm32`, `arm`, `universal`, `wasm32`, or `wasm`
    - `channel`: lowercase letters, digits, `-`, `_`; starts with a letter or digit; up to 32 characters
+   - `app` (optional, on both calls): the app id for a second app such as a dedicated server, with `app_name` for its display name
 
 3. For large files, open a session first: `POST https://uploader.blazium.online/api/v1/tool/upload/sessions` (same headers, form fields `filename`, `total_size`, `checksum`, `os`, `arch`, `channel`, and `build_id`). The `201` response has `session_id`, `expected_size`, `current_size`, and `expires_at` (6 hours). Send the chunks in order to `/tool/upload/files` as multipart `file` parts with `X-Upload-Session-ID` and `Content-Range: bytes <start>-<end>/<total>`. Each returns `202` until the last one finishes the upload. On an error, resume from its `current_size`.
 

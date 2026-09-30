@@ -42,7 +42,7 @@ Create a player key at [blazium.games/settings/mcp](https://blazium.games/settin
 | Scope | Allows |
 |---|---|
 | `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review, friends and what they're playing |
-| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, taste feedback, bug reports, friend requests, presence and activity sharing |
+| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, tag suggestions, taste feedback, bug reports, friend requests, presence and activity sharing |
 | `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game` |
 
 A route outside this list returns `4033`. A missing `player:buy` returns `4212`; any other missing scope returns `4031`.
@@ -72,7 +72,9 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `get_library` | none | read | Games you own, with refund windows and play time |
 | `get_download_link` | `file_id` | read | 5-minute signed URL for a build file |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
-| `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `authorship`, `sort`, `page`, `page_size` | read | Public games, tools, and assets with a score, scan state, platforms, made-with label, launch-health band, and a short reason for each match. See [Listings and search](../listings.md#search) |
+| `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `exclude_warnings`, `ai_uses`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `authorship`, `sort`, `page`, `page_size` | read | Public games, tools, mods, and assets with a score, scan state, platforms, made-with label, content warnings, AI disclosure, launch-health band, and a short reason for each match. Adult listings appear only if you turned on adult content. See [Listings and search](../listings.md#search) |
+| `list_game_addons` | `uid`, `kind` (`mods`, `tools`, or empty for both), `limit` (1-100) | read | Mods and plugins, or tools and applications, made for a game. `same_creator` marks the ones from the game's own developer |
+| `suggest_tag` | `uid`, `tag`, `remove` | write | Suggests a tag for a game you own and have played for at least an hour (`4237` before that); `remove` withdraws it. Up to 5 per game. Without `tag` it returns your suggestions and whether you may suggest. See [Community tags](../listings.md#community-tags) |
 | `get_shelf` | `kind` (`tonight` or `unheard_of`), `os` | read | A short curated shelf. `tonight` has short-session games with a healthy, clean build for `os`; `unheard_of` has recent listings few people have found. The order rotates daily. See [Shelves](../listings.md#shelves) |
 | `get_game_details` | `uid` | read | Description, taxonomy, price, editions (`skus`), made-with label, launch health, license kind, engine compatibility, what it uses and what uses it, files with scan state and checksum, similar titles, and whether you own it |
 | `install_build` | `uid`, `build_id`, `os`, `arch`, `channel` | read | Checks your license and the virus scan, then returns the file checksum, a 5-minute `download_url`, and a `blazium://install/<uid>` link for the launcher. Uses the channel you follow unless you pass `stable` or `beta`. Refuses any file that isn't `clean` |
@@ -96,7 +98,7 @@ Games list the channels you can join in `get_game_details` (`channels`). A beta 
 
 ## Recommendations
 
-`recommend` gives the same answer for the same inputs; no model picks the games. It only considers public games with a clean build for your platform (when you pass `os`), and skips games you own or already liked unless you pass `include_owned`. Each game is scored in this order:
+`recommend` gives the same answer for the same inputs; no model picks the games. It only considers public listings of one `asset_type` (`game` unless you pass another) with a clean build for your platform (when you pass `os`), leaves out adult listings unless you turned on adult content at [blazium.games/settings](https://blazium.games/settings#adult), and skips games you own or already liked unless you pass `include_owned`. Each game is scored in this order:
 
 1. **Session fit**: its session length (`15m`, `1h`, `3h`, or endless) against the `minutes` you have.
 2. **Friends**: a friend playing it right now, or else friends who own it. Only friends who share their activity count.

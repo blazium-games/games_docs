@@ -17,8 +17,8 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `get_profile` | none | Current user. Account only |
 | `list_games` | none | Games you own or administer, and pending admin invites |
 | `get_game` | `uid` | One game's settings |
-| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name` | New game page. Account only, write |
-| `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility` | Update a page. Setting `public` fails with `4225` until the listing check passes. Write |
+| `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | New store page. Tools, mods and plugins need a `parent` before they can go public. Needs [developer mode](../developer-mode.md) (`4105`). Account only, write |
+| `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | Update a page; only the fields you pass change. Setting `public` fails with `4225` until the listing check passes. An empty `parent` object clears the parent. Write |
 | `get_game_analytics` | `uid` | Visitor analytics |
 | `list_game_crashes` | `uid` | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | One crash report including stack excerpt |
@@ -92,6 +92,17 @@ These show on the store page as **Uses / Used by**, **License** and **Works with
 | `declare_engine_compat` | `uid`, `compat` (up to 10 of `engine`, `min_version`, `max_version`, `renderer`, `platform`) | Replaces the list; an empty list clears it. Either version may be empty to leave that end open, and a `max_version` of `4.3` covers `4.3.x`. Write |
 | `declare_license` | `uid`, `license_kind` | `cc0`, `cc-by`, `cc-by-sa`, `paid`, `source-available`, or `proprietary`; empty clears it. Write |
 
+### Tools, mods and press
+
+A tool, mod or plugin names the game it is for with `parent` on `create_game` or `update_game`: `{"game": "uid-or-vanity"}` for a game or application on Blazium Games, or `{"external_name": "...", "external_url": "https://..."}` for one that isn't. The parent's store page lists it under **Tools and utilities** or **Mods and plugins**. See [Listings and search](../listings.md#parent-games-tools-mods-and-plugins).
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `set_mod_settings` | `uid`, `install_path`, `loader`, `instructions` | Mods and plugins only (`4234` otherwise). `install_path` is relative to the game folder (for example `mods/my-mod`), `loader` a lowercase slug such as `bepinex`, `instructions` markdown up to 8000 characters. Replaces all three. Write |
+| `get_press_kit` | `uid` | The press kit behind the listing's `/press` page and `press.zip` |
+| `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | Replaces the whole press kit; fields you leave out are cleared, so read it with `get_press_kit` first. Links must be https. Up to 20 features, awards, links and quotes, 50 credits. See [Press kit](../press-kit.md). Write |
+| `hide_community_tag` | `uid`, `tag`, `show` | Hides a player-suggested tag from the store page, or shows it again with `show`. Without `tag` it lists every suggestion with its vote count. See [Community tags](../listings.md#community-tags). Write |
+
 ### Game keys
 
 Keys give a game to someone for free, for press, bundles, or giveaways. Each code works once and adds the game to the redeemer's library (a license with source `key`). Players redeem at [blazium.games/redeem](https://blazium.games/redeem) or with `redeem_key` on the player server. Pools can also be managed on the **Game keys** tab of the project page.
@@ -113,7 +124,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 
 | Scope | Covers |
 |-------|--------|
-| `mcp:catalog.write` | Game pages, taxonomy, similar titles, dependencies, engine compatibility, license kind, media, review replies |
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, dependencies, engine compatibility, license kind, media, review replies, mod settings, press kits, community tags |
 | `mcp:build.write` | Builds, channels, deploy info, scan status, symbols, bundle check |
 | `mcp:crash.read` | Crash reports, crash groups, crash analysis, bug tickets, including `update_bug_ticket` |
 | `mcp:analytics.read` | Visitor analytics and events |
@@ -129,7 +140,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 | Tool | Inputs | Notes |
 |------|--------|-------|
 | `validate_listing` | `uid` | Listing check: `ready`, `errors` (block going public), `warnings`, `passes`, plus the current taxonomy and allowed values |
-| `update_game_taxonomy` | `uid` (required), `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit` | Only the fields you pass change. `authorship` is the [made-with label](../listings.md#made-with) (`human`, `human_agent`, `agent_heavy`, or empty to clear) and `authorship_credit` an optional credit line up to 120 characters. Write |
+| `update_game_taxonomy` | `uid` (required), `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit`, `ai_uses` | Only the fields you pass change. `authorship` is the [made-with label](../listings.md#made-with) (`human`, `human_agent`, `agent_heavy`, or empty to clear) and `authorship_credit` an optional credit line up to 120 characters. `ai_uses` is the [generative AI disclosure](../content-rules.md#generative-ai-disclosure) (`art`, `audio`, `code`, `text`, `voice`, `runtime`; an empty list means none). Write |
 | `set_similar_games` | `uid`, `games` (up to 10 uids or vanity names) | Replaces the similar titles; an empty list clears them. Write |
 | `set_media` | `uid`, `kind` (`cover`, `thumbnail`, or `gallery`) | Returns the matching [`chauffeur media`](../cli/media.md) commands and the image limits (PNG, JPEG, GIF, or WebP, 512 to 2048 px per side, up to 10 MB). MCP never uploads images; use chauffeur or the website. Write |
 | `scan_status` | `uid` | Scan state and history of every build file, plus files removed in the last 30 days because their scan failed |
@@ -138,7 +149,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 54 tools instead of 66. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 58 tools instead of 70. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -167,7 +178,9 @@ Cash-out and payout setup are website-only.
 Field values:
 
 - `visibility`: `draft`, `invisible`, or `public`
-- `asset_type`: `game`, `application`, `mod`, `game_asset`, or `dev_asset`
+- `asset_type`: `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset`
+- `adult`: marks 18+ content. See [Content rules](../content-rules.md#adult-content)
+- `indexable`: `false` keeps the store page out of search engines. See [SEO and indexing](../seo-and-indexing.md)
 
 ## Prompts
 
@@ -239,6 +252,13 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4230` | Invalid engine compatibility: engine or renderer not a slug, a version without numbers, or `min_version` above `max_version` (HTTP 422) |
 | `4231` | Unknown license kind (HTTP 422) |
 | `4232` | Invalid key pool request: missing name, more than 50 pools, `n` outside 1 to 5000, or a pool over 100,000 keys (HTTP 422) |
+| `4233` | Invalid parent: not a game or application, the listing itself, a type that can't have a parent, or an external parent without a name and https link (HTTP 422) |
+| `4234` | Invalid mod settings: not a mod or plugin, an absolute or `..` install path, a loader that isn't a slug, or instructions too long (HTTP 422) |
+| `4235` | Invalid press kit: a link that isn't https, a bad email or date, or too many items (HTTP 422) |
+| `4236` | Invalid tag, or the player already suggested 5 tags for this game (HTTP 422) |
+| `4237` | Play the game for at least an hour before suggesting tags (HTTP 403, `play_seconds` and `needed_seconds` in `data`) |
+| `4104` | Adult listing: the viewer hasn't turned on adult content (HTTP 403; signed-out viewers get `4004`) |
+| `4105` | Developer mode is off on this account (HTTP 403) |
 | `4042` | That key or gift link isn't valid (HTTP 404) |
 | `4079` | That key was already redeemed (HTTP 409) |
 | `4084` | The player already has this game; the key stays unused (HTTP 409) |

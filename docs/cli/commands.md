@@ -22,6 +22,7 @@ chauffeur build --asset build.yml [flags]
 |------|---------|
 | `--asset` | Path to build.yml (required) |
 | `--os`, `--arch`, `--channel` | Replace the file's platforms with this one (`--arch` defaults to `x86_64`) |
+| `--app`, `--app-name` | The [app](./configuration.md#apps) the build belongs to, overriding the file. Default: the main app |
 | `--engine-version` | Engine version, like `4.3` or `4.3.0-beta.2` |
 | `--symbols` | A `.sym` file, a folder of `.sym` files, or a `.zip` to upload for the build (needs a single platform) |
 
@@ -43,6 +44,7 @@ chauffeur addfiles --asset addfiles.yml [flags]
 |------|---------|
 | `--asset` | Path to addfiles.yml (required) |
 | `--os`, `--arch`, `--channel` | Override the file's platform |
+| `--app`, `--app-name` | Override the file's [app](./configuration.md#apps) |
 | `--engine-version` | Engine version, used when the build is created |
 | `--symbols` | Symbols to upload for the build after the files |
 
@@ -60,6 +62,7 @@ Write a starter `build.yml` in the current folder.
 |------|---------|
 | `--version` | Build version (default `0.0.1`, up to 32 characters) |
 | `--engine-version` | Engine version |
+| `--app`, `--app-name` | Write this [app](./configuration.md#apps) into the file |
 | `--images` | Folder of gallery images (PNG, JPEG, GIF, WebP) to add to `media.gallery` |
 
 ```bash
@@ -89,6 +92,7 @@ Write a starter `addfiles.yml` in the current folder.
 | `--version` | Default `0.0.1` |
 | `--type` | Build type (default `game`) |
 | `--engine-version` | Engine version |
+| `--app`, `--app-name` | Write this [app](./configuration.md#apps) into the file |
 | `--symbols` | Symbols path to record in the file |
 
 ```bash

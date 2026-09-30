@@ -12,7 +12,7 @@ Uploads go through the [chauffeur CLI](./cli/index.md) or the upload API with th
 
 ## 1. Get deploy keys
 
-Deploy keys are an `access_token` and `secret_key` pair for one game. Get them from the game's edit page on [blazium.games](https://blazium.games), or ask an agent to call the MCP tool `request_deploy_key`.
+Deploy keys are an `access_token` and `secret_key` pair for one game. Get them from the game's edit page on [blazium.games](https://blazium.games), or ask an agent to call the MCP tool `request_deploy_key`. Issuing them needs [developer mode](./developer-mode.md) (`4105`).
 
 :::warning
 
@@ -108,6 +108,7 @@ checksum=<sha256 hex of the zip>, file=@game.zip
 - `channel` is lowercase letters, digits, `-`, and `_`, starting with a letter or digit, up to 32 characters.
 - `checksum` is the SHA-256 of the zip as 64 hex characters (a `sha256:` prefix is accepted).
 - Instead of `build_id`, you can send `build` plus `build_type` and `version`.
+- `app` (and optionally `app_name`) on the registration and the upload targets one [app](./cli/configuration.md#apps) of the project, such as a dedicated server. Leave it out for the main app. A `build_id` of another app is refused.
 - The game owner must have a verified email before files can be uploaded.
 
 ### Chunked uploads
@@ -150,7 +151,7 @@ Sessions survive restarts of the upload service, so a chunk that fails while the
 
 ## Channels
 
-Each channel (`stable`, `beta`, `dev`, or your own lowercase name) points at one build. When an upload passes the virus scan, its channel moves to that build if it's newer. Players see the build each channel points at; `beta` only for players who joined the beta on the store page, and `dev` only for you and your game admins.
+Each channel (`stable`, `beta`, `dev`, or your own lowercase name) points at one build, separately for each [app](./cli/configuration.md#apps) of the project. When an upload passes the virus scan, its channel moves to that build if it's newer. Players see the build each channel points at; `beta` only for players who joined the beta on the store page, and `dev` only for you and your game admins.
 
 On the **Builds** tab of your game you can promote a build to a channel, set an expiry, roll a channel back to its previous build, and see the history. Over MCP use `list_channels`, `promote_build`, and `rollback_channel`. Promoting to `stable` over MCP waits for your approval by email.
 

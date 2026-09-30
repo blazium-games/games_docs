@@ -41,6 +41,8 @@ The player server acts for one player. It sees the account, wallet, and library,
 | Why a game was or wasn't suggested | `why_this` with the same inputs; its `blockers` say what kept it out |
 | Find something specific | `search_catalog` with their constraints (for example `session_bucket: 15m`, `players: 2`, `os: windows`), then `get_game_details` on the best matches. Say why each one fits using `why_short` |
 | "More like this" / "not for me" | `taste_feedback` with `more_like` true or false |
+| Mods or tools for a game | `list_game_addons` with the game's `uid` (`kind: mods` or `tools`) |
+| Tag a game they play | `suggest_tag` with the tag they chose. It needs an hour of play (`4237`); `remove` takes it back |
 | Review a game they own | Ask whether they enjoyed it and, separately, its quality from 1 to 5, then `write_review` with their words. Never write a review they didn't give you |
 | Report a bug | `report_bug` with what happened and how to reproduce it. If they have a crash dump or log, set `include_dump` / `include_log` and upload the file with `PUT` to the returned URL |
 | "What are my friends playing?" | `games_friends_play`; live games come first, then the last 14 days |

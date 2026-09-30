@@ -9,7 +9,7 @@ New to Blazium Games in Cursor? Start with [blazium-games-get-started](skills/bl
 | Skill | Use it to | Key tools |
 |-------|-----------|-----------|
 | [blazium-games-get-started](skills/blazium-games-get-started/SKILL.md) | Connect, verify, and pick a workflow | `get_profile`, `get_setup` |
-| [blazium-games-store-page](skills/blazium-games-store-page/SKILL.md) | Create or edit a store page, set a price or donations | `create_game`, `update_game`, `set_game_price` |
+| [blazium-games-store-page](skills/blazium-games-store-page/SKILL.md) | Create or edit a store page (games, tools, mods, plugins), set a price or donations, fill the press kit | `create_game`, `update_game`, `set_game_price`, `set_press_kit` |
 | [blazium-games-deploy](skills/blazium-games-deploy/SKILL.md) | Ship builds from CI or the CLI | `get_deploy_info`, `request_deploy_key`, `list_game_builds` |
 | [blazium-games-crash-reporting](skills/blazium-games-crash-reporting/SKILL.md) | Send crashes and events from a game | `get_deploy_info`, `list_game_builds`, `get_game_build` |
 | [blazium-games-debug-crash](skills/blazium-games-debug-crash/SKILL.md) | Triage and fix crashes, close bug tickets | `list_crash_groups`, `get_crash`, `request_crash_download`, `update_bug_ticket` |
