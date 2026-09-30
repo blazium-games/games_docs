@@ -125,6 +125,8 @@ filename=game.zip&total_size=<bytes>&checksum=<sha256 hex>&os=windows&arch=x86_6
 
 The `201` response has `session_id`, `expected_size`, `current_size`, and `expires_at` (6 hours). Then send the chunks in order to `/api/v1/tool/upload/files`, each as a multipart `file` part with `X-Upload-Session-ID: <session_id>` and `Content-Range: bytes <start>-<end>/<total_size>`. Each chunk returns `202` with `current_size` until the last one, which finishes the upload like a single request. After a failed chunk, resume from the `current_size` in the error. Each game can have up to 8 open sessions.
 
+Sessions survive restarts of the upload service, so a chunk that fails while the service is being updated can be sent again once it's back. If a chunk gets `4045`, the session has expired or is gone: open a new session and upload from the start. A single request or chunk may take up to 5 minutes plus one second per 512 KB of its size (at most 3 hours) to arrive; use chunks on slow connections.
+
 | Code | Meaning |
 |------|---------|
 | `4020` / `4021` | Missing `X-Access-Token` or `X-Secret-Key` |
@@ -137,8 +139,8 @@ The `201` response has `session_id`, `expected_size`, `current_size`, and `expir
 | `4039` | Build not found; register it first |
 | `4041` | Invalid `checksum`, `os`, `arch`, or `channel`, or the file is not a `.zip` |
 | `4043` | Larger than 5 GB, or larger than the chunk's `Content-Range` (`413`) |
-| `4044` | Missing or invalid `X-Upload-Session-ID` / `Content-Range`, or a chunk that does not continue the session |
-| `4045` | Upload session not found or expired |
+| `4044` | Missing or invalid `X-Upload-Session-ID` / `Content-Range`, or a chunk that does not continue the session or couldn't be written. When the error has `current_size`, resume from there (`400` or `409`) |
+| `4045` | Upload session not found or expired (`404`); open a new session |
 | `4046` | Checksum mismatch |
 | `4047` | Another chunk for the same session is still uploading (`409`) |
 | `4048` | The file record couldn't be created; try again (`500`) |

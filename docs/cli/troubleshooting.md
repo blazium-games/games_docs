@@ -35,8 +35,8 @@ With `--json` the same information is in `code`, `error` and `hint`.
 | `4038` / `4039` | The build is missing or belongs to another game | Pass the `build_id` printed by `chauffeur build` for this game |
 | `4041` | Invalid `os`, `arch`, `channel`, checksum or file name | See [platform values](./configuration.md#platform-values); build files must be `.zip` |
 | `4043` | Too large | 5 GB per build file, 512 MB per symbol file, 1 GB per symbol upload |
-| `4044` | A chunk doesn't continue the upload | chauffeur resumes on its own; if it keeps failing, run the command again |
-| `4045` | The upload session expired (6 hours) or wasn't found | Run the command again |
+| `4044` | A chunk doesn't continue the upload, or the server couldn't write it | chauffeur resumes from the server's position on its own; if it keeps failing, run the command again |
+| `4045` | The upload session expired (6 hours) or wasn't found | chauffeur opens a new session and uploads the file again, up to 3 times; if it still fails, run the command again |
 | `4046` | Checksum mismatch | Make sure nothing writes to the files during the upload, then retry |
 | `4047` | Another chunk of the same upload is still in progress | Don't run the same upload twice at once; retry when the first finishes |
 | `4049` | Not a Breakpad `.sym` file, or a `.zip` with other files | See [Symbols](./symbols.md) |
@@ -56,6 +56,8 @@ With `--json` the same information is in `code`, `error` and `hint`.
 **`os "darwin" is not supported`.** Update chauffeur; `darwin`, `amd64` and `aarch64` are accepted as `macos`, `x86_64` and `arm64`.
 
 **Uploads through a proxy.** chauffeur honours `HTTPS_PROXY` and `NO_PROXY`. A proxy that buffers whole requests may time out on large chunks; exempt `uploader.blazium.online` if you can.
+
+**An upload failed while the upload service was being updated.** Chunked upload sessions survive restarts of the service. chauffeur retries failed chunks with backoff and carries on from where the server stopped, so a large upload usually finishes on its own. If it gave up, run the same command again.
 
 **A file stays `pending` or `scanning`.** Scans usually finish within minutes, longer for multi-GB files. Check the Builds tab or `chauffeur builds list`. An `infected` or `error` result removes the file and lists it under **Rejected uploads**.
 
