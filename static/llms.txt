@@ -1,0 +1,38 @@
+# Blazium Games
+
+> Blazium Games is the platform for playing and publishing games, applications, mods, and assets.
+
+## The platform
+
+- [Blazium Games](https://blazium.games/): Play and publish games, applications, mods, and assets.
+- [Introduction](https://blazium-games.github.io/games_docs/docs/intro): What the platform is and where to start.
+
+## MCP and the player server
+
+- [MCP](https://blazium-games.github.io/games_docs/docs/mcp): The developer server for pages, builds, analytics, and keys. A token belongs to this server or the player server, not both.
+- [Player MCP](https://blazium-games.github.io/games_docs/docs/mcp/player): The player server for search, reviews, friends, installs, and purchases. Buys go here.
+
+## Listings
+
+- [Listings](https://blazium-games.github.io/games_docs/docs/listings): Taxonomy, the listing check, image sizes, search, and shelves.
+
+## Payments
+
+- [Payments](https://blazium-games.github.io/games_docs/docs/payments): Selling, buying, the balance, cash-outs, and refunds.
+
+## Deploy and crash reporting
+
+- [Deploy builds](https://blazium-games.github.io/games_docs/docs/deploy): Upload builds and symbols from CI.
+- [Crash reporting](https://blazium-games.github.io/games_docs/docs/crash-reporting): Crashes and events from a game.
+
+## SEO and discovery
+
+- [SEO and indexing](https://blazium-games.github.io/games_docs/docs/seo-and-indexing): What may be indexed, sitemaps, and share titles.
+- [Discovery files](https://blazium-games.github.io/games_docs/docs/discovery): robots.txt, sitemaps, security.txt, the API catalog, and llms.txt.
+
+## Legal and support
+
+- [Privacy Policy](https://blazium.games/privacy-policy): What is collected and how accounts are deleted.
+- [Terms of Service](https://blazium.games/terms-of-service): Terms for using Blazium Games.
+- [Support](https://blazium.games/support): How to get help.
+- [Service status](https://status.blazium.games/): Current status and incidents.

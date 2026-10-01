@@ -26,8 +26,8 @@ Create and edit the public page at `https://<username>.blazium.games/<vanity_nam
 1. Call `list_games`. If a game matches the user's project, use its `uid` and go to step 3 (Update).
 2. Otherwise draft copy. Use the `draft_game_page` prompt with a short `pitch`, or write:
    - `name`
-   - `tagline`: one line
-   - `description`: markdown, two short paragraphs, facts only
+   - `tagline`: one factual line. This is the share-card description on Discord, X, and Google. Do not put private contacts, keys, or unreleased URLs in it
+   - `description`: markdown, two short paragraphs, facts only. Its first plain line is the share description when there is no tagline
 3. Confirm the copy with the user.
 
 ## 2. Create
@@ -62,7 +62,7 @@ A page can't go public until the listing check passes (`4225` otherwise).
 
 1. Call `validate_listing`. It returns `errors`, `warnings`, and the allowed values.
 2. Fix the taxonomy with `update_game_taxonomy`: at least 3 `tags`; for games also `genres`, `session_bucket`, `players_min`/`players_max`, `net`, and `inputs`; for mods and assets `engines`. Only use values from the check's vocabulary (`4071` otherwise). Ask the user rather than guessing player counts, network mode, or content warnings. Ask whether to set `authorship` (`human`, `human_agent`, or `agent_heavy`) and an optional `authorship_credit`; never pick it for them. Ask which parts used generative AI and set `ai_uses` (`art`, `audio`, `code`, `text`, `voice`, `runtime`, or an empty list for none) from their answer. Tools, mods, and plugins also need a `parent`, and plugins an engine.
-3. Images: a cover (1024x576 to 2048x1152, 16:9, 8 MB), a thumbnail (960x540 to 1920x1080, 16:9, 5 MB), and at least 4 screenshots (1280x720 to 2048x1152, 16:9, 10 MB). PNG, JPEG, GIF or WebP, read from the file. MCP never uploads images. Give the user the `chauffeur media` commands (`set_media` returns them), for example `chauffeur media cover art/cover.png` and `chauffeur media add shots/*.png`, run with the game's deploy key, or point them to the game's edit page on the website. See https://blazium-games.github.io/games_docs/docs/cli/media
+3. Images: PNG, JPEG, GIF, or WebP, sniffed from the file bytes. Wide images need width/height between 1.70 and 1.85. Recommended, and the accepted range: thumbnail 1280x720 (960x540 to 1920x1080, 5 MB), cover 1024x576 (1024x576 to 2048x1152, 8 MB), screenshot 1920x1080 (1280x720 to 2048x1152, 10 MB). A public page needs a cover, a thumbnail, and 4 to 20 screenshots. Add at most 10 at a time. A game can change images 60 times an hour. The account avatar is uploaded on the settings page, not here. MCP never uploads images. Give the user the `chauffeur media` commands (`set_media` returns them), for example `chauffeur media cover art/cover.png` and `chauffeur media add shots/*.png`, run with the game's deploy key, or point them to the game's edit page on the website. See https://blazium-games.github.io/games_docs/docs/cli/media
 4. A clean build: ship one with `blazium-games-deploy`, then check `scan_status` until a file is `clean`. If a file is `infected` or `error`, tell the user; it was removed and must be rebuilt and uploaded again.
 5. Optionally `set_similar_games` with up to 10 public titles the user names.
 6. Call `validate_listing` again; when `ready` is true, set `visibility` to `public`.
@@ -93,5 +93,6 @@ Videos and changelogs are managed on the website or through builds (`blazium-gam
 - https://blazium-games.github.io/games_docs/docs/listings
 - https://blazium-games.github.io/games_docs/docs/content-rules
 - https://blazium-games.github.io/games_docs/docs/press-kit
+- https://blazium-games.github.io/games_docs/docs/seo-and-indexing
 - https://blazium-games.github.io/games_docs/docs/developer-mode
 - https://blazium-games.github.io/games_docs/docs/mcp/reference

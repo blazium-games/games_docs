@@ -4,7 +4,13 @@ sidebar_position: 1
 
 # Introduction
 
-This is the documentation for [Blazium Games](https://blazium.games), the store and developer platform for games, applications, mods, and game assets.
+This is the documentation for [Blazium Games](https://blazium.games). Blazium Games is the platform for playing and publishing games, applications, mods, and assets.
+
+## The platform
+
+Players browse the catalog, keep a library, and use the desktop app on Windows and Linux. Publishers host a profile and a page for each project, with a press kit and lists of mods and tools.
+
+The files crawlers and agents read — robots.txt, sitemaps, security.txt, the API catalog, and llms.txt — are listed in [Discovery files](./discovery.md).
 
 ## Start here
 

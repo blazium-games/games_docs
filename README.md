@@ -1,5 +1,7 @@
 # Blazium Games for Cursor
 
+Blazium Games is the platform for playing and publishing games, applications, mods, and assets.
+
 The official Blazium Games plugin for Cursor, and the source of the [Blazium Games documentation](https://blazium-games.github.io/games_docs/).
 
 The plugin teaches Cursor how to use [Blazium Games](https://blazium.games): create and edit store pages, ship builds from CI, wire up crash reporting, debug crashes, read analytics, and manage keys through the hosted developer MCP server, and find, review, and buy games through the player MCP server.

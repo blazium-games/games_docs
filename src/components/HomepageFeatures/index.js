@@ -10,8 +10,8 @@ const FeatureList = [
     to: '/docs/graphical_assets_guidelines',
     description: (
       <>
-        Publish games, applications, mods, and assets on blazium.games, with
-        guidelines for every image on your page.
+        Play and publish games, applications, mods, and assets on blazium.games,
+        with guidelines for every image on a project page.
       </>
     ),
   },

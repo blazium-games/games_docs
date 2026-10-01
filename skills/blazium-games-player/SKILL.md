@@ -37,6 +37,7 @@ The player server acts for one player. It sees the account, wallet, and library,
 |---|---|
 | Buy, donate, or top up | [purchases](../blazium-games-purchases/SKILL.md) |
 | See what they own | `get_library` |
+| Something to play, and they haven't said what | `get_shelf` with `tonight`, or `unheard_of` when they want something new, before a wide `recommend` |
 | Something to play right now | `recommend` with what they told you (`minutes`, `party_size`, `intent` in their words, `like_uid`, `os`). Give each pick with its `reasons` and `cautions`; don't add reasons of your own. If the results are empty, relay the `hint` and ask for one more constraint |
 | Why a game was or wasn't suggested | `why_this` with the same inputs; its `blockers` say what kept it out |
 | Find something specific | `search_catalog` with their constraints (for example `session_bucket: 15m`, `players: 2`, `os: windows`), then `get_game_details` on the best matches. Say why each one fits using `why_short` |
@@ -48,8 +49,9 @@ The player server acts for one player. It sees the account, wallet, and library,
 | "What are my friends playing?" | `games_friends_play`; live games come first, then the last 14 days |
 | Add or answer a friend | `send_friend_request` with the username they gave you, or `list_friends` then `respond_friend_request`. Only send requests the human asked for |
 | Redeem a key or gift link | `redeem_key` with the code or link they gave you. `4084` means they already own it and the key is still unused |
-| Install a game they own or a free game | `install_build`, then give them the `blazium://install/<uid>` link. If it fails because the scan isn't clean, don't offer another way to download that file |
-| Play a game | `launch_game`, then give them the `blazium://game/<uid>` link |
+| Install a game they own or a free game | `why_should_i_trust_this` first. Pass its facts on, and do not call a file safe. Then `install_build` and give them the `blazium://install/<uid>` link. If it fails because the scan isn't clean, don't offer another way to download that file |
+| Join or leave a beta | `set_channel` (`beta` or `stable`), then `install_build` |
+| Play a game | `launch_game`, then give them the `blazium://game/<uid>` link. The desktop app is Windows and Linux. Hand over the link; do not fetch the installer unless they ask |
 | Download a game they own or a free game | Step 5 (Download) of [purchases](../blazium-games-purchases/SKILL.md) |
 
 ## Errors

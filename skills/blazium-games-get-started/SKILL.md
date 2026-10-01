@@ -1,12 +1,28 @@
 ---
 name: blazium-games-get-started
-description: Connect Cursor to the hosted Blazium Games MCP server, confirm the connection, and route to the right Blazium Games skill. Use when the user mentions Blazium Games for the first time, asks how to connect, or is unsure where to start.
+description: Connect Cursor to Blazium Games and route to the right skill. Blazium Games is the platform for playing and publishing games, applications, mods, and assets. The developer server (mcp.blazium.games/mcp) publishes pages, builds, crashes, analytics, and keys. The player server (mcp.blazium.games/player) finds, reviews, installs, and buys. Use when the user mentions Blazium Games for the first time, asks how to connect, or is unsure whether they want to play or publish.
 license: MIT
 ---
 
 # Blazium Games: Get Started
 
-Connect to the hosted Blazium Games MCP server at `https://mcp.blazium.games/mcp`, verify the account, and hand off to the skill that matches the user's goal.
+Blazium Games is the platform for playing and publishing games, applications, mods, and assets. A token belongs to one server:
+
+- Developer server `https://mcp.blazium.games/mcp` (`blazium-games`, keys `bgames_mcp_`): pages, builds, crashes, analytics, and keys. Needs developer mode.
+- Player server `https://mcp.blazium.games/player` (`blazium-games-player`, keys `bgames_play_`): find, review, install, and buy. Works for every account.
+
+Never send a player token to the developer server, or a developer token to the player server. Verify the account, then hand off to the skill that matches the user's goal.
+
+## Read this first
+
+Use these instead of browsing the website. Signed-in pages do not have facts the tools already return.
+
+- Docs map: https://blazium-games.github.io/games_docs/llms.txt
+- Platform map: https://blazium.games/llms.txt
+- One project's public facts: `https://<username>.blazium.games/<vanity_name>/llms.txt`
+- Developer server card: https://mcp.blazium.games/.well-known/mcp/server-card.json
+- Player server card: https://mcp.blazium.games/.well-known/mcp/player-server-card.json
+- Which files exist, and which do not: https://blazium-games.github.io/games_docs/docs/discovery
 
 ## Invoke This Skill When
 
