@@ -11,7 +11,7 @@ description: Account versus project access, project keys and admins, read-only t
 Account access (an account key, or OAuth with **Account**) reaches every project you own or administer. Project access (your project key, or OAuth with one project) reaches only that project:
 
 - `list_games` and `blazium-games://games` return only that project.
-- Account-only tools return `403` with code `4030`: `get_profile`, `get_setup`, `list_mcp_keys`, `request_mcp_key`, `create_game`, `get_account`, `request_email_code`, `verify_email`, `get_approval`, `confirm_approval`, the deprecated wallet, purchase, and library tools, and the `blazium-games://me`, `wallet`, and `library` resources.
+- Account-only tools return `403` with code `4030`: `get_profile`, `get_setup`, `list_mcp_keys`, `request_mcp_key`, `create_game`, `get_account`, `request_email_code`, `verify_email`, `set_timezone`, `get_approval`, `confirm_approval`, the deprecated wallet, purchase, and library tools, and the `blazium-games://me`, `wallet`, and `library` resources.
 - Everything else for that project works: page details and updates, analytics, crashes, bug tickets, reviews, builds, channels, deploy info, key pools, and `request_deploy_key`. Calls for any other game return `4030`.
 - Approvals requested with a project token are approved from the owner's email, since the token can't call `get_approval` or `confirm_approval`.
 

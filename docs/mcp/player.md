@@ -55,9 +55,11 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 
 | Tool | Inputs | Scope | Notes |
 |------|--------|-------|-------|
-| `get_account` | none | read | Email verification, balances, and what the account may do |
+| `get_account` | none | read | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open (`legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`, `gate`) |
 | `request_email_code` | none | write | Emails a verification code to you |
 | `verify_email` | `code` | write | Verifies your email with the code |
+| `set_timezone` | `timezone` | write | Sets your IANA timezone, replacing the saved one. The agent uses your zone, not the machine it is running on |
+| `get_security_status` | none | read | Whether an authenticator app protects your account, and how many recovery codes are left |
 | `get_wallet` | none | read | Credit, pending, and available balances plus fee and refund rules |
 | `list_wallet_transactions` | `limit` (1-200), `before` | read | Ledger entries, newest first |
 | `get_payment_options` | none | read | Card top-up and x402 USDC networks with fees |

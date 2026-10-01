@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/x-api-disclosure
 
 # X API Disclosure
 
-**Effective Date: September 26, 2026**
+**Effective Date: September 30, 2026**
 
 Blazium Games uses the X API only to link X to your account and let you log in with it.
 This page explains what we access and the commitments we make about it.
@@ -27,8 +27,8 @@ We do not request `offline.access`, so X gives us no refresh token.
 ## How we use it
 
 - **Account linking:** when you are signed in and link X at [Linked accounts](https://blazium.games/settings/connections), we attach your X user ID to your account.
-- **Sign-in:** we look for the account your X user ID is linked to. Signing in never links X or creates an account.
-- **No pre-filling:** we do not copy your X name, username, or avatar into your profile or the setup form.
+- **Sign-in:** we look for the account your X user ID is linked to. If it is linked, you confirm your password and then an authenticator code or an emailed code. X does not provide an email, so a new sign-in asks you to choose a username, email, and password and confirm that inbox before the account is created and X is linked.
+- **No pre-filling:** we do not copy your X name, username, or avatar. You type the email yourself.
 
 That is the only use. We make one X API request per link or sign-in and none after that.
 

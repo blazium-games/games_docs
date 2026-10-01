@@ -76,9 +76,11 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 
 | Tool | Inputs | Access | What it does |
 |------|--------|--------|--------------|
-| `get_account` | none | account | Email verification, balances, and what the account may do (publish, upload, download, buy) |
+| `get_account` | none | account | Email verification, timezone, balances, what the account may do (publish, upload, download, buy), and open website sign-in steps (`gate`, `legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`) |
 | `request_email_code` | none | account, write | Email a verification code to the human |
 | `verify_email` | `code` | account, write | Verify the email with the code the human read from their inbox |
+| `set_timezone` | `timezone` | account, write | Replace the saved timezone with the human's IANA name, when it is empty or the human asks. Do not send the timezone of the machine running the agent. Unknown names: `4085` |
+| `get_security_status` | none | account, read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Changes happen only on the website |
 | `get_wallet` | none | account | Credit, pending, and available balances with fee, refund, and cash-out rules. **Deprecated** |
 | `list_wallet_transactions` | `limit` (1-200, default 50), `before` | account | Ledger entries, newest first. **Deprecated** |
 | `get_payment_options` | none | account | Card top-up link option and x402 USDC networks with fees. **Deprecated** |
@@ -123,6 +125,7 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4093` | The game doesn't accept donations |
 | `4006` | Build not found |
 | `4096` | Email not verified; use `request_email_code` and `verify_email` |
+| `4085` | Not an IANA timezone name |
 | `4020` | Not enough balance; top up first |
 | `4221` | No billing address for tax; top up by card once or buy on the website |
 | `4023` | Buy the game before downloading it |
