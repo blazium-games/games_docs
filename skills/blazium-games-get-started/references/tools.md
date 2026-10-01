@@ -40,7 +40,7 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `validate_listing` | `uid` | | Listing check (errors block going public), current taxonomy, and allowed values |
 | `update_game_taxonomy` | `uid`, `genres`, `tags`, `tone`, `inputs`, `content_warnings`, `engines`, `session_bucket`, `net`, `players_min`, `players_max`, `authorship`, `authorship_credit`, `ai_uses` | write | Set the taxonomy, the made-with label (`human`, `human_agent`, `agent_heavy`, empty clears; credit up to 120 characters), and the generative AI disclosure (`art`, `audio`, `code`, `text`, `voice`, `runtime`; empty list means none); only passed fields change |
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
-| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`) | write | Returns the `chauffeur media` commands and image limits (PNG, JPEG, GIF, WebP). Thumbnail 960x540 to 1920x1080, 16:9, 5 MB. Cover 1024x576 to 2048x1152, 16:9, 8 MB. Screenshot 1280x720 to 2048x1152, 16:9, 10 MB. Avatar 256x256 to 512x512, square, 2 MB. MCP never uploads images |
+| `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`) | write | Returns the `chauffeur media` commands and image limits (PNG, JPEG, GIF, WebP, sniffed from the file). Wide images need width/height between 1.70 and 1.85. Thumbnail 1280x720 recommended, 960x540 to 1920x1080, 5 MB. Cover 1024x576 recommended, 1024x576 to 2048x1152, 8 MB. Screenshot 1920x1080 recommended, 1280x720 to 2048x1152, 10 MB. Avatar 256x256 to 512x512, square (0.95 to 1.05), 2 MB, on the account settings page. MCP never uploads images |
 | `scan_status` | `uid` | | Virus-scan state and history per build file, and files removed for failing the scan |
 
 ## Tools, mods and press

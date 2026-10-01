@@ -8,7 +8,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Blazium Games Docs',
-  tagline: 'Store pages, MCP, the Cursor plugin, deploys, and crash reporting for Blazium Games',
+  tagline: 'Blazium Games is the platform for playing and publishing games, applications, mods, and assets.',
   favicon: 'img/favicon.ico',
 
   future: {

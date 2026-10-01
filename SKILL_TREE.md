@@ -1,8 +1,10 @@
 # Blazium Games Skill Tree
 
+Blazium Games is the platform for playing and publishing games, applications, mods, and assets. A token belongs to one server: `blazium-games` (developer, `https://mcp.blazium.games/mcp`, keys `bgames_mcp_`) publishes pages, builds, crashes, analytics, and keys. `blazium-games-player` (player, `https://mcp.blazium.games/player`, keys `bgames_play_`) finds, reviews, installs, and buys.
+
 ## Start Here
 
-New to Blazium Games in Cursor? Start with [blazium-games-get-started](skills/blazium-games-get-started/SKILL.md). It connects the MCP server, verifies your account, and routes you to the right skill. The plugin ships two servers: `blazium-games` (developer, `https://mcp.blazium.games/mcp`) and `blazium-games-player` (player, `https://mcp.blazium.games/player`).
+New to Blazium Games in Cursor? Start with [blazium-games-get-started](skills/blazium-games-get-started/SKILL.md). It connects the right server, verifies the account, and routes to the skill that matches the goal.
 
 ## Skills
 
