@@ -91,7 +91,7 @@ Changing a page to `public` runs the listing check. If anything in the errors co
 | At least 1 engine | mods, plugins, game assets, dev assets | error |
 | A parent game | tools, mods, plugins | error |
 | At least 4 gallery images | all | error |
-| A cover image and a thumbnail (not the placeholder) | all | error |
+| A cover image (1024x576 to 2048x1152, 16:9) and a thumbnail (960x540 to 1920x1080, 16:9) | all | error |
 | At least one build that passed the virus scan | all | error |
 | A tagline | all | warning |
 | Similar titles | all | warning |
