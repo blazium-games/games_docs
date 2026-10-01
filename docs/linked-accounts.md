@@ -10,9 +10,12 @@ Linking is managed at [Settings > Linked accounts](https://blazium.games/setting
 
 ## Before you start
 
-- Linking does not create a Blazium Games account. [Create one with email](https://blazium.games/signup) first, then link.
+- Signing in with GitHub, X, or Discord does not open a session by itself. You finish with your Blazium Games password and a second step.
+- If that service is already linked, you enter your password. With an authenticator app set up, you enter its current code (a recovery code works once). Without one, we email a code immediately, and you can send another 30 seconds later.
+- If it is not linked, and GitHub or Discord gives a verified email that already belongs to an account, you enter that account's password. A match links the service, then you do the second step. A wrong password links nothing and creates nothing.
+- If it is not linked and there is no matching verified email, you choose a username, email, and password, confirm a code sent to that inbox, then set up an authenticator app or skip it and confirm another emailed code. The account and the link are created only after the inbox code matches. X does not provide an email, so that path always starts with the email you type.
 - Each GitHub, X, or Discord account can be linked to only one Blazium Games account.
-- Only a linked account can log in. We never match a GitHub, X, or Discord account to yours by email.
+- Linking from Settings, while you are already signed in, only attaches the service. It does not create an account.
 
 ## Link an account
 
@@ -28,10 +31,11 @@ A provider marked **Not available** can't be linked.
 
 1. On the [Log in](https://blazium.games/login) page, or in the header when you are logged out, click **GitHub**, **X**, or **Discord**.
 2. Approve Blazium Games on the other service if it asks.
-3. If this browser has not verified a sign-in code before, we email you a code. Enter it to finish logging in. A browser that has verified a code is remembered for 30 days.
+3. Enter your Blazium Games password. If the service is not linked yet and its verified email matches an account, that password links it. Otherwise you set a username, email, and password and confirm the code we email.
+4. If an authenticator app is set up, enter its current code. If you skip setup, or none is recorded, enter the code we email. You can ask for another code 30 seconds after the last one.
 
-If your account is already set up, logging in takes you straight to where you were going. It never sends you to account setup and never pre-fills anything from GitHub, X, or Discord.
-Only an account that never finished setup is asked to complete it after logging in.
+A browser that has verified an emailed code is remembered for 30 days for email-and-password sign-in when no authenticator app is set up. It does not skip the password, an authenticator code, or the second step of a GitHub, X, or Discord sign-in. Authenticator setup, recovery codes, and what happens after sign-in are in [Account security and sign-in](./account-security.md).
+A verified email from GitHub or Discord can be shown on the create form and is compared with existing accounts. It is not saved on its own, and we do not copy your name or avatar. X does not provide an email.
 
 ## Unlink an account
 
@@ -53,8 +57,9 @@ Revoking there does not unlink the account here. Unlink it at [Linked accounts](
 
 ## What we store
 
-For each linked account we keep only its user ID and username, so it can log in and the settings page can show which one is linked.
-We never store access tokens, and we never store or use an email address from these services.
+For each linked account we keep its user ID and username, so it can log in and the settings page can show which one is linked.
+A verified email from GitHub or Discord is compared while you sign in and is not saved on its own. X does not provide an email.
+We never store access tokens, and we do not copy your name or avatar.
 
 The details for each service:
 
@@ -69,7 +74,7 @@ Deleting your Blazium Games account unlinks all of them. See the [Privacy Policy
 
 | Message | What it means | What to do |
 | --- | --- | --- |
-| No Blazium Games account is linked to this *Name* account. Sign in and link it under Settings > Linked accounts. | You tried to log in with an account that is not linked, or that you unlinked. | Log in with your email and password, then link the account. |
+| Confirm your password, or choose a username, email, and password | The service is not linked yet. A verified GitHub or Discord email that matches an account asks for that password. Anything else, including X, asks you to finish a new account. | Enter the matching password, or complete the new account and the emailed code. |
 | This *Name* account is linked to another Blazium Games user | The account is already linked to a different Blazium Games account. | Log in to that other account and unlink it there, then try again. |
 | Set a password or link another account before unlinking *Name* | It is the only way to log in to an account with no password. | Set a password in Settings, or link another account, then unlink. |
 | Missing or invalid OAuth state | The link or login took longer than 15 minutes, or the page was reused or opened in another browser. | Start again from the Link or login button. |

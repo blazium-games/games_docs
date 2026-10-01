@@ -27,6 +27,13 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer and player servers 1.13:
+
+- New tools: `set_timezone` (sets the human's IANA timezone; `4085` for an unknown name) and `get_security_status` (authenticator on, skipped, or not chosen, and recovery codes left)
+- `get_account` returns `legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`, and `gate`. Agents send the human to the website to finish those steps (see [Account security](../account-security.md#for-agents-mcp))
+- `set_media` returns a structured `limits` object for the slot it was asked about (thumbnail, cover, or screenshots with `max_images`)
+- Signing in to approve an agent uses its own `__Host-BG_MCP` cookie on mcp.blazium.games, signed by the MCP server
+
 Developer server 1.12:
 
 - Tools, mods and plugins: `asset_type` gains `tool` and `plugin`; `create_game` and `update_game` accept `parent`, `adult` and `indexable`, and `update_game` accepts `asset_type`

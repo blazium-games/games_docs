@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/permissions
 
 # Permissions & Scopes
 
-**Effective Date: September 28, 2026**
+**Effective Date: September 30, 2026**
 
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
 It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), and [Discord](./discord-api-disclosure.md).
@@ -19,12 +19,13 @@ For step-by-step instructions, see the [Linked accounts and sign-in](../linked-a
 
 You can link GitHub, X, and Discord from [Linked accounts](https://blazium.games/settings/connections) and then use any of them to log in.
 
-- Only a linked account can log in. We never match a GitHub, X, or Discord account to yours by email, and signing in never links an account for you.
+- Signing in with GitHub, X, or Discord always continues on Blazium Games. A provider proof alone does not log you in.
+- If the service is already linked, you enter your password, then an authenticator code if you have set one up, or an emailed code if you have not. You can send another emailed code 30 seconds after the last one. A remembered browser does not skip this step.
+- If it is not linked and a verified GitHub or Discord email matches an existing account, you enter that account's password. A match links the service. A wrong password links nothing and creates nothing.
+- If it is not linked and there is no matching verified email, you set a username, email, and password, confirm a code sent to that inbox, then set up an authenticator app or skip it and confirm another emailed code. X does not provide an email, so that path always starts with the email you type. The account is created only after the inbox code matches.
+- Linking while you are already signed in, at Linked accounts, only attaches the service. It does not create an account.
 - Once you unlink an account, it can no longer be used to log in.
 - If your account has no password, you must keep at least one account linked.
-- Linking does not create a Blazium Games account. Create one with email first.
-- After a linked account proves who you are, we still email you a sign-in code unless you have already verified that browser.
-- If your account is already set up, signing in never sends you to account setup and never pre-fills anything from GitHub, X, or Discord.
 
 ## GitHub
 
@@ -32,7 +33,7 @@ Scopes requested: `read:user` and `user:email`.
 
 ### Why we need it
 - To link GitHub to your account and let you log in with it.
-- We read your GitHub user ID, login, and your primary verified email address. GitHub must report a verified email or sign-in and linking stop; we do not store the email or use it to find your account.
+- We read your GitHub user ID, login, and your primary email address. A verified email is compared with existing accounts during sign-in and can be shown on the create form. We do not store it on its own. If GitHub does not report a verified email, you type an email instead. Sign-in and linking still continue.
 
 ### What we store
 - Your GitHub user ID and login, so we can recognize the linked account and show which one is linked.
@@ -70,11 +71,11 @@ Scopes requested: `identify` and `email`.
 
 ### Why we need it
 - To link Discord to your account and let you log in with it.
-- We make one request to Discord's `/users/@me` and read your Discord user ID and username.
+- We make one request to Discord's `/users/@me` and read your Discord user ID and username. If Discord marks your email verified, we compare it during sign-in and do not store it on its own. An unverified or missing email is ignored.
 
 ### What we store
 - Your Discord user ID and username. Nothing else.
-- Discord includes your email address, display name, and avatar in its reply. We ignore them: we do not store your Discord email or use it to find your account.
+- Discord includes your email address, display name, and avatar in its reply. We do not store the email, and we do not copy the display name or avatar. A verified email is compared during sign-in only.
 - The Discord access token is used once during sign-in or linking and is never stored.
 
 ### We will never
@@ -145,16 +146,23 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 
 ## Cookies
 
-Sign-in cookies are always on because the site does not work without them. They are HTTPS-only, hidden from page scripts, and `SameSite=Lax`, so other sites can't make signed-in requests with them. Analytics cookies are only set if you accept them in the cookie banner.
+Sign-in cookies are always on because the site does not work without them. They are HTTPS-only, hidden from page scripts, and `SameSite=Lax`, so other sites can't make signed-in requests with them. Cookies whose names start with `__Host-` belong to the exact host that set them: no other blazium.games site, including people's profile and project sites, can read or replace them. Analytics cookies are only set if you accept them in the cookie banner.
 
 | Cookie | Purpose | Lifetime | Needs consent |
 | --- | --- | --- | --- |
-| `BG_T` | Your signed-in session. | 7 days | No |
-| `BG_UD` | Your display name, username, and avatar for the header. | 7 days | No |
-| `BG_DEV` | Remembers a browser that verified an emailed sign-in code. Survives logout. | 30 days | No |
-| `BG_NEXT` | Returns you to the page you came from after logging in with GitHub, X, or Discord. | 15 minutes | No |
-| `BG_SETUP` | Finishes setup for an account that never completed it, after logging in with a linked account. | 15 minutes | No |
+| `__Host-BG_T` | Your signed-in session on blazium.games. | 7 days | No |
+| `__Host-BG_UD` | Your display name, username, and avatar for the header. | 7 days | No |
+| `__Host-BG_STORE` | A separate session for store pages on other blazium.games hosts. It can buy and use your library, but cannot change account settings. It is handed over through a one-time code that works once, for 60 seconds. | 7 days | No |
+| `__Host-BG_CSRF` | A random value that every form on the site must echo back, so another site cannot submit forms as you. | 7 days | No |
+| `__Host-BG_DEV` | Remembers a browser that verified an emailed sign-in code, for email-and-password sign-in when no authenticator app is set up. Survives logout. It does not skip an authenticator code. | 30 days | No |
+| `__Host-BG_NEXT` | Returns you to the page you came from after logging in with GitHub, X, or Discord. | 15 minutes | No |
+| `__Host-BG_STATE` | Ties a GitHub, X, or Discord sign-in to the browser that started it. | 15 minutes | No |
+| `__Host-BG_SETUP` | Finishes setup for an email account that has not completed it. | 15 minutes | No |
+| `__Host-BG_ENROLL` | Carries a sign-in until you finish your password and a second step. | 15 minutes | No |
+| `__Host-BG_FACTOR` | Finishes authenticator setup, then shows recovery codes once. | 15 minutes | No |
+| `BG_IN` | Tells other blazium.games hosts that you are signed in, so store pages know to fetch their own session. It is set for the whole blazium.games domain and holds no credential. | 7 days | No |
 | `BG_CONSENT` | Remembers your cookie banner choice. | 1 year | No |
+| `__Host-BG_MCP` | On mcp.blazium.games only: a pass that lets you approve an AI agent's access. It can only read your account and project list, is signed by the MCP server, and is not your blazium.games session. Signing out of blazium.games ends it. | 7 days | No |
 | `_ga`, `_ga_*` | Google Analytics. | Up to 2 years (set by Google) | Yes |
 
 Game pages also keep a visit session ID in your browser's session storage. It is cleared when you close the tab.

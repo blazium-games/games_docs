@@ -149,13 +149,15 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 58 tools instead of 70. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 60 tools instead of 72. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
-| `get_account` | none | Email verification, balances, and what the account may do. Account only |
+| `get_account` | none | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open: `legal_acceptance_required` (with `legal_changes`), `setup_required`, `authenticator` (`on`, `skipped`, or `not_chosen`), and `gate` (empty when none). Send the human to blazium.games/account/finish for an open step; never accept terms, finish setup, or set up or skip an authenticator for them. Account only |
 | `request_email_code` | none | Emails a verification code to the account owner. Account only, write |
 | `verify_email` | `code` | Verifies the email with the code the human received. Account only, write |
+| `set_timezone` | `timezone` | Replaces the saved timezone with the human's IANA name. Call it when `get_account` timezone is empty or the human asks to change it. Do not send the machine's timezone. Unknown names return `4085`. Account only, write |
+| `get_security_status` | none | Whether an authenticator app protects the account: `state` (`on`, `skipped`, or `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Setting up or turning off an authenticator happens only on the website. Account only, read |
 | `get_wallet` | none | Credit, pending, and available balances plus fee and refund rules. Account only. **Deprecated** |
 | `list_wallet_transactions` | `limit` (1-200), `before` | Ledger entries, newest first. Account only. **Deprecated** |
 | `get_payment_options` | none | Card top-up and x402 USDC networks with fees. Account only. **Deprecated** |
@@ -220,6 +222,7 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4033` | This route isn't available to this server's tokens (for example a player token on a developer route) |
 | `4006` | Build not found |
 | `4096` | The account email is not verified |
+| `4085` | `set_timezone` got a name that isn't an IANA timezone |
 | `4020` | Not enough balance; top up first |
 | `4221` | No billing address for tax; top up by card once or buy on the website |
 | `4023` | Buy the game before downloading it |

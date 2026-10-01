@@ -20,6 +20,10 @@ The canonical versions of these pages live on blazium.games. The copies here are
 
 For how to link, log in with, and unlink GitHub, X, and Discord, see the [Linked accounts and sign-in](../linked-accounts.md) guide.
 
+## When these pages change
+
+Each page has a version date. You accept the Terms of Service and Privacy Policy when you sign up. When either changes, you are asked to accept the new version the next time you sign in, after your second sign-in step, with a short summary of what changed and a link to the full text. You can't use your account on the website until you accept or log out, though connected agents and MCP keys keep working. The other pages here don't need acceptance. See [Account security and sign-in](../account-security.md#after-you-sign-in).
+
 ## Contacts
 
 - Privacy questions and account deletion: [privacy@blazium.games](mailto:privacy@blazium.games). Deletion requests are processed within 30 days.

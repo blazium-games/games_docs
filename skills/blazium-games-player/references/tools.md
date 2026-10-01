@@ -6,9 +6,11 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 
 | Tool | Scope | Purpose |
 |------|-------|---------|
-| `get_account` | read | Email verification, balances, and what the account may do |
+| `get_account` | read | Email verification, timezone, balances, what the account may do, and open website sign-in steps (`gate`, `legal_acceptance_required`, `setup_required`, `authenticator`) |
 | `request_email_code` | write | Email a verification code to the human |
 | `verify_email` | write | Verify the email with the human's code |
+| `set_timezone` | write | Replace the saved timezone with the human's IANA name, when `get_account` timezone is empty or the human asks. Do not use the agent's machine timezone. Unknown names: `4085` |
+| `get_security_status` | read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `recovery_codes_left`, and `email_code_alternative`. Changes happen only on the website |
 | `get_wallet` | read | Balances plus fee and refund rules |
 | `list_wallet_transactions` | read | Ledger entries, newest first |
 | `get_payment_options` | read | Card and x402 USDC top-up options with fees |
