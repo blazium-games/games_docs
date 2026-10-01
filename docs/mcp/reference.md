@@ -19,7 +19,7 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `get_game` | `uid` | One game's settings |
 | `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | New store page. Tools, mods and plugins need a `parent` before they can go public. Needs [developer mode](../developer-mode.md) (`4105`). Account only, write |
 | `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | Update a page; only the fields you pass change. Setting `public` fails with `4225` until the listing check passes. An empty `parent` object clears the parent. Write |
-| `get_game_analytics` | `uid` | Visitor analytics |
+| `get_game_analytics` | `uid` | Visitor analytics and the 30-day `downloads` block (see [Download analytics](../download-analytics.md)) |
 | `list_game_crashes` | `uid` | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | One crash report including stack excerpt |
 | `request_crash_download` | `uid`, `crash_id`, `kind` | Private download URL for `dump`, `log`, or `stack`, valid for 1 hour |
