@@ -32,6 +32,11 @@ Summarize store page traffic for one game.
 | `country_breakdown.countries[]` | `country`, `count`, `percent` |
 | `per_game[]` | Visitors and actions per game |
 | `actions[]` | Tracked actions such as visits and downloads |
+| `downloads.total` | Downloads that went through in the last 30 days |
+| `downloads.anonymous` | Downloads with no account (anonymous downloads on) |
+| `downloads.by_source[]` | `website`, `asset_library` (Godot or Blazium editor), `api`, `mcp_player`, `mcp_dev` |
+| `downloads.by_access[]` | `anonymous`, `owner`, `free`, `purchase`, `grant`, `key`, `bundle` |
+| `downloads.by_outcome[]` | Every attempt, including refusals such as `sign_in_required` and `payment_required` |
 
 Analytics are aggregate. Individual visitors are not identifiable through the MCP.
 
@@ -42,6 +47,7 @@ Report in a few sentences:
 - Views and unique visitors
 - Top three countries with percentages
 - Notable actions (for example downloads compared with views)
+- Downloads by source, and refusals worth fixing (many `payment_required` or `sign_in_required` attempts from the editor asset library, for example)
 - One suggestion, such as improving the tagline if views are high but downloads are low
 
 For crash trends, use `blazium-games-debug-crash` instead.

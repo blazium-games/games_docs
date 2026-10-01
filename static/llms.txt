@@ -20,6 +20,13 @@
 
 - [Payments](https://blazium-games.github.io/games_docs/docs/payments): Selling, buying, the balance, cash-outs, and refunds.
 
+## Public API and the editor asset library
+
+- [Public API reference](https://blazium-games.github.io/games_docs/docs/api-reference): Authentication, the envelope, error codes, and rate limits. OpenAPI 3.1 at https://api.blazium.online/api/v1/public/openapi.json.
+- [Editor asset library](https://blazium-games.github.io/games_docs/docs/editor-asset-library): The Godot and Blazium AssetLib repository URL, https://api.blazium.online/api/v1/public/asset-library, with optional player sign-in.
+- [Anonymous downloads](https://blazium-games.github.io/games_docs/docs/anonymous-downloads): Downloading free projects without an account, and its trade-offs.
+- [Download analytics](https://blazium-games.github.io/games_docs/docs/download-analytics): Download sources, access, clients, outcomes, and what is recorded.
+
 ## Deploy and crash reporting
 
 - [Deploy builds](https://blazium-games.github.io/games_docs/docs/deploy): Upload builds and symbols from CI.

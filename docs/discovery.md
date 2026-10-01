@@ -55,7 +55,7 @@ The public site does not serve a Markdown twin of every page. The docs map above
 
 ## Developer discovery
 
-`https://blazium.games/.well-known/api-catalog` is an [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727) linkset (`application/linkset+json`). It links only to documents that already exist:
+`https://blazium.games/.well-known/api-catalog` is an [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727) linkset (`application/linkset+json`). It links to these documents:
 
 - Docs: [https://blazium-games.github.io/games_docs/](https://blazium-games.github.io/games_docs/)
 - Status: [https://status.blazium.games/](https://status.blazium.games/)
@@ -63,13 +63,15 @@ The public site does not serve a Markdown twin of every page. The docs map above
 - Developer server card: [https://mcp.blazium.games/.well-known/mcp/server-card.json](https://mcp.blazium.games/.well-known/mcp/server-card.json)
 - Player server card: [https://mcp.blazium.games/.well-known/mcp/player-server-card.json](https://mcp.blazium.games/.well-known/mcp/player-server-card.json)
 - OAuth protected-resource metadata (RFC 9728) for [the developer server](https://mcp.blazium.games/.well-known/oauth-protected-resource/mcp) and [the player server](https://mcp.blazium.games/.well-known/oauth-protected-resource/player)
+- The public API's OpenAPI 3.1 description, as the `service-desc` of `https://api.blazium.online/api/v1/public/`: [JSON](https://api.blazium.online/api/v1/public/openapi.json) and [YAML](https://api.blazium.online/api/v1/public/openapi.yaml). Its `service-doc` is the [public API reference](./api-reference.md).
+- The [editor asset library](./editor-asset-library.md) repository URL: `https://api.blazium.online/api/v1/public/asset-library`
 - Public JSON: [search](https://api.blazium.online/api/v1/public/search) and [sitemap](https://api.blazium.online/api/v1/public/sitemap)
 
 Indexable store pages publish `VideoGame` or `SoftwareApplication` JSON-LD. Profiles publish `ProfilePage` and `Person`.
 
 ## Files this site does not publish
 
-- **OpenAPI or AsyncAPI.** The public API is described in these docs and in `llms.txt`. The API catalog has no `service-desc` link, because there is no specification document to point at.
+- **AsyncAPI.** The website's live updates are not a public interface. The public HTTP API has an [OpenAPI description](./api-reference.md). Signed-in account routes are left out of it; agents use the MCP servers, which publish server cards.
 - **ads.txt.** Blazium Games does not sell ad inventory.
 - **Apple or Android association files.** The desktop app is a Windows and Linux download, not a mobile app.
 - **ai.txt, identity.json, an A2A agent card, or an empty agent card.** Agents call the MCP servers, and those servers already publish server cards. An empty card would claim a protocol this site does not serve.
