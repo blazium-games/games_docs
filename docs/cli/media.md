@@ -13,10 +13,13 @@ description: Upload and arrange a game's cover, thumbnail and gallery with chauf
 | Rule | Value |
 |------|-------|
 | Formats | PNG, JPEG, GIF, WebP. The type is read from the file's contents, not its extension |
-| Size | 512 to 2048 pixels per side |
-| File size | Up to 10 MB |
-| Gallery | Up to 20 images; up to 10 per `media add` |
+| Thumbnail | 960x540 to 1920x1080, 16:9, up to 5 MB. 1280x720 recommended |
+| Cover | 1024x576 to 2048x1152, 16:9, up to 8 MB. 1024x576 recommended |
+| Screenshot | 1280x720 to 2048x1152, 16:9, up to 10 MB. 1920x1080 recommended |
+| Gallery | Up to 20 screenshots; up to 10 per `media add` |
 | Changes | Up to 60 image changes per game per hour |
+
+16:9 means the width divided by the height is between 1.70 and 1.85. The account avatar is a separate upload: 256x256 to 512x512, square (0.95 to 1.05), up to 2 MB.
 
 chauffeur checks the format and size locally before uploading.
 
@@ -63,7 +66,7 @@ The cover and thumbnail replace the current ones; gallery images are appended.
 | Code | Meaning |
 |------|---------|
 | `4150` | Invalid request; `kind` must be `cover`, `thumbnail` or `gallery` |
-| `4151` | Not a PNG, JPEG, GIF or WebP, outside 512 to 2048 px, or over 10 MB |
+| `4151` | Not a PNG, JPEG, GIF or WebP, or outside that slot's size, shape or file size |
 | `4152` | The gallery already has 20 images; delete one first |
 | `4153` | A public listing needs its cover and thumbnail; replace them instead |
 | `4154` | The order doesn't list every gallery uid exactly once |
