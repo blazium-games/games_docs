@@ -1,7 +1,7 @@
 ---
 title: Listings and search
 sidebar_position: 2
-description: Listing types, parent games for tools, mods and plugins, taxonomy fields, community tags, the listing check that must pass before a page goes public, build scan states, similar titles, links to other stores, and how players and agents search the catalog.
+description: Listing types, who can see draft and owner pages, parent games for tools, mods and plugins, taxonomy fields, community tags, the listing check that must pass before a page goes public, build scan states, similar titles, links to other stores, and how players and agents search the catalog.
 ---
 
 # Listings and search
@@ -23,6 +23,19 @@ Pick the type on the **Settings** tab of the edit page, or pass `asset_type` to 
 | `plugin` | Extends a game or engine without changing its content | Required to go public |
 | `game_asset` | Art, audio or other content for making games | None |
 | `dev_asset` | Code, shaders, plugins for engines and other development assets | None |
+
+## Visibility
+
+Every new project starts as a draft. Change it on the **Settings** tab, or pass `visibility` to `create_game` or `update_game`.
+
+| Visibility | Who can open the store page |
+|---|---|
+| `draft` | You and the project's admins who accepted their invite |
+| `owner` | Only you. Admins still see the project in their dashboard and can edit it |
+| `invisible` | Anyone with the link. It stays out of search, browse and the sitemap |
+| `public` | Everyone. It needs the [listing check](#listing-check) to pass |
+
+Draft and owner pages show a notice saying who can see them, ask search engines not to index them, and can't be bought. Everyone else gets "not found", the same answer as for a page that doesn't exist.
 
 ## Parent games, tools, mods and plugins
 

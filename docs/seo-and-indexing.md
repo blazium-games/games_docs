@@ -12,7 +12,7 @@ Search engines and AI crawlers may index a store page when all of these are true
 - It isn't marked [adult](./content-rules.md#adult-content).
 - **Let search engines and AI crawlers index this page** is ticked on the **Settings** tab (on by default), or `indexable` is `true` over the API or MCP.
 
-The Settings tab says whether the page can be indexed right now. Other pages still reach the listing through links; turning indexing off only asks crawlers to stay away. To hide a listing from people too, make it `invisible` or `draft`.
+The Settings tab says whether the page can be indexed right now. Other pages still reach the listing through links; turning indexing off only asks crawlers to stay away. To hide a listing from people too, make it `invisible`, `draft` or `owner` (see [visibility](./listings.md#visibility)).
 
 ## What changes when a page isn't indexable
 
