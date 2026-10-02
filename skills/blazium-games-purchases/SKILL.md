@@ -102,5 +102,5 @@ Top-ups add a processing fee (shown by `get_payment_options`). Credit can be spe
 
 ## Docs
 
-- https://blazium-games.github.io/games_docs/docs/payments/agent-purchases
-- https://blazium-games.github.io/games_docs/docs/payments/top-up
+- https://docs.blazium.games/docs/payments/agent-purchases
+- https://docs.blazium.games/docs/payments/top-up

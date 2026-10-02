@@ -9,7 +9,7 @@ The server at `https://mcp.blazium.games/mcp` accepts OAuth 2.1 access tokens or
 - Scopes: `mcp:read`, `mcp:write`, and the narrower `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, `mcp:money`
 - Access tokens last 1 hour. Refresh tokens rotate on every use, so the client renews silently, but the sign-in still ends 30 days after it started
 - Each refresh token works once. Reusing a spent one revokes the whole sign-in; the user then reconnects
-- Details: https://blazium-games.github.io/games_docs/docs/mcp/oauth
+- Details: https://docs.blazium.games/docs/mcp/oauth
 
 On the consent page the user picks:
 

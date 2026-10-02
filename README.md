@@ -2,7 +2,7 @@
 
 Blazium Games is the platform for playing and publishing games, applications, mods, and assets.
 
-The official Blazium Games plugin for Cursor, and the source of the [Blazium Games documentation](https://blazium-games.github.io/games_docs/).
+The official Blazium Games plugin for Cursor, and the source of the [Blazium Games documentation](https://docs.blazium.games/).
 
 The plugin teaches Cursor how to use [Blazium Games](https://blazium.games): create and edit store pages, ship builds from CI, wire up crash reporting, debug crashes, read analytics, and manage keys through the hosted developer MCP server, and find, review, and buy games through the player MCP server.
 
@@ -12,11 +12,11 @@ Add `blazium-games/games_docs` from **Cursor Settings > Plugins**, then enable *
 
 The first time the agent uses a Blazium Games tool, Cursor opens a browser for the Blazium Games sign-in and consent page. No key is stored in the plugin.
 
-Full guide: [Cursor plugin docs](https://blazium-games.github.io/games_docs/docs/cursor-plugin).
+Full guide: [Cursor plugin docs](https://docs.blazium.games/docs/cursor-plugin).
 
 ## What's included
 
-- The hosted [Blazium Games MCP server](https://blazium-games.github.io/games_docs/docs/mcp) at `https://mcp.blazium.games/mcp` and the [player server](https://blazium-games.github.io/games_docs/docs/mcp/player) at `https://mcp.blazium.games/player` ([mcp.json](mcp.json)).
+- The hosted [Blazium Games MCP server](https://docs.blazium.games/docs/mcp) at `https://mcp.blazium.games/mcp` and the [player server](https://docs.blazium.games/docs/mcp/player) at `https://mcp.blazium.games/player` ([mcp.json](mcp.json)).
 - Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 
 | Skill | What it does |
@@ -34,7 +34,7 @@ Full guide: [Cursor plugin docs](https://blazium-games.github.io/games_docs/docs
 ## Authentication
 
 - **OAuth (default):** choose your whole account or a single project on the consent page, and a preset such as **CI**, **Crash triage**, or **Read-only**. The player server has its own consent with `player:read`, `player:write`, and `player:buy`.
-- **API key:** for headless use, create a key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) and send it as `Authorization: Bearer bgames_mcp_...`. See [Access and keys](https://blazium-games.github.io/games_docs/docs/mcp/access-and-keys).
+- **API key:** for headless use, create a key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) and send it as `Authorization: Bearer bgames_mcp_...`. See [Access and keys](https://docs.blazium.games/docs/mcp/access-and-keys).
 
 Never commit keys to a repository.
 
@@ -56,7 +56,7 @@ You need Node.js 22 or newer.
 
 ```bash
 npm ci
-npm start                       # docs site at http://localhost:3000/games_docs/
+npm start                       # docs site at http://localhost:3000/
 npm run build                   # production build; fails on broken links
 node scripts/check-plugin.mjs   # plugin check (add --offline to skip the live server card)
 ```

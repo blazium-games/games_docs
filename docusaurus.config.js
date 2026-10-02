@@ -15,8 +15,8 @@ const config = {
     v4: true,
   },
 
-  url: 'https://blazium-games.github.io',
-  baseUrl: '/games_docs/',
+  url: 'https://docs.blazium.games',
+  baseUrl: '/',
 
   organizationName: 'blazium-games',
   projectName: 'games_docs',

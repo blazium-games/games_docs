@@ -17,12 +17,12 @@ Never send a player token to the developer server, or a developer token to the p
 
 Use these instead of browsing the website. Signed-in pages do not have facts the tools already return.
 
-- Docs map: https://blazium-games.github.io/games_docs/llms.txt
+- Docs map: https://docs.blazium.games/llms.txt
 - Platform map: https://blazium.games/llms.txt
 - One project's public facts: `https://<username>.blazium.games/<vanity_name>/llms.txt`
 - Developer server card: https://mcp.blazium.games/.well-known/mcp/server-card.json
 - Player server card: https://mcp.blazium.games/.well-known/mcp/player-server-card.json
-- Which files exist, and which do not: https://blazium-games.github.io/games_docs/docs/discovery
+- Which files exist, and which do not: https://docs.blazium.games/docs/discovery
 
 ## Invoke This Skill When
 
@@ -94,4 +94,4 @@ If OAuth is not possible (headless CI, remote agents), use an API key instead. S
 - [references/resources.md](references/resources.md): `blazium-games://` resources and templates
 - [references/prompts.md](references/prompts.md): server prompts
 - [references/auth.md](references/auth.md): OAuth, API keys, scopes, and project binding
-- Full docs: https://blazium-games.github.io/games_docs/docs/mcp
+- Full docs: https://docs.blazium.games/docs/mcp

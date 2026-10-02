@@ -72,4 +72,4 @@ The player server acts for one player. It sees the account, wallet, and library,
 ## References
 
 - [Tools](./references/tools.md)
-- https://blazium-games.github.io/games_docs/docs/mcp/player
+- https://docs.blazium.games/docs/mcp/player

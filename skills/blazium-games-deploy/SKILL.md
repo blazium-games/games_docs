@@ -101,7 +101,7 @@ Other chauffeur commands:
 | List builds, files, and symbol counts | `chauffeur builds list` |
 | Machine-readable output | Add `--json`; exit codes are 0 ok, 1 usage, 2 API error, 3 network |
 
-Errors print the API code with a hint. See https://blazium-games.github.io/games_docs/docs/cli/troubleshooting
+Errors print the API code with a hint. See https://docs.blazium.games/docs/cli/troubleshooting
 
 ## 3b. Upload API directly
 
@@ -173,7 +173,7 @@ jobs:
           ./chauffeur addfiles --asset addfiles.yml --symbols ./symbols
 ```
 
-`build.yml` must use the tag's version without the `v`. For several platforms use a matrix, and for GitLab CI see https://blazium-games.github.io/games_docs/docs/cli/ci
+`build.yml` must use the tag's version without the `v`. For several platforms use a matrix, and for GitLab CI see https://docs.blazium.games/docs/cli/ci
 
 ## 5. Hand off to crash reporting
 
@@ -181,5 +181,5 @@ Give the new `build_id` to the crash reporter as `X-Build-Id`: in Blazium Engine
 
 ## Docs
 
-- https://blazium-games.github.io/games_docs/docs/deploy
-- https://blazium-games.github.io/games_docs/docs/cli
+- https://docs.blazium.games/docs/deploy
+- https://docs.blazium.games/docs/cli

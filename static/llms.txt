@@ -5,37 +5,37 @@
 ## The platform
 
 - [Blazium Games](https://blazium.games/): Play and publish games, applications, mods, and assets.
-- [Introduction](https://blazium-games.github.io/games_docs/docs/intro): What the platform is and where to start.
+- [Introduction](https://docs.blazium.games/docs/intro): What the platform is and where to start.
 
 ## MCP and the player server
 
-- [MCP](https://blazium-games.github.io/games_docs/docs/mcp): The developer server for pages, builds, analytics, and keys. A token belongs to this server or the player server, not both.
-- [Player MCP](https://blazium-games.github.io/games_docs/docs/mcp/player): The player server for search, reviews, friends, installs, and purchases. Buys go here.
+- [MCP](https://docs.blazium.games/docs/mcp): The developer server for pages, builds, analytics, and keys. A token belongs to this server or the player server, not both.
+- [Player MCP](https://docs.blazium.games/docs/mcp/player): The player server for search, reviews, friends, installs, and purchases. Buys go here.
 
 ## Listings
 
-- [Listings](https://blazium-games.github.io/games_docs/docs/listings): Taxonomy, the listing check, image sizes, search, and shelves.
+- [Listings](https://docs.blazium.games/docs/listings): Taxonomy, the listing check, image sizes, search, and shelves.
 
 ## Payments
 
-- [Payments](https://blazium-games.github.io/games_docs/docs/payments): Selling, buying, the balance, cash-outs, and refunds.
+- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs, and refunds.
 
 ## Public API and the editor asset library
 
-- [Public API reference](https://blazium-games.github.io/games_docs/docs/api-reference): Authentication, the envelope, error codes, and rate limits. OpenAPI 3.1 at https://api.blazium.online/api/v1/public/openapi.json.
-- [Editor asset library](https://blazium-games.github.io/games_docs/docs/editor-asset-library): The Godot and Blazium AssetLib repository URL, https://api.blazium.online/api/v1/public/asset-library, with optional player sign-in.
-- [Anonymous downloads](https://blazium-games.github.io/games_docs/docs/anonymous-downloads): Downloading free projects without an account, and its trade-offs.
-- [Download analytics](https://blazium-games.github.io/games_docs/docs/download-analytics): Download sources, access, clients, outcomes, and what is recorded.
+- [Public API reference](https://docs.blazium.games/docs/api-reference): Authentication, the envelope, error codes, and rate limits. OpenAPI 3.1 at https://api.blazium.online/api/v1/public/openapi.json.
+- [Editor asset library](https://docs.blazium.games/docs/editor-asset-library): The Godot and Blazium AssetLib repository URL, https://api.blazium.online/api/v1/public/asset-library, with optional player sign-in.
+- [Anonymous downloads](https://docs.blazium.games/docs/anonymous-downloads): Downloading free projects without an account, and its trade-offs.
+- [Download analytics](https://docs.blazium.games/docs/download-analytics): Download sources, access, clients, outcomes, and what is recorded.
 
 ## Deploy and crash reporting
 
-- [Deploy builds](https://blazium-games.github.io/games_docs/docs/deploy): Upload builds and symbols from CI.
-- [Crash reporting](https://blazium-games.github.io/games_docs/docs/crash-reporting): Crashes and events from a game.
+- [Deploy builds](https://docs.blazium.games/docs/deploy): Upload builds and symbols from CI.
+- [Crash reporting](https://docs.blazium.games/docs/crash-reporting): Crashes and events from a game.
 
 ## SEO and discovery
 
-- [SEO and indexing](https://blazium-games.github.io/games_docs/docs/seo-and-indexing): What may be indexed, sitemaps, and share titles.
-- [Discovery files](https://blazium-games.github.io/games_docs/docs/discovery): robots.txt, sitemaps, security.txt, the API catalog, and llms.txt.
+- [SEO and indexing](https://docs.blazium.games/docs/seo-and-indexing): What may be indexed, sitemaps, and share titles.
+- [Discovery files](https://docs.blazium.games/docs/discovery): robots.txt, sitemaps, security.txt, the API catalog, and llms.txt.
 
 ## Legal and support
 

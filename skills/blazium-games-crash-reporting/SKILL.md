@@ -92,7 +92,7 @@ Every game should send the six standard events so its builds get a launch health
 
 Send them to the events endpoint below with the same random per-install `device_uid` on every event (store it in `user://`). Clamp `ms` and `seconds` to their ranges: one invalid standard event refuses the whole request with `4158`.
 
-For Blazium and Godot, add an autoload (for example `res://autoload/blazium_events.gd`, registered in Project Settings > Autoload) that sends `session_start` in `_ready`, `boot_ok` after the first processed frame, `first_input` from `_input` once, and `session_end` on `NOTIFICATION_WM_CLOSE_REQUEST`, and exposes a `quit_game()` that sends `quit` and `session_end` before quitting. A complete script is in https://blazium-games.github.io/games_docs/docs/crash-reporting#standard-events. Use the same `app_id` and `build_id` as the crash reporter. For other engines, send the same events at the same moments.
+For Blazium and Godot, add an autoload (for example `res://autoload/blazium_events.gd`, registered in Project Settings > Autoload) that sends `session_start` in `_ready`, `boot_ok` after the first processed frame, `first_input` from `_input` once, and `session_end` on `NOTIFICATION_WM_CLOSE_REQUEST`, and exposes a `quit_game()` that sends `quit` and `session_end` before quitting. A complete script is in https://docs.blazium.games/docs/crash-reporting#standard-events. Use the same `app_id` and `build_id` as the crash reporter. For other engines, send the same events at the same moments.
 
 Ask before adding them if the game has no privacy policy or the user needs player consent for telemetry.
 
@@ -117,7 +117,7 @@ Stacks from minidumps only show addresses until Breakpad symbols are uploaded fo
 2. Make `.sym` files: `cargo install dump_syms`, then `dump_syms <pdb|binary|dSYM> > symbols/<name>.sym`.
 3. Upload: `chauffeur symbols --build-id <build_id> symbols/`, or `--symbols symbols/` on `chauffeur addfiles`. `upload_symbols_info` returns the exact command.
 
-Check with `list_build_symbols`. Details: https://blazium-games.github.io/games_docs/docs/cli/symbols
+Check with `list_build_symbols`. Details: https://docs.blazium.games/docs/cli/symbols
 
 ## 6. Verify
 
@@ -130,4 +130,4 @@ If nothing arrives, check that `X-Build-Id` belongs to this game (`get_game_buil
 
 ## Docs
 
-https://blazium-games.github.io/games_docs/docs/crash-reporting
+https://docs.blazium.games/docs/crash-reporting
