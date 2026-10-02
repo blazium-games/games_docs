@@ -72,4 +72,4 @@ If the dump has no symbols, say so and suggest exporting with debug symbols for 
 
 ## Docs
 
-https://blazium-games.github.io/games_docs/docs/crash-reporting#reading-crashes
+https://docs.blazium.games/docs/crash-reporting#reading-crashes

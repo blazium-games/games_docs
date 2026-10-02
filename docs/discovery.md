@@ -47,7 +47,7 @@ These files are maps. They do not replace `robots.txt` or the sitemaps.
 - `https://blazium.games/llms.txt` describes the platform, its APIs, and its MCP servers.
 - `https://<you>.blazium.games/llms.txt` lists that developer's indexable listings.
 - `https://<you>.blazium.games/<game>/llms.txt` summarizes one indexable listing.
-- [https://blazium-games.github.io/games_docs/llms.txt](https://blazium-games.github.io/games_docs/llms.txt) is a short map of these docs.
+- [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt) is a short map of these docs.
 
 There is no training opt-out file. Public pages stay allowed for every user-agent. Naming training crawlers, or publishing a Content-Signal or a text-and-data-mining reservation, would be a separate decision.
 
@@ -57,7 +57,7 @@ The public site does not serve a Markdown twin of every page. The docs map above
 
 `https://blazium.games/.well-known/api-catalog` is an [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727) linkset (`application/linkset+json`). It links to these documents:
 
-- Docs: [https://blazium-games.github.io/games_docs/](https://blazium-games.github.io/games_docs/)
+- Docs: [https://docs.blazium.games/](https://docs.blazium.games/)
 - Status: [https://status.blazium.games/](https://status.blazium.games/)
 - [https://blazium.games/llms.txt](https://blazium.games/llms.txt)
 - Developer server card: [https://mcp.blazium.games/.well-known/mcp/server-card.json](https://mcp.blazium.games/.well-known/mcp/server-card.json)

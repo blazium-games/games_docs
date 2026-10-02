@@ -74,5 +74,5 @@ If the user approved the connection with **Read-only access**, the token only ha
 
 ## Docs
 
-- https://blazium-games.github.io/games_docs/docs/mcp/access-and-keys
-- Permissions, scopes, and error codes: https://blazium-games.github.io/games_docs/docs/legal/permissions
+- https://docs.blazium.games/docs/mcp/access-and-keys
+- Permissions, scopes, and error codes: https://docs.blazium.games/docs/legal/permissions
