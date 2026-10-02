@@ -12,7 +12,15 @@ Signing in to [blazium.games](https://blazium.games) takes two steps: your passw
 
 - 10 to 128 characters. A password that matches your email or username is refused.
 - Passwords that have appeared in known data breaches are refused. Only the first 5 characters of the password's SHA-1 hash leave our servers for that check (the [Have I Been Pwned](https://haveibeenpwned.com/Passwords) range API), never the password itself.
-- Change it at [Settings](https://blazium.games/settings). If you forget it, use **Forgot password** on the login page.
+- Change it at [Settings > Password](https://blazium.games/settings/password). If you forget it, use **Forgot password** on the login page.
+
+### Changing or setting a password
+
+1. Open [Settings > Password](https://blazium.games/settings/password).
+2. Enter your current password and the new one. If the account has no password yet (some accounts made through GitHub, X, or Discord), the page says **Set a password** and asks only for the new one.
+3. Choose **Email me a code**, then enter the 6-digit code we email you, valid for 10 minutes, and choose **Save password**.
+
+Saving signs out every session, including the one you used, so log in again with the new password.
 
 ### Resetting a forgotten password
 
@@ -20,7 +28,7 @@ Signing in to [blazium.games](https://blazium.games) takes two steps: your passw
 2. We email a 6-digit password reset code, valid for 10 minutes. Enter it on the same page, or open **Reset your password** in the email, which takes you back to that page with your email filled in.
 3. Choose a new password and select **Reset password**. Your other sessions are signed out.
 
-The page answers the same way whether or not the email has an account, so it never reveals who has one. Accounts that only sign in through GitHub, X, or Discord and never set a password don't get a code. If no code arrives, check your spam folder for mail from noreply@blazium.games, then use **Send a new code**. A code meant for a password reset doesn't work as a sign-in code.
+The page answers the same way whether or not the email has an account, so it never reveals who has one. An account that only signed in through GitHub, X, or Discord and never had a password gets a code too; the reset sets its first password. If no code arrives, check your spam folder for mail from noreply@blazium.games, then use **Send a new code**. A code meant for a password reset doesn't work as a sign-in code.
 
 ## After you sign in
 

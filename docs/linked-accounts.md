@@ -43,7 +43,7 @@ A verified email from GitHub or Discord can be shown on the create form and is c
 2. Click **Unlink** next to the account.
 
 Once unlinked, that account can no longer be used to log in.
-If your Blazium Games account has no password, you cannot unlink the last linked account. Set a password or link another account first.
+If your Blazium Games account has no password, you cannot unlink the last linked account. [Set a password](https://blazium.games/settings/password) or link another account first.
 
 ## Revoke access on the other service
 
@@ -76,7 +76,7 @@ Deleting your Blazium Games account unlinks all of them. See the [Privacy Policy
 | --- | --- | --- |
 | Confirm your password, or choose a username, email, and password | The service is not linked yet. A verified GitHub or Discord email that matches an account asks for that password. Anything else, including X, asks you to finish a new account. | Enter the matching password, or complete the new account and the emailed code. |
 | This *Name* account is linked to another Blazium Games user | The account is already linked to a different Blazium Games account. | Log in to that other account and unlink it there, then try again. |
-| Set a password or link another account before unlinking *Name* | It is the only way to log in to an account with no password. | Set a password in Settings, or link another account, then unlink. |
+| Set a password or link another account before unlinking *Name* | It is the only way to log in to an account with no password. | Set a password at [Settings > Password](https://blazium.games/settings/password), or link another account, then unlink. |
 | Missing or invalid OAuth state | The link or login took longer than 15 minutes, or the page was reused or opened in another browser. | Start again from the Link or login button. |
 | Could not verify the *Name* account | The other service did not confirm who you are. This is usually temporary on their side. | Try again later. If it keeps happening, email [support@blazium.games](mailto:support@blazium.games). |
 | Linking was cancelled, or Sign-in was cancelled | You declined on the other service's approval screen. Nothing was linked or signed in. | Click **Link** or the login button again. |
