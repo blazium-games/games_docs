@@ -181,7 +181,7 @@ Cash-out and payout setup are website-only.
 
 Field values:
 
-- `visibility`: `draft`, `invisible`, or `public`
+- `visibility`: `draft` (you and admins), `owner` (only you), `invisible` (anyone with the link), or `public`
 - `asset_type`: `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset`
 - `adult`: marks 18+ content. See [Content rules](../content-rules.md#adult-content)
 - `indexable`: `false` keeps the store page out of search engines. See [SEO and indexing](../seo-and-indexing.md)

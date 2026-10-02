@@ -39,7 +39,7 @@ Call `create_game`:
 | `name` | Required |
 | `tagline` | One line |
 | `description` | Markdown |
-| `visibility` | Start with `draft`. Options: `draft`, `invisible`, `public` |
+| `visibility` | Start with `draft`. Options: `draft` (owner and admins), `owner` (owner only), `invisible` (link only), `public` |
 | `asset_type` | `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset` |
 | `vanity_name` | URL slug, lowercase with dashes |
 | `parent` | Required for `tool`, `mod`, and `plugin` before they can go public: `{"game": "uid-or-vanity"}` for a listing on Blazium Games, or `{"external_name": "...", "external_url": "https://..."}` for a game that isn't. Ask the user which game it's for |
