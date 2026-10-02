@@ -27,6 +27,12 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer and player servers 1.14:
+
+- New developer tools: `get_store_links` and `set_store_links` for the listing's pages on other stores such as Steam, GOG, or Epic Games Store (`4238` for a link on the wrong site). `get_game_details` returns them as `store_links`
+- `search_catalog`: several values in one filter match any of them (comma-separate `asset_type`, `session_bucket`, `net`, `os`, and `authorship`), and `exclude_types`, `exclude_genres`, `exclude_tone`, `exclude_tags`, and `exclude_ai_uses` leave listings out. `sort` defaults to best match
+- `os` on `search_catalog` and `get_shelf` accepts `ios`
+
 Developer and player servers 1.13:
 
 - New tools: `set_timezone` (sets the human's IANA timezone; `4085` for an unknown name) and `get_security_status` (authenticator on, skipped, or not chosen, and recovery codes left)

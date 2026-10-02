@@ -25,11 +25,11 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `get_library` | read | Owned games, refund windows, play time |
 | `get_download_link` | read | 5-minute signed download URL |
 | `get_agent_policy` | read | This agent's spending limit |
-| `search_catalog` | read | Search public games, tools, mods, and assets by text, genres, tags (including community tags), tone, session length, network mode, players, platform, engine and version, renderer, license, made-with label (`authorship`), `ai_uses`, and `exclude_warnings`. Adult listings only appear if the human turned on adult content |
+| `search_catalog` | read | Search public games, tools, mods, and assets by text, genres, tags (including community tags), tone, session length, network mode, players, platform, engine and version, renderer, license, made-with label (`authorship`), and `ai_uses`. Several values in one filter match any of them; `exclude_types`, `exclude_genres`, `exclude_tone`, `exclude_tags`, `exclude_warnings`, and `exclude_ai_uses` leave listings out. Adult listings only appear if the human turned on adult content |
 | `list_game_addons` | read | Mods and plugins, or tools and applications, made for a game (`kind`: `mods`, `tools`, or empty for both); `same_creator` marks the developer's own |
 | `suggest_tag` | write | Suggest a tag for a game the human owns and played for an hour (`4237` before that), or `remove` it; up to 5 per game. Without `tag`, returns their suggestions. Only suggest tags the human chose |
 | `get_shelf` | read | A short curated shelf: `tonight` (short sessions with a healthy, clean build for the human's `os`) or `unheard_of` (recent listings few people have found). The order rotates daily |
-| `get_game_details` | read | One listing: taxonomy, price, files with scan state and checksum, similar titles, ownership |
+| `get_game_details` | read | One listing: taxonomy, price, files with scan state and checksum, similar titles, links to its pages on other stores (`store_links`), ownership |
 | `install_build` | read | License and scan check, checksum, 5-minute download URL, and a `blazium://install/<uid>` hand-off. Uses the channel the human follows unless `channel` is given. Fails unless the file is clean |
 | `launch_game` | read | `blazium://game/<uid>` hand-off link for the launcher |
 | `set_channel` | write | Join (`beta`) or leave (`stable`) a game's beta |

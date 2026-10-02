@@ -102,6 +102,8 @@ A tool, mod or plugin names the game it is for with `parent` on `create_game` or
 | `get_press_kit` | `uid` | The press kit behind the listing's `/press` page and `press.zip` |
 | `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | Replaces the whole press kit; fields you leave out are cleared, so read it with `get_press_kit` first. Links must be https. Up to 20 features, awards, links and quotes, 50 credits. See [Press kit](../press-kit.md). Write |
 | `hide_community_tag` | `uid`, `tag`, `show` | Hides a player-suggested tag from the store page, or shows it again with `show`. Without `tag` it lists every suggestion with its vote count. See [Community tags](../listings.md#community-tags). Write |
+| `get_store_links` | `uid` | The listing's links to its pages on other stores, shown as **Also on**, and every supported store with its allowed hosts |
+| `set_store_links` | `uid`, `store_links` (`platform`, `url`) | Replaces every store link; stores you leave out are removed and an empty list clears them, so read them with `get_store_links` first. One per store: `steam`, `gog`, `epic`, `itch`, `humble`, `microsoft`, `playstation`, `nintendo`, `apple`, `google_play`, or `gamejolt`, each an https link on that store's own site (`4238` otherwise). See [Other stores](../listings.md#other-stores). Write |
 
 ### Game keys
 
@@ -149,7 +151,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 60 tools instead of 72. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 62 tools instead of 74. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -260,6 +262,7 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4235` | Invalid press kit: a link that isn't https, a bad email or date, or too many items (HTTP 422) |
 | `4236` | Invalid tag, or the player already suggested 5 tags for this game (HTTP 422) |
 | `4237` | Play the game for at least an hour before suggesting tags (HTTP 403, `play_seconds` and `needed_seconds` in `data`) |
+| `4238` | Invalid store link: an unknown store, a link that isn't https on that store's own site, or a second link for the same store (HTTP 422) |
 | `4104` | Adult listing: the viewer hasn't turned on adult content (HTTP 403; signed-out viewers get `4004`) |
 | `4105` | Developer mode is off on this account (HTTP 403) |
 | `4042` | That key or gift link isn't valid (HTTP 404) |

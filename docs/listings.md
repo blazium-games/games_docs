@@ -1,7 +1,7 @@
 ---
 title: Listings and search
 sidebar_position: 2
-description: Listing types, parent games for tools, mods and plugins, taxonomy fields, community tags, the listing check that must pass before a page goes public, build scan states, similar titles, and how players and agents search the catalog.
+description: Listing types, parent games for tools, mods and plugins, taxonomy fields, community tags, the listing check that must pass before a page goes public, build scan states, similar titles, links to other stores, and how players and agents search the catalog.
 ---
 
 # Listings and search
@@ -104,6 +104,30 @@ Pages that were already public on September 28, 2026 have a 30-day grace period.
 
 List up to 10 public games that players of yours would also like, most similar first. They show on your store page and feed recommendations. A title that isn't public, or your own game, returns `4072`.
 
+## Other stores
+
+If the game is also sold elsewhere, link its pages there and the store page lists them under **Also on**. Add them on the **Links** tab of the edit page (**Other stores**), or with the `get_store_links` and `set_store_links` MCP tools. Saving replaces every link; leave a store empty to remove it.
+
+Each link must be an `https://` link on that store's own site, one per store:
+
+| Store | `platform` | Links on |
+|---|---|---|
+| Steam | `steam` | store.steampowered.com |
+| GOG | `gog` | gog.com |
+| Epic Games Store | `epic` | store.epicgames.com |
+| itch.io | `itch` | itch.io and its subdomains, such as `you.itch.io` |
+| Humble Store | `humble` | humblebundle.com |
+| Microsoft Store | `microsoft` | xbox.com, apps.microsoft.com, microsoft.com |
+| PlayStation Store | `playstation` | store.playstation.com |
+| Nintendo eShop | `nintendo` | nintendo.com and Nintendo's regional sites |
+| App Store | `apple` | apps.apple.com |
+| Google Play | `google_play` | play.google.com |
+| Game Jolt | `gamejolt` | gamejolt.com |
+
+A link on another site, an `http://` link, a second link for the same store, or a link over 255 characters returns `4238`. Links are kept without the part after `#`.
+
+`GET /api/v1/private/games/{uid}/store-links` returns the links and every supported store with its allowed hosts; `PUT` the same path with `{"store_links": [{"platform": "steam", "url": "https://..."}]}` to replace them (an empty list clears them). Public listings return them as `store_links`, each with `platform`, `label`, and `url`.
+
 ## Dependencies, compatibility and license
 
 These are set over the developer MCP (`declare_dependency`, `declare_engine_compat`, `declare_license`; see the [reference](./mcp/reference.md#dependencies-compatibility-and-license)).
@@ -179,25 +203,31 @@ The Builds tab also lists files removed in the last 30 days because their scan d
 
 `GET https://api.blazium.online/api/v1/public/search` needs no sign-in. The [Browse](https://blazium.games/browse) page and the player MCP `search_catalog` tool use it.
 
+List filters take several values, comma-separated or with the parameter repeated. A listing matches a filter if it has any of its values, and it has to match every filter you give. The `exclude_` filters leave out listings that have any of their values, and win over the matching include. Unknown values are ignored.
+
+On [Browse](https://blazium.games/browse) each filter is a group of checkboxes: tick values to show only listings with any of them, or tick **hide** to leave them out. Content warnings only have **hide**.
+
 | Parameter | Notes |
 |---|---|
 | `q` (or `search`) | Free text across name, tagline, and description |
-| `asset_type` (or `type`) | `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset` |
-| `genres`, `tags`, `tone` | Comma-separated. A game matches if it has any of them. `tags` also matches community tags |
-| `exclude_warnings` | Comma-separated content warnings. Leaves out listings with any of them |
-| `ai_uses` | Comma-separated. Only listings that disclose generative AI for any of them |
-| `session_bucket`, `net` | One value each |
+| `asset_type` (or `type`) | List of `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, `dev_asset` |
+| `genres`, `tags`, `tone` | Lists. `tags` also matches community tags |
+| `ai_uses` | List. Only listings that disclose generative AI for any of them |
+| `session_bucket`, `net`, `authorship` | Lists. `authorship` is `human`, `human_agent`, or `agent_heavy`; it filters only and never changes ranking |
+| `os` | List. Only games with a clean build for any of these platforms |
+| `exclude_types`, `exclude_genres`, `exclude_tone`, `exclude_tags` | Lists. `exclude_tags` also checks community tags |
+| `exclude_warnings` | List of content warnings |
+| `exclude_ai_uses` | List. Leaves out listings that disclose generative AI for any of them |
 | `players` | Only games that support this many players |
-| `os`, `arch` | Only games with a clean build for this platform |
+| `arch` | With `os`, only builds for this architecture |
 | `engine` | Listings made with this engine (`engines`) or declaring compatibility with it |
 | `engine_version`, `renderer` | Only listings whose declared compatibility covers this version or renderer |
 | `license` | One license kind |
-| `authorship` | `human`, `human_agent`, or `agent_heavy`. Filters only; it never changes ranking |
-| `sort` | `relevance` (default with `q` or `tags`), `newest` (default otherwise), or `updated` |
+| `sort` | `relevance` (default, best match): listings with launch problems last, then the best text and tag match, then newest. `newest` or `updated` sort by date. Any other value means `relevance` |
 | `page`, `page_size` | `page_size` is 1 to 50, default 20 |
 
 Adult listings are left out unless the signed-in player turned on adult content (see [Content rules](./content-rules.md#adult-content)).
 
 Each result has the listing fields, `engines`, `license_kind`, `authorship`, `adult`, `content_warnings`, `ai_uses`, `health` (the launch health band), `scan` (the best scan state across the game's files), `platforms` (clean builds only), `score`, and `matched_tags`.
 
-`GET /api/v1/public/games/{uid}` returns one listing with its taxonomy, made-with fields, `ai_uses`, `community_tags`, `adult`, `indexable`, `parent`, `has_mods` and `has_tools`, launch health, editions (`skus`), license kind, engine compatibility, dependencies (`relations.uses` and `relations.used_by`), `mod_compat` for mods, `mod_settings` for mods and plugins, files, scan states, checksums, similar titles, and newest changelog. `GET /api/v1/public/games/{uid}/relations` returns just the dependencies, license kind, and compatibility.
+`GET /api/v1/public/games/{uid}` returns one listing with its taxonomy, made-with fields, `ai_uses`, `community_tags`, `adult`, `indexable`, `parent`, `has_mods` and `has_tools`, launch health, editions (`skus`), license kind, engine compatibility, dependencies (`relations.uses` and `relations.used_by`), `mod_compat` for mods, `mod_settings` for mods and plugins, `store_links` (see [Other stores](#other-stores)), files, scan states, checksums, similar titles, and newest changelog. `GET /api/v1/public/games/{uid}/relations` returns just the dependencies, license kind, and compatibility.

@@ -53,6 +53,8 @@ A tool, mod or plugin names the game it is for with `parent` on `create_game` or
 | `get_press_kit` | `uid` | | The press kit behind the listing's `/press` page and `press.zip` |
 | `set_press_kit` | `uid`, `release_date`, `website_url`, `press_email`, `trailer_url`, `history`, `features`, `awards`, `links`, `quotes`, `credits` | write | Replace the whole press kit; omitted fields are cleared, so read it with `get_press_kit` first. https links only; up to 20 features, awards, links and quotes, and 50 credits |
 | `hide_community_tag` | `uid`, `tag`, `show` | write | Hide a player-suggested tag from the store page, or show it again with `show`. Without `tag`, lists every suggestion with its vote count |
+| `get_store_links` | `uid` | | The listing's links to its pages on other stores (shown as "Also on"), and every supported store with its allowed hosts |
+| `set_store_links` | `uid`, `store_links` (`platform`, `url`) | write | Replace every store link; omitted stores are removed, so read them with `get_store_links` first. One per store (`steam`, `gog`, `epic`, `itch`, `humble`, `microsoft`, `playstation`, `nintendo`, `apple`, `google_play`, `gamejolt`), each an https link on that store's own site |
 
 ## Builds, health and editions
 
@@ -150,3 +152,4 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4233` | Invalid parent |
 | `4234` | Invalid mod settings |
 | `4235` | Invalid press kit |
+| `4238` | Invalid store link: wrong site, not https, or a store listed twice |
