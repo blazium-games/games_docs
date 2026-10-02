@@ -10,7 +10,7 @@ These rules come from the [Terms of Service](https://blazium.games/terms-of-serv
 
 ## Content warnings
 
-Set every warning that applies on the **Listing** tab or with `update_game_taxonomy`: violence, gore, sexual, nudity, language, drugs, gambling, horror, flashing_lights. They show on the store page, and players can leave out listings with a warning with the content filter on [Browse](https://blazium.games/browse) (for example **no gore**) or `exclude_warnings` in [search](./listings.md#search).
+Set every warning that applies on the **Listing** tab or with `update_game_taxonomy`: violence, gore, sexual, nudity, language, drugs, gambling, horror, flashing_lights. They show on the store page, and players can leave out listings with a warning with the **Content warnings** filter on [Browse](https://blazium.games/browse) (for example **Hide gore**) or `exclude_warnings` in [search](./listings.md#search).
 
 ## Adult content
 

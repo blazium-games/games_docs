@@ -52,7 +52,7 @@ Keep the returned `uid`.
 
 Call `update_game` with `uid` and any of `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent`. An empty `parent` object clears it. To polish existing copy, run the `improve_game_copy` prompt with the current description first.
 
-For mods and plugins, set how to install them with `set_mod_settings` (`install_path` relative to the game folder, `loader` such as `bepinex`, markdown `instructions`). For press coverage, fill the press kit with `set_press_kit`; it powers the page's `/press` page and `press.zip`. Players can suggest tags; list them with `hide_community_tag` without a `tag`, and hide one only when the user asks.
+For mods and plugins, set how to install them with `set_mod_settings` (`install_path` relative to the game folder, `loader` such as `bepinex`, markdown `instructions`). For press coverage, fill the press kit with `set_press_kit`; it powers the page's `/press` page and `press.zip`. If the game is also on Steam, GOG, Epic Games Store, itch.io or another store, read the current links with `get_store_links`, then pass the full list to `set_store_links` (one https link per store, on that store's own site); they show as "Also on". Players can suggest tags; list them with `hide_community_tag` without a `tag`, and hide one only when the user asks.
 
 Before switching to `public`, confirm with the user and make sure the owner is verified. `invisible` keeps the page reachable by link but out of listings.
 
