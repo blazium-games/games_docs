@@ -7,13 +7,13 @@ Picture 1 (/img/storefront/guide09-embed-button.png): 1 is Embed.
 
 2. The dialog heading is Embed this game. The X closes it. It was not used. The preview shows Starfall Drift, by nova, and Pilot a salvage skiff through a collapsing star system. The thumbnail also says Starfall Drift. View & Buy and More on Blazium Games were not used. There is no Free badge on this preview.
 The line under the preview is Copy and paste the HTML below into your website to show the widget above.
-The box under that line has no placeholder and no copy button. The text is one line, and it wraps in the box after embed". The first visual line ends with embed" and the next visual line is width="680" height="190"></iframe>. The full line is <iframe src="http://nova.localhost:5173/starfall-drift/embed" width="680" height="190"></iframe>
+The box under that line has no placeholder and no copy button. The text is one line, and it wraps in the box after embed". The first visual line ends with embed" and the next visual line is `width="680" height="190"></iframe>`. The full line is `<iframe src="http://nova.localhost:5173/starfall-drift/embed" width="680" height="190"></iframe>`
 2 is in the empty bottom of that box, to the right of the code. The code stays readable.
 The page behind this dialog is the same game page, including Older versions and Choose An Older Build. Those are other guides.
 Picture 2 (/img/storefront/guide09-dialog-starfall.png): 2 is that box.
 
 On Hexlink, the dialog heading is still Embed this game. The helper line is the same. The preview is Hexlink, by pixel, and Connect the hexes. No timer, no pressure. It has a Free badge and a Download button. It does not have View & Buy. More on Blazium Games is the same link. Download and More on Blazium Games were not used.
-The box is the same kind of box as 2 and is not numbered again. The text is one line, and it wraps after embed". The full line is <iframe src="http://pixel.localhost:5173/hexlink/embed" width="680" height="190"></iframe>
+The box is the same kind of box as 2 and is not numbered again. The text is one line, and it wraps after embed". The full line is `<iframe src="http://pixel.localhost:5173/hexlink/embed" width="680" height="190"></iframe>`
 Behind the dialog, the page shows Hexlink screenshot 1, Download for web amd64, About, Players say with no public tag, and Player reviews with 2 reviews, 100% enjoyed it, Quality 5.0 / 5, and 100% would play with friends. nova says Enjoyed it · Quality 5/5 · Would play with friends · 6h played 2026-09-08. Embed, Report, and Press kit are still in the row. That page is not this guide.
 Picture 3 (/img/storefront/guide09-dialog-hexlink-pixel.png): no new numbers.
 
