@@ -21,12 +21,12 @@ Picture 2 (/img/storefront/guide27-player-more.png): 2 is Check status.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 1. The heading and the cards match picture 1, including the cut lines at the bottom. Do not quote those cut lines. Open an issue is in this frame. It was not used. It is not marked again. Check status is not in this frame.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide27-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide27-developer.png): no new numbers.
 
 4. Signed out, there is no account chip in this frame. The header reads Home, Browse, MCP, and Docs. The header buttons read Log in, Sign up, GitHub, X, and Discord. The header X has a label. That header GitHub is not the GitHub in the Report a bug card.
 The heading and the cards match picture 1, including the cut lines at the bottom. Do not quote those cut lines. Open an issue is in this frame. It was not used. It is not marked again. Check status is not in this frame.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 4 (images/raw/guide27-signed-out.png): no new numbers.
+Picture 4 (/img/storefront/guide27-signed-out.png): no new numbers.
 
 What can go wrong
 

@@ -18,13 +18,13 @@ Starfall Drift reads Released, Public, and Owner. The line is Pilot a salvage sk
 Moss Garden reads In development, Public, and Owner. The line is Grow a tiny terrarium, one mossy stone at a time. Edit, Analytics, Crashes, and Delete are readable. Those were not used.
 Tiny Tactics reads Prototype, Draft, and Owner. The line is Pocket-sized turn-based skirmishes. Edit, Analytics, Crashes, and Delete are readable. Those were not used.
 No cookie banner is in this frame. More by Blazium is a closed peek. The footer is not in this frame.
-Picture 2 (images/raw/guide21-github.png): no new numbers.
+Picture 2 (/img/storefront/guide21-github.png): no new numbers.
 
 3. This picture matches picture 2. It is the same file as picture 2. It is the same Nova Studio dashboard. It is not an X page. It is not a success screen. The corner reads Nova Studio. The cards, the invite, and the cut-off strips match picture 2. They are not repeated here. No cookie banner is in this frame. There is no round X under the header. More by Blazium is a closed peek. The footer is not in this frame.
-Picture 3 (images/raw/guide21-x.png): no new numbers.
+Picture 3 (/img/storefront/guide21-x.png): no new numbers.
 
 4. This picture matches picture 2. It is the same file as picture 2. It is the same Nova Studio dashboard. It is not a Discord page. It is not a success screen. The corner reads Nova Studio. The cards, the invite, and the cut-off strips match picture 2. They are not repeated here. No cookie banner is in this frame. There is no round X under the header. More by Blazium is a closed peek. The footer is not in this frame.
-Picture 4 (images/raw/guide21-discord.png): no new numbers.
+Picture 4 (/img/storefront/guide21-discord.png): no new numbers.
 
 5. This picture is the Pixel dashboard. It is not a provider page. It is not a success screen. The corner reads Pixel. The header is Home, Browse, MCP, and Docs. There is no round X under the header. The heading is Dashboard. The line matches picture 2. The buttons are New Project and All analytics. Those were not used.
 The heading is Projects. The count is 5 projects. This frame shows three cards. The next row is cut off.

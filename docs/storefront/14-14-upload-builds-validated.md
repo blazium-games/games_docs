@@ -37,10 +37,10 @@ The cookie banner matches picture 1. Its buttons were not used. The footer match
 Picture 3 (/img/storefront/guide14-deploy-keys.png): 4 is New key, 5 is Delete.
 
 4. Signed in as Pixel, the corner reads Pixel. The page does not show the builds form. The page shows 403, then Error. The line is (4030) You don't manage this project. The buttons are Back to Home and Browse Games. Those were not used. Under that, You might be looking for shows four cards. Browse Games, Discover indie games and experiences. Browse Add-ons, Assets, tools, and resources for creators. Game Jams, Join community events and competitions. Support, Get help or report an issue. Those cards were not used. There is no deploy-key form. More by Blazium is open. The names are blazium.app, blazium.games, DDDBrowser, RUNE Interface, and shoyo.work. Those were not opened. The header is Home, Browse, MCP, and Docs. The footer is in this frame and matches picture 2. There is no cookie banner.
-Picture 4 (images/raw/guide14-player.png): no new numbers.
+Picture 4 (/img/storefront/guide14-player.png): no new numbers.
 
 5. Signed out, the edit page does not stay up. It sends you to log in. The heading is Welcome back. Email, Password, Log in, Create an account, Forgot password, or continue with, GitHub, X, and Discord are the login form. A cookie banner covers the top of GitHub, X, and Discord and part of or continue with. Its Decline and Accept were not used. That banner is another guide. Under those buttons the page says You'll confirm a password, then a code. Home is under that. That form is another guide and is not numbered. The header reads Log in, Sign up, GitHub, X, and Discord. The left side says Blazium Games, Games made by people, and Independent games, professional tools, community-first platform. More by Blazium is a closed peek. There is no builds form on this picture.
-Picture 5 (images/raw/guide14-signed-out.png): no new numbers.
+Picture 5 (/img/storefront/guide14-signed-out.png): no new numbers.
 
 What can go wrong
 

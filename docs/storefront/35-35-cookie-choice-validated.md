@@ -14,12 +14,12 @@ Picture 1 (/img/storefront/guide35-signed-out.png): 1 is Decline. 2 is Accept.
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame. There is no Sign up button in this frame.
 Featured, Garden Tower, Play Now, New releases, and the cookie bar match picture 1. Play Now was not used. Decline was not used. Accept was not used. They are not marked again. Cookie details was not used. It is not marked again.
 The footer is not in this frame. More by Blazium is a closed peek. A card under that peek is cut off. It is not quoted.
-Picture 2 (images/raw/guide35-player.png): no new numbers.
+Picture 2 (/img/storefront/guide35-player.png): no new numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 2. There is no Log in button in this frame.
 Featured, Garden Tower, Play Now, New releases, and the cookie bar match picture 1. Play Now was not used. Decline was not used. Accept was not used. They are not marked again. Cookie details was not used. It is not marked again.
 The footer is not in this frame. More by Blazium is a closed peek. A card under that peek is cut off. It is not quoted.
-Picture 3 (images/raw/guide35-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide35-developer.png): no new numbers.
 
 What can go wrong
 

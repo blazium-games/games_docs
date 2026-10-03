@@ -21,7 +21,7 @@ Picture 2 (/img/storefront/guide22-code.png): 3 is Code, 4 is New password, 5 is
 The first line is different. It reads If an account uses you@example.com, a 6-digit code is on its way. It works for 10 minutes. you@example.com is the sample address printed on this picture.
 The rest matches picture 2. The labels are Code and New password. The boxes are empty. Reset password and Send a new code were not used. Use a different email and Back to log in were not used. The spam line matches picture 2. It names noreply@blazium.games. These controls are not marked again.
 The banner line matches picture 1. Cookie details, Decline, and Accept were not used. The footer matches picture 1. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide22-sent.png): no new numbers.
+Picture 3 (/img/storefront/guide22-sent.png): no new numbers.
 
 4. This picture is Account settings. It is not the forgot-password form. It is not a success screen. The corner reads Pixel. The header reads Home, Browse, MCP, and Docs. The sidebar reads Account, Linked accounts, Authenticator, Verify email, Wallet, and MCP.
 The heading is Account settings. The heading under that is Profile. The circle reads Pixel. Upload avatar was not used. The line is Avatar (256x256 to 512x512, square, up to 2 MB). The Username box shows pixel. The note under it reads Your developer page lives at this subdomain, so changing it changes your store links.

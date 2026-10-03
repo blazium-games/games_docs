@@ -19,13 +19,13 @@ Picture 1 (/img/storefront/guide37-signed-out.png): 1 is Download the press kit 
 The press kit matches picture 1. Download the press kit (.zip) was not used. It is not marked again. The links were not used. Decline was not used. Accept was not used. Cookie details was not used. It is not marked again.
 The line under Salvage, drift, survive is covered by the cookie bar. It is not quoted. The line under Features is cut off. It is not quoted.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide37-player.png): no new numbers.
+Picture 2 (/img/storefront/guide37-player.png): no new numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 2. There is no Log in button in this frame. There is no Sign up button in this frame.
 The press kit matches picture 1. Download the press kit (.zip) was not used. It is not marked again. The links were not used. Decline was not used. Accept was not used. Cookie details was not used. It is not marked again.
 The line under Salvage, drift, survive is covered by the cookie bar. It is not quoted. The line under Features is cut off. It is not quoted.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide37-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide37-developer.png): no new numbers.
 
 What can go wrong
 

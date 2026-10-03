@@ -17,10 +17,10 @@ More by Blazium is a closed peek at the bottom left. The footer is cut off at th
 Picture 1 (/img/storefront/guide15-game-keys.png): 1 is New pool, 2 is the number box, 3 is Create keys, 4 is Gift link.
 
 2. Signed in as Pixel, the corner reads Pixel. The page does not show the game keys form. The page shows 403, then Error. The line is (4030) You don't manage this project. The buttons are Back to Home and Browse Games. Those were not used. Under that, You might be looking for shows Browse Games, Discover indie games and experiences; Browse Add-ons, Assets, tools, and resources for creators; and Game Jams, Join community events and competitions. A fourth card is cut off at the bottom, so do not name it. Those cards were not used. There is no game keys form. More by Blazium is a closed peek. The header is Home, Browse, MCP, and Docs. There is no cookie banner. The footer is not in this frame.
-Picture 2 (images/raw/guide15-player.png): no new numbers.
+Picture 2 (/img/storefront/guide15-player.png): no new numbers.
 
 3. Signed out, the edit page does not stay up. It sends you to log in. The heading is Welcome back. Email, Password, Log in, Create an account, Forgot password, or continue with, GitHub, X, and Discord are the login form. A cookie banner covers the lower part of GitHub, X, and Discord, and it covers the line under them. To the right of the banner, the readable words are then a code. Do not quote the covered words. The banner's Decline and Accept were not used. That banner is another guide. That form is another guide and is not numbered. The header reads Home, Browse, MCP, and Docs, and also Log in, Sign up, GitHub, X, and Discord. The left side says Blazium Games, Games made by people, and Independent games, professional tools, community-first platform. More by Blazium is a closed peek. There is no game keys form on this picture.
-Picture 3 (images/raw/guide15-signed-out.png): no new numbers.
+Picture 3 (/img/storefront/guide15-signed-out.png): no new numbers.
 
 What can go wrong
 

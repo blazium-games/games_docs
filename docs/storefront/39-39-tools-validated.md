@@ -14,12 +14,12 @@ Picture 1 (/img/storefront/guide39-signed-out.png): 1 is Ember Track Editor.
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame. There is no Sign up button in this frame. There is no header GitHub, no header X, and no header Discord in this frame.
 The tools page matches picture 1. Ember Track Editor was not used. It is not marked again. See mods and plugins was not used. It is not marked again. Decline was not used. Accept was not used. Cookie details was not used. It is not marked again.
 The footer is in this frame. Those links were not used. The Discord icon and the X icon were not used. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide39-player.png): no new numbers.
+Picture 2 (/img/storefront/guide39-player.png): no new numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 2. There is no Log in button in this frame. There is no Sign up button in this frame. There is no header GitHub, no header X, and no header Discord in this frame.
 The tools page matches picture 1. Ember Track Editor was not used. It is not marked again. See mods and plugins was not used. It is not marked again. Decline was not used. Accept was not used. Cookie details was not used. It is not marked again.
 The footer is in this frame. Those links were not used. The Discord icon and the X icon were not used. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide39-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide39-developer.png): no new numbers.
 
 What can go wrong
 

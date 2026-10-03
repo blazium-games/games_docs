@@ -18,17 +18,17 @@ The line under that heading is cut off. It is not quoted.
 The bar reads We use Google Analytics and browser fingerprinting to understand how game pages are used. They only run if you accept. Sign-in cookies are always on because the site needs them. That text was already on the page. The link reads Cookie details. It was not used. It is not numbered.
 Decline was not used. Accept was not used. They are not numbered.
 The footer is not in this frame. The page continues below this frame. More by Blazium is a closed peek.
-Picture 1 (images/raw/guide46-signed-out.png): no numbers.
+Picture 1 (/img/storefront/guide46-signed-out.png): no numbers.
 
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame. There is no Sign up button in this frame. There is no header GitHub, no header X, and no header Discord in this frame.
 The page matches picture 1. The documentation link was not used. It is not marked. Decline was not used. Accept was not used. Cookie details was not used.
 The footer is not in this frame. The page continues below this frame. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide46-player.png): no new numbers.
+Picture 2 (/img/storefront/guide46-player.png): no new numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 2. There is no Log in button in this frame. There is no Sign up button in this frame. There is no header GitHub, no header X, and no header Discord in this frame.
 The page matches picture 1. The documentation link was not used. It is not marked. Decline was not used. Accept was not used. Cookie details was not used.
 The footer is not in this frame. The page continues below this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide46-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide46-developer.png): no new numbers.
 
 What can go wrong
 

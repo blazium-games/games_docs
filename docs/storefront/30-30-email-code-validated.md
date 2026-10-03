@@ -16,12 +16,12 @@ Picture 1 (/img/storefront/guide30-signed-out.png): 1 is the Email box. 2 is the
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame. There is no round X in this frame.
 The heading, the line, the Email box, the Code box, Confirm, and Send another code match picture 1. The boxes are empty. Confirm was not used. It is not marked again. Send another code was not used. It is not marked again. The line about a 6-digit code was already on the page.
 The cookie banner is not in this frame. The footer matches picture 1. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide30-player.png): no new numbers.
+Picture 2 (/img/storefront/guide30-player.png): no new numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 2. There is no Log in button in this frame. There is no round X in this frame.
 The heading, the line, the Email box, the Code box, Confirm, and Send another code match picture 1. The boxes are empty. Confirm was not used. It is not marked again. Send another code was not used. It is not marked again. The line about a 6-digit code was already on the page.
 The cookie banner is not in this frame. The footer matches picture 1. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide30-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide30-developer.png): no new numbers.
 
 What can go wrong
 

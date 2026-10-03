@@ -10,7 +10,7 @@ The line reads or continue with. The buttons read GitHub, X, and Discord. The X 
 The next line reads You'll confirm a password, then a code. Under that, the link reads Home. That Home is not the header Home. It was not used.
 There is no Authenticator app heading in this frame. There is no Set up an authenticator app again button in this frame.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 1 (images/raw/guide33-signed-out.png): no new numbers.
+Picture 1 (/img/storefront/guide33-signed-out.png): no new numbers.
 
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame.
 The heading is Authenticator app. The line is You chose not to use an authenticator app on 2026-09-30. Sign-in uses emailed codes. You can set one up again at any time with a new setup code. That line was already on the page. The date reads 2026-09-30.
@@ -26,7 +26,7 @@ Picture 2 (/img/storefront/guide33-player.png): 1 is the Password box. 2 is Set 
 The heading, the lines, the Password box, Set up an authenticator app again, and Linked accounts match picture 2. The box is empty. Set up an authenticator app again was not used. It is not marked again. Linked accounts was not used. It is not marked again. The date reads 2026-09-30.
 There is no setup code in this frame.
 The cookie banner is not in this frame. The footer matches picture 2. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide33-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide33-developer.png): no new numbers.
 
 What can go wrong
 

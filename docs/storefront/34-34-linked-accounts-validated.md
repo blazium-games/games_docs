@@ -10,7 +10,7 @@ The line reads or continue with. The buttons read GitHub, X, and Discord. The X 
 The next line reads You'll confirm a password, then a code. Under that, the link reads Home. That Home is not the header Home. It was not used.
 There is no Link button in this frame. There is no Unlink button in this frame.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 1 (images/raw/guide34-signed-out.png): no new numbers.
+Picture 1 (/img/storefront/guide34-signed-out.png): no new numbers.
 
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame.
 A list on the left reads Account, Linked accounts, Authenticator, Verify email, Wallet, and MCP. That Linked accounts is the list item. It is not the heading. That Authenticator is not the Authenticator app link under the card. That MCP is not the header MCP.
@@ -30,7 +30,7 @@ The list, the heading, and the lines match picture 2. set a password was not use
 The rows do not match picture 2. The GitHub row reads Linked as @nova-studio on 2026-07-15. Its button reads Unlink. It was not used. It is not marked. The X row reads Not linked. Its button reads Link. It was not used. It is not marked. The Discord row reads Not linked. Its button reads Link. It was not used. It is not marked. The date reads 2026-07-15.
 Authenticator app, the disclosure links, and Back to settings match picture 2. They were not used. They are not marked again.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide34-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide34-developer.png): no new numbers.
 
 What can go wrong
 

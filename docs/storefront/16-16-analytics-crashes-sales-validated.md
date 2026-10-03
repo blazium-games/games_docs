@@ -16,7 +16,7 @@ Picture 1 (/img/storefront/guide16-analytics.png): 1 is Download JSON.
 How players had access lists Purchased 921, Free license 737, and Your team 92.
 Clients lists Browser 1105, Godot editor 368, Blazium editor 184, and Agent or script 184.
 Daily lists dates and counts. The cookie banner covers the middle of that list. Its buttons were not used. The readable rows are 2026-09-20 37, 2026-09-21 74, 2026-09-22 49, 2026-09-23 86, 2026-09-24 61, 2026-09-25 37, and 2026-09-26 74. The bottom of the list is cut off by More by Blazium, so do not quote those rows. More by Blazium is a closed peek. The footer is not in this frame.
-Picture 2 (images/raw/guide16-analytics-more.png): no new numbers.
+Picture 2 (/img/storefront/guide16-analytics-more.png): no new numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The heading is Crashes. Crashes is filled. The others in that row were not opened.
 The headers are When, Severity, OS, Arch, Version, Message, and Files.
@@ -40,10 +40,10 @@ The footer line in this frame is Blazium Games, MCP, Documentation, Support, and
 Picture 4 (/img/storefront/guide16-sales.png): 3 is wallet.
 
 5. Signed in as Pixel, the corner reads Pixel. The page does not show analytics. The page shows 403, then Error. The line is (4030) You don't manage this project. The buttons are Back to Home and Browse Games. Those were not used. Under that, You might be looking for shows Browse Games, Discover indie games and experiences; Browse Add-ons, Assets, tools, and resources for creators; and Game Jams, Join community events and competitions. A fourth card is cut off at the bottom, so do not name it. Those cards were not used. More by Blazium is a closed peek. The header is Home, Browse, MCP, and Docs. There is no cookie banner. The footer is not in this frame.
-Picture 5 (images/raw/guide16-player.png): no new numbers.
+Picture 5 (/img/storefront/guide16-player.png): no new numbers.
 
 6. Signed out, the analytics page does not stay up. It sends you to log in. The heading is Welcome back. Email, Password, Log in, Create an account, Forgot password, or continue with, GitHub, X, and Discord are the login form. Under those buttons the page says You'll confirm a password, then a code. Home is under that. That form is another guide and is not numbered. The header reads Home, Browse, MCP, and Docs, and also Log in, Sign up, GitHub, X, and Discord. The left side says Blazium Games, Games made by people, and Independent games, professional tools, community-first platform. More by Blazium is a closed peek. There is no cookie banner. There is no analytics on this picture.
-Picture 6 (images/raw/guide16-signed-out.png): no new numbers.
+Picture 6 (/img/storefront/guide16-signed-out.png): no new numbers.
 
 What can go wrong
 

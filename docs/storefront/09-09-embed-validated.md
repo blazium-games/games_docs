@@ -15,13 +15,13 @@ Picture 2 (/img/storefront/guide09-dialog-starfall.png): 2 is that box.
 On Hexlink, the dialog heading is still Embed this game. The helper line is the same. The preview is Hexlink, by pixel, and Connect the hexes. No timer, no pressure. It has a Free badge and a Download button. It does not have View & Buy. More on Blazium Games is the same link. Download and More on Blazium Games were not used.
 The box is the same kind of box as 2 and is not numbered again. The text is one line, and it wraps after embed". The full line is <iframe src="http://pixel.localhost:5173/hexlink/embed" width="680" height="190"></iframe>
 Behind the dialog, the page shows Hexlink screenshot 1, Download for web amd64, About, Players say with no public tag, and Player reviews with 2 reviews, 100% enjoyed it, Quality 5.0 / 5, and 100% would play with friends. nova says Enjoyed it · Quality 5/5 · Would play with friends · 6h played 2026-09-08. Embed, Report, and Press kit are still in the row. That page is not this guide.
-Picture 3 (images/raw/guide09-dialog-hexlink-pixel.png): no new numbers.
+Picture 3 (/img/storefront/guide09-dialog-hexlink-pixel.png): no new numbers.
 
 Opening the Starfall address from that box, on its own, is the widget. There is no site header and no footer. It shows the same preview: Starfall Drift, by nova, the same sentence, View & Buy, and More on Blazium Games. There is no Free badge. The rest of the page is empty. Those buttons were not used.
-Picture 4 (images/raw/guide09-widget-starfall.png): no new numbers.
+Picture 4 (/img/storefront/guide09-widget-starfall.png): no new numbers.
 
 Signed out, the Starfall Drift page stays up. It does not send you to log in. The dialog is the same text as picture 2, including the same iframe line. There is no email field. Behind the dialog, Log in to suggest tags for games you own, and Log in to join it on the beta line, are not this dialog. Color Palette Mod, Community, If you like these, Ember Racer, and More by Blazium are other guides and are not numbered.
-Picture 5 (images/raw/guide09-dialog-starfall-anon.png): no new numbers.
+Picture 5 (/img/storefront/guide09-dialog-starfall-anon.png): no new numbers.
 
 What can go wrong
 

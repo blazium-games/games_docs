@@ -9,7 +9,7 @@ The line reads or continue with. The buttons read GitHub, X, and Discord. The X 
 The next line reads You'll confirm a password, then a code. Under that, the link reads Home. That Home is not the header Home. It was not used.
 There is no Username box in this frame. There is no Finish setup button in this frame.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 1 (images/raw/guide31-signed-out.png): no new numbers.
+Picture 1 (/img/storefront/guide31-signed-out.png): no new numbers.
 
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame.
 The heading is Finish setting up your account. The line is Choose a username to finish your account.
@@ -25,7 +25,7 @@ Picture 2 (/img/storefront/guide31-player.png): 1 is the Username box. 2 is Fini
 The heading, the line, the Username box, Finish setup, the rules, and Log out instead match picture 2. The box is empty. Finish setup was not used. It is not marked again. Log out instead was not used. It is not marked again.
 There is no Password box in this frame.
 The cookie banner is not in this frame. The footer matches picture 2. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide31-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide31-developer.png): no new numbers.
 
 What can go wrong
 

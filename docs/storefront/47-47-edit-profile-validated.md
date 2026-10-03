@@ -15,7 +15,7 @@ The bar reads We use Google Analytics and browser fingerprinting to understand h
 Decline was not used. Accept was not used. They are not numbered.
 The left side reads Blazium Games, Games made by people, and Independent games, professional tools, community-first platform.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 1 (images/raw/guide47-signed-out.png): no numbers.
+Picture 1 (/img/storefront/guide47-signed-out.png): no numbers.
 
 2. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs. There is no Log in button in this frame. There is no Sign up button in this frame. There is no header GitHub, no header X, and no header Discord in this frame.
 The side list reads Account, Linked accounts, Authenticator, Verify email, Wallet, and MCP. None of them was used. They are not numbered.
@@ -31,7 +31,7 @@ The button reads Save. It was not used. It is not numbered.
 The bar reads We use Google Analytics and browser fingerprinting to understand how game pages are used. They only run if you accept. Sign-in cookies are always on because the site needs them. That text was already on the page. The link reads Cookie details. It was not used. It is not numbered.
 Decline was not used. Accept was not used. They are not numbered.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide47-player.png): no numbers.
+Picture 2 (/img/storefront/guide47-player.png): no numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 2. There is no Log in button in this frame. There is no Sign up button in this frame. There is no header GitHub, no header X, and no header Discord in this frame.
 The side list matches picture 2. None of them was used.
@@ -45,7 +45,7 @@ The timezone box reads Europe/Berlin. Nothing was typed. Do not convert it.
 Save was not used. It is not numbered.
 Decline was not used. Accept was not used. Cookie details was not used.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide47-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide47-developer.png): no new numbers.
 
 What can go wrong
 

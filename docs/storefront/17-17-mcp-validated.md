@@ -53,23 +53,23 @@ The row is bgames_mcp_Hs3â€¦ then Created 2026-08-24, Last used 2026-10-03, 
 The cookie banner covers the button under that row. The readable start of the button is Replace. The rest of that button is covered, so do not guess the rest of the label and do not mark it. Replace was not used. The banner buttons were not used.
 The heading is What a project key can do. The readable bullets are Read and update this project: page details, analytics, crashes, builds, deploy info, and rotating its upload keys. And list_games returns only this project. The next bullet is cut off at the bottom of the frame, so do not quote it.
 More by Blazium is a closed peek. The footer is not in this frame.
-Picture 5 (images/raw/guide17-project-mcp-more.png): no new numbers.
+Picture 5 (/img/storefront/guide17-project-mcp-more.png): no new numbers.
 
 6. Signed in as Pixel, the corner reads Pixel. The header is Home, Browse, MCP, and Docs. The left list is Account, Linked accounts, Authenticator, Verify email, Wallet, and MCP. Those other items were not opened.
 The heading is MCP access. The lines match picture 1, including Connect without a token (recommended), Add to Cursor, Add to VS Code, and Cursor mcp.json. Copy was not used. The cookie banner covers the next block the same way. The readable tail is s/mcp. Do not quote the covered label. Under the banner, Other MCP clients: server URL reads https://mcp.blazium.games/mcp. Copy was not used. The banner buttons were not used.
 More by Blazium is a closed peek. The footer is not in this frame.
-Picture 6 (images/raw/guide17-player.png): no new numbers.
+Picture 6 (/img/storefront/guide17-player.png): no new numbers.
 
 7. This picture is scrolled. The account chip is not in the frame. The header is not in the frame. The left list is the same. Those items were not opened.
 The label is Claude Code. Copy was not used. The line matches picture 2. Other MCP clients: server URL matches picture 2. The consent lines match picture 2, including choose My whole account (all projects I can access).
 The heading is Account API keys. The same two lines about an account key are here. The buttons are Create key and Rotate (revoke all account keys). Those were not used. Under them the line is No account keys yet. There is no key row on this picture.
 The cookie banner covers the start of the next block. Do not quote the covered words. The readable bits at the right of the banner are you as a player: and nd fetch download. Under the banner the lines are links. It cannot touch your projects, builds, or keys. Player keys start with bgames_play_ and never work on the developer server, and developer keys never work here. The banner buttons were not used.
 The buttons under that text are Add to Cursor and Add to VS Code. Those were not used. A sliver at the bottom right is cut off, so do not name it. More by Blazium is a closed peek. The footer is not in this frame.
-Picture 7 (images/raw/guide17-player-more.png): no new numbers.
+Picture 7 (/img/storefront/guide17-player-more.png): no new numbers.
 
 8. Signed out, the MCP page does not stay up. It sends you to log in. The heading is Welcome back. Email, Password, Log in, Create an account, Forgot password, or continue with, GitHub, X, and Discord are the login form. That form is another guide and is not numbered. The cookie banner covers the lower part of GitHub, X, and Discord and the line under them. The only readable words to the right are then a code. Do not quote the covered words. The banner buttons were not used.
 The header reads Home, Browse, MCP, and Docs, and also Log in, Sign up, GitHub, X, and Discord. The left side says Blazium Games, Games made by people, and Independent games, professional tools, community-first platform. More by Blazium is a closed peek. The footer is not in this frame. There is no MCP settings text on this picture.
-Picture 8 (images/raw/guide17-signed-out.png): no new numbers.
+Picture 8 (/img/storefront/guide17-signed-out.png): no new numbers.
 
 What can go wrong
 

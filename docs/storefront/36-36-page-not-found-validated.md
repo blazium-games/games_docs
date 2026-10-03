@@ -13,11 +13,11 @@ Picture 1 (/img/storefront/guide36-signed-out.png): 1 is Back to Home. 2 is the 
 
 2. This frame matches picture 1. The header is not in this frame. There is no account chip in this frame. Back to Home was not used. Browse Games was not used. The cards were not used. They are not marked again. Decline was not used. Accept was not used. Cookie details was not used. It is not marked again.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide36-player.png): no new numbers.
+Picture 2 (/img/storefront/guide36-player.png): no new numbers.
 
 3. This frame matches picture 1. The header is not in this frame. There is no account chip in this frame. Back to Home was not used. Browse Games was not used. The cards were not used. They are not marked again. Decline was not used. Accept was not used. Cookie details was not used. It is not marked again.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide36-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide36-developer.png): no new numbers.
 
 What can go wrong
 

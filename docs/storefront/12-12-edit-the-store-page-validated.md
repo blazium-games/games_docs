@@ -29,13 +29,13 @@ More by Blazium is a closed peek.
 Picture 3 (/img/storefront/guide12-settings-visibility.png): 4 is Visibility, 5 is Save.
 
 Listing has an outline on the same page. The corner still reads Nova Studio. The heading is still Edit Starfall Drift. Edit is still filled. The fields under the tabs are still Thumbnail and Cover image, with the same size lines. The listing form is not on this picture. Upload new thumbnail and Upload new cover were not used. More by Blazium is a closed peek.
-Picture 4 (images/raw/guide12-listing-top.png): no new numbers.
+Picture 4 (/img/storefront/guide12-listing-top.png): no new numbers.
 
 Signed in as Pixel, the corner reads Pixel. The page does not show the form. The page shows 403, then Error. The line is (4030) You don't manage this project. The buttons are Back to Home and Browse Games. Those were not used. Under that, You might be looking for shows Browse Games, Browse Add-ons, and Game Jams. Those cards were not used. There is no edit form. More by Blazium is a closed peek. The header is Home, Browse, MCP, and Docs.
-Picture 5 (images/raw/guide12-player.png): no new numbers.
+Picture 5 (/img/storefront/guide12-player.png): no new numbers.
 
 Signed out, the edit page does not stay up. It sends you to log in. The heading is Welcome back. Email, Password, Log in, Create an account, Forgot password, or continue with, GitHub, X, and Discord are the login form. Under those buttons the page says You'll confirm a password, then a code. Home is under that. That form is another guide and is not numbered. The header reads Log in, Sign up, GitHub, X, and Discord. The left side says Blazium Games, Games made by people, and Independent games, professional tools, community-first platform. More by Blazium is a closed peek. There is no edit form on this picture.
-Picture 6 (images/raw/guide12-signed-out.png): no new numbers.
+Picture 6 (/img/storefront/guide12-signed-out.png): no new numbers.
 
 What can go wrong
 

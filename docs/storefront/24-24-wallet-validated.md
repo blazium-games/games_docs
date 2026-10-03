@@ -24,7 +24,7 @@ Picture 2 (/img/storefront/guide24-player-more.png): 3 is Set up payouts with St
 Add funds matches picture 1, including the amount label and the box that already shows 10.00. Pay by card is in this frame. It was not used. It is not marked again. 2 is not on this picture.
 The banner line matches picture 1. Decline and Accept were not used. The banner does not cover Pay by card. Under the banner, the earnings lines match picture 1. A button at the bottom edge reads Open Stripe payout dashboard. It was not used. It is marked on picture 4. There is no Set up payouts with Stripe button in this frame.
 The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide24-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide24-developer.png): no new numbers.
 
 4. This picture is scrolled. There is no account chip in this frame. The sidebar matches picture 1.
 The top lines are the earnings paragraph. 4 is beside Open Stripe payout dashboard, off the words. The words stay readable. That button was not used.
@@ -39,14 +39,14 @@ Picture 4 (/img/storefront/guide24-developer-more.png): 4 is Open Stripe payout 
 5. This picture is scrolled a little farther than picture 4. There is no account chip in this frame. The sidebar matches picture 1. The top line is the end of the earnings paragraph. Open Stripe payout dashboard, the box that shows 47.30, and Cash out are in this frame. They were not used. They are not marked again.
 The payout row matches picture 4. The transactions match picture 4. The refunds line matches picture 2.
 The banner line matches picture 1. Decline and Accept were not used. The footer under the banner reads Blazium Games, MCP, Documentation, Support, and Status, then a Discord icon and X. The next line reads Terms of Service, Privacy Policy, Permissions, GitHub API disclosure, X API disclosure, Discord API disclosure, Subprocessors, and Cookie settings. The banner does not cover those words. More by Blazium is a closed peek.
-Picture 5 (images/raw/guide24-developer-more-2.png): no new numbers.
+Picture 5 (/img/storefront/guide24-developer-more-2.png): no new numbers.
 
 6. Signed out, this picture is not the wallet. It is the login page. There is no account chip in this frame. The header reads Home, Browse, MCP, and Docs. The header buttons read Log in, Sign up, GitHub, X, and Discord. The header X has a label.
 The left side reads Blazium Games, Games made by people, and Independent games, professional tools, community-first platform.
 The heading is Welcome back. The email form reads Email, Password, Log in, Create an account, and Forgot password. That form is another guide. It is not numbered. The boxes are empty. The email Log in button was not used.
 The line above the form buttons is or continue with. The form buttons read GitHub, X, and Discord. Those were not used. They are not numbered. The cookie banner covers the line under those buttons. The readable tail to the right is then a code. Do not quote the covered words.
 The banner line matches picture 1. Decline and Accept were not used. More by Blazium is a closed peek. The footer is not in this frame.
-Picture 6 (images/raw/guide24-signed-out.png): no new numbers.
+Picture 6 (/img/storefront/guide24-signed-out.png): no new numbers.
 
 What can go wrong
 

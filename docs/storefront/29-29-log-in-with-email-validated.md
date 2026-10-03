@@ -24,7 +24,7 @@ The next card reads Hexlink, then Released, Public, and Owner, then Connect the 
 Color Palette Mod is cut off at the bottom of the frame. Released and Public are readable. Do not quote the rest.
 There is no Welcome back on this picture. There is no Email box. There is no Password box. There is no Log in button.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide29-player.png): no new numbers.
+Picture 2 (/img/storefront/guide29-player.png): no new numbers.
 
 3. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 2. There is no Log in button in this frame. This picture is the dashboard. It is not the result of the Log in button.
 The heading and the line match picture 2. New Project and All analytics were not used.
@@ -36,7 +36,7 @@ The next card reads Tiny Tactics, then Prototype, Draft, and Owner, then Pocket-
 More cards are cut off at the bottom of the frame. A green strip and a pink strip have no readable name. More by Blazium covers the left of them. Do not name them from this picture.
 There is no Welcome back on this picture. There is no Email box. There is no Password box. There is no Log in button.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide29-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide29-developer.png): no new numbers.
 
 What can go wrong
 

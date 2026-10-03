@@ -14,7 +14,7 @@ Picture 1 (/img/storefront/guide25-player-settings.png): 1 is Show adult content
 The top of the frame shows Developer mode and an On badge. The line is Developer mode is on since 2026-06-25. You can create projects, join a project team and use developer MCP keys. The next line is To turn it off, first transfer or delete your projects and leave the teams you help run. The button reads Turn off developer mode. It was not used. It is another guide. It is not numbered.
 The Adult content card matches picture 1, including the same hidden line, the same empty 18 box, and Show adult content. That button was not used. It is not marked again.
 The cookie banner is not in this frame. The footer matches picture 1. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide25-developer-settings.png): no new numbers.
+Picture 2 (/img/storefront/guide25-developer-settings.png): no new numbers.
 
 3. Signed in as Pixel, the corner reads Pixel. The header reads Home, Browse, MCP, and Docs.
 This picture is the adult gate, not the game. The heading is This listing is for adults. The line is It has sexual content or nudity. You can see adult listings after you confirm you are 18 or older and turn them on in your settings.
@@ -24,21 +24,21 @@ Picture 3 (/img/storefront/guide25-player-game.png): 3 is Open settings.
 
 4. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 3. This picture is the same adult gate. The heading, the line, and Open settings match picture 3. Open settings was not used. It is not marked again.
 The cookie banner is not in this frame. The footer matches picture 1. More by Blazium is a closed peek.
-Picture 4 (images/raw/guide25-developer-game.png): no new numbers.
+Picture 4 (/img/storefront/guide25-developer-game.png): no new numbers.
 
 5. Signed out, this picture is not the adult gate. It is page not found. There is no account chip in this frame. The header reads Home, Browse, MCP, and Docs. The header buttons read Log in, Sign up, GitHub, X, and Discord. The header X has a label.
 The page shows 404. The heading is Page not found. The line is The page you're looking for has been deleted, or never existed in the first place.
 The buttons read Back to Home and Browse Games. Those were not used. They are not numbered.
 The next heading is You might be looking for. Three cards are in the frame. Browse Games, with Discover indie games and experiences. Browse Add-ons, with Assets, tools, and resources for creators. Game Jams, with Join community events and competitions. Those cards were not used. They are another guide. A fourth card is cut off at the bottom of the frame. More by Blazium covers the left of that card. Do not quote it.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 5 (images/raw/guide25-signed-out-game.png): no new numbers.
+Picture 5 (/img/storefront/guide25-signed-out-game.png): no new numbers.
 
 6. Signed out, this picture is not the settings page. It is the login page. There is no account chip in this frame. The header reads Home, Browse, MCP, and Docs. The header buttons read Log in, Sign up, GitHub, X, and Discord. The header X has a label.
 The left side reads Blazium Games, Games made by people, and Independent games, professional tools, community-first platform.
 The heading is Welcome back. The email form reads Email, Password, Log in, Create an account, and Forgot password. That form is another guide. It is not numbered. The boxes are empty. The email Log in button was not used.
 The line above the form buttons is or continue with. The form buttons read GitHub, X, and Discord. Those were not used. They are not numbered. The line under those buttons reads You'll confirm a password, then a code. Under that, the word Home is in the frame. The rest of the footer is not in this frame.
 The cookie banner is not in this frame. More by Blazium is a closed peek.
-Picture 6 (images/raw/guide25-signed-out-settings.png): no new numbers.
+Picture 6 (/img/storefront/guide25-signed-out-settings.png): no new numbers.
 
 What can go wrong
 

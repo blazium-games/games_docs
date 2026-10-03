@@ -31,7 +31,7 @@ The bar reads We use Google Analytics and browser fingerprinting to understand h
 Decline was not used. Accept was not used. They are not numbered.
 A review line at the bottom edge is cut off. It is not quoted.
 The footer is not in this frame. The page continues below this frame. More by Blazium is a closed peek.
-Picture 1 (images/raw/guide49-signed-out.png): no numbers.
+Picture 1 (/img/storefront/guide49-signed-out.png): no numbers.
 
 2. There is no account chip in this frame. The header is not in this frame.
 The button reads Download for linux amd64 (beta). It was not used. It is not numbered. It is not Leave the beta.
@@ -53,7 +53,7 @@ The line reads If you like these. The card reads Ember Racer. It was not used. I
 The heading reads Player reviews. The review form above the bar is not quoted.
 The bar matches picture 1. Decline was not used. Accept was not used. Cookie details was not used.
 The footer is not in this frame. The page continues below this frame. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide49-player.png): no new numbers.
+Picture 2 (/img/storefront/guide49-player.png): no new numbers.
 
 3. There is no account chip in this frame. The header is not in this frame.
 The buy line is cut off at the top of the frame. It is not quoted.
@@ -75,7 +75,7 @@ The mothlight line is partly under the cookie bar. It is not quoted. A review at
 The line reads Developer nova.
 The bar matches picture 1. Decline was not used. Accept was not used. Cookie details was not used.
 The footer is not in this frame. The page continues below this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide49-developer.png): no new numbers.
+Picture 3 (/img/storefront/guide49-developer.png): no new numbers.
 
 What can go wrong
 

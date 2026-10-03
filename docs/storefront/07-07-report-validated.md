@@ -18,16 +18,16 @@ Picture 3 (/img/storefront/guide07-game-email.png): 5 is Your Email.
 Picture 4 (/img/storefront/guide07-person-control.png): 6 is Report.
 
 The dialog from that button is titled Report Nova Studio. The file name says pixel. Read the dialog title. The category box says Select A Category. The reason box is empty. Submit Report and the X are the same as picture 2. There is no email box. The X was not used. Shader Library and the nova author line are still behind the dialog.
-Picture 5 (images/raw/guide07-person-dialog-pixel.png): no new numbers. The title is Report Nova Studio.
+Picture 5 (/img/storefront/guide07-person-dialog-pixel.png): no new numbers. The title is Report Nova Studio.
 
 The same Report button on Pixel's profile opens a dialog titled Report Pixel. The file name says nova. Read the dialog title. The fields are the same as 2, 3, and 4. There is no email box. Behind the dialog, Tools & Assets shows 8-Bit SFX Pack and Color Palette Mod. Both lines are signed pixel. Those cards are not this guide.
-Picture 6 (images/raw/guide07-person-dialog-nova.png): no new numbers. The title is Report Pixel.
+Picture 6 (/img/storefront/guide07-person-dialog-nova.png): no new numbers. The title is Report Pixel.
 
 Signed out, that profile page stays up. The dialog is Report Nova Studio, and it adds Your Email. The box is empty. The line under it is the same as picture 3. The category box, the reason box, and Submit Report are the same as 2, 3, and 4. More by Blazium on this picture is another guide. Shader Library is still behind the dialog.
-Picture 7 (images/raw/guide07-person-dialog-anon.png): no new numbers.
+Picture 7 (/img/storefront/guide07-person-dialog-anon.png): no new numbers.
 
 On the same game, when the right side says This game has a beta with newer, less tested builds and Join the beta, Report is still in the row with Embed and Press kit. It is the same button as 1 and is not numbered again. There is no review form on this picture. Edit reply and Reply are another guide. If you like these, and Ember Racer, are not this guide.
-Picture 8 (images/raw/guide07-game-control-nova.png): no new numbers.
+Picture 8 (/img/storefront/guide07-game-control-nova.png): no new numbers.
 
 What can go wrong
 

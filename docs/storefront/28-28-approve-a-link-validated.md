@@ -18,7 +18,7 @@ The buttons read Back to Home and Browse Games. They were not used.
 The next heading is You might be looking for. The first card reads Browse Games, then Discover indie games and experiences. The next card reads Browse Add-ons, then Assets, tools, and resources for creators. The next card reads Game Jams, then Join community events and competitions. A fourth card is cut off at the bottom of the frame. More by Blazium covers the left of it. Do not quote it. Those three cards are the same cards as on the 404 page. They are not real pages.
 There is no Agent request on this picture. There is no Approve button. There is no Deny button.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 2 (images/raw/guide28-player.png): no new numbers.
+Picture 2 (/img/storefront/guide28-player.png): no new numbers.
 
 3. Signed out, there is no account chip in this frame. The header reads Home, Browse, MCP, and Docs. The header buttons read Log in, Sign up, GitHub, X, and Discord. The header X has a label.
 This picture is the login page. The left side reads Blazium Games, then Games made by people, then Independent games, professional tools, community-first platform.
@@ -27,7 +27,7 @@ The line reads or continue with. The buttons read GitHub, X, and Discord. The X 
 The next line is You'll confirm a password, then a code. Then the word Home. That Home is not the header Home. It was not used.
 There is no Agent request on this picture. There is no Approve button. There is no Deny button. Nothing was typed.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide28-signed-out.png): no new numbers.
+Picture 3 (/img/storefront/guide28-signed-out.png): no new numbers.
 
 What can go wrong
 

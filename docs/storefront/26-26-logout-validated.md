@@ -23,17 +23,17 @@ Picture 2 (/img/storefront/guide26-player-logout.png): 2 is Log out on the page.
 SITE and PLAYER match picture 1. DEVELOPER reads Dashboard, Analytics, and MCP. It does not read Publish your games. ACCOUNT matches picture 1, including Log out. That Log out was not used. It is not marked again.
 The featured card matches picture 1, including the cut line beside the title and the cut line under PLAY IN BROWSER. Do not quote those lines. Play Now was not used. The card under New releases is cut off. More by Blazium covers the left of it. Do not quote it.
 The cookie banner is not in this frame. The footer is not in this frame. More by Blazium is a closed peek.
-Picture 3 (images/raw/guide26-developer-menu.png): no new numbers.
+Picture 3 (/img/storefront/guide26-developer-menu.png): no new numbers.
 
 4. Signed in as Nova Studio, the corner reads Nova Studio. The header matches picture 1. The account menu is closed.
 The heading, the line, Log out, and Home match picture 2. Log out was not used. It is not marked again. Home was not used. That Home is the underlined Home, not the header Home.
 The cookie banner is not in this frame. The footer matches picture 2. More by Blazium is a closed peek.
-Picture 4 (images/raw/guide26-developer-logout.png): no new numbers.
+Picture 4 (/img/storefront/guide26-developer-logout.png): no new numbers.
 
 5. Signed out, there is no account chip in this frame. The header reads Home, Browse, MCP, and Docs. The header buttons read Log in, Sign up, GitHub, X, and Discord. The header X has a label.
 The heading is Log out. The line is You are already logged out. There is no Log out button in this frame. Home is underlined. It was not used. That Home is not the header Home.
 The cookie banner is not in this frame. The footer matches picture 2. More by Blazium is a closed peek.
-Picture 5 (images/raw/guide26-signed-out.png): no new numbers.
+Picture 5 (/img/storefront/guide26-signed-out.png): no new numbers.
 
 What can go wrong
 

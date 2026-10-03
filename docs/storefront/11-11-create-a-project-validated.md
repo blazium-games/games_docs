@@ -33,10 +33,10 @@ The footer matches picture 1. More by Blazium is a closed peek.
 Picture 5 (/img/storefront/guide11-form-publishing.png): 8 is Visibility, 9 is Create project.
 
 The Visibility menu opened on the same page. The account chip is not in this frame. The control still reads Draft (You And Admins). The list under it repeats that line, then Owner Only, Invisible (Link Only), and Public. Owner Only is highlighted. That highlight is not a new choice. Picture 5 is the closed box, and it still reads Draft (You And Admins). The list covers Description and Create project on this picture. Those are on picture 5. Project type and Status stay Game and Release.
-Picture 6 (images/raw/guide11-visibility-open.png): no new numbers.
+Picture 6 (/img/storefront/guide11-visibility-open.png): no new numbers.
 
 Signed out, New project does not stay up. It sends you to log in. The heading is Welcome back. Email, Password, Log in, Create an account, Forgot password, or continue with, GitHub, X, and Discord are the login form. Under those buttons the page says You'll confirm a password, then a code. Home is under that. That form is another guide and is not numbered. The header reads Log in, Sign up, GitHub, X, and Discord. The left side says Blazium Games, Games made by people, and Independent games, professional tools, community-first platform. More by Blazium is a closed peek. There is no New project form on this picture.
-Picture 7 (images/raw/guide11-signed-out.png): no new numbers.
+Picture 7 (/img/storefront/guide11-signed-out.png): no new numbers.
 
 What can go wrong
 

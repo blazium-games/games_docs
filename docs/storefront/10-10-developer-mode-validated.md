@@ -16,7 +16,7 @@ On the same picture, Adult content is another guide and is not numbered. It says
 Picture 2 (/img/storefront/guide10-settings-off.png): 2 is the terms checkbox, 3 is Turn on developer mode.
 
 Signed in as Nova Studio, the same menu does not say Publish your games. The chip reads Nova Studio. Under DEVELOPER the rows are Dashboard, Analytics, and MCP. Dashboard and Analytics were not opened. They are other guides and are not numbered. The rest of the menu matches picture 1, including Garden Tower and Play Now.
-Picture 3 (images/raw/guide10-menu-nova.png): no new numbers.
+Picture 3 (/img/storefront/guide10-menu-nova.png): no new numbers.
 
 4. On the same settings block, the badge says On. This picture is scrolled the same way. The page heading is not in the frame, and the card above this block is cut off.
 The line is Developer mode is on since 2026-06-25. You can create projects, join a project team and use developer MCP keys.
@@ -27,7 +27,7 @@ Adult content is the same block as picture 2 and is not numbered. The checkbox i
 Picture 4 (/img/storefront/guide10-settings-on.png): 4 is Turn off developer mode.
 
 Signed out, the settings page does not stay up. It sends you to log in. The heading is Welcome back. Email, Password, Log in, Create an account, Forgot password, or continue with, GitHub, X, and Discord are the login form. Under those buttons the page says You'll confirm a password, then a code. Home is under that. That form is another guide and is not numbered. The header reads Log in, Sign up, GitHub, X, and Discord. The left side says Blazium Games, Games made by people, and Independent games, professional tools, community-first platform. More by Blazium is a closed peek. There is no developer block on this picture.
-Picture 5 (images/raw/guide10-signed-out.png): no new numbers.
+Picture 5 (/img/storefront/guide10-signed-out.png): no new numbers.
 
 What can go wrong
 
