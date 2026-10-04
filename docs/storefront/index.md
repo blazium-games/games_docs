@@ -20,6 +20,7 @@ The screenshots use sample games and accounts.
 - [Friends](./friends.md): requests, who is playing what, and activity sharing.
 - [Reviews and player tags](./reviews-and-tags.md)
 - [Report a game or a person](./report.md)
+- [Copyright (DMCA) notices](./dmca.md)
 - [Embed a game on your website](./embed.md)
 
 ## Your account

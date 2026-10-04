@@ -20,9 +20,9 @@ Reports are reviewed against the [Terms of Service](https://blazium.games/terms-
 
 ## Copyright notices
 
-We don't remove content because of a copyright or DMCA notice. Send the notice to [dmca@blazium.games](mailto:dmca@blazium.games) or by mail to the address in [section 17.1 of the Terms](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices). We forward it in full to the account that uploaded the content, and that account decides whether to keep or remove it. We don't share who the uploader is without a US court order.
+A report with the **copyright** category is input to our own moderation, not a copyright notice. To file a notice, use the paid form at [blazium.games/dmca](https://blazium.games/dmca). It's the only way we accept copyright notices; see [Copyright (DMCA) notices](./dmca.md) for the fee and what happens next.
 
-If you uploaded the content and receive a forwarded notice, you can delete the listing or its builds yourself. You are responsible for what you upload.
+If a notice names content you uploaded, you can read it under **Settings > Copyright notices**. You are responsible for what you upload.
 
 ## Bugs are different
 

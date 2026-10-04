@@ -27,6 +27,11 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer server 1.17:
+
+- New read-only developer tools: `list_copyright_notices` and `get_copyright_notice`, for paid copyright (DMCA) notices that name the account's content. See [Copyright notices](./reference.md#copyright-notices)
+- The player server reports 1.17.0 too, with no tool changes
+
 Developer and player servers 1.16:
 
 - Interactive views (MCP Apps). Tools a person should see carry `_meta.ui.resourceUri` (and the older `_meta["ui/resourceUri"]`) pointing at a `ui://blazium-games/…` resource served as `text/html;profile=mcp-app`, and both servers advertise the `io.modelcontextprotocol/ui` extension. See [Player tools](./player.md#interactive-views) and the [reference](./reference.md)

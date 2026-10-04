@@ -11,7 +11,7 @@ Blazium Games is operated by Divine Games, Inc. The canonical versions of these 
 | Page | What it covers |
 | --- | --- |
 | [Privacy Policy](https://blazium.games/privacy-policy) | What is collected (including payment data), the 1-year analytics retention, cookies, and account deletion. |
-| [Terms of Service](https://blazium.games/terms-of-service) | The terms for using Blazium Games, including payments, fees, taxes, the account balance, cash-outs and payout timing, refunds (donations are not refundable), agent purchases and payouts, and copyright (DMCA) notices, which are forwarded to the uploader rather than acted on. |
+| [Terms of Service](https://blazium.games/terms-of-service) | The terms for using Blazium Games, including payments, fees, taxes, the account balance, cash-outs and payout timing, refunds (donations are not refundable), agent purchases and payouts, and copyright (DMCA) notices, which are filed only through a paid form, forwarded to the uploader, and reviewed by our staff. |
 | [Permissions & Scopes](./permissions.md) | GitHub, X and Discord sign-in and linking scopes, MCP scopes, agent spending limits, agent payouts, keys, and cookies, plus how scopes behave for developers. |
 | [GitHub API disclosure](./github-api-disclosure.md) | What is read from GitHub and the commitments made about it. |
 | [X API disclosure](./x-api-disclosure.md) | What is read from X and the commitments made about it. |
@@ -27,7 +27,7 @@ Each page has a version date. You accept the Terms of Service and Privacy Policy
 ## Contacts
 
 - Privacy questions and account deletion: [privacy@blazium.games](mailto:privacy@blazium.games). Deletion requests are processed within 30 days.
-- Copyright and DMCA notices: [dmca@blazium.games](mailto:dmca@blazium.games), or by mail to Divine Games, Inc., 10130 S Kent Rd, Mohave Valley, AZ 86440, United States. We forward each notice to the account that uploaded the content and do not remove it ourselves. See [section 17.1 of the Terms](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices).
+- Copyright and DMCA notices: only through the paid form at [blazium.games/dmca](https://blazium.games/dmca) ($100, plus $100 per uploader account, not refundable). Email to [dmca@blazium.games](mailto:dmca@blazium.games) gets an automatic reply with a link to the form. See [Copyright (DMCA) notices](../storefront/dmca.md) and [section 17.1 of the Terms](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices).
 - Everything else: [support@blazium.games](mailto:support@blazium.games), or see [Support](https://blazium.games/support).
 
 For how payments work in practice, see [Payments](../payments/index.md).
