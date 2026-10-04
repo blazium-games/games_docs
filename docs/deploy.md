@@ -103,7 +103,7 @@ checksum=<sha256 hex of the zip>, file=@game.zip
 ```
 
 - `file` must be a `.zip`, up to 5 GB. Folders inside the zip are kept as they are.
-- `os` is one of `windows`, `macos`, `linux`, `android`, `ios`, or `web`.
+- `os` is one of `windows`, `macos`, `linux`, `android`, `ios`, `web`, or `any`. Use `any` with `arch=universal` for files that work everywhere, such as a content pack in its own [app](./cli/configuration.md#apps) (`--app tracks --app-name "Track Pack" --os any`).
 - `arch` is one of `x86_64`, `x86`, `arm64`, `arm32`, `arm`, `universal`, `wasm32`, or `wasm`.
 - `channel` is lowercase letters, digits, `-`, and `_`, starting with a letter or digit, up to 32 characters.
 - `checksum` is the SHA-256 of the zip as 64 hex characters (a `sha256:` prefix is accepted).
@@ -186,6 +186,10 @@ jobs:
 ```
 
 For a platform matrix, GitLab CI, and reading the `build_id` from `--json` output, see [CI](./cli/ci.md).
+
+## What you upload is yours to answer for
+
+Only upload builds and assets you have the right to share. If someone sends a copyright or DMCA notice about your content, we forward it to your account email and leave the decision to you: keep it, or delete the build or listing yourself. We don't take content down on your behalf. See [section 17.1 of the Terms](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices).
 
 ## Next
 
