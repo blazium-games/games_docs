@@ -190,14 +190,24 @@ The store page and search show the band of the newest stable build. The Builds t
 
 ## Shelves
 
-The home page has two shelves. Each shows up to 12 listings in an order that changes daily:
+The home page is built from shelves. Every shelf only takes public listings with a clean stable download (for the player's OS when one is given) from a verified owner, and never shows adult listings. Shelves without their own order change order daily.
 
-| Shelf | What qualifies |
-|---|---|
-| `tonight` (Something for tonight) | Public games with a 15-minute session length, a clean stable download for the player's OS, and a newest stable build rated `excellent` or `healthy` |
-| `unheard_of` (Unheard of) | Recently published games and applications that pass the listing check, have a clean stable download, and haven't been played on many devices yet. A listing shows for a limited time after its first `boot_ok` |
+| Shelf | What qualifies | Order |
+|---|---|---|
+| `featured` (Featured) | Games with a thumbnail and a newest stable build rated `excellent` or `healthy` | Daily |
+| `new` (New releases) | Games and applications published in the last 30 days | Newest first |
+| `recently_updated` (Recently updated) | Games and applications | Newest clean stable upload first |
+| `made_with_blazium` (Made with Blazium) | Games and applications that list the Blazium engine in [Made with](#made-with) | Daily |
+| `in_development` (In development) | Games with the status `development` or `prototype` | Daily |
+| `browser_playable` (Play in your browser) | Games with a clean stable `web` build | Daily |
+| `community` (From the community) | Games and applications with reviews in the last 90 days or [community tags](#community-tags) | Most reviews and tags first |
+| `tools_and_assets` (Tools, mods & assets) | Tools, mods, plugins, game assets and dev assets | Daily |
+| `tonight` (Something for tonight) | Games with a 15-minute session length and a newest stable build rated `excellent` or `healthy` | Daily |
+| `unheard_of` (Unheard of) | Games and applications published in the last 60 days that pass the listing check and haven't been played on many devices yet. A listing shows for a limited time after its first `boot_ok` | Daily |
 
-Both need a verified owner. `GET https://api.blazium.online/api/v1/public/shelves/{shelf}?os=windows` returns a shelf without sign-in, and the player MCP `get_shelf` tool reads it.
+`GET https://api.blazium.online/api/v1/public/shelves/{shelf}?os=windows&limit=12` returns a shelf without sign-in, and the player MCP `get_shelf` tool reads it. `limit` is 1 to 24 (default 12). An unknown shelf is a `404`, and a `limit` outside 1 to 24 is a `400`.
+
+Each listing on a shelf has its `uid`, `name`, `asset_type`, `status`, `tagline`, `vanity_name`, `thumbnail`, `price_cents`, `session_bucket`, `authorship`, launch `health`, the developer's `username` and `creator_avatar`, and two play fields: `has_browser_build` (a clean stable `web` build) and `has_downloads` (a clean stable build for any other platform).
 
 ## Build scans
 
@@ -238,6 +248,8 @@ On [Browse](https://blazium.games/browse) each filter is a group of checkboxes: 
 | `license` | One license kind |
 | `sort` | `relevance` (default, best match): listings with launch problems last, then the best text and tag match, then newest. `newest` or `updated` sort by date. Any other value means `relevance` |
 | `page`, `page_size` | `page_size` is 1 to 50, default 20 |
+
+Each result also has `creator_avatar` and the same `has_browser_build` and `has_downloads` play fields as [shelves](#shelves).
 
 Adult listings are left out unless the signed-in player turned on adult content (see [Content rules](./content-rules.md#adult-content)).
 

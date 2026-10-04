@@ -11,7 +11,7 @@ Every Blazium Games account can play, buy, review, and use the [player MCP](./mc
 ## Turn it on
 
 1. Open [Settings](https://blazium.games/settings#developer) and find **Developer mode**.
-2. Read the [developer terms](https://blazium.games/terms-of-service#13-developer-terms) and tick the box to accept them.
+2. Read the [developer terms](https://blazium.games/terms-of-service#19-developer-terms) and tick the box to accept them.
 3. Click **Turn on developer mode**.
 
 The header menu then shows **Dashboard** and **Analytics**, and [New project](https://blazium.games/new) opens the project form. Without developer mode the menu shows **Publish your games** instead, which links to this setting.

@@ -37,7 +37,7 @@ The player server acts for one player. It sees the account, wallet, and library,
 |---|---|
 | Buy, donate, or top up | [purchases](../blazium-games-purchases/SKILL.md) |
 | See what they own | `get_library` |
-| Something to play, and they haven't said what | `get_shelf` with `tonight`, or `unheard_of` when they want something new, before a wide `recommend` |
+| Something to play, and they haven't said what | `get_shelf` with `tonight`, `unheard_of` when they want something new, or `browser_playable` when they can't install anything, before a wide `recommend` |
 | Something to play right now | `recommend` with what they told you (`minutes`, `party_size`, `intent` in their words, `like_uid`, `os`). Give each pick with its `reasons` and `cautions`; don't add reasons of your own. If the results are empty, relay the `hint` and ask for one more constraint |
 | Why a game was or wasn't suggested | `why_this` with the same inputs; its `blockers` say what kept it out |
 | Find something specific | `search_catalog` with their constraints (for example `session_bucket: 15m`, `players: 2`, `os: windows`, `genres: [puzzle, strategy]`, or `exclude_tone: [dark]` for what they want to avoid), then `get_game_details` on the best matches. Say why each one fits using `why_short` |
