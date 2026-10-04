@@ -22,7 +22,7 @@ Everything is validated locally before chauffeur sends anything; a bad value exi
 
 | Field | Allowed values |
 |-------|----------------|
-| `os` | `windows`, `macos`, `linux`, `android`, `ios`, `web`. `darwin`, `mac` and `osx` mean `macos`; `win`, `win32` and `win64` mean `windows` |
+| `os` | `windows`, `macos`, `linux`, `android`, `ios`, `web`, `any`. `darwin`, `mac` and `osx` mean `macos`; `win`, `win32` and `win64` mean `windows`. Use `any` for files that work on every platform, such as a content pack |
 | `arch` | `x86_64`, `x86`, `arm64`, `arm32`, `arm`, `universal`, `wasm32`, `wasm`. `amd64` and `x64` mean `x86_64`; `aarch64` means `arm64` |
 | `channel` | 1 to 32 lowercase letters, digits, `-` or `_`, starting with a letter or digit. Default `stable` |
 
@@ -36,6 +36,12 @@ One project can ship more than one app, for example the game plus a dedicated se
 | `app.name` | string | Optional display name on the downloads, up to 80 characters. Needs `app.id` |
 
 `--app` and `--app-name` on `build`, `addfiles`, `genbuild` and `setfiles` set the same values, and on `build` and `addfiles` they override the file. A build is only matched and reused within its own app, and a `build_id` from another app is refused. Clean files of a non-main app are stored as `<game>-<app>-<channel>-<os>-<arch>.zip`.
+
+Optional downloads for a game, such as track packs, models or soundtracks, are an app with `os` set to `any`. They sit next to the game's downloads, show as "All platforms" on the store page, and are not counted as a platform or as a playable build:
+
+```bash
+chauffeur setfiles --version 1.0.0 --app tracks --app-name "Track Pack" --os any --arch universal --files ./export/tracks
+```
 
 ```yaml
 version: v1

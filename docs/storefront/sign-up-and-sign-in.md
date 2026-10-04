@@ -11,9 +11,10 @@ You need to be at least 13 to use Blazium Games. Buying, adding money and cashin
 ## Create an account with email
 
 1. Click **Sign up** in the header.
-2. Fill in **Email**, **Username** and **Password**.
+2. Fill in **Email**, **Username** and **Password**, then type the password again in **Confirm password**.
    - Usernames are 4 to 32 letters, numbers or hyphens, and start and end with a letter or number. Your username becomes your developer page address, `username.blazium.games`, so some names are reserved.
-   - Passwords are 10 to 128 characters.
+   - Passwords are 10 to 128 characters. **Show** next to the password displays what you typed; **Hide** masks it again.
+   - If the two passwords differ, the form says "The passwords don't match." and won't submit.
 3. Tick "I accept the Terms of Service and Privacy Policy".
 4. Click **Sign up**.
 5. Enter the 6-digit code we email you and click **Confirm**. The code works for 10 minutes.
@@ -22,8 +23,8 @@ If the code doesn't arrive within a minute, check your spam or junk folder for m
 
 ## Sign in with email
 
-1. Click **Log in** and enter your **Email** and **Password**.
-2. Click **Log in**.
+1. Click **Log in**. The GitHub, X and Discord buttons are at the top; the email form is below "or use email".
+2. Enter your **Email** and **Password**, then click **Log in**.
 3. If we ask for a code, enter the one from your email or your authenticator app.
 
 If you came from another page, you return to it after signing in.
