@@ -25,7 +25,7 @@ You don't need an account.
 5. Tick the good faith and penalty of perjury statements, and type your full legal name as your signature.
 6. Tick that you understand the fee isn't refundable, then click **Pay $… and file**. You pay on Stripe Checkout.
 
-After payment you're sent back to a page that shows your claim reference (`DMCA-` and six characters) once the payment is confirmed. Keep the reference for any follow-up.
+After payment you're sent back to a page that shows your claim reference (`DMCA-` and six characters) once the payment is confirmed, and the receipt email includes that reference. Keep it for any follow-up. If you cancel Stripe Checkout, the notice is not filed and your card is not charged.
 
 Notices sent by email, post or any other way aren't filed. An email to dmca@blazium.games only gets the automatic reply with the link.
 
@@ -33,9 +33,11 @@ Notices sent by email, post or any other way aren't filed. An email to dmca@blaz
 
 - We forward your notice to each uploader named in it, including your name, company and email address. Only our staff see your postal address and phone number.
 - Our staff review the claim and may email you or the uploader for more information.
-- If we decide the claim is valid, we may disable or remove the content and suspend or ban the uploader's account. If not, we close the claim and the content stays up. Either way, it's our decision, and filing doesn't guarantee removal.
+- If we decide the claim is valid, we may disable or remove the content and suspend or ban the uploader's account. If not, we close the claim and the content stays up. Staff decide alone. Filing doesn't guarantee removal, and we don't owe an explanation or an appeal.
+- Account action is decided claim by claim. There is no fixed repeat-infringer policy.
 - While a claim is open, we keep a record of each named listing and file as it was when you filed, even if the uploader changes or deletes it.
 - We don't share the uploader's identity or contact details without a United States court order.
+- Forwarding a notice or deciding a claim is not legal advice, and it is not an admission that the content does or does not infringe.
 
 To add information to your claim, email [dmca@blazium.games](mailto:dmca@blazium.games) with your claim reference in the subject.
 
@@ -43,7 +45,7 @@ To add information to your claim, email [dmca@blazium.games](mailto:dmca@blazium
 
 You get an email with the notice, and it shows up under **Settings > Copyright notices** at [blazium.games/settings/copyright](https://blazium.games/settings/copyright). A banner on your dashboard points to it while a claim is under review. Notices appear only once the claimant has paid.
 
-The list shows each notice's reference, status, claimant, filing date and how many of your links it names. Open one to see:
+The list shows each notice's reference, status, claimant, filing date and how many of your links it names. A notice is `open` while staff are reviewing it, then `accepted`, `rejected`, `resolved`, or `closed`. Open one to see:
 
 - the claimant's name, company and email address
 - the work they describe, their statements and signature
@@ -51,7 +53,7 @@ The list shows each notice's reference, status, claimant, filing date and how ma
 - messages from our staff, such as a request for information
 - the decision, once there is one
 
-What you can do:
+There is no formal counter-notice. What you can do:
 
 - Answer the claimant directly at their email address, if you want to.
 - Send us anything relevant, such as a license or proof that the work is yours, by emailing [dmca@blazium.games](mailto:dmca@blazium.games) with the reference in the subject.

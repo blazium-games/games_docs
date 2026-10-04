@@ -20,7 +20,7 @@ Reports are reviewed against the [Terms of Service](https://blazium.games/terms-
 
 ## Copyright notices
 
-A report with the **copyright** category is input to our own moderation, not a copyright notice. To file a notice, use the paid form at [blazium.games/dmca](https://blazium.games/dmca). It's the only way we accept copyright notices; see [Copyright (DMCA) notices](./dmca.md) for the fee and what happens next.
+A report with the **copyright** category is input to our own moderation, not a copyright notice. A report, an email, or any other demand is not a takedown. [Section 17 of the Terms](https://blazium.games/terms-of-service#17-moderation-is-our-decision) says outside demands are not orders we follow. The only outside process is a paid copyright notice under [section 17.1](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices), filed at [blazium.games/dmca](https://blazium.games/dmca). See [Copyright (DMCA) notices](./dmca.md) for the fee and what happens next.
 
 If a notice names content you uploaded, you can read it under **Settings > Copyright notices**. You are responsible for what you upload.
 
