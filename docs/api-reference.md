@@ -96,7 +96,7 @@ The asset library, signed-out downloads, and the OpenAPI document allow any orig
 | `GET /api/v1/public/downloads/{file_uid}` | A signed link for a file, without an account, when [anonymous downloads](./anonymous-downloads.md) are on. |
 | `GET /api/v1/public/downloads/{file_uid}/redirect` | The same, answered with a redirect. |
 | `GET /api/v1/public/search` | Catalog search. See [Listings](./listings.md). |
-| `GET /api/v1/public/shelves/{kind}` | The `tonight` and `unheard_of` shelves. |
+| `GET /api/v1/public/shelves/{kind}` | A home page shelf, such as `new`, `browser_playable`, or `tonight`. `limit` is 1 to 24. See [Shelves](./listings.md#shelves). |
 | `GET /api/v1/public/tags/popular` | The most used tags. |
 | `GET /api/v1/public/sitemap` | Indexable listings and developers. |
 | `GET /api/v1/public/store-rules` | Price limits and fees. |
