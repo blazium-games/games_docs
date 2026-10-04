@@ -131,6 +131,10 @@ Add friends by username from the agent or at [blazium.games/friends](https://bla
 
 Friends see whether you're online and which game you're playing, plus the public games you played in the last 14 days. "Playing" comes from the play-time heartbeat your launcher or game sends, and lasts 10 minutes after the last one; there is no separate presence tool. Unlisted and draft games are never shown. Turn off **Activity sharing** on the friends page to hide all of it; you then also drop out of your friends' recommendations.
 
+## Interactive views
+
+A host that supports MCP Apps shows an interactive view beside the tool result. You confirm a purchase, donation, key redeem, or friend request in that view. A card top-up opens a Checkout link for you to pay. Payout setup and cash-out stay text-only tools. A host without MCP Apps keeps the text result. Each view is a `ui://` resource served as `text/html;profile=mcp-app`.
+
 ## Resources
 
 | URI | Contents |
@@ -138,6 +142,16 @@ Friends see whether you're online and which game you're playing, plus the public
 | `blazium-games://me` | Account status, verification, and what the account may do |
 | `blazium-games://wallet` | Stored balance and payment rules |
 | `blazium-games://library` | Owned games and licenses |
+| `ui://blazium-games/checkout.html` | Quote, buy, and donate. The purchase runs when you click |
+| `ui://blazium-games/game.html` | Game information and trust checks |
+| `ui://blazium-games/results.html` | Search, recommendations, shelves, add-ons, and what friends are playing |
+| `ui://blazium-games/wallet.html` | Balance, ledger, spending limit, and a card top-up link |
+| `ui://blazium-games/approval.html` | Approval status, confirm link, and the emailed code |
+| `ui://blazium-games/library.html` | Owned games, redeem, and download links |
+| `ui://blazium-games/handoff.html` | `blazium://` hand-off for the Windows and Linux launcher |
+| `ui://blazium-games/account.html` | Verification, timezone, and links to finish sign-in on the website |
+| `ui://blazium-games/feedback.html` | Reviews, bug reports, taste, and tag suggestions |
+| `ui://blazium-games/friends.html` | Friends and requests |
 
 ## Moving from the developer server
 
