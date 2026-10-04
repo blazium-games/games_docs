@@ -6,13 +6,13 @@ slug: /legal
 
 # Legal and privacy
 
-The canonical versions of these pages live on blazium.games. The copies here are for reference while you work with the docs, the MCP server, or the Cursor plugin.
+Blazium Games is operated by Divine Games, Inc. The canonical versions of these pages live on blazium.games. The copies here are for reference while you work with the docs, the MCP server, or the Cursor plugin.
 
 | Page | What it covers |
 | --- | --- |
 | [Privacy Policy](https://blazium.games/privacy-policy) | What is collected (including payment data), the 1-year analytics retention, cookies, and account deletion. |
-| [Terms of Service](https://blazium.games/terms-of-service) | The terms for using Blazium Games, including payments, fees, taxes, the account balance, cash-outs, refunds, and agent purchases. |
-| [Permissions & Scopes](./permissions.md) | GitHub, X and Discord sign-in and linking scopes, MCP scopes, agent spending limits, keys, and cookies, plus how scopes behave for developers. |
+| [Terms of Service](https://blazium.games/terms-of-service) | The terms for using Blazium Games, including payments, fees, taxes, the account balance, cash-outs and payout timing, refunds (donations are not refundable), and agent purchases and payouts. |
+| [Permissions & Scopes](./permissions.md) | GitHub, X and Discord sign-in and linking scopes, MCP scopes, agent spending limits, agent payouts, keys, and cookies, plus how scopes behave for developers. |
 | [GitHub API disclosure](./github-api-disclosure.md) | What is read from GitHub and the commitments made about it. |
 | [X API disclosure](./x-api-disclosure.md) | What is read from X and the commitments made about it. |
 | [Discord API disclosure](./discord-api-disclosure.md) | What is read from Discord and the commitments made about it. |

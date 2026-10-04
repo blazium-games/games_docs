@@ -72,7 +72,7 @@ Until you accept, other pages send you back here. Support and the legal pages st
 
 ## Verify your email
 
-Buying, downloading, publishing, uploading builds and cashing out need a verified email. Until you verify, a banner says "Verify your email to publish games, upload builds, download, and buy."
+Buying, downloading, publishing, uploading builds and cashing out need a verified email. The exception is a free project whose developer turned on [anonymous downloads](../anonymous-downloads.md), which anyone can download without an account. Until you verify, a banner says "Verify your email to publish games, upload builds, download, and buy."
 
 1. Click **Verify now** in the banner, or open Settings and choose **Verify email**.
 2. Click **Send code**.

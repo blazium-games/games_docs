@@ -151,7 +151,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 62 tools instead of 74. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 65 tools instead of 77. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -173,11 +173,14 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources a
 | `get_download_link` | `file_id` | 5-minute signed URL for a build file. Needs a verified email and, for paid games, a license. Account only. **Deprecated** |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | Owners and game admins. Write |
 | `list_game_sales` | `uid` | Sales, donations, refunds, and seller earnings |
+| `start_payout_setup` | none | Starts or continues Stripe Connect payout setup and returns a Stripe link for the human, who enters identity, tax, and bank details on Stripe only. Needs a verified email. US only. Account only, money write |
+| `get_payout_dashboard_link` | none | One-time Stripe Express dashboard link for the human. `4095` until payout setup has started. Account only, money write |
+| `cash_out` | `amount_cents` (at least 2500) | Cashes out available earnings to the account's own Stripe payout account without asking the human; the owner is emailed after each agent cash-out. Fees as on the website. Money can take up to 72 business hours to reach the bank. `4095` finish payout setup, `4021` not enough available earnings, `4057` below the minimum. Account only, money write |
 | `get_agent_policy` | none | This agent's limit mode (`unset`, `unlimited`, `monthly`, `yearly`, `one_time`), limit, and spend in the period. Changed only on the website. Account only. **Deprecated** |
 | `get_approval` | `approval_id` | State of a purchase approval: `pending`, `approved`, `denied`, `expired`, or `used`. Account only |
 | `confirm_approval` | `approval_id`, `code` | Approves with the 6-digit code the human read from their email. Account only, write |
 
-Cash-out and payout setup are website-only.
+Payout setup and cash-out need `mcp:write` or `mcp:money` and an account-level token; project tokens can't use them. They are not deprecated and stay on both servers. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
 
 Field values:
 
@@ -234,10 +237,10 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4214` | Waiting for the human's approval (HTTP 202, returned as a normal result) |
 | `4215` | The human denied the request |
 | `4216` | Wrong or expired approval code |
-| `4095` | The idempotency key belongs to a different purchase |
+| `4095` | The idempotency key belongs to a different purchase, or payout setup isn't finished (payout tools) |
 | `4097` | The approval was already used |
 | `4098` | The approval was already decided or expired |
-| `4083` | Website only (payout setup and cash-out) |
+| `4083` | Website only (for example account settings, approval links, or key management) |
 | `4071` | A taxonomy value isn't allowed; `validate_listing` lists the allowed values |
 | `4072` | A similar title isn't a public game, or is this game |
 | `4225` | The listing check failed, so the page can't go public (HTTP 422, report in `data.lint`) |

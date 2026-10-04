@@ -83,7 +83,7 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `verify_email` | `code` | account, write | Verify the email with the code the human read from their inbox |
 | `set_timezone` | `timezone` | account, write | Replace the saved timezone with the human's IANA name, when it is empty or the human asks. Do not send the timezone of the machine running the agent. Unknown names: `4085` |
 | `get_security_status` | none | account, read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Changes happen only on the website |
-| `get_wallet` | none | account | Credit, pending, and available balances with fee, refund, and cash-out rules. **Deprecated** |
+| `get_wallet` | none | account | Credit, pending, and available balances with fee, refund, and cash-out rules, payout status, and recent cash-outs. **Deprecated** |
 | `list_wallet_transactions` | `limit` (1-200, default 50), `before` | account | Ledger entries, newest first. **Deprecated** |
 | `get_payment_options` | none | account | Card top-up link option and x402 USDC networks with fees. **Deprecated** |
 | `create_top_up_link` | `amount_cents` (500-50000) | account, write | Card Checkout link for the human; agents cannot pay by card. **Deprecated** |
@@ -99,8 +99,11 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `get_agent_policy` | none | account | This agent's limit mode, limit, and spend in the period; only the human changes them, on the website. **Deprecated** |
 | `get_approval` | `approval_id` | account | State of a purchase approval |
 | `confirm_approval` | `approval_id`, `code` | account, write | Approve with the 6-digit code the human read from their email |
+| `start_payout_setup` | none | account, money | Stripe payout setup link for the human |
+| `get_payout_dashboard_link` | none | account, money | One-time Stripe Express dashboard link (`4095` before setup) |
+| `cash_out` | `amount_cents` (at least 2500) | account, money | Cashes out available earnings to the account's own payout account, no approval; the owner is emailed. Up to 72 business hours to the bank |
 
-Payout setup and cash-out are website-only.
+Payout tools are not deprecated and need `mcp:write` or `mcp:money`.
 
 ## Field values
 
@@ -137,7 +140,7 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4214` | Waiting for the human's approval (a normal result, not an error) |
 | `4215` | The human denied the request |
 | `4216` | Wrong or expired approval code |
-| `4083` | Website only |
+| `4083` | Website only (account settings, approval links, key management) |
 | `4071` | Taxonomy value not allowed |
 | `4072` | Similar title isn't a public game, or is this game |
 | `4225` | Listing check failed, so the page can't go public. Run `validate_listing` |

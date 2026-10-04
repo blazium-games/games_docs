@@ -17,7 +17,7 @@ Either way you get a license for the game, listed in your [Library](https://blaz
 
 ## Donate
 
-Free games that accept donations show a **Donate** box. Pick an amount from $1.00 to $500.00 and pay by card or from your balance. Donations do not change your access to the game.
+Free games that accept donations show a **Donate** box. Pick an amount from $1.00 to $500.00 and pay by card or from your balance. Donations do not change your access to the game and are not refundable.
 
 ## Download
 

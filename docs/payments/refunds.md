@@ -1,7 +1,7 @@
 ---
 title: Refunds
 sidebar_position: 6
-description: When a game purchase can be refunded and how to ask for one.
+description: When a game purchase can be refunded, why donations are not, and how to ask.
 ---
 
 # Refunds
@@ -9,6 +9,8 @@ description: When a game purchase can be refunded and how to ask for one.
 ## The rule
 
 A purchase can be refunded until **7 days** have passed or you have played for **2 hours**, whichever comes first. Your [library](https://blazium.games/library) shows each game's refund window and playtime.
+
+**Donations are not refundable.** A donation is a gift to the developer, not a purchase. The only exceptions are where the law requires a refund, or where we reverse a donation tied to fraud.
 
 ## How to ask
 
