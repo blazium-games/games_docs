@@ -9,9 +9,9 @@ Canonical version: https://blazium.games/subprocessors
 
 # Subprocessors
 
-**Effective Date: September 30, 2026**
+**Effective Date: October 5, 2026**
 
-These are the third-party services that process data on behalf of Blazium Games.
+These are the third-party services that process data on behalf of Divine Games, Inc., which operates Blazium Games.
 We will update this page before adding a new subprocessor.
 
 | Subprocessor | What it does for us | Data involved | Location |

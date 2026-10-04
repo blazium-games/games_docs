@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/permissions
 
 # Permissions & Scopes
 
-**Effective Date: September 30, 2026**
+**Effective Date: October 5, 2026**
 
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
 It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), and [Discord](./discord-api-disclosure.md).
@@ -130,13 +130,26 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 - The limit counts each purchase's total, including tax. Refunded purchases stop counting.
 - Buying needs a player token with `player:buy`, or until October 28, 2026 a developer token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy (error 4030).
 - From October 28, 2026 the developer server no longer buys: its buying tools are removed and direct requests get error 4034. Use the player server instead.
-- Agents pay only from your account balance, never by card. They cannot cash out, set up payouts, or request refunds.
+- Agents pay only from your account balance, never by card. They cannot request refunds.
 - Your email must be verified before agents can buy.
 - Each agent purchase is recorded with the agent that made it, and shows in your wallet transactions and library.
 
 ### We will never
 - Let an agent charge your card.
 - Let an agent spend beyond the limit you set without your approval.
+- Let an agent send your earnings anywhere except the payout account on your own account.
+
+## Agent payouts
+
+AI tools with wallet access can set up payouts and cash out for you without asking first.
+
+- Wallet access means a player token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-game (project) tokens cannot.
+- An agent can start payout setup and open your Stripe payout dashboard. Both return a Stripe link for you to open: identity, tax, and bank details are entered by you on Stripe's own pages and never pass through the agent or us.
+- An agent can cash out your available earnings ($25 minimum, same fees as the website). The money only goes to the Stripe account linked to your Blazium Games account.
+- We email you after every cash-out an agent makes, with the amount and the agent's name.
+- Your email must be verified before agents can set up payouts or cash out.
+- A payout can take up to 72 business hours to reach your bank.
+- To stop an agent, revoke its key or disconnect it at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
 
 ## Keys
 
@@ -190,7 +203,7 @@ These are the responses your MCP client, script, or CI job will see.
 | A project token is used for a different game | 403 | 4030 | This token is limited to one project |
 | The game's owner turned off MCP access for admins, and an admin's token is used on it | 403 | 4080 | The project owner has turned off MCP access for admins |
 | A project token tries to buy | 403 | 4212 | This token can't make purchases |
-| A player token without `player:buy` tries to top up or buy | 403 | 4212 | This token can't make purchases; reconnect and allow purchases |
+| A player token without `player:buy` tries to top up, buy, set up payouts, or cash out | 403 | 4212 | This token can't make purchases or cash out; reconnect and allow purchases |
 | A player token is used outside the player routes | 403 | 4033 | Player tokens cannot use this route |
 | A developer token is used on a player route | 403 | 4033 | Player routes need a player token |
 | A token holds both developer and player scopes | 403 | 4032 | This token mixes developer and player scopes |
@@ -200,8 +213,8 @@ These are the responses your MCP client, script, or CI job will see.
 | You denied the agent's request | 403 | 4215 | The account owner denied this request |
 | The agent sent a wrong or expired approval code | 400 | 4216 | Wrong or expired code |
 | An agent tries to pay by card | 403 | 4082 | Agents pay from the balance |
-| An MCP token is used for wallet setup, cash-out, or agent limits | 403 | 4083 or 4081 | Only available on blazium.games |
-| The account's email is not verified and it tries to buy, download, or cash out | 403 | 4096 | Verify your email first |
+| An MCP token is used to change agent limits | 403 | 4083 or 4081 | Only available on blazium.games |
+| The account's email is not verified and it tries to buy, download, set up payouts, or cash out | 403 | 4096 | Verify your email first |
 | The token expired, or the account was deleted | 401 | 4003 or 4007 | Invalid or expired authentication token, or User account not found |
 
 - Account MCP keys and website sessions carry both scopes. OAuth tokens carry what the user approved.

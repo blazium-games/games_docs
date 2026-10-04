@@ -11,7 +11,7 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `verify_email` | write | Verify the email with the human's code |
 | `set_timezone` | write | Replace the saved timezone with the human's IANA name, when `get_account` timezone is empty or the human asks. Do not use the agent's machine timezone. Unknown names: `4085` |
 | `get_security_status` | read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `recovery_codes_left`, and `email_code_alternative`. Changes happen only on the website |
-| `get_wallet` | read | Balances plus fee and refund rules |
+| `get_wallet` | read | Balances, fee and refund rules, payout status (`payouts`), recent `cash_outs`, and `rules.payout_arrival` |
 | `list_wallet_transactions` | read | Ledger entries, newest first |
 | `get_payment_options` | read | Card and x402 USDC top-up options with fees |
 | `create_top_up_link` | buy | Card Checkout link for the human |
@@ -25,6 +25,9 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `get_library` | read | Owned games, refund windows, play time |
 | `get_download_link` | read | 5-minute signed download URL |
 | `get_agent_policy` | read | This agent's spending limit |
+| `start_payout_setup` | buy | Start or continue Stripe payout setup; returns a link only the human opens to enter identity, tax, and bank details |
+| `get_payout_dashboard_link` | buy | One-time Stripe Express dashboard link for the human (`4095` until setup has started) |
+| `cash_out` | buy | Cash out available earnings (`amount_cents`, at least 2500) to the human's own payout account. No approval; the owner is emailed. Up to 72 business hours to reach the bank. `4021` not enough available, `4057` below the minimum |
 | `search_catalog` | read | Search public games, tools, mods, and assets by text, genres, tags (including community tags), tone, session length, network mode, players, platform, engine and version, renderer, license, made-with label (`authorship`), and `ai_uses`. Several values in one filter match any of them; `exclude_types`, `exclude_genres`, `exclude_tone`, `exclude_tags`, `exclude_warnings`, and `exclude_ai_uses` leave listings out. Adult listings only appear if the human turned on adult content |
 | `list_game_addons` | read | Mods and plugins, or tools and applications, made for a game (`kind`: `mods`, `tools`, or empty for both); `same_creator` marks the developer's own |
 | `suggest_tag` | write | Suggest a tag for a game the human owns and played for an hour (`4237` before that), or `remove` it; up to 5 per game. Without `tag`, returns their suggestions. Only suggest tags the human chose |

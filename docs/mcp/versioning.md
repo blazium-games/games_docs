@@ -27,6 +27,12 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer and player servers 1.15:
+
+- New tools on both servers: `start_payout_setup` and `get_payout_dashboard_link` (Stripe links for the human) and `cash_out` (`amount_cents`). Agents with `player:buy`, `mcp:write`, or `mcp:money` can set up payouts and cash out to the account's own Stripe payout account without approval; the owner is emailed after each agent cash-out. `4083` no longer applies to payouts
+- `get_wallet` now returns `payouts` (`connected`, `payouts_ready`), `cash_outs`, and `rules.payout_arrival` (up to 72 business hours) to agents
+- Donations are no longer refundable, and purchase results show `refundable_until` as null for donations
+
 Developer and player servers 1.14:
 
 - New developer tools: `get_store_links` and `set_store_links` for the listing's pages on other stores such as Steam, GOG, or Epic Games Store (`4238` for a link on the wrong site). `get_game_details` returns them as `store_links`

@@ -18,7 +18,7 @@
 
 ## Payments
 
-- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs, and refunds.
+- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs (up to 72 business hours to the bank, also by agents), and refunds (donations are not refundable).
 
 ## Public API and the editor asset library
 

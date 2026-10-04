@@ -26,15 +26,17 @@ The wallet page also lists every transaction: sales, purchases, top-ups, refunds
 
 Cash-outs are paid through [Stripe Connect](https://stripe.com/connect) Express. For now, payout accounts can only be set up in the United States.
 
-1. On the wallet page choose **Set up payouts**. You are sent to Stripe to confirm your identity and add a bank account. Stripe may ask for tax information (KYC).
-2. When you come back, the wallet page shows whether payouts are ready. If Stripe needs more information, choose **Set up payouts** again.
-3. **Stripe dashboard** opens your Express dashboard, where you manage your bank account and see payouts.
+1. On the wallet page choose **Set up payouts with Stripe**. Stripe opens in a new tab, where you confirm your identity and add a bank account. Stripe may ask for tax information (KYC).
+2. When you come back, the wallet page shows whether payouts are ready. If Stripe needs more information, choose **Continue payout setup**.
+3. **Open Stripe payout dashboard** opens your Express dashboard in a new tab, where you manage your bank account and see payouts.
 
-Payout setup and cash-outs are only available on the website, never through MCP or an agent.
+An AI agent can do the same for you. See [Agent payouts](#agent-payouts).
 
 ## Cash out
 
-Cash out any amount from $25 of available earnings. The fee is 8% of the amount plus Stripe's payout fee (0.25% + $0.25). The rest is transferred to your Stripe account and paid out to your bank on Stripe's schedule.
+Cash out any amount from $25 of available earnings. The fee is 8% of the amount plus Stripe's payout fee (0.25% + $0.25). The rest is transferred to your Stripe account and then paid out to your bank.
+
+A payout can take up to **72 business hours** to reach your bank after you cash out. Weekends and United States federal holidays don't count. Stripe verification, tax-form holds, or a Stripe review can add to that.
 
 | You cash out | 8% fee | Payout fee | Transferred |
 | --- | --- | --- | --- |
@@ -42,6 +44,18 @@ Cash out any amount from $25 of available earnings. The fee is 8% of the amount 
 | $100.00 | $8.00 | $0.50 | $91.50 |
 
 If a transfer fails or is reversed, the full amount returns to your available balance and the fee is refunded.
+
+## Agent payouts
+
+An AI agent connected with wallet access can set up payouts and cash out for you, without asking you first:
+
+- Wallet access means a player key or token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-project tokens can't.
+- `start_payout_setup` and `get_payout_dashboard_link` return a Stripe link for you to open. Your identity, tax, and bank details are only ever entered on Stripe's pages, never through the agent.
+- `cash_out` sends available earnings to the payout account on your own Blazium Games account. The same $25 minimum and fees apply. Money can't be sent anywhere else.
+- We email you after every cash-out an agent makes, with the amount and the agent's name.
+- Your email must be verified first.
+
+To stop an agent, revoke its key or disconnect it in [MCP settings](https://blazium.games/settings/mcp). See [Permissions](../legal/permissions.md#agent-payouts).
 
 ## Chargebacks
 

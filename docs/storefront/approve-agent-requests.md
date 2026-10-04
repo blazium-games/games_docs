@@ -23,5 +23,6 @@ Only approve requests you asked your agent to make.
 ## Good to know
 
 - Requests expire. An expired request says "This request expired. Your agent can ask again."
-- Agents only pay from your stored balance, never your card, and can't cash out.
+- Agents only pay from your stored balance, never your card.
+- Agents with wallet access can set up payouts and cash out your earnings without a request here. Money only goes to the payout account on your own account, and you get an email after each cash-out. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
 - Pending requests are also listed under **Waiting for your approval** in [MCP settings](https://blazium.games/settings/mcp), where you also set how much an agent may spend without asking. See [Agent purchases](../payments/agent-purchases.md).

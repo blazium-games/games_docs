@@ -1,12 +1,12 @@
 ---
 title: Player MCP
 sidebar_position: 5
-description: Connect an agent to your Blazium Games account as a player to get recommendations with reasons, search the catalog, review games and report bugs, check your wallet and library, top up, buy games within your spending limit, and install or launch them through the Blazium launcher.
+description: Connect an agent to your Blazium Games account as a player to get recommendations with reasons, search the catalog, review games and report bugs, check your wallet and library, top up, buy games within your spending limit, cash out earnings, and install or launch them through the Blazium launcher.
 ---
 
 # Player MCP
 
-The player server acts for you as a player. It can recommend games and say why, search the catalog, review games you own and report bugs, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
+The player server acts for you as a player. It can recommend games and say why, search the catalog, review games you own and report bugs, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, set up payouts and cash out your earnings, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
 
 | | Developer server | Player server |
 |---|---|---|
@@ -43,13 +43,17 @@ Create a player key at [blazium.games/settings/mcp](https://blazium.games/settin
 |---|---|
 | `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review, friends and what they're playing |
 | `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, tag suggestions, taste feedback, bug reports, friend requests, presence and activity sharing |
-| `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game` |
+| `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game`, payout setup and `cash_out` |
 
 A route outside this list returns `4033`. A missing `player:buy` returns `4212`; any other missing scope returns `4031`.
 
 ## Spending limits and approval
 
 Purchases always come from your stored balance. Set a limit per agent at [blazium.games/settings/mcp](https://blazium.games/settings/mcp): ask every time, unlimited, monthly, yearly, or a one-time budget. Anything beyond the limit waits for you to approve it by email link or code. See [Agent purchases](../payments/agent-purchases.md).
+
+## Payouts and cash-out
+
+With `player:buy` an agent can also start payout setup, open your Stripe payout dashboard, and cash out your available earnings, without asking first. Stripe links are for you to open; your identity, tax, and bank details are only entered on Stripe. Money only goes to the payout account on your own account, we email you after each agent cash-out, and a payout can take up to 72 business hours to reach your bank. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
 
 ## Tools
 
@@ -60,7 +64,7 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `verify_email` | `code` | write | Verifies your email with the code |
 | `set_timezone` | `timezone` | write | Sets your IANA timezone, replacing the saved one. The agent uses your zone, not the machine it is running on |
 | `get_security_status` | none | read | Whether an authenticator app protects your account, and how many recovery codes are left |
-| `get_wallet` | none | read | Credit, pending, and available balances plus fee and refund rules |
+| `get_wallet` | none | read | Credit, pending, and available balances, fee and refund rules, payout status, and recent cash-outs |
 | `list_wallet_transactions` | `limit` (1-200), `before` | read | Ledger entries, newest first |
 | `get_payment_options` | none | read | Card top-up and x402 USDC networks with fees |
 | `create_top_up_link` | `amount_cents` | buy | Card Checkout link for you to add balance |
@@ -74,6 +78,9 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 | `get_library` | none | read | Games you own, with refund windows and play time |
 | `get_download_link` | `file_id` | read | 5-minute signed URL for a build file |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
+| `start_payout_setup` | none | buy | Starts or continues Stripe payout setup and returns a link for you |
+| `get_payout_dashboard_link` | none | buy | One-time link to your Stripe Express dashboard (`4095` until setup has started) |
+| `cash_out` | `amount_cents` | buy | Cashes out available earnings ($25 minimum) to your own payout account; you're emailed after each one |
 | `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `ai_uses`, `exclude_types`, `exclude_genres`, `exclude_tone`, `exclude_tags`, `exclude_warnings`, `exclude_ai_uses`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `authorship`, `sort`, `page`, `page_size` | read | Public games, tools, mods, and assets with a score, scan state, platforms, made-with label, content warnings, AI disclosure, launch-health band, and a short reason for each match. Several values in one filter match any of them (comma-separate `asset_type`, `session_bucket`, `net`, `os`, and `authorship`); the `exclude_` filters leave out listings with any of their values. `sort` is `relevance` (default, best match), `newest`, or `updated`. Adult listings appear only if you turned on adult content. See [Listings and search](../listings.md#search) |
 | `list_game_addons` | `uid`, `kind` (`mods`, `tools`, or empty for both), `limit` (1-100) | read | Mods and plugins, or tools and applications, made for a game. `same_creator` marks the ones from the game's own developer |
 | `suggest_tag` | `uid`, `tag`, `remove` | write | Suggests a tag for a game you own and have played for at least an hour (`4237` before that); `remove` withdraws it. Up to 5 per game. Without `tag` it returns your suggestions and whether you may suggest. See [Community tags](../listings.md#community-tags) |
