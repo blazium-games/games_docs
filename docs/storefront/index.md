@@ -1,56 +1,40 @@
 ---
+title: Using Blazium Games
 sidebar_position: 1
+description: Step-by-step guides for players and developers using the blazium.games website, from finding a game to publishing your own.
 ---
 
-# Storefront Guides
+# Using Blazium Games
 
-Complete step-by-step guides for using the Blazium Games storefront.
+These guides walk through the [blazium.games](https://blazium.games) website. Each one names the buttons and messages you will see, so you can follow along in another tab.
 
-01. [Find a game and download or buy it](./01-01-find-a-game-validated.md)
-02. [Install the desktop app](./02-02-install-desktop-app.md)
-03. [Redeem a key](./03-03-redeem-a-key.md)
-04. [See your library](./04-04-see-your-library.md)
-05. [Add friends](./05-05-add-friends.md)
-06. [Review a game and suggest a tag](./06-06-review-and-tag-validated.md)
-07. [Report a game or a person](./07-07-report-validated.md)
-09. [Embed a game](./09-09-embed-validated.md)
-10. [Turn on developer mode](./10-10-developer-mode-validated.md)
-11. [Create a project](./11-11-create-a-project-validated.md)
-12. [Edit the store page](./12-12-edit-the-store-page-validated.md)
-13. [Invite an admin and accept](./13-13-invite-an-admin-validated.md)
-14. [Upload builds and deploy keys](./14-14-upload-builds-validated.md)
-15. [Give out game keys](./15-15-game-keys-validated.md)
-16. [Analytics, crashes, and sales](./16-16-analytics-crashes-sales-validated.md)
-17. [MCP](./17-17-mcp-validated.md)
-18. [Delete a project](./18-18-delete-a-project-validated.md)
-19. [Create a project, then open it as a player](./19-19-create-then-open.md)
-20. [Create an account](./20-20-create-an-account-validated.md)
-21. [Sign in with GitHub, X, or Discord](./21-21-sign-in-social-validated.md)
-22. [Forgot password](./22-22-forgot-password-validated.md)
-23. [Verify your email](./23-23-verify-email-validated.md)
-24. [Wallet, add funds, and cash out](./24-24-wallet-validated.md)
-25. [Show or hide adult games](./25-25-adult-validated.md)
-26. [Log out](./26-26-logout-validated.md)
-27. [Get help](./27-27-get-help-validated.md)
-28. [Approve a link](./28-28-approve-a-link-validated.md)
-29. [Log in with email](./29-29-log-in-with-email-validated.md)
-30. [Email code](./30-30-email-code-validated.md)
-31. [Finish setup](./31-31-finish-setup-validated.md)
-32. [Change password](./32-32-change-password-validated.md)
-33. [Authenticator](./33-33-authenticator-validated.md)
-34. [Linked accounts](./34-34-linked-accounts-validated.md)
-35. [Cookie choice](./35-35-cookie-choice-validated.md)
-36. [Page not found](./36-36-page-not-found-validated.md)
-37. [Press kit](./37-37-press-kit-validated.md)
-38. [Mods](./38-38-mods-validated.md)
-39. [Tools](./39-39-tools-validated.md)
-40. [Terms](./40-40-terms-validated.md)
-41. [Privacy](./41-41-privacy-validated.md)
-42. [Permissions](./42-42-permissions-validated.md)
-43. [GitHub API disclosure](./43-43-github-api-disclosure-validated.md)
-44. [X API disclosure](./44-44-x-api-disclosure-validated.md)
-45. [Discord API disclosure](./45-45-discord-api-disclosure-validated.md)
-46. [Subprocessors](./46-46-subprocessors-validated.md)
-47. [Edit your profile](./47-47-edit-profile-validated.md)
-48. [View a profile](./48-48-view-profile-validated.md)
-49. [Join or leave a beta](./49-49-beta-validated.md)
+The screenshots use sample games and accounts.
+
+## Playing
+
+- [Find a game](./find-a-game.md): the home page shelves, Browse, filters, and mods and tools for a game.
+- [Buy and download a game](./buy-and-download.md): paying by card or from your balance, downloads, older versions, and betas.
+- [Your library](./library.md): the games you own and how to get back to their downloads.
+- [Redeem a key or gift link](./redeem-a-key.md)
+- [The desktop app](./desktop-app.md)
+- [Friends](./friends.md): requests, who is playing what, and activity sharing.
+- [Reviews and player tags](./reviews-and-tags.md)
+- [Report a game or a person](./report.md)
+- [Embed a game on your website](./embed.md)
+
+## Your account
+
+- [Sign up and sign in](./sign-up-and-sign-in.md): email, GitHub, X or Discord, emailed codes, and updated terms.
+- [Profile and settings](./profile-and-settings.md): avatar, username, adult content, and cookie choices.
+- [Approve an agent request](./approve-agent-requests.md)
+- [Get help](./get-help.md)
+
+Security settings are covered in [Account security](../account-security.md) and [Linked accounts](../linked-accounts.md). Money is covered in [Payments](../payments/index.md).
+
+## Publishing
+
+- [Create and edit a project](./create-a-project.md): the new project form, the edit page tabs, the listing check, and deleting a project.
+- [Team and keys](./team-and-keys.md): admins, deploy keys, and game keys.
+- [Builds and reports](./builds-and-reports.md): release channels, launch health, analytics, crashes, and sales.
+
+Publishing needs [developer mode](../developer-mode.md).

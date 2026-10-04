@@ -6,7 +6,7 @@ description: When a listing must be marked adult, how players opt in to adult co
 
 # Content rules
 
-These rules come from the [Terms of Service](https://blazium.games/terms-of-service#14-content-ratings-and-adult-content). This page explains how they work on the store.
+These rules come from the [Terms of Service](https://blazium.games/terms-of-service#20-content-ratings-and-adult-content). This page explains how they work on the store.
 
 ## Content warnings
 
