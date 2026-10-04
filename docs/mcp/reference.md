@@ -211,6 +211,17 @@ Field values:
 | `blazium-games://games/{uid}/builds` | Builds and crash reporter `build_id` values |
 | `blazium-games://wallet` | Stored balance and payment rules. Account only. **Deprecated** |
 | `blazium-games://library` | Owned games and licenses. Account only. **Deprecated** |
+| `ui://blazium-games/account.html` | Account status, with links to finish sign-in on the website |
+| `ui://blazium-games/approval.html` | Approval status, confirm link, and the emailed code |
+| `ui://blazium-games/dev-game.html` | Store pages you can edit |
+| `ui://blazium-games/analytics.html` | Visitor analytics |
+| `ui://blazium-games/sales.html` | Sales, and a price form that saves when you click |
+| `ui://blazium-games/crashes.html` | Crash reports and a private download link |
+| `ui://blazium-games/checkout.html` | Quote, buy, and donate. **Deprecated** with the buying tools after 2026-10-28 |
+| `ui://blazium-games/wallet.html` | Balance and a card top-up link. **Deprecated** after 2026-10-28 |
+| `ui://blazium-games/library.html` | Owned games and download links. **Deprecated** after 2026-10-28 |
+
+A host that supports MCP Apps renders these `ui://` resources (`text/html;profile=mcp-app`) beside the tool result. You confirm a price change in the sales view. Card payment happens on the Checkout link. Other hosts keep the text result. Key-issuing tools, payout setup, and cash-out stay text-only.
 
 Template `{uid}` values must be a uid or vanity name made of letters, digits, `-` and `_`. Anything else, including dots or slashes, returns an error instead of calling the API.
 

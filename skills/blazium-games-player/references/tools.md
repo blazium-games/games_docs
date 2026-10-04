@@ -55,3 +55,13 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `blazium-games://me` | Account status |
 | `blazium-games://wallet` | Stored balance and payment rules |
 | `blazium-games://library` | Owned games and licenses |
+| `ui://blazium-games/checkout.html` | Quote, buy, and donate. The purchase runs when the human clicks |
+| `ui://blazium-games/game.html` | Game information and trust checks |
+| `ui://blazium-games/results.html` | Search, recommendations, shelves, add-ons, and what friends are playing |
+| `ui://blazium-games/wallet.html` | Balance, ledger, spending limit, and a card top-up link |
+| `ui://blazium-games/approval.html` | Approval status, confirm link, and the emailed code |
+| `ui://blazium-games/library.html` | Owned games, redeem, and download links |
+| `ui://blazium-games/handoff.html` | `blazium://` hand-off for the Windows and Linux launcher |
+| `ui://blazium-games/account.html` | Verification, timezone, and links to finish sign-in on the website |
+| `ui://blazium-games/feedback.html` | Reviews, bug reports, taste, and tag suggestions. Send only what the human wrote |
+| `ui://blazium-games/friends.html` | Friends and requests. Send and answer only from a click |

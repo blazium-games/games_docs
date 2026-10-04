@@ -27,6 +27,13 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer and player servers 1.16:
+
+- Interactive views (MCP Apps). Tools a person should see carry `_meta.ui.resourceUri` (and the older `_meta["ui/resourceUri"]`) pointing at a `ui://blazium-games/…` resource served as `text/html;profile=mcp-app`, and both servers advertise the `io.modelcontextprotocol/ui` extension. See [Player tools](./player.md#interactive-views) and the [reference](./reference.md)
+- A purchase, donation, key redeem, friend request, or price change runs only when the human clicks in the view. Key-issuing tools, x402 signing, payout setup, and cash-out stay text-only
+- The `checkout`, `wallet`, and `library` views leave the developer server with the deprecated buying tools after 2026-10-28
+- The servers no longer advertise the deprecated `logging` capability. No tools were added or removed
+
 Developer and player servers 1.15:
 
 - New tools on both servers: `start_payout_setup` and `get_payout_dashboard_link` (Stripe links for the human) and `cash_out` (`amount_cents`). Agents with `player:buy`, `mcp:write`, or `mcp:money` can set up payouts and cash out to the account's own Stripe payout account without approval; the owner is emailed after each agent cash-out. `4083` no longer applies to payouts
