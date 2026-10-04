@@ -81,6 +81,15 @@ Players review games they own and file bug tickets from the [player server](./pl
 
 Only the game's owner and admins can read bug tickets and download their attachments.
 
+### Copyright notices
+
+Paid copyright (DMCA) notices that name the account's content. Notices appear only once the claimant has paid. See [Copyright (DMCA) notices](../storefront/dmca.md#if-a-notice-names-your-content).
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `list_copyright_notices` | none | Notices about the account's content: `uid`, `reference`, `status` (`open`, `accepted`, `rejected`, `resolved`, `closed`), claimant, company, filing and decision dates, and how many of the account's links each names. `open` counts notices still under review |
+| `get_copyright_notice` | `uid` (from `list_copyright_notices`) | One notice: the claimant's name, company and email, the work described, the statements and signature, the account's links it names and whether those listings were disabled, staff messages, the decision, and `reply_to`. Read only; the human replies to staff by email at `reply_to` with the reference in the subject |
+
 ### Dependencies, compatibility and license
 
 These show on the store page as **Uses / Used by**, **License** and **Works with**, and players filter [`search_catalog`](./player.md) by them.
@@ -151,7 +160,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 65 tools instead of 77. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 67 tools instead of 79. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|

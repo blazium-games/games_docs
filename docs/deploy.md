@@ -189,7 +189,7 @@ For a platform matrix, GitLab CI, and reading the `build_id` from `--json` outpu
 
 ## What you upload is yours to answer for
 
-Only upload builds and assets you have the right to share. If someone sends a copyright or DMCA notice about your content, we forward it to your account email and leave the decision to you: keep it, or delete the build or listing yourself. We don't take content down on your behalf. See [section 17.1 of the Terms](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices).
+Only upload builds and assets you have the right to share. If someone files a paid copyright (DMCA) notice about your content, we email it to you and it appears under **Settings > Copyright notices**. Our staff review each notice, and if they decide a claim is valid, they may disable the content and suspend or ban the account. You can answer the claimant, send us evidence, or delete the build or listing yourself at any time. See [Copyright (DMCA) notices](./storefront/dmca.md#if-a-notice-names-your-content) and [section 17.1 of the Terms](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices).
 
 ## Next
 

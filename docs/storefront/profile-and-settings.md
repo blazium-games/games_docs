@@ -8,7 +8,7 @@ description: Change your avatar, username, display name and timezone, show or hi
 
 ![Account settings with the Profile card](/img/storefront/settings.png)
 
-Open **Settings** from the account menu. The side menu has **Account**, **Linked accounts**, **Authenticator**, **Verify email**, **Wallet** and **MCP**.
+Open **Settings** from the account menu. The side menu has **Account**, **Linked accounts**, **Authenticator**, **Verify email**, **Wallet**, **MCP** and **Copyright notices**.
 
 ## Profile
 
@@ -37,6 +37,10 @@ To see them:
 Adult listings then appear in Browse, on developer pages and on store pages, marked **18+**. **Hide adult content** turns them off again. You can still leave them out of a single search with **Hide adult content** in Browse's filters.
 
 How developers label adult content is covered in [Content rules](../content-rules.md).
+
+## Copyright notices
+
+**Copyright notices** lists the paid copyright (DMCA) notices that name your content, with their status and any messages from our staff. It's empty unless someone has filed one. See [Copyright (DMCA) notices](./dmca.md#if-a-notice-names-your-content).
 
 ## Cookies
 
