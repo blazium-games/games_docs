@@ -11,12 +11,12 @@ Blazium Games is the platform for playing and publishing games, applications, mo
 - The hosted [Blazium Games MCP server](./mcp/index.md) at `https://mcp.blazium.games/mcp`, and the [player server](./mcp/player.md) at `https://mcp.blazium.games/player`. Both connect with OAuth, so no key is stored in the plugin.
 - Skills that walk the agent through store pages, deploys, crash reporting, crash debugging, analytics, keys, playing, and purchases.
 
-Source: [github.com/blazium-games/games_docs](https://github.com/blazium-games/games_docs) (MIT).
+The docs repo remains the guide and the plugin source: [github.com/blazium-games/games_docs](https://github.com/blazium-games/games_docs) (MIT). The versioned release is [github.com/blazium-games/games_skill](https://github.com/blazium-games/games_skill), published as `npm install @blazium-games/skills`.
 
 ## Install
 
 1. Open **Cursor Settings > Plugins**.
-2. Add `blazium-games/games_docs`.
+2. Add `blazium-games/games_skill`.
 3. Enable the **Blazium Games** plugin.
 4. Ask the agent something like "Connect to Blazium Games and list my games". Cursor opens a browser for the Blazium Games sign-in and consent page the first time.
 

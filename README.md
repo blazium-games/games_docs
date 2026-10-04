@@ -8,7 +8,13 @@ The plugin teaches Cursor how to use [Blazium Games](https://blazium.games): cre
 
 ## Install
 
-Add `blazium-games/games_docs` from **Cursor Settings > Plugins**, then enable **Blazium Games**.
+The versioned release is [blazium-games/games_skill](https://github.com/blazium-games/games_skill). Add `blazium-games/games_skill` from **Cursor Settings > Plugins**, then enable **Blazium Games**.
+
+```bash
+npm install @blazium-games/skills
+```
+
+This docs repo remains the guide and the plugin source. It still loads `./skills` and `mcp.json`. `games_skill` is what CI publishes to npm and to `https://cdn.blazium.app/games-skills/skills.json`.
 
 The first time the agent uses a Blazium Games tool, Cursor opens a browser for the Blazium Games sign-in and consent page. No key is stored in the plugin.
 
