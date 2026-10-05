@@ -28,6 +28,7 @@ Most public routes need no credentials. The rest take a header:
 | Player key or player OAuth token | `Authorization: Bearer ...` (or the `BLAZIUM_GAMES` header) | Optional on the [editor asset library](./editor-asset-library.md). Needs `player:read`. |
 | Deploy key | `X-Access-Token` and `X-Secret-Key` | Build registration. See [Deploy builds](./deploy.md). |
 | Game id | `X-App-Id` and `X-Build-Id` | Crash and event ingest. See [Crash reporting](./crash-reporting.md). |
+| Steam auth key | `Authorization: Bearer ...` | The `server` routes of [Steam auth verification](./steam-auth.md), from your own servers. |
 
 Player keys start with `bgames_play_` and are created at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). Player OAuth tokens come from `https://mcp.blazium.games/.well-known/oauth-authorization-server/player`. See [Player MCP](./mcp/player.md).
 
@@ -110,5 +111,8 @@ The asset library, signed-out downloads, and the OpenAPI document allow any orig
 | `POST /api/v1/public/crashes` | Send a crash report. |
 | `POST /api/v1/public/events` | Send game events. |
 | `POST /api/v1/tool/upload/build` | Register a build with a deploy key. |
+| `POST /api/v1/steam/{game_uid}/auth`, `/refresh` | Trade a Steam session ticket for a session token, or refresh one. See [Steam auth verification](./steam-auth.md). |
+| `POST /api/v1/steam/{game_uid}/server/verify`, `/server/revoke` | Check or revoke session tokens with the game's Steam auth key. |
+| `GET /api/v1/steam/{game_uid}/server/ownership/{steam_id}` | Ask whether a Steam account owns the game, with the Steam auth key. |
 
 File uploads go to `uploader.blazium.online` and are described in [Deploy builds](./deploy.md) and the [chauffeur CLI](./cli/index.md).

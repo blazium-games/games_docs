@@ -9,10 +9,10 @@ Canonical version: https://blazium.games/permissions
 
 # Permissions & Scopes
 
-**Effective Date: October 5, 2026**
+**Effective Date: October 8, 2026**
 
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
-It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), and [Discord](./discord-api-disclosure.md).
+It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), [Discord](./discord-api-disclosure.md), and [Steam](./steam-api-disclosure.md).
 For step-by-step instructions, see the [Linked accounts and sign-in](../linked-accounts.md) guide.
 
 ## Linked accounts and sign-in
@@ -83,6 +83,22 @@ Scopes requested: `identify` and `email`.
 - Ask for more scopes without updating this page first.
 
 Details: [Discord API disclosure](./discord-api-disclosure.md).
+
+## Steam
+
+Steam sign-in uses OpenID 2.0, which has no scopes and gives us no access token.
+
+### Why we need it
+- To link Steam to your account, so games that use Steam auth verification can tell their servers which Blazium Games account you are. Steam cannot be used to log in here.
+- Steam returns your Steam ID, and we ask Steam to confirm the reply is genuine. We may then read your public Steam name.
+
+### What we store
+- Your Steam ID and public Steam name. Nothing else.
+
+### We will never
+- Read your Steam library, friends, or inventory, or act on Steam for you.
+
+Details: [Steam API disclosure](./steam-api-disclosure.md).
 
 ## MCP access (OAuth)
 
@@ -156,6 +172,8 @@ AI tools with wallet access can set up payouts and cash out for you without aski
 - **MCP keys** (account keys and project keys) are shown once when you create them and are stored only as a hash. You can rotate them at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) or on a game's MCP tab; rotating invalidates the previous key.
 - **Player keys** (starting `bgames_play_`) work only on the player server. They are shown once, stored only as a hash, and rotated at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) separately from MCP keys.
 - **Deploy keys** let the chauffeur CLI or CI upload builds and debug symbols for one game. Issuing a new deploy key invalidates the previous one.
+- **Steamworks Web API keys** that developers enter to import a game from Steam are used for that import and discarded. With Steam auth verification on, the key is stored encrypted, never shown again, and never available to AI agents.
+- **Steam auth keys** (128 characters) sign a game's Steam session tokens and let its servers call Blazium Games. They are stored encrypted, can be shown to the game's owner and admins on its Steam tab, and are never available to AI agents. Making a new one revokes every session token.
 
 ## Cookies
 
@@ -169,7 +187,7 @@ Sign-in cookies are always on because the site does not work without them. They 
 | `__Host-BG_CSRF` | A random value that every form on the site must echo back, so another site cannot submit forms as you. | 7 days | No |
 | `__Host-BG_DEV` | Remembers a browser that verified an emailed sign-in code, for email-and-password sign-in when no authenticator app is set up. Survives logout. It does not skip an authenticator code. | 30 days | No |
 | `__Host-BG_NEXT` | Returns you to the page you came from after logging in with GitHub, X, or Discord. | 15 minutes | No |
-| `__Host-BG_STATE` | Ties a GitHub, X, or Discord sign-in to the browser that started it. | 15 minutes | No |
+| `__Host-BG_STATE` | Ties a GitHub, X, or Discord sign-in, or a Steam link, to the browser that started it. | 15 minutes | No |
 | `__Host-BG_SETUP` | Finishes setup for an email account that has not completed it. | 15 minutes | No |
 | `__Host-BG_ENROLL` | Carries a sign-in until you finish your password and a second step. | 15 minutes | No |
 | `__Host-BG_FACTOR` | Finishes authenticator setup, then shows recovery codes once. | 15 minutes | No |
@@ -189,6 +207,7 @@ You can change your choice at any time with **Cookie settings** in the blazium.g
 - **GitHub:** remove Blazium Games under [GitHub > Settings > Applications > Authorized OAuth Apps](https://github.com/settings/applications).
 - **X:** remove Blazium Games under [X > Settings > Security and account access > Apps and sessions](https://x.com/settings/connected_apps).
 - **Discord:** remove Blazium Games under Discord **User Settings > Authorized Apps**.
+- **Steam:** OpenID gives Blazium Games no ongoing access, so there is nothing to remove on Steam. Unlink it at [blazium.games/settings/connections](https://blazium.games/settings/connections).
 - **Agent spending:** set any agent back to **Ask me each time** at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
 - **MCP keys and tokens:** rotate keys at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). OAuth access tokens expire after 1 hour and refresh tokens after 30 days; all of them stop working when your account is deleted.
 - **Everything:** email [privacy@blazium.games](mailto:privacy@blazium.games) to delete your account. See the [Privacy Policy](https://blazium.games/privacy-policy#6-deleting-your-account).

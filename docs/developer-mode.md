@@ -23,11 +23,16 @@ Accounts that already owned a project, helped run one as an admin, or held a dev
 | Action | Without developer mode |
 |---|---|
 | Creating a project (website, `create_game`, or `POST /api/v1/private/games`) | `4105` |
-| Accepting an invite to help run a project | `4105` |
+| Accepting an invite to help run a project | Turns developer mode on when you accept the developer terms with the invite; `4106` without them |
 | Creating or rotating a project's deploy keys | `4105` |
+| [Importing from Steam](./steam-import.md) | `4105` |
 | Creating or rotating developer MCP keys, project MCP keys, and signing in to the [developer MCP server](./mcp/index.md) | `4105` |
 
 `4105` is HTTP 403 with `data.error` set to `developer_mode_required` and `data.developer_terms_version` set to the current terms version.
+
+## Accepting an admin invite
+
+Helping run a project needs developer mode, so accepting an admin invite turns it on. If it is off, the invite on your [Dashboard](https://blazium.games/dashboard) shows an **I accept the developer terms** box that you tick before **Accept**. Through the API, send `{"accept_developer_terms": true}` with `PUT /api/v1/private/invite/{invite_uid}`; without it the answer is `4106` with `data.error` set to `developer_terms_required`. Declining never needs the terms.
 
 ## Turn it off
 
