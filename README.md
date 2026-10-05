@@ -1,29 +1,37 @@
-# Blazium Games for Cursor
+# Blazium Games docs
 
-Blazium Games is the platform for playing and publishing games, applications, mods, and assets.
-
-The official Blazium Games plugin for Cursor, and the source of the [Blazium Games documentation](https://docs.blazium.games/).
-
-The plugin teaches Cursor how to use [Blazium Games](https://blazium.games): create and edit store pages, ship builds from CI, wire up crash reporting, debug crashes, read analytics, and manage keys through the hosted developer MCP server, and find, review, and buy games through the player MCP server.
+Documentation for [Blazium Games](https://blazium.games) and the source of the Cursor plugin. It is not the Blazium engine docs.
 
 ## Install
 
-The versioned release is [blazium-games/games_skill](https://github.com/blazium-games/games_skill). Add `blazium-games/games_skill` from **Cursor Settings > Plugins**, then enable **Blazium Games**.
+Read the site at [docs.blazium.games](https://docs.blazium.games).
+
+To use the plugin, add `blazium-games/games_skill` from **Cursor Settings > Plugins**, then enable **Blazium Games**.
 
 ```bash
 npm install @blazium-games/skills
 ```
 
-This docs repo remains the guide and the plugin source. It still loads `./skills` and `mcp.json`. `games_skill` is what CI publishes to npm and to `https://cdn.blazium.app/games-skills/skills.json`.
-
 The first time the agent uses a Blazium Games tool, Cursor opens a browser for the Blazium Games sign-in and consent page. No key is stored in the plugin.
+
+## Platform
+
+- Docs: [docs.blazium.games](https://docs.blazium.games) and the map [llms.txt](https://docs.blazium.games/llms.txt)
+- Skills: `npm install @blazium-games/skills`, or Cursor Settings > Plugins > `blazium-games/games_skill`. Index: [SKILL_TREE.md](https://github.com/blazium-games/games_skill/blob/master/SKILL_TREE.md)
+- MCP: [developer server](https://docs.blazium.games/docs/mcp) at `https://mcp.blazium.games/mcp`, and [player server](https://docs.blazium.games/docs/mcp/player) at `https://mcp.blazium.games/player`
+- CLI: `npm install -g @blazium-games/cli` (`chauffeur`), guide at [docs.blazium.games/docs/cli](https://docs.blazium.games/docs/cli)
+- Launcher: Windows setup from [Releases](https://github.com/blazium-games/games_launcher/releases), guide at [desktop app](https://docs.blazium.games/docs/storefront/desktop-app)
+- Support: [blazium-games/support](https://github.com/blazium-games/support/issues). Status: [status.blazium.games](https://status.blazium.games)
+
+## This repo
+
+This repository is the guide and the plugin source. It loads `./skills` and `mcp.json`. [games_skill](https://github.com/blazium-games/games_skill) is the versioned release that CI publishes to npm and to `https://cdn.blazium.app/games-skills/skills.json`.
 
 Full guide: [Cursor plugin docs](https://docs.blazium.games/docs/cursor-plugin).
 
-## What's included
+The hosted [developer MCP server](https://docs.blazium.games/docs/mcp) is `https://mcp.blazium.games/mcp`. The [player server](https://docs.blazium.games/docs/mcp/player) is `https://mcp.blazium.games/player`. Both are listed in [mcp.json](mcp.json).
 
-- The hosted [Blazium Games MCP server](https://docs.blazium.games/docs/mcp) at `https://mcp.blazium.games/mcp` and the [player server](https://docs.blazium.games/docs/mcp/player) at `https://mcp.blazium.games/player` ([mcp.json](mcp.json)).
-- Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
+Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 
 | Skill | What it does |
 |-------|--------------|
@@ -37,14 +45,14 @@ Full guide: [Cursor plugin docs](https://docs.blazium.games/docs/cursor-plugin).
 | [blazium-games-player](skills/blazium-games-player/SKILL.md) | Acts as a player: recommendations, catalog search, reviews, bug reports, friends |
 | [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buys games and donates from the balance within spending limits |
 
-## Authentication
+### Authentication
 
 - **OAuth (default):** choose your whole account or a single project on the consent page, and a preset such as **CI**, **Crash triage**, or **Read-only**. The player server has its own consent with `player:read`, `player:write`, and `player:buy`.
 - **API key:** for headless use, create a key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) and send it as `Authorization: Bearer bgames_mcp_...`. See [Access and keys](https://docs.blazium.games/docs/mcp/access-and-keys).
 
 Never commit keys to a repository.
 
-## Repository layout
+### Repository layout
 
 | Path | Contents |
 |------|----------|
@@ -54,7 +62,7 @@ Never commit keys to a repository.
 | `docs/`, `src/`, `static/` | Docusaurus documentation site |
 | `scripts/check-plugin.mjs` | Validates manifests, skills, links, MCP coverage, and the version and tool counts in the docs |
 
-## Contributing
+### Editing the site
 
 Pull requests for the docs and plugin are welcome. Report bugs in Blazium Games itself, including the MCP servers, at [blazium-games/support](https://github.com/blazium-games/support/issues).
 
@@ -71,13 +79,8 @@ The plugin check fetches the live [developer server card](https://mcp.blazium.ga
 
 The site itself is static and makes no API calls, so `npm start` works offline.
 
-## Contact
-
-- Support: [blazium.games/support](https://blazium.games/support) or [support@blazium.games](mailto:support@blazium.games)
-- Bug reports: [blazium-games/support](https://github.com/blazium-games/support/issues)
-- Service status: [status.blazium.games](https://status.blazium.games)
-- Privacy: [privacy@blazium.games](mailto:privacy@blazium.games)
+Privacy requests: [privacy@blazium.games](mailto:privacy@blazium.games).
 
 ## License
 
-[MIT](LICENSE)
+Licensed under the MIT License — see [LICENSE](LICENSE).

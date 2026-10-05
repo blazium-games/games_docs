@@ -148,7 +148,7 @@ A host that supports MCP Apps shows an interactive view beside the tool result. 
 | `ui://blazium-games/wallet.html` | Balance, ledger, spending limit, and a card top-up link |
 | `ui://blazium-games/approval.html` | Approval status, confirm link, and the emailed code |
 | `ui://blazium-games/library.html` | Owned games, redeem, and download links |
-| `ui://blazium-games/handoff.html` | `blazium://` hand-off for the Windows and Linux launcher |
+| `ui://blazium-games/handoff.html` | `blazium://` hand-off for the Windows launcher |
 | `ui://blazium-games/account.html` | Verification, timezone, and links to finish sign-in on the website |
 | `ui://blazium-games/feedback.html` | Reviews, bug reports, taste, and tag suggestions |
 | `ui://blazium-games/friends.html` | Friends and requests |

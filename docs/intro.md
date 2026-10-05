@@ -8,7 +8,7 @@ This is the documentation for [Blazium Games](https://blazium.games). Blazium Ga
 
 ## The platform
 
-Players browse the catalog, keep a library, and use the [desktop launcher](./storefront/desktop-app.md) on Windows and Linux. Friend messages and each game's chat are IRC on `irc.blazium.online`. Publishers host a profile and a page for each project, with a press kit and lists of mods and tools. Upload builds with `npm install -g @blazium-games/cli` (`chauffeur`).
+Players browse the catalog, keep a library, and use the [desktop launcher](./storefront/desktop-app.md) on Windows. A Linux package is not in the current release. Friend messages and each game's chat are IRC on `irc.blazium.online`. Publishers host a profile and a page for each project, with a press kit and lists of mods and tools. Upload builds with `npm install -g @blazium-games/cli` (`chauffeur`).
 
 The files crawlers and agents read — robots.txt, sitemaps, security.txt, the API catalog, and llms.txt — are listed in [Discovery files](./discovery.md).
 
@@ -34,4 +34,8 @@ The files crawlers and agents read — robots.txt, sitemaps, security.txt, the A
 - Service status: [status.blazium.games](https://status.blazium.games)
 - Privacy: [privacy@blazium.games](mailto:privacy@blazium.games)
 - Community: [Discord](https://blazium.app/chat)
-- Source for this site and the Cursor plugin: [blazium-games/games_docs](https://github.com/blazium-games/games_docs)
+- Docs and the Cursor plugin: [blazium-games/games_docs](https://github.com/blazium-games/games_docs)
+- Skills: [blazium-games/games_skill](https://github.com/blazium-games/games_skill) (`npm install @blazium-games/skills`)
+- Launcher: [blazium-games/games_launcher](https://github.com/blazium-games/games_launcher)
+- CLI: [blazium-games/games_cli](https://github.com/blazium-games/games_cli) (`npm install -g @blazium-games/cli`)
+- Support tracker: [blazium-games/support](https://github.com/blazium-games/support)
