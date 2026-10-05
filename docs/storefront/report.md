@@ -18,6 +18,10 @@ A message under the form confirms it was sent.
 
 Reports are reviewed against the [Terms of Service](https://blazium.games/terms-of-service#16-community-guidelines-and-reports), and what happens next is our decision.
 
+## Something in chat
+
+Chat follows the [Chat Rules](../legal/chat-rules.md). In a game's channel, the game's owner and admins can ban or mute someone. For anything else, email [support@blazium.games](mailto:support@blazium.games) with the channel, the usernames, and the time. Chat isn't logged, so a screenshot helps. If a child is in danger, contact your local authorities first.
+
 ## Copyright notices
 
 A report with the **copyright** category is input to our own moderation, not a copyright notice. A report, an email, or any other demand is not a takedown. [Section 17 of the Terms](https://blazium.games/terms-of-service#17-moderation-is-our-decision) says outside demands are not orders we follow. The only outside process is a paid copyright notice under [section 17.1](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices), filed at [blazium.games/dmca](https://blazium.games/dmca). See [Copyright (DMCA) notices](./dmca.md) for the fee and what happens next.

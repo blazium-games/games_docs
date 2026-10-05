@@ -27,6 +27,11 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer and player servers 1.18:
+
+- Game chat on the player server: `get_chat_connection` (a 10-minute SASL PLAIN sign-in), `get_chat_token_status`, and `request_chat_token` and `revoke_chat_token` (both need `confirm`; the new token is returned once). See [Player tools](./player.md#chat)
+- Game chat moderation on the developer server: `get_game_chat`, `set_chat_guests`, `ban_chat_user`, `unban_chat_user`, `suspend_chat_user`, and `unsuspend_chat_user`. See [Game chat](./reference.md#game-chat)
+
 Developer server 1.17:
 
 - New read-only developer tools: `list_copyright_notices` and `get_copyright_notice`, for paid copyright (DMCA) notices that name the account's content. See [Copyright notices](./reference.md#copyright-notices)

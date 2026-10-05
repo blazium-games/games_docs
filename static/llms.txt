@@ -17,6 +17,11 @@
 - [Listings](https://docs.blazium.games/docs/listings): Taxonomy, the listing check, image sizes, search, and shelves.
 - [Import from Steam](https://docs.blazium.games/docs/steam-import): Copy a Steam store page into a new or existing listing with a Steamworks Web API key.
 
+## Game chat
+
+- [Game chat](https://docs.blazium.games/docs/storefront/chat): IRC at irc.blazium.online (TLS 6697, browser websocket 8000). Sign in with SASL PLAIN: your username and a chat token from Settings > Chat, shown once; regenerating it disconnects the old one. Join a game with GAMEJOIN <game uid>.
+- [Chat Rules](https://blazium.games/chat-rules): Anything legal is allowed; nothing illegal; never any harm to children. Chat is not logged.
+
 ## Steam auth verification
 
 - [Steam auth verification](https://docs.blazium.games/docs/steam-auth): Trade a Steam session ticket for a session token that proves ownership, then check, refresh, or revoke it from your servers with the game's auth key.
@@ -47,5 +52,6 @@
 - [Privacy Policy](https://blazium.games/privacy-policy): What is collected and how accounts are deleted.
 - [Terms of Service](https://blazium.games/terms-of-service): Terms for using Blazium Games.
 - [Steam API Disclosure](https://blazium.games/steam-api-disclosure): What is read from Steam for linking, imports, and Steam auth verification.
+- [Chat Rules](https://blazium.games/chat-rules): What is allowed in chat, penalties, chat tokens, and what chat keeps.
 - [Support](https://blazium.games/support): How to get help.
 - [Service status](https://status.blazium.games/): Current status and incidents.
