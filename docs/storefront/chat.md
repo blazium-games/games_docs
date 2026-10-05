@@ -62,6 +62,39 @@ Game channels have names like `#g0123456789abcdef`. Join one by the game's uid:
 
 `GAMEPART <game uid>` leaves it. Type `/RULES` to read the rules.
 
+To read a game's chat without talking, spectate it with `/quote LFGSUB <game uid>`, and leave with `/quote LFGUNSUB <game uid>`. You can spectate up to 10 games at once.
+
+### Clients without SASL
+
+Bots and small clients that can't do SASL can sign in by sending `GAMEAUTH <chat token>` as their first line, before `NICK` and `USER`. A good login answers with `1800` and your username. After 3 failed tries in 30 seconds, the server makes you wait.
+
+Accounts are made on the website. `REGISTER` and `VERIFY` only point you there.
+
+### Game chat commands
+
+| Command | What it does |
+|---|---|
+| `GAMEJOIN <game uid>` | Join a game's chat. Your voice depends on your license and role. |
+| `GAMEPART <game uid>` | Leave it. |
+| `LFGSUB <game uid>` / `LFGUNSUB <game uid>` | Start or stop spectating. |
+| `GAMES [game uid]` | List games that have chat: uid, channel, user count, name. Needs the `blazium.games/commands` capability. |
+| `LFGWHO <game uid>` | Who is in a game chat you're in, and their roles. |
+| `LFGMETA <game uid>` | A game chat's name, channel, and counts. |
+
+`WHOIS` on yourself lists the game chats you're in.
+
+### For client developers
+
+The server advertises `GAMESERVICES=2` and `GAMEVENDOR=blazium.games` in `005`. Every reply uses a numeric in the 1800 to 1860 range, for example `1801` when you join, `1802` when you start spectating, `1803` when you leave, and `1804`/`1805` for `GAMES` lines and their end.
+
+| Capability | What it adds |
+|---|---|
+| `blazium.games/tags` | Messages in game channels carry `blazium.games/game` (the game uid) and `blazium.games/role` (`owner`, `chat`, or `spectator`). |
+| `blazium.games/commands` | Turns on `GAMES`. |
+| `blazium.games/membership` | Together with `blazium.games/tags`, sends a `TAGMSG` to the channel with your role and the game uid when you join or your role changes. |
+
+If a game chat is full on the server you're connected to, you get `1851`, plus `1860` naming another server to try.
+
 ### Keep your token secret
 
 Anyone with your token can chat as you. If it leaks, or you lose it, go to Settings > Chat and **Regenerate token**. The old token stops working and every client signed in with it is disconnected right away. **Revoke token** does the same without making a new one.
