@@ -19,6 +19,8 @@ Load either into Swagger UI, Redocly, Postman, or a client generator. The docume
 
 Signed-in account routes (`/api/v1/private/...`) are used by the website and the MCP servers and are not part of it. Agents should use the [developer](./mcp/index.md) or [player](./mcp/player.md) MCP server instead.
 
+Game chat isn't part of this API either. It is IRC at `irc.blazium.online`; see [Game chat](./storefront/chat.md). Chat tokens are managed in Settings > Chat or with the player MCP chat tools.
+
 ## Authentication
 
 Most public routes need no credentials. The rest take a header:

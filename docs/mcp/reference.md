@@ -114,6 +114,19 @@ A tool, mod or plugin names the game it is for with `parent` on `create_game` or
 | `get_store_links` | `uid` | The listing's links to its pages on other stores, shown as **Also on**, and every supported store with its allowed hosts |
 | `set_store_links` | `uid`, `store_links` (`platform`, `url`) | Replaces every store link; stores you leave out are removed and an empty list clears them, so read them with `get_store_links` first. One per store: `steam`, `gog`, `epic`, `itch`, `humble`, `microsoft`, `playstation`, `nintendo`, `apple`, `google_play`, or `gamejolt`, each an https link on that store's own site (`4238` otherwise). See [Other stores](../listings.md#other-stores). Write |
 
+### Game chat
+
+Each game has an IRC channel on `irc.blazium.online`. The owner and accepted admins moderate it. See [Game chat](../storefront/chat.md).
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `get_game_chat` | `uid` | The channel name (`irc_channel`), whether guests may join (`chat_guests`), and who is banned or muted with when each mute ends |
+| `set_chat_guests` | `uid`, `guests` | Lets people without a license join the channel. Guests can read but can't talk until they own the game. Write |
+| `ban_chat_user` | `uid`, `username` | Bans a user from the channel until unbanned and removes them right away. The owner, admins, and `blazium` can't be banned. Write |
+| `unban_chat_user` | `uid`, `username` | Lifts a ban. Write |
+| `suspend_chat_user` | `uid`, `username`, `minutes` (1-43200) | Mutes a user for up to 30 days; they can still read. Write |
+| `unsuspend_chat_user` | `uid`, `username` | Lifts a mute. Write |
+
 ### Game keys
 
 Keys give a game to someone for free, for press, bundles, or giveaways. Each code works once and adds the game to the redeemer's library (a license with source `key`). Players redeem at [blazium.games/redeem](https://blazium.games/redeem) or with `redeem_key` on the player server. Pools can also be managed on the **Game keys** tab of the project page.

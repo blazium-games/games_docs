@@ -8,7 +8,7 @@ description: Change your avatar, username, display name and timezone, show or hi
 
 ![Account settings with the Profile card](/img/storefront/settings.png)
 
-Open **Settings** from the account menu. The side menu has **Account**, **Linked accounts**, **Authenticator**, **Verify email**, **Wallet**, **MCP** and **Copyright notices**.
+Open **Settings** from the account menu. The side menu has **Account**, **Linked accounts**, **Authenticator**, **Verify email**, **Wallet**, **MCP**, **Chat** and **Copyright notices**.
 
 ## Profile
 
@@ -37,6 +37,10 @@ To see them:
 Adult listings then appear in Browse, on developer pages and on store pages, marked **18+**. **Hide adult content** turns them off again. You can still leave them out of a single search with **Hide adult content** in Browse's filters.
 
 How developers label adult content is covered in [Content rules](../content-rules.md).
+
+## Chat
+
+**Chat** creates a chat token so you can use your own IRC client (HexChat, WeeChat, irssi, and others) with game chat. The token is shown once. **Regenerate token** replaces it and disconnects every client signed in with the old one; **Revoke token** removes it. The page also shows the server settings. See [Game chat](./chat.md#use-your-own-irc-client) and the [Chat Rules](../legal/chat-rules.md).
 
 ## Copyright notices
 

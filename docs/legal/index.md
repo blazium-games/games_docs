@@ -10,13 +10,14 @@ Blazium Games is operated by Divine Games, Inc. The canonical versions of these 
 
 | Page | What it covers |
 | --- | --- |
-| [Privacy Policy](https://blazium.games/privacy-policy) | What is collected (including payment data), the 1-year analytics retention, cookies, and account deletion. |
+| [Privacy Policy](https://blazium.games/privacy-policy) | What is collected (including payment data and what chat keeps), the 1-year analytics retention, cookies, and account deletion. |
 | [Terms of Service](https://blazium.games/terms-of-service) | The terms for using Blazium Games, including payments, fees, taxes, the account balance, cash-outs and payout timing, refunds (donations are not refundable), agent purchases and payouts, and copyright (DMCA) notices, which are filed only through a paid form, forwarded to the uploader, and reviewed by our staff. |
 | [Permissions & Scopes](./permissions.md) | GitHub, X and Discord sign-in and linking scopes, Steam linking, MCP scopes, agent spending limits, agent payouts, keys (including Steam keys), and cookies, plus how scopes behave for developers. |
 | [GitHub API disclosure](./github-api-disclosure.md) | What is read from GitHub and the commitments made about it. |
 | [X API disclosure](./x-api-disclosure.md) | What is read from X and the commitments made about it. |
 | [Discord API disclosure](./discord-api-disclosure.md) | What is read from Discord and the commitments made about it. |
 | [Steam API disclosure](./steam-api-disclosure.md) | What is read from Steam for linking, game imports, and Steam auth verification, and the commitments made about it. |
+| [Chat Rules](./chat-rules.md) | What is and isn't allowed in chat (anything legal; nothing illegal; never any harm to children), the penalties up to a chat lock or suspension, chat tokens for IRC clients, and what chat keeps. Chat is not logged. |
 | [Subprocessors](./subprocessors.md) | Third-party services that process data for Blazium Games, including Stripe and Coinbase for payments. |
 
 For how to link, log in with, and unlink GitHub, X, and Discord, and how to link Steam, see the [Linked accounts and sign-in](../linked-accounts.md) guide.

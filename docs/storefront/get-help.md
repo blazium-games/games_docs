@@ -16,6 +16,8 @@ Check the [status page](https://status.blazium.games) first. If something is dow
 | Your account, a purchase or a refund | Email [support@blazium.games](mailto:support@blazium.games) from the address on your account. For a purchase, include the purchase ID from your wallet or receipt. |
 | A bug in a game | Contact the game's developer. |
 | Your data, or deleting your account | Email [privacy@blazium.games](mailto:privacy@blazium.games). |
+| Someone breaking the [Chat Rules](../legal/chat-rules.md), or your account can't use chat | Email [support@blazium.games](mailto:support@blazium.games). See [Something in chat](./report.md#something-in-chat). |
+| A leaked chat token | Regenerate it in [Settings > Chat](https://blazium.games/settings/chat). That disconnects anyone using the old one. |
 | A security problem | Email [support@blazium.games](mailto:support@blazium.games). Don't post it in a public issue. |
 
 GitHub issues are public. Never include passwords, keys, payment details or your email address in them.

@@ -41,8 +41,8 @@ Create a player key at [blazium.games/settings/mcp](https://blazium.games/settin
 
 | Scope | Allows |
 |---|---|
-| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review, friends and what they're playing |
-| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, tag suggestions, taste feedback, bug reports, friend requests, presence and activity sharing |
+| `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review, friends and what they're playing, chat token status |
+| `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, tag suggestions, taste feedback, bug reports, friend requests, presence and activity sharing, chat sign-in and chat tokens |
 | `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game`, payout setup and `cash_out` |
 
 A route outside this list returns `4033`. A missing `player:buy` returns `4212`; any other missing scope returns `4031`.
@@ -99,11 +99,15 @@ With `player:buy` an agent can also start payout setup, open your Stripe payout 
 | `list_friends` | none | read | Friends with their presence (playing, online, offline) and pending requests with their `request_uid` |
 | `send_friend_request` | `username` | write | Sends a friend request. If that person already asked you, it accepts theirs |
 | `respond_friend_request` | `request_uid`, `accept` | write | Accepts or declines an incoming request |
+| `get_chat_connection` | none | write | Chat host, TLS port 6697, the browser websocket, and a SASL PLAIN sign-in token that works for 10 minutes, so the agent can join chat itself. See [Chat](#chat) |
+| `get_chat_token_status` | none | read | Whether you have a chat token for IRC clients (prefix and created and last used times, never the token), whether your account is locked out of chat, and the settings for a client |
+| `request_chat_token` | `confirm` | write | Creates or replaces your IRC client chat token and returns it once. Replacing it disconnects every client signed in with the old one |
+| `revoke_chat_token` | `confirm` | write | Revokes your chat token and disconnects every client signed in with it |
 | `redeem_key` | `code` | write | Redeems a game key (`XXXXX-XXXXX-XXXXX-XXXXX`) or a gift link (the whole link or the code at its end) and adds the game to your library. If you already own it, the key stays unused (`4084`) |
 
 Games list the channels you can join in `get_game_details` (`channels`). A beta download link for a game whose beta you haven't joined returns `4074`.
 
-`install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and BlaziumLauncher does the rest. `blazium://install/<uid>` and `blazium://game/<uid>` go to BlaziumLauncher on port 39220. `blazium://buy/<uid>` opens the store page and does not install. `blazium://hub` and `blazium://install?version=` stay with BlaziumHub. Chat links (`blazium://chat` and `blazium://friends`) open BlaziumLauncher too. Game chat itself is IRC on `irc.blazium.online` port 6697.
+`install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and BlaziumLauncher does the rest. `blazium://install/<uid>` and `blazium://game/<uid>` go to BlaziumLauncher on port 39220. `blazium://buy/<uid>` opens the store page and does not install. `blazium://hub` and `blazium://install?version=` stay with BlaziumHub. Chat links (`blazium://chat` and `blazium://friends`) open BlaziumLauncher too. Game chat itself is IRC on `irc.blazium.online` port 6697; see [Chat](#chat).
 
 ## Recommendations
 
@@ -130,6 +134,10 @@ A bug report goes to the game's developers, up to 10 per day (`4291`). Attached 
 Add friends by username from the agent or at [blazium.games/friends](https://blazium.games/friends). You need a verified email to send requests, and you can send up to 20 a day (`4292`). Sending a request to someone who already asked you makes you friends right away. Adding yourself returns `4228`, and asking someone you're already friends with or already asked returns `4078`.
 
 Friends see whether you're online and which game you're playing, plus the public games you played in the last 14 days. "Playing" comes from the play-time heartbeat your launcher or game sends, and lasts 10 minutes after the last one; there is no separate presence tool. Unlisted and draft games are never shown. Turn off **Activity sharing** on the friends page to hide all of it; you then also drop out of your friends' recommendations.
+
+## Chat
+
+Game chat is IRC on `irc.blazium.online` and follows the [Chat Rules](https://blazium.games/chat-rules). `get_chat_connection` signs the agent in as you for 10 minutes. For your own IRC client, `request_chat_token` creates a long-lived token: it is returned once, so the agent should hand it straight to you, and only when you ask. Up to 10 token changes an hour (`4290`). A locked account can't sign in to chat with either token. See [Game chat](../storefront/chat.md) for client setup.
 
 ## Interactive views
 
