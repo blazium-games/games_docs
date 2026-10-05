@@ -127,9 +127,10 @@ On the Steam tab:
 
 - **New auth key** makes a new auth key. The old one stops working right away and every session token is revoked.
 - **New ticket key** makes a new ticket key. Builds with the old one can't sign in until they're updated.
+- **Replace Web API key** swaps in a new Steamworks Web API key after you revoke the old one. The auth key, ticket key and session tokens keep working.
 - **Turn off** revokes every token, deletes both keys, and forgets the Web API key. Turning it on again makes new keys.
 
-If the auth key leaks, make a new one at once, then update your servers.
+If the auth key leaks, make a new one at once, then update your servers. If the Web API key leaks, revoke it in Steamworks and replace it here.
 
 ## Limits
 
@@ -148,7 +149,7 @@ If the auth key leaks, make a new one at once, then update your servers.
 | `4248` | 401 or 422 | The token isn't valid for this game, or its session ended. |
 | `4249` | 401 | Send the game's auth key as a Bearer token. |
 | `4240` | 400 | `steam_id` isn't a SteamID64, or revoke got neither `jti` nor `steam_id`. |
-| `4243` | 502 | Steam didn't answer, or refused the game's Web API key. Update the key on the Steam tab. |
+| `4243` | 502 | Steam didn't answer, or refused the game's Web API key. Replace the key on the Steam tab. |
 | `4290` | 429 | Too many requests. |
 
 ## What players should know
