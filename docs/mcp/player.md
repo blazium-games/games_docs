@@ -103,7 +103,7 @@ With `player:buy` an agent can also start payout setup, open your Stripe payout 
 
 Games list the channels you can join in `get_game_details` (`channels`). A beta download link for a game whose beta you haven't joined returns `4074`.
 
-`install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and the Blazium launcher does the rest.
+`install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and the Blazium Games launcher does the rest. `blazium://install/<uid>` and `blazium://game/<uid>` go to that launcher on port 39220. `blazium://buy/<uid>` opens the store page and does not install. `blazium://hub` and `blazium://install?version=` stay with Hub. Chat links (`blazium://chat` and `blazium://friends`) open the launcher too. Game chat itself is IRC on `irc.blazium.online` port 6697.
 
 ## Recommendations
 

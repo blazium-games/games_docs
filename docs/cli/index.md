@@ -12,7 +12,12 @@ chauffeur authenticates with the game's [deploy key](./authentication.md), so it
 
 ## Install
 
-Download the archive for your platform. Each one is a zip with the `chauffeur` binary and a `VERSION` file.
+```bash
+npm install -g @blazium-games/cli
+chauffeur --version
+```
+
+The package is `@blazium-games/cli`. The command is `chauffeur`. You can still download the zip for your platform. Each one contains the `chauffeur` binary and a `VERSION` file.
 
 | Platform | Archive |
 |----------|---------|

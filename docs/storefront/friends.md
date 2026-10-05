@@ -31,6 +31,10 @@ The home page shows the same recent games in **Friends are playing**.
 
 **Remove** takes someone off your list straight away. There is no confirmation.
 
+## Chat
+
+Friend messages and each game's chat are on `irc.blazium.online`. The launcher uses port 6697. Details are in [Game chat](./chat.md).
+
 ## Activity sharing
 
 Under **Activity sharing** you choose whether friends see what you play:

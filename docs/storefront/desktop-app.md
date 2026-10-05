@@ -10,19 +10,18 @@ The Blazium Games desktop app installs, updates and launches the games in your l
 
 ## Download it
 
-1. Open the [app page](https://blazium.games/app).
-2. Click **Start Download**. The page picks Linux if your browser reports Linux, and Windows otherwise. To choose yourself, click **Windows** or **Linux** in "Available for Windows and Linux".
-3. Unzip the download and start the app.
+Install the Windows setup or the Linux package from the [launcher releases](https://github.com/blazium-games/games_launcher/releases). The Windows app is `BlaziumGames.exe` under `Blazium Games`. The Linux package installs under `/opt/blazium-games`.
 
-Requirements: Windows 10 or 11 (64-bit), or Linux (Ubuntu 20.04 or newer, glibc 2.31 or newer). The download is about 85 MB.
+This app is not Blazium Hub. If `blazium-cli` is already installed, the installer leaves Hub's `blazium://` handler and `hub_remote.json` alone and writes `launcher_remote.json` instead.
 
-The desktop app does not run on macOS yet. Mac visitors see "macOS not yet supported" with links to the Windows and Linux versions.
+Requirements: Windows 10 or 11 (64-bit), or Linux (64-bit). macOS is not supported yet.
 
 ## What it does
 
-- **Your Library**: browse and launch all your purchased and free games in one place.
-- **Auto-Updates**: games update in the background.
-- **Notifications**: hear about new games and updates to your favorites.
+- **Library**: browse and launch purchased and free games.
+- **Friends**: the friends window.
+- **Chat**: game chat on `irc.blazium.online` port 6697. See [Game chat](./chat.md).
+- **Links**: `blazium://install/<game>`, `blazium://game/<game>`, and `blazium://buy/<game>` open in this app. `blazium://buy` does not install. `blazium://hub` and `blazium://install?version=` stay with Hub.
 
 ## For developers
 

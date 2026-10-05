@@ -18,6 +18,7 @@ The screenshots use sample games and accounts.
 - [Redeem a key or gift link](./redeem-a-key.md)
 - [The desktop app](./desktop-app.md)
 - [Friends](./friends.md): requests, who is playing what, and activity sharing.
+- [Game chat](./chat.md): IRC on `irc.blazium.online`.
 - [Reviews and player tags](./reviews-and-tags.md)
 - [Report a game or a person](./report.md)
 - [Copyright (DMCA) notices](./dmca.md)

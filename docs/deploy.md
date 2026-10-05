@@ -26,7 +26,7 @@ The MCP tool `get_deploy_info` returns every URL below for your game, plus recen
 
 ## 2a. Upload with chauffeur
 
-[Install chauffeur](./cli/index.md#install). It reads `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY` from the environment (or `--access` and `--secret-stdin`).
+[Install chauffeur](./cli/index.md#install) with `npm install -g @blazium-games/cli`, or from the CDN zip. It reads `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY` from the environment (or `--access` and `--secret-stdin`).
 
 ```bash
 chauffeur genbuild --version 1.0.0
