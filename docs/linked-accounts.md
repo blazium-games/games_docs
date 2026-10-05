@@ -45,6 +45,16 @@ A verified email from GitHub or Discord can be shown on the create form and is c
 Once unlinked, that account can no longer be used to log in.
 If your Blazium Games account has no password, you cannot unlink the last linked account. [Set a password](https://blazium.games/settings/password) or link another account first.
 
+## Steam
+
+You can also link Steam at **Settings > Linked accounts**. Steam can't be used to log in to Blazium Games. Linking it lets games that use [Steam auth verification](./steam-auth.md) tell their servers which Blazium Games account you are.
+
+1. Click **Link** next to Steam.
+2. Sign in on Steam's page and confirm.
+3. You return to Linked accounts with "Steam account linked." The row shows your Steam name.
+
+Steam sign-in uses OpenID, so Blazium Games gets your Steam ID and no access token. We may read your public Steam name. Click **Unlink** to remove it; games then no longer learn your Blazium Games account from Steam. See the [Steam API disclosure](./legal/steam-api-disclosure.md).
+
 ## Revoke access on the other service
 
 You can remove Blazium Games from the other service at any time:
@@ -66,6 +76,7 @@ The details for each service:
 - [GitHub API disclosure](./legal/github-api-disclosure.md)
 - [X API disclosure](./legal/x-api-disclosure.md)
 - [Discord API disclosure](./legal/discord-api-disclosure.md)
+- [Steam API disclosure](./legal/steam-api-disclosure.md)
 - [Permissions & Scopes](./legal/permissions.md) for the exact scopes we request
 
 Deleting your Blazium Games account unlinks all of them. See the [Privacy Policy](https://blazium.games/privacy-policy#6-deleting-your-account).

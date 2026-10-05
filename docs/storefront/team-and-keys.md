@@ -16,11 +16,11 @@ Admins can edit the project, upload builds and manage keys. Only the owner can d
 2. Enter a username or user ID in **Add an admin**.
 3. Click **Add admin**.
 
-The person needs [developer mode](../developer-mode.md) to accept.
+Accepting turns on [developer mode](../developer-mode.md) for the person if it isn't on yet.
 
 ### Accept an invite
 
-Invites appear at the top of your Dashboard under **Admin invites**, as "Name invited you to help manage Game". Click **Accept** or **Decline**. After you accept, the project is in your Dashboard list with the **Admin** badge.
+Invites appear at the top of your Dashboard under **Admin invites**, as "Name invited you to help manage Game". Click **Accept** or **Decline**. If developer mode is off, tick **I accept the developer terms** first; accepting then turns it on. After you accept, the project is in your Dashboard list with the **Admin** badge.
 
 ### Remove an admin
 
