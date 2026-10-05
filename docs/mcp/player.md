@@ -1,7 +1,7 @@
 ---
 title: Player MCP
 sidebar_position: 5
-description: Connect an agent to your Blazium Games account as a player to get recommendations with reasons, search the catalog, review games and report bugs, check your wallet and library, top up, buy games within your spending limit, cash out earnings, and install or launch them through the Blazium launcher.
+description: Connect an agent to your Blazium Games account as a player to get recommendations with reasons, search the catalog, review games and report bugs, check your wallet and library, top up, buy games within your spending limit, cash out earnings, and install or launch them through BlaziumLauncher.
 ---
 
 # Player MCP
@@ -103,7 +103,7 @@ With `player:buy` an agent can also start payout setup, open your Stripe payout 
 
 Games list the channels you can join in `get_game_details` (`channels`). A beta download link for a game whose beta you haven't joined returns `4074`.
 
-`install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and the Blazium Games launcher does the rest. `blazium://install/<uid>` and `blazium://game/<uid>` go to that launcher on port 39220. `blazium://buy/<uid>` opens the store page and does not install. `blazium://hub` and `blazium://install?version=` stay with Hub. Chat links (`blazium://chat` and `blazium://friends`) open the launcher too. Game chat itself is IRC on `irc.blazium.online` port 6697.
+`install_build` and `launch_game` never install or run anything on the server or your machine; the agent gives you the `blazium://` link, or your client opens it, and BlaziumLauncher does the rest. `blazium://install/<uid>` and `blazium://game/<uid>` go to BlaziumLauncher on port 39220. `blazium://buy/<uid>` opens the store page and does not install. `blazium://hub` and `blazium://install?version=` stay with BlaziumHub. Chat links (`blazium://chat` and `blazium://friends`) open BlaziumLauncher too. Game chat itself is IRC on `irc.blazium.online` port 6697.
 
 ## Recommendations
 
@@ -148,7 +148,7 @@ A host that supports MCP Apps shows an interactive view beside the tool result. 
 | `ui://blazium-games/wallet.html` | Balance, ledger, spending limit, and a card top-up link |
 | `ui://blazium-games/approval.html` | Approval status, confirm link, and the emailed code |
 | `ui://blazium-games/library.html` | Owned games, redeem, and download links |
-| `ui://blazium-games/handoff.html` | `blazium://` hand-off for the Windows launcher |
+| `ui://blazium-games/handoff.html` | `blazium://` hand-off for BlaziumLauncher |
 | `ui://blazium-games/account.html` | Verification, timezone, and links to finish sign-in on the website |
 | `ui://blazium-games/feedback.html` | Reviews, bug reports, taste, and tag suggestions |
 | `ui://blazium-games/friends.html` | Friends and requests |

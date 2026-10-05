@@ -73,6 +73,6 @@ Indexable store pages publish `VideoGame` or `SoftwareApplication` JSON-LD. Prof
 
 - **AsyncAPI.** The website's live updates are not a public interface. The public HTTP API has an [OpenAPI description](./api-reference.md). Signed-in account routes are left out of it; agents use the MCP servers, which publish server cards.
 - **ads.txt.** Blazium Games does not sell ad inventory.
-- **Apple or Android association files.** The desktop app people can download today is the Windows setup, not a mobile app.
+- **Apple or Android association files.** The desktop program people can download today is BlaziumLauncher for Windows, installed under the shared Blazium folder, not a mobile app.
 - **ai.txt, identity.json, an A2A agent card, or an empty agent card.** Agents call the MCP servers, and those servers already publish server cards. An empty card would claim a protocol this site does not serve.
 - **A training opt-out file.** See the guidance section above.

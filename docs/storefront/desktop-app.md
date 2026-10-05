@@ -1,27 +1,27 @@
 ---
 title: The desktop app
 sidebar_position: 6
-description: Download the Blazium Games desktop app for Windows to install, update and launch your library.
+description: Download BlaziumLauncher for Windows to install, update and launch your library.
 ---
 
 # The desktop app
 
-The Blazium Games desktop app installs, updates and launches the games in your library. It is not Blazium Hub. Hub installs editors.
+BlaziumLauncher installs, updates and launches the games in your library. It is not BlaziumHub. BlaziumHub installs editors and lives in `{autopf}\Blazium\Engine`.
 
 ## Download it
 
-Download the latest Windows setup from the [launcher releases](https://github.com/blazium-games/games_launcher/releases). Windows 10 or 11, 64-bit. The app is `BlaziumGames.exe` under `Blazium Games`.
+Download the latest Windows setup from the [launcher releases](https://github.com/blazium-games/games_launcher/releases). Windows 10 or 11, 64-bit. The program is `BlaziumLauncher.exe` under `{autopf}\Blazium\Games`. Shared tools live in `{autopf}\Blazium`.
 
 A Linux package is not in the current release. macOS is not supported.
 
-If `blazium-cli` is already installed, the installer leaves Hub's `blazium://` handler and `hub_remote.json` alone and writes `launcher_remote.json` instead.
+If `blazium-cli` is already installed, the installer leaves BlaziumHub's `blazium://` handler and `hub_remote.json` alone and writes `launcher_remote.json` instead. The BlaziumLauncher setup can also download BlaziumHub into the same folder.
 
 ## What it does
 
 - **Library**: browse and launch purchased and free games.
 - **Friends**: the friends window.
 - **Chat**: game chat on `irc.blazium.online` port 6697. See [Game chat](./chat.md).
-- **Links**: `blazium://install/<game>`, `blazium://game/<game>`, and `blazium://buy/<game>` open in this app. `blazium://buy` does not install. `blazium://hub` and `blazium://install?version=` stay with Hub.
+- **Links**: `blazium://install/<game>`, `blazium://game/<game>`, and `blazium://buy/<game>` open in BlaziumLauncher. `blazium://buy` does not install. `blazium://hub` and `blazium://install?version=` stay with BlaziumHub.
 
 ## For developers
 
