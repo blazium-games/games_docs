@@ -116,7 +116,7 @@ A tool, mod or plugin names the game it is for with `parent` on `create_game` or
 
 ### Game chat
 
-Each game has an IRC channel on `irc.blazium.online`. The owner and accepted admins moderate it. See [Game chat](../storefront/chat.md).
+Each game has an IRC channel on `irc.blazium.online`. The owner and accepted admins moderate it. See [Chat for publishers](../chat/for-publishers.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|

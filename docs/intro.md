@@ -8,7 +8,7 @@ This is the documentation for [Blazium Games](https://blazium.games). Blazium Ga
 
 ## The platform
 
-Players browse the catalog, keep a library, and use [BlaziumLauncher](./storefront/desktop-app.md) on Windows. A Linux package is not in the current release. Friend messages and each game's chat are IRC on `irc.blazium.online`. Publishers host a profile and a page for each project, with a press kit and lists of mods and tools. Upload builds with `npm install -g @blazium-games/cli` (`chauffeur`).
+Players browse the catalog, keep a library, and use [BlaziumLauncher](./storefront/desktop-app.md) on Windows. A Linux package is not in the current release. Friend messages and each game's chat are IRC on `irc.blazium.online`; see [Chat](./chat/index.md). Publishers host a profile and a page for each project, with a press kit and lists of mods and tools. Upload builds with `npm install -g @blazium-games/cli` (`chauffeur`).
 
 The files crawlers and agents read — robots.txt, sitemaps, security.txt, the API catalog, and llms.txt — are listed in [Discovery files](./discovery.md).
 

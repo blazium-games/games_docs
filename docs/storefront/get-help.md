@@ -18,6 +18,7 @@ Check the [status page](https://status.blazium.games) first. If something is dow
 | Your data, or deleting your account | Email [privacy@blazium.games](mailto:privacy@blazium.games). |
 | Someone breaking the [Chat Rules](../legal/chat-rules.md), or your account can't use chat | Email [support@blazium.games](mailto:support@blazium.games). See [Something in chat](./report.md#something-in-chat). |
 | A leaked chat token | Regenerate it in [Settings > Chat](https://blazium.games/settings/chat). That disconnects anyone using the old one. |
+| Chat won't sign in, won't let you join, or won't let you talk | See [Chat troubleshooting](../chat/troubleshooting.md). |
 | A security problem | Email [support@blazium.games](mailto:support@blazium.games). Don't post it in a public issue. |
 
 GitHub issues are public. Never include passwords, keys, payment details or your email address in them.

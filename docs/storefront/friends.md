@@ -33,7 +33,7 @@ The home page shows the same recent games in **Friends are playing**.
 
 ## Chat
 
-Friend messages and each game's chat are on `irc.blazium.online`. The launcher uses port 6697. Details are in [Game chat](./chat.md).
+Friend messages and each game's chat are on `irc.blazium.online`. A friend message is a private message to your friend's username, so it works from BlaziumLauncher or any IRC client. In the launcher you can also invite a friend to a game. Details are in [Chat](../chat/index.md).
 
 ## Activity sharing
 

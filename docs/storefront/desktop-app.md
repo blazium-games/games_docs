@@ -20,7 +20,7 @@ If `blazium-cli` is already installed, the installer leaves BlaziumHub's `blaziu
 
 - **Library**: browse and launch purchased and free games.
 - **Friends**: the friends window.
-- **Chat**: game chat on `irc.blazium.online` port 6697. See [Game chat](./chat.md).
+- **Chat**: friend messages and game chat on `irc.blazium.online` port 6697, one tab per friend and per game. It asks before sending a message or a game invite. See [Chat](../chat/index.md).
 - **Links**: `blazium://install/<game>`, `blazium://game/<game>`, and `blazium://buy/<game>` open in BlaziumLauncher. `blazium://buy` does not install. `blazium://hub` and `blazium://install?version=` stay with BlaziumHub.
 
 ## For developers
