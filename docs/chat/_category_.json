@@ -1,0 +1,5 @@
+{
+  "label": "Chat",
+  "position": 3.5,
+  "link": { "type": "doc", "id": "chat/index" }
+}

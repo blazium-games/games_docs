@@ -40,7 +40,7 @@ How developers label adult content is covered in [Content rules](../content-rule
 
 ## Chat
 
-**Chat** creates a chat token so you can use your own IRC client (HexChat, WeeChat, irssi, and others) with game chat. The token is shown once. **Regenerate token** replaces it and disconnects every client signed in with the old one; **Revoke token** removes it. The page also shows the server settings. See [Game chat](./chat.md#use-your-own-irc-client) and the [Chat Rules](../legal/chat-rules.md).
+**Chat** creates a chat token so you can use your own IRC client (HexChat, WeeChat, irssi, and others) with game chat. The token is shown once. **Regenerate token** replaces it and disconnects every client signed in with the old one (tick **Disconnect clients using my current token** first); **Revoke token** removes it. The page also shows the server settings. See [IRC clients](../chat/irc-clients.md) and the [Chat Rules](../legal/chat-rules.md).
 
 ## Copyright notices
 

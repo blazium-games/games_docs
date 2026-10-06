@@ -137,7 +137,7 @@ Friends see whether you're online and which game you're playing, plus the public
 
 ## Chat
 
-Game chat is IRC on `irc.blazium.online` and follows the [Chat Rules](https://blazium.games/chat-rules). `get_chat_connection` signs the agent in as you for 10 minutes. For your own IRC client, `request_chat_token` creates a long-lived token: it is returned once, so the agent should hand it straight to you, and only when you ask. Up to 10 token changes an hour (`4290`). A locked account can't sign in to chat with either token. See [Game chat](../storefront/chat.md) for client setup.
+Game chat is IRC on `irc.blazium.online` and follows the [Chat Rules](https://blazium.games/chat-rules). `get_chat_connection` signs the agent in as you for 10 minutes. For your own IRC client, `request_chat_token` creates a long-lived token: it is returned once, so the agent should hand it straight to you, and only when you ask. Up to 10 token changes an hour (`4290`). A locked account can't sign in to chat with either token. See [IRC clients](../chat/irc-clients.md) for client setup and [For client developers](../chat/client-developers.md) for what an agent sees once it's connected.
 
 ## Interactive views
 
