@@ -1,7 +1,7 @@
 ---
 title: The desktop app
 sidebar_position: 6
-description: Download BlaziumLauncher for Windows to install, update and launch your library.
+description: Download BlaziumLauncher for Windows or Linux to install, update and launch your library.
 ---
 
 # The desktop app
@@ -10,11 +10,14 @@ BlaziumLauncher installs, updates and launches the games in your library. It is 
 
 ## Download it
 
-Download the latest Windows setup from the [launcher releases](https://github.com/blazium-games/games_launcher/releases). Windows 10 or 11, 64-bit. The program is `BlaziumLauncher.exe` under `{autopf}\Blazium\Games`. Shared tools live in `{autopf}\Blazium`.
+Both downloads are on the [launcher releases](https://github.com/blazium-games/games_launcher/releases) page.
 
-A Linux package is not in the current release. macOS is not supported.
+- **Windows**: the setup (`BlaziumLauncher-Setup-<version>.exe`). Windows 10 or 11, 64-bit. The program is `BlaziumLauncher.exe` under `{autopf}\Blazium\Games`. Shared tools live in `{autopf}\Blazium`.
+- **Linux**: the Debian package (`blazium-games_<version>_amd64.deb`), x86_64. Install it with `sudo apt install ./blazium-games_<version>_amd64.deb`. The program is `/opt/blazium/games/BlaziumLauncher`, with a menu entry.
 
-If `blazium-cli` is already installed, the installer leaves BlaziumHub's `blazium://` handler and `hub_remote.json` alone and writes `launcher_remote.json` instead. The BlaziumLauncher setup can also download BlaziumHub into the same folder.
+macOS is not supported.
+
+If `blazium-cli` or BlaziumHub is already installed, either installer leaves BlaziumHub's `blazium://` handler and `hub_remote.json` alone and writes `launcher_remote.json` instead. Otherwise BlaziumLauncher registers `blazium://` itself. The Windows setup can also download BlaziumHub into the same folder.
 
 ## What it does
 
