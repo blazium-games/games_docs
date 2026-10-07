@@ -14,7 +14,7 @@ The game opens a websocket to `wss://login.blazium.online/api/v1/connect` with p
 
 Turn lobbies on in the game editor. Choose Relay or Scripted. Relay seats players without a pack. Scripted runs a published Luau pack. A separate switch turns TURN and STUN on or off for that game.
 
-Create or join returns only after the player is admitted. The response includes `lobby_url`, `ice_enabled`, and, when TURN is on, `ice_session_id`. Connect to `lobby_url` after that call succeeds. The engine module and the SDK return the response and leave the socket to the game. The `games_plugin` addon opens it.
+Create or join returns only after the player is admitted. The response includes `lobby_url`, `ice_enabled`, and, when TURN is on, `ice_session_id`. The module opens the lobby socket after that call succeeds. `lobby_seat` and SDK message 19 report `seated`, `lobby_loading`, or `lobby_failed`. The SDK does not open the socket. The `games_plugin` addon opens its own.
 
 The lobby socket is `wss://lobby.blazium.online/`. ICE servers come from `https://stun.blazium.online/v1/ice` using `ice_session_id` from that response. Relay uses `turn.blazium.online`. When the TURN switch is off, the game does not request ICE.
 
