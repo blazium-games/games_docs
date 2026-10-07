@@ -29,6 +29,7 @@ We will update this page before adding a new subprocessor.
 
 These are not subprocessors, because we operate them on our own servers:
 
+- **Game sign-in, lobbies, and peer connections:** these run on our own servers. DigitalOcean hosts the machines. No extra company sits in that path.
 - **Mail:** our own mail service handles mail to and from @blazium.games.
 - **Virus scanning:** uploaded files are scanned with an open-source malware scanner.
 - **Country lookup:** we turn IP addresses into countries with a local copy of the MaxMind GeoLite2 database. No IP address is sent to MaxMind. This product includes GeoLite2 data created by MaxMind, available from [maxmind.com](https://www.maxmind.com).

@@ -164,6 +164,18 @@ chauffeur builds list --os windows --channel beta
 chauffeur builds list --version 1.2.0 --json
 ```
 
+## Scripted lobbies
+
+Turn scripted lobbies on in the game editor, then publish the Luau pack:
+
+```bash
+chauffeur lobby publish --dir .
+chauffeur lobby list
+chauffeur lobby status
+```
+
+See [Multiplayer](../multiplayer.md).
+
 ## Shell completion
 
 `chauffeur completion bash|zsh|fish|powershell` prints a completion script. For example, `chauffeur completion powershell | Out-String | Invoke-Expression`.
