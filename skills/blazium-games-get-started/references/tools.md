@@ -8,6 +8,8 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `get_setup` | none | account | Account, games, public URLs, and key prefixes. No secrets |
 | `list_games` | none | | Games the user owns or admins, plus pending admin invites |
 | `get_game` | `uid` | | One game's settings and store page fields |
+| `get_lobby` | `uid` | | Lobby settings and published packs: enabled, relay or scripted, TURN, the active checksum, and pack history |
+| `set_lobby` | `uid` (required), `enabled`, `lobby_type` (`relay` or `scripted`), `ice_enabled` | write | Only the fields you pass change |
 | `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | account, write | Create a store page. Tools, mods and plugins need a `parent` before they can go public. Needs developer mode on the account (`4105`) |
 | `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | write | Update a store page; only passed fields change. An empty `parent` object clears it |
 | `get_game_analytics` | `uid` | | Visitor analytics: views, unique visitors, countries, actions |
