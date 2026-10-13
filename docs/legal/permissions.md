@@ -115,6 +115,7 @@ When you approve a tool, it gets a token for one server only, with one or more o
 | `mcp:analytics.read` | Developer | Reading visitor analytics and custom events. |
 | `mcp:keys.manage` | Developer | Listing and rotating deploy keys and MCP keys. |
 | `mcp:money` | Developer | Pricing, sales, game keys and gift links, wallet, library, and downloads. |
+| `mcp:anticheat` | Developer | Requesting anticheat for a game you own, and, after an NDA and a contract are signed, reading that game's anticheat reports and managing its server keys. Not included in `mcp:read` or `mcp:write`. |
 | `player:read` | Player | Reading your account, balance, wallet history, quotes, library, approvals, download links, the builds you can see, your reviews, recommendations, and your friends and what they're playing. |
 | `player:write` | Player | Verifying your email, recording play time, confirming an approval with the code you give the tool, joining or leaving a game's beta, writing or deleting your reviews, "more/less like this" feedback, filing bug reports, sending and answering friend requests, setting your presence and activity sharing, and redeeming game keys. |
 | `player:buy` | Player | Topping up and buying games or donating from your balance within the limits you set. Granted only if you tick **Allow purchases**. |
@@ -124,7 +125,7 @@ When you approve a tool, it gets a token for one server only, with one or more o
 
 ### How it is limited
 - The consent screen has a **Read-only access** option. Tick it and the tool only gets `mcp:read` (or `player:read`); any attempt to change data is refused.
-- On the developer server you can pick a narrower preset on the consent screen (store page, CI, crash triage, keys, money, or read-only), so the tool only gets the scopes that job needs.
+- On the developer server you can pick a narrower preset on the consent screen (store page, CI, crash triage, keys, money, anticheat, or read-only), so the tool only gets the scopes that job needs. Anticheat is its own preset. Full access does not include it. See [Anticheat](../anticheat.md).
 - On the player server the tool can't buy unless you tick **Allow purchases**.
 - Over MCP, rotating or creating MCP and deploy keys, deleting a deploy key, promoting a build to stable, deleting a game or build, creating more than 100 game keys at once, and adding a project admin wait until you approve them by the emailed link or code, even with full access.
 - A token is either for your whole account or for a single game (project). A project token is refused (error 4030) for any other game and for account-level actions: your profile, balance, wallet, library, account analytics, MCP keys, creating games, and buying.

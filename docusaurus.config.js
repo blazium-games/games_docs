@@ -98,6 +98,7 @@ const config = {
               {label: 'Introduction', to: '/docs/intro'},
               {label: 'Deploy builds', to: '/docs/deploy'},
               {label: 'Crash reporting', to: '/docs/crash-reporting'},
+              {label: 'Anticheat', to: '/docs/anticheat'},
               {label: 'Linked accounts', to: '/docs/linked-accounts'},
               {label: 'Graphical Assets Guidelines', to: '/docs/graphical_assets_guidelines'},
             ],
