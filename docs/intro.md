@@ -19,6 +19,7 @@ The files crawlers and agents read — robots.txt, sitemaps, security.txt, the A
 - **[Cursor plugin](./cursor-plugin.md)**: the official plugin bundles the MCP server with skills for common workflows.
 - **[Deploy builds](./deploy.md)**: upload builds, symbols, and store images with the [chauffeur CLI](./cli/index.md), the API, or GitHub Actions.
 - **[Crash reporting](./crash-reporting.md)**: send crashes and events from your game.
+- **[In-game bug reporter](./bug-reporter.md)**: let players file a bug from the game, with a screenshot and a webhook.
 - **[Payments](./payments/index.md)**: sell games or take donations, buy games, top up your balance, cash out, refunds, and agent purchases.
 - **[Linked accounts and sign-in](./linked-accounts.md)**: link GitHub, X, or Discord, log in with them, and unlink them.
 - **[Multiplayer](./multiplayer.md)**: sign-in, lobbies, and peer connections for a game, and how to publish a scripted lobby.

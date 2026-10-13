@@ -6,7 +6,7 @@ description: Send crash reports, dumps, logs, and custom events from your game t
 
 # Crash reporting
 
-Games send crashes to `https://api.blazium.online/api/v1/public/crashes`. Reports appear on your game's dashboard and through the MCP tools `list_game_crashes` and `get_crash`.
+Games send crashes to `https://api.blazium.online/api/v1/public/crashes`. Reports appear on your game's dashboard and through the MCP tools `list_game_crashes` and `get_crash`. Player-written bug tickets are separate: see [In-game bug reporter](./bug-reporter.md). Crash scopes do not list or update those tickets.
 
 Crash ingest needs no secret. It identifies the game with two headers:
 

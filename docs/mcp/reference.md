@@ -79,7 +79,11 @@ Players review games they own and file bug tickets from the [player server](./pl
 | `list_reviews` | `uid`, `unreplied`, `page` | Reviews, newest first, with the summary: `count`, `enjoyed`, `quality_avg`, `quality_counts` (1 to 5), and `would_play_with_friends`. `unreplied` lists only reviews without a reply |
 | `reply_to_review` | `uid`, `review_uid`, `text` | Public reply shown under the review on the store page (up to 2000 characters). Empty text removes it. Write |
 | `list_bug_tickets` | `uid`, `status` (`open`, `fixed`, `closed`) | Tickets, newest first, with counts by status. A ticket with an attached dump or log has a `crash_id` for `get_crash` and `request_crash_download` |
-| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, or `closed`) | Marks a ticket fixed or closed, or reopens it with `open`. Covered by `mcp:crash.read` |
+| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, or `closed`) | Marks a ticket fixed or closed, or reopens it with `open`. Covered by `mcp:bugs.write`. A fixed ticket can show the player an in-game notice. |
+| `get_bug_reporter` | `uid` | Reads the in-game reporter: enabled, daily cap, webhooks, and that game's signing key. Covered by `mcp:bugs.read` |
+| `set_bug_reporter` | `uid`, optional `enabled`, `daily_cap`, `webhooks`, `refresh_signing_key` | Turns the reporter on, sets the cap (1–10000), replaces up to five webhook URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:bugs.write` |
+| `get_steam_auth` | `uid` | Reads whether Steam auth is on, the app id, and whether the Web API key and ticket secret are stored, plus who set each and when. Never returns those secrets. Covered by `mcp:steam.manage` |
+| `set_steam_auth` | `uid`, optional `enabled`, `confirm`, `app_id`, `web_api_key`, `ticket_secret` | Writes the app id and the two secrets, and turns auth on when all three are stored. `enabled: false` deletes both secrets only when `confirm` is true. Covered by `mcp:steam.manage` |
 
 Only the game's owner and admins can read bug tickets and download their attachments.
 
@@ -152,13 +156,16 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 |-------|--------|
 | `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, dependencies, engine compatibility, license kind, media, review replies, mod settings, press kits, community tags |
 | `mcp:build.write` | Builds, channels, deploy info, scan status, symbols, bundle check |
-| `mcp:crash.read` | Crash reports, crash groups, crash analysis, bug tickets, including `update_bug_ticket` |
+| `mcp:crash.read` | Crash reports, crash groups, and crash analysis |
+| `mcp:bugs.read` | Listing bug tickets and reading the in-game bug reporter |
+| `mcp:bugs.write` | Updating bug tickets and changing the in-game bug reporter. Also covers the read routes |
+| `mcp:steam.manage` | Reading and changing Steam auth settings. The Web API key and ticket secret can be set and are never returned |
 | `mcp:analytics.read` | Visitor analytics and events |
 | `mcp:keys.manage` | Deploy keys, MCP keys, MCP access for admins, and project admins |
 | `mcp:money` | Pricing, editions, sales, game keys and gift links, wallet, purchases, library, downloads |
 | `mcp:anticheat` | Anticheat for one game. Not included in `mcp:read`, `mcp:write`, or **Full access**. See [Anticheat](#anticheat). |
 
-Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Anticheat** (`mcp:anticheat`), **Read-only** (`mcp:read`), and **Full access**.
+Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Bugs** (`mcp:bugs.read mcp:bugs.write`), **Steam** (`mcp:steam.manage`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Anticheat** (`mcp:anticheat`), **Read-only** (`mcp:read`), and **Full access**. `mcp:write` covers the bug and Steam scopes. It does not cover anticheat.
 
 ### Anticheat
 

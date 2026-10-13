@@ -14,17 +14,22 @@ You don't need your own Steamworks Web API key on your servers, and players don'
 
 The listing must be linked to its Steam app. Either:
 
-- tick **Enable Steam auth verification** when you [import from Steam](./steam-import.md), or
-- open the listing's **Steam** tab, enter the Steamworks Web API key, and click **Turn on**.
+- tick **Enable Steam auth verification** when you [import from Steam](./steam-import.md) and supply a ticket secret, or
+- open the listing's **Steam** tab, enter the Steamworks Web API key and the ticket secret, and click **Turn on**.
 
-Blazium Games keeps the Web API key, encrypted, while this is on, and makes two keys for the listing:
+Auth stays off until three values are stored on the listing:
 
-| Key | Where it goes | What it does |
+| Value | Secret? | What it does |
 |---|---|---|
-| **Auth key** (128 characters) | Your servers only. Never ship it in the game. | Signs session tokens (HS512) and authenticates your servers to Blazium Games. |
-| **Ticket key** (`bg_` and 32 hex characters) | The game client. | The identity string the game passes to `GetAuthTicketForWebApi`. Tickets made with any other identity are refused. |
+| **App id** | No | The Steam app this listing is linked to. It stays when auth is turned off. |
+| **Web API key** | Yes, write-only | The publisher key Blazium Games uses to ask Steam about tickets and ownership. Sealed at rest. |
+| **Ticket secret** | Yes, write-only | The identity string your game passes to `GetAuthTicketForWebApi`. You choose it and put the same value in the game. Blazium Games does not generate it. |
 
-The Steam tab shows the last 4 characters of the auth key. **Show auth key** displays the whole key until your next change on the tab. Owners and admins of the listing can see it; AI agents and MCP tokens can't.
+A save replaces a secret. No page, reveal, or MCP result returns the Web API key or the ticket secret, not even a prefix. The Steam tab shows whether each is stored, who set it, and when. After a save the secret fields are empty.
+
+Turning auth off asks you to confirm, then deletes both secrets and revokes Steam sessions. The app id stays. The session-signing **auth key** is separate: it signs the tokens your servers check, and **Show auth key** still reveals it to an owner on the website. Agents cannot reveal it.
+
+An agent with `mcp:steam.manage` (or `mcp:write`) can set the app id, the Web API key, and the ticket secret with `set_steam_auth`. `get_steam_auth` returns the app id and the audit fields only. `enabled: false` does nothing unless `confirm` is true.
 
 ## Sign a player in
 
@@ -32,7 +37,7 @@ In the game, ask Steam for a Web API ticket with the ticket key as the identity,
 
 ```cpp
 // Steamworks SDK
-SteamUser()->GetAuthTicketForWebApi("bg_0123456789abcdef0123456789abcdef");
+SteamUser()->GetAuthTicketForWebApi("the-ticket-secret-from-your-listing");
 // In the GetTicketForWebApiResponse_t callback, hex-encode m_rgubTicket.
 ```
 
