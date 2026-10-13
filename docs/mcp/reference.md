@@ -79,6 +79,8 @@ Players review games they own and file bug tickets from the [player server](./pl
 | Tool | Inputs | Notes |
 |------|--------|-------|
 | `list_reviews` | `uid`, `unreplied`, `page` | Reviews, newest first, with the summary: `count`, `enjoyed`, `quality_avg`, `quality_counts` (1 to 5), and `would_play_with_friends`. `unreplied` lists only reviews without a reply |
+| `get_review_reporter` | `uid` | Reads new-review webhooks: enabled, webhook URLs, and that game's signing key. The key is not the sale, crash, or bug reporter key. Covered by `mcp:read` |
+| `set_review_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | Turns new-review webhooks on, replaces up to five https URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:catalog.write` |
 | `reply_to_review` | `uid`, `review_uid`, `text` | Public reply shown under the review on the store page (up to 2000 characters). Empty text removes it. Write |
 | `list_bug_tickets` | `uid`, `status` (`open`, `fixed`, `closed`) | Tickets, newest first, with counts by status. A ticket with an attached dump or log has a `crash_id` for `get_crash` and `request_crash_download` |
 | `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, or `closed`) | Marks a ticket fixed or closed, or reopens it with `open`. Covered by `mcp:bugs.write`. A fixed ticket can show the player an in-game notice. |
@@ -156,7 +158,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 
 | Scope | Covers |
 |-------|--------|
-| `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, dependencies, engine compatibility, license kind, media, review replies, mod settings, press kits, community tags |
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, dependencies, engine compatibility, license kind, media, review replies, new-review webhooks, mod settings, press kits, community tags |
 | `mcp:build.write` | Builds, channels, deploy info, scan status, symbols, bundle check |
 | `mcp:crash.read` | Crash reports, crash groups, crash analysis, and reading the crash webhook setting and signing key |
 | `mcp:crash.write` | Changing crash webhooks and refreshing the signing key. Also covers the crash read routes |
@@ -165,7 +167,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 | `mcp:steam.manage` | Reading and changing Steam auth settings. The Web API key and ticket secret can be set and are never returned |
 | `mcp:analytics.read` | Visitor analytics and events |
 | `mcp:keys.manage` | Deploy keys, MCP keys, MCP access for admins, and project admins |
-| `mcp:money` | Pricing, editions, sales, game keys and gift links, wallet, purchases, library, downloads |
+| `mcp:money` | Pricing, editions, sales, sale and refund webhooks, game keys and gift links, wallet, purchases, library, downloads |
 | `mcp:anticheat` | Anticheat for one game. Not included in `mcp:read`, `mcp:write`, or **Full access**. See [Anticheat](#anticheat). |
 
 Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:crash.write mcp:analytics.read`), **Bugs** (`mcp:bugs.read mcp:bugs.write`), **Steam** (`mcp:steam.manage`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Anticheat** (`mcp:anticheat`), **Read-only** (`mcp:read`), and **Full access**. `mcp:write` covers the bug and Steam scopes. It does not cover anticheat.
@@ -206,7 +208,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 97 tools instead of 109. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 99 tools instead of 111. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -228,6 +230,8 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources a
 | `get_download_link` | `file_id` | 5-minute signed URL for a build file. Needs a verified email and, for paid games, a license. Account only. **Deprecated** |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | Owners and game admins. Write |
 | `list_game_sales` | `uid` | Sales, donations, refunds, and seller earnings |
+| `get_sale_reporter` | `uid` | Reads sale and refund webhooks: enabled, webhook URLs, and that game's signing key. The key is not the review, crash, or bug reporter key. Covered by `mcp:money` |
+| `set_sale_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | Turns sale and refund webhooks on, replaces up to five https URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:money` |
 | `start_payout_setup` | none | Starts or continues Stripe Connect payout setup and returns a Stripe link for the human, who enters identity, tax, and bank details on Stripe only. Needs a verified email. US only. Account only, money write |
 | `get_payout_dashboard_link` | none | One-time Stripe Express dashboard link for the human. `4095` until payout setup has started. Account only, money write |
 | `cash_out` | `amount_cents` (at least 2500) | Cashes out available earnings to the account's own Stripe payout account without asking the human; the owner is emailed after each agent cash-out. Fees as on the website. Money can take up to 72 business hours to reach the bank. `4095` finish payout setup, `4021` not enough available earnings, `4057` below the minimum. Account only, money write |
@@ -236,6 +240,28 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources a
 | `confirm_approval` | `approval_id`, `code` | Approves with the 6-digit code the human read from their email. Account only, write |
 
 Payout setup and cash-out need `mcp:write` or `mcp:money` and an account-level token; project tokens can't use them. They are not deprecated and stay on both servers. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
+
+### Sales and review webhooks
+
+`get_sale_reporter` and `set_sale_reporter` use `mcp:money`. `get_review_reporter` is a catalog read, so `mcp:read` can read it, and `set_review_reporter` needs `mcp:catalog.write`. Each list stores up to five URLs and its own signing key. Refreshing one key does not change the others. A Discord webhook URL receives an embed and no file. Any other https URL receives JSON. `http` is allowed only for localhost. The `signature` is base64 HMAC-SHA1 of the JSON body before that field is added, using that list's key. One attempt per URL, no retry. One URL failing does not skip the others, and a failed delivery does not fail the sale, refund, or review.
+
+A paid purchase or donation, after it commits. `purchase_uid` is the idempotency key. `kind` is `purchase` or `donation`. `buyer` is the username only.
+
+```json
+{"event":"sale","game_uid":"gme_1","game_name":"Example","purchase_uid":"pur_1","kind":"purchase","price_cents":1000,"sale_fee_cents":105,"seller_net_cents":895,"currency":"usd","buyer":"ada","signature":""}
+```
+
+A full refund uses the same event name with `partial` false. A partial Stripe refund sets `partial` true and `refunded_cents` to the amount refunded so far. Top-up refunds are not sent. The staff name is not included. `reason` is omitted when empty.
+
+```json
+{"event":"refund","game_uid":"gme_1","game_name":"Example","purchase_uid":"pur_1","kind":"purchase","partial":false,"refunded_cents":1000,"currency":"usd","buyer":"ada","reason":"changed mind","signature":""}
+```
+
+A new review only. An edit or a delete does not send.
+
+```json
+{"event":"review","game_uid":"gme_1","game_name":"Example","review_uid":"rv_1","enjoyed":true,"quality":4,"would_play_with_friends":true,"text":"Worth it","buyer":"ada","signature":""}
+```
 
 Field values:
 
