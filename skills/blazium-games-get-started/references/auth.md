@@ -6,7 +6,7 @@ The server at `https://mcp.blazium.games/mcp` accepts OAuth 2.1 access tokens or
 
 - Discovery: `https://mcp.blazium.games/.well-known/oauth-protected-resource/mcp` and `/.well-known/oauth-authorization-server` (player server: the same paths ending in `/player`)
 - PKCE `S256` (verifier 43-128 characters), dynamic client registration, and client ID metadata documents are supported
-- Scopes: `mcp:read`, `mcp:write`, and the narrower `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, `mcp:money`, `mcp:anticheat`
+- Scopes: `mcp:read`, `mcp:write`, and the narrower `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:bugs.read`, `mcp:bugs.write`, `mcp:steam.manage`, `mcp:keys.manage`, `mcp:money`, `mcp:anticheat`
 - Access tokens last 1 hour. Refresh tokens rotate on every use, so the client renews silently, but the sign-in still ends 30 days after it started
 - Each refresh token works once. Reusing a spent one revokes the whole sign-in; the user then reconnects
 - Details: https://docs.blazium.games/docs/mcp/oauth

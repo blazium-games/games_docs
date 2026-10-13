@@ -30,7 +30,9 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `list_reviews` | `uid`, `unreplied`, `page` | | Player reviews with the summary (enjoyed, quality average and counts, would play with friends) |
 | `reply_to_review` | `uid`, `review_uid`, `text` | write | Public reply to a review; empty text removes it |
 | `list_bug_tickets` | `uid`, `status` | | Player bug tickets with counts by status; attachments carry a `crash_id` |
-| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, `closed`) | write | Mark a ticket fixed or closed, or reopen it; covered by `mcp:crash.read` |
+| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, `closed`) | `mcp:bugs.write` | Mark a ticket fixed or closed, or reopen it |
+| `get_bug_reporter` / `set_bug_reporter` | `uid`, and for set: `enabled`, `daily_cap`, `webhooks`, `refresh_signing_key` | `mcp:bugs.read` / `mcp:bugs.write` | Per-game in-game reporter. The signing key is unique to the game |
+| `get_steam_auth` / `set_steam_auth` | `uid`, and for set: `app_id`, `web_api_key`, `ticket_secret`, `enabled`, `confirm` | `mcp:steam.manage` | Write-only Web API key and ticket secret. Disable deletes both only when `confirm` is true |
 | `list_copyright_notices` | none | | Paid copyright (DMCA) notices about the account's content, with status and how many of its links each names |
 | `get_copyright_notice` | `uid` | | One notice: claimant, work, statements, the account's named links, staff messages, decision, and `reply_to`. Read only; the human replies by email with the reference in the subject |
 | `get_game_chat` | `uid` | | The game's IRC channel (`irc_channel`), whether guests may join (`chat_guests`), and who is banned or muted with when each mute ends |
