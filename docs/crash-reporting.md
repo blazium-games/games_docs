@@ -165,6 +165,34 @@ Set `BUILD_ID` for each export (see [CI](./cli/ci.md#crash-reporter-ids)). Reque
 
 Reports with a minidump are stackwalked with the Breakpad symbols uploaded for their build. Without symbols, stacks only show addresses. Upload them with `chauffeur symbols`; see [Symbols](./cli/symbols.md).
 
+## Crash webhooks
+
+Crash ingest stays open and still needs no secret. A separate per-game setting can notify your own receiver. It is off until you turn it on from the listing's **Crash webhooks** tab, or with `get_crash_reporter` and `set_crash_reporter`. `mcp:crash.read` can read the setting and the signing key. `mcp:crash.write` can change the webhooks and refresh the key, and it also covers the read routes. This key is not the bug reporter key. Refreshing one does not break the other.
+
+You can store up to five `https` URLs. `http` is allowed only for `localhost`. A Discord webhook URL gets an embed and no file. Every other URL gets JSON. The `signature` field is base64 HMAC-SHA1 of the JSON body before that field is added. `crash_id` is the idempotency key: a later delivery for the same crash can add a URL once that file exists.
+
+```json
+{
+  "game_uid": "game uid",
+  "game_name": "My Game",
+  "crash_id": "report id",
+  "build_id": "build uid",
+  "app_version": "1.0.0",
+  "os": "windows",
+  "arch": "x86_64",
+  "has_dump": true,
+  "has_log": true,
+  "has_stack": false,
+  "expires": 1760000000,
+  "dump_url": "https://api.blazium.online/api/v1/games/<game uid>/crashes/<crash id>/dump?Expires=1760000000&Signature=...",
+  "log_url": "https://api.blazium.online/api/v1/games/<game uid>/crashes/<crash id>/log?Expires=1760000000&Signature=..."
+}
+```
+
+A URL is included only for a file that is already stored. `dump_url`, `log_url`, and `stack_url` use the same signature as a private object: base64 HMAC-SHA1 of `GET\n\n\n{expires}\n/{path}`, with `path` like `games/<game uid>/crashes/<crash id>/log`. `GET` that URL to download the file. A bad or expired signature is rejected. If the file is not stored yet, the response is not found.
+
+A report with no dump and no log is delivered as soon as it is accepted. After a dump or log upload finishes, and again after the stack is stored, the same webhooks are called once more. Delivery is one attempt. Turning the setting off, or having no key or no webhooks, skips delivery. The report is still stored.
+
 ## Reading crashes
 
 With the MCP server connected, ask your agent to list recent crashes. It uses:

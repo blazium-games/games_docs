@@ -24,7 +24,9 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `get_game_analytics` | `uid` | Visitor analytics and the 30-day `downloads` block (see [Download analytics](../download-analytics.md)) |
 | `list_game_crashes` | `uid` | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | One crash report including stack excerpt |
-| `request_crash_download` | `uid`, `crash_id`, `kind` | Private download URL for `dump`, `log`, or `stack`, valid for 1 hour |
+| `request_crash_download` | `uid`, `crash_id`, `kind` | Private download URL for `dump`, `log`, or `stack`, valid for 1 hour. Covered by `mcp:crash.read` |
+| `get_crash_reporter` | `uid` | Reads crash webhooks: enabled, webhook URLs, and that game's signing key. The key is not the bug reporter key. Covered by `mcp:crash.read` |
+| `set_crash_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | Turns crash webhooks on, replaces up to five https URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:crash.write` |
 | `list_mcp_keys` | none | Account key prefixes only. Account only |
 | `get_setup` | none | Account, games, public URLs, latest `build_id`. No secrets. Account only |
 | `get_deploy_info` | `uid` | Upload, crash, and page URLs, build list, and deploy key prefixes. No secrets |
@@ -156,7 +158,8 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 |-------|--------|
 | `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, dependencies, engine compatibility, license kind, media, review replies, mod settings, press kits, community tags |
 | `mcp:build.write` | Builds, channels, deploy info, scan status, symbols, bundle check |
-| `mcp:crash.read` | Crash reports, crash groups, and crash analysis |
+| `mcp:crash.read` | Crash reports, crash groups, crash analysis, and reading the crash webhook setting and signing key |
+| `mcp:crash.write` | Changing crash webhooks and refreshing the signing key. Also covers the crash read routes |
 | `mcp:bugs.read` | Listing bug tickets and reading the in-game bug reporter |
 | `mcp:bugs.write` | Updating bug tickets and changing the in-game bug reporter. Also covers the read routes |
 | `mcp:steam.manage` | Reading and changing Steam auth settings. The Web API key and ticket secret can be set and are never returned |
@@ -165,7 +168,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 | `mcp:money` | Pricing, editions, sales, game keys and gift links, wallet, purchases, library, downloads |
 | `mcp:anticheat` | Anticheat for one game. Not included in `mcp:read`, `mcp:write`, or **Full access**. See [Anticheat](#anticheat). |
 
-Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Bugs** (`mcp:bugs.read mcp:bugs.write`), **Steam** (`mcp:steam.manage`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Anticheat** (`mcp:anticheat`), **Read-only** (`mcp:read`), and **Full access**. `mcp:write` covers the bug and Steam scopes. It does not cover anticheat.
+Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:crash.write mcp:analytics.read`), **Bugs** (`mcp:bugs.read mcp:bugs.write`), **Steam** (`mcp:steam.manage`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Anticheat** (`mcp:anticheat`), **Read-only** (`mcp:read`), and **Full access**. `mcp:write` covers the bug and Steam scopes. It does not cover anticheat.
 
 ### Anticheat
 
@@ -203,7 +206,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 93 tools instead of 105. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 97 tools instead of 109. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
