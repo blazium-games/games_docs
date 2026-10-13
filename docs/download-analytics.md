@@ -89,4 +89,8 @@ A signed-in download on the website is requested by the site's own server for th
 
 ## Through MCP
 
-`get_game_analytics` and the `blazium-games://games/{uid}/analytics` resource return the same payload as the project's analytics page, including `downloads`. A token needs `mcp:read` or `mcp:analytics.read`. See the [MCP reference](./mcp/reference.md).
+`get_game_analytics` and the `blazium-games://games/{uid}/analytics` resource return the same payload as the project's analytics page, including `downloads` and `plays`. A token needs `mcp:read` or `mcp:analytics.read`. See the [MCP reference](./mcp/reference.md).
+
+## Plays
+
+Browser plays are beside downloads. They are not added to download totals and they are not library play time. `plays` covers the last 30 days: total, unique players, anonymous plays, seconds the tab was visible, median session, and full versus demo. See [Browser player](./web-player.md).

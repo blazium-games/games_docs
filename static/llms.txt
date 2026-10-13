@@ -41,6 +41,7 @@
 - [Editor asset library](https://docs.blazium.games/docs/editor-asset-library): The Godot and Blazium AssetLib repository URL, https://api.blazium.online/api/v1/public/asset-library, with optional player sign-in.
 - [Anonymous downloads](https://docs.blazium.games/docs/anonymous-downloads): Downloading free projects without an account, and its trade-offs.
 - [Download analytics](https://docs.blazium.games/docs/download-analytics): Download sources, access, clients, outcomes, and what is recorded.
+- [Browser player](https://docs.blazium.games/docs/web-player): Play a Godot, Blazium, or Unreal HTML5 build in the browser, with an optional demo build.
 
 ## Deploy and crash reporting
 
