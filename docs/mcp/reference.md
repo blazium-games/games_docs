@@ -146,7 +146,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 
 ### Scopes
 
-`mcp:read` and `mcp:write` cover every developer tool. OAuth consent can grant narrower scopes instead:
+`mcp:read` and `mcp:write` cover every developer tool except anticheat. OAuth consent can grant narrower scopes instead:
 
 | Scope | Covers |
 |-------|--------|
@@ -156,8 +156,29 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 | `mcp:analytics.read` | Visitor analytics and events |
 | `mcp:keys.manage` | Deploy keys, MCP keys, MCP access for admins, and project admins |
 | `mcp:money` | Pricing, editions, sales, game keys and gift links, wallet, purchases, library, downloads |
+| `mcp:anticheat` | Anticheat for one game. Not included in `mcp:read`, `mcp:write`, or **Full access**. See [Anticheat](#anticheat). |
 
-Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Read-only** (`mcp:read`), and **Full access**.
+Every developer token can read the profile, account, and game pages. A write scope also reads its own group; the crash and analytics scopes also cover their actions. A call outside the token's scopes returns `4073`, or `4031` if the token has no write scope at all. The consent page offers presets: **Store page** (`mcp:read mcp:catalog.write`), **CI** (`mcp:read mcp:build.write`), **Crash triage** (`mcp:crash.read mcp:analytics.read`), **Keys** (`mcp:read mcp:keys.manage`), **Money** (`mcp:read mcp:money`), **Anticheat** (`mcp:anticheat`), **Read-only** (`mcp:read`), and **Full access**.
+
+### Anticheat
+
+These tools are on the developer server only. Each one needs `mcp:anticheat`. They do nothing for a game until staff have recorded a signed NDA and a signed contract, except `request_anticheat` and a status read. The player server does not have them. What each profile checks is described in [Anticheat](../anticheat.md), without the decision rules.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `request_anticheat` | `uid`, contact email, `confirm` | Owner only. `confirm` must be true. Sends the request. A staff member writes to that email. |
+| `get_anticheat` | `uid` | Before both signatures, the request status only. After that, the profile and its settings. |
+| `update_anticheat` | `uid`, `profile` (`generic`, `platformer`, or `fps`), and the settings for that profile | A setting from the other profile is rejected. Shutting admins out is owner-only. |
+| `list_anticheat_keys` | `uid` | Names and prefixes. Never the secret. |
+| `create_anticheat_key` | `uid`, name, `confirm` | `confirm` must be true. The secret is returned once, for the dedicated server. |
+| `rotate_anticheat_key` | `uid`, key id, `confirm` | `confirm` must be true. The new secret is returned once. |
+| `revoke_anticheat_key` | `uid`, key id, `confirm` | `confirm` must be true. |
+| `list_anticheat_events` | `uid`, optional origin | Reports for that game. Origin is the client or a server key's name. |
+| `list_anticheat_bans`, `ban_anticheat_player`, `unban_anticheat_player` | `uid`, and a player on the ban and unban tools | |
+| `list_anticheat_mutes`, `mute_anticheat_player`, `unmute_anticheat_player` | `uid`, and a player on the mute tools | |
+| `list_anticheat_notes`, `add_anticheat_note` | `uid` | A note the game's developers keep |
+| `enqueue_anticheat_action` | `uid`, action, player id, `confirm` | `confirm` must be true. Asks the dedicated server to warn, mute, kick, or ban, or to take a screenshot. |
+| `list_anticheat_audit` | `uid` | Who changed settings, keys, or actions |
 
 ### Listings
 

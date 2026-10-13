@@ -166,3 +166,28 @@ Tool errors come back as `API <status>: <body>`. Common bodies:
 | `4234` | Invalid mod settings |
 | `4235` | Invalid press kit |
 | `4238` | Invalid store link: wrong site, not https, or a store listed twice |
+
+## Anticheat
+
+These tools need `mcp:anticheat`. `mcp:read`, `mcp:write`, and **Full access** do not include them. They are not on the player server. Reports, keys, and settings stay closed until staff record a signed NDA and a signed contract for that game. `request_anticheat` is the exception: the owner uses it to start that request. Do not describe how a check decides. Profiles are `generic`, `platformer`, and `fps`. Public description: [Anticheat](https://docs.blazium.games/docs/anticheat).
+
+| Tool | Inputs | Access | What it does |
+|------|--------|--------|--------------|
+| `request_anticheat` | `uid`, contact email, `confirm` | `mcp:anticheat` | Owner only. `confirm` must be true. Staff write to that email |
+| `get_anticheat` | `uid` | `mcp:anticheat` | Request status, then the profile and its settings after access is granted |
+| `update_anticheat` | `uid`, `profile`, settings for that profile | `mcp:anticheat` | Rejects a setting from the other profile. Shutting admins out is owner-only |
+| `list_anticheat_keys` | `uid` | `mcp:anticheat` | Names and prefixes. Never the secret |
+| `create_anticheat_key` | `uid`, name, `confirm` | `mcp:anticheat` | `confirm` must be true. Secret once, for the dedicated server only |
+| `rotate_anticheat_key` | `uid`, key id, `confirm` | `mcp:anticheat` | `confirm` must be true. New secret once |
+| `revoke_anticheat_key` | `uid`, key id, `confirm` | `mcp:anticheat` | `confirm` must be true |
+| `list_anticheat_events` | `uid`, optional origin | `mcp:anticheat` | Reports. Origin is the client or a server key's name |
+| `list_anticheat_bans` | `uid` | `mcp:anticheat` | Bans for that game |
+| `ban_anticheat_player` | `uid`, player | `mcp:anticheat` | Ban a player on that game |
+| `unban_anticheat_player` | `uid`, player | `mcp:anticheat` | Lift that ban |
+| `list_anticheat_mutes` | `uid` | `mcp:anticheat` | Mutes for that game |
+| `mute_anticheat_player` | `uid`, player | `mcp:anticheat` | Mute a player on that game |
+| `unmute_anticheat_player` | `uid`, player | `mcp:anticheat` | Lift that mute |
+| `list_anticheat_notes` | `uid` | `mcp:anticheat` | Notes the game's developers kept |
+| `add_anticheat_note` | `uid`, note | `mcp:anticheat` | Add a note |
+| `enqueue_anticheat_action` | `uid`, action, player id, `confirm` | `mcp:anticheat` | `confirm` must be true. Warn, mute, kick, ban, or a screenshot |
+| `list_anticheat_audit` | `uid` | `mcp:anticheat` | Who changed settings, keys, or actions |

@@ -17,7 +17,7 @@ Account access (an account key, or OAuth with **Account**) reaches every project
 
 ## Read, write, and narrower scopes
 
-OAuth tokens carry `mcp:read` and `mcp:write`, or narrower scopes per area: `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, and `mcp:money`. The consent page offers presets for them (**Store page**, **CI**, **Crash triage**, **Keys**, **Money**, **Read-only**, **Full access**); see [Scopes](./reference.md#scopes).
+OAuth tokens carry `mcp:read` and `mcp:write`, or narrower scopes per area: `mcp:catalog.write`, `mcp:build.write`, `mcp:crash.read`, `mcp:analytics.read`, `mcp:keys.manage`, `mcp:money`, and `mcp:anticheat`. The consent page offers presets for them (**Store page**, **CI**, **Crash triage**, **Keys**, **Money**, **Anticheat**, **Read-only**, **Full access**); see [Scopes](./reference.md#scopes). **Full access** does not include `mcp:anticheat`. Anticheat tools need that scope on their own, and only after the game's NDA and contract are signed. See [Anticheat](../anticheat.md).
 
 - A token without any write scope (for example when you tick **Read-only access**) can only read. Any change returns `403` with code `4031` "This token is read-only".
 - A call outside the token's scopes, such as `update_game` with a **CI** token, returns `4073`.

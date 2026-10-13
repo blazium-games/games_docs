@@ -27,6 +27,10 @@
 
 - [Steam auth verification](https://docs.blazium.games/docs/steam-auth): Trade a Steam session ticket for a session token that proves ownership, then check, refresh, or revoke it from your servers with the game's auth key.
 
+## Anticheat
+
+- [Anticheat](https://docs.blazium.games/docs/anticheat): The owner asks with a contact email. Settings stay closed until staff record a signed NDA and a signed contract. Profiles are generic, platformer, and fps. Dedicated servers use a named key. The player client uses the platform session.
+
 ## Payments
 
 - [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs (up to 72 business hours to the bank, also by agents), and refunds (donations are not refundable).
