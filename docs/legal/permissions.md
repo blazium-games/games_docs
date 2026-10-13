@@ -111,7 +111,8 @@ When you approve a tool, it gets a token for one server only, with one or more o
 | `mcp:write` | Developer | Creating and updating game pages, setting prices, issuing deploy keys, and (until October 28, 2026) buying from your balance within the limits you set, in addition to everything `mcp:read` allows. |
 | `mcp:catalog.write` | Developer | Changing game pages (text, taxonomy, similar titles, dependencies, engine compatibility, license kind, images, admins) and replying to player reviews. Reads of your profile and games are always included. |
 | `mcp:build.write` | Developer | Managing builds and release channels, and reading deploy info and scan status. |
-| `mcp:crash.read` | Developer | Reading crash reports and crash groups, and running crash analysis. |
+| `mcp:crash.read` | Developer | Reading crash reports and crash groups, running crash analysis, and reading the crash webhook setting and that game's signing key. |
+| `mcp:crash.write` | Developer | Changing crash webhooks and refreshing that game's signing key. Also covers the crash read routes. |
 | `mcp:bugs.read` | Developer | Reading player bug tickets and the in-game bug reporter settings, including that game's signing key. |
 | `mcp:bugs.write` | Developer | Updating bug tickets and changing the in-game bug reporter. |
 | `mcp:steam.manage` | Developer | Setting a game's Steam app id, Web API key, and ticket secret, and turning Steam auth on or off. The Web API key and ticket secret can be replaced but are never shown back. |

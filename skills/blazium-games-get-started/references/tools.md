@@ -26,6 +26,7 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `promote_build` | `uid`, `channel`, `build_id`, `expires_in_hours`, `idempotency_key` | write | Point a channel at a clean build. `stable` waits for the human's approval |
 | `rollback_channel` | `uid`, `channel` | write | Move a channel back to its previous build |
 | `list_crash_groups` | `uid` | | Up to 100 crash groups by cause, most recently seen first, with counts per build and a sample crash id |
+| `get_crash_reporter` / `set_crash_reporter` | `uid`, and for set: `enabled`, `webhooks`, `refresh_signing_key` | `mcp:crash.read` / `mcp:crash.write` | Per-game crash webhooks. The signing key is not the bug reporter key |
 | `get_build_provenance` | `uid`, `file_uid` | | Uploader, deploy key reference, upload time, checksum, and scan history of a file |
 | `list_reviews` | `uid`, `unreplied`, `page` | | Player reviews with the summary (enjoyed, quality average and counts, would play with friends) |
 | `reply_to_review` | `uid`, `review_uid`, `text` | write | Public reply to a review; empty text removes it |
