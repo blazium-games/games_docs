@@ -6,7 +6,7 @@ description: Trade a player's Steam session ticket for a Blazium Games session t
 
 # Steam auth verification
 
-Steam auth verification lets a Steam build of your game sign players in through Blazium Games. The game sends a Steam session ticket, and Blazium Games checks it with Steam, confirms the player owns the game, and returns a signed session token. Your servers, or any third-party service you run, check that token with the game's **auth key**.
+Steam auth verification lets a Steam build of your game sign players in through Blazium Games. The game sends a Steam session ticket, and Blazium Games checks it with Steam, confirms the player owns the game, and returns a signed session token. Your servers, or any third-party service you run, check that token with a signing key derived from the game's **auth key** and its game id.
 
 You don't need your own Steamworks Web API key on your servers, and players don't need a Blazium Games account. If a player has [linked Steam](./linked-accounts.md#steam) to their Blazium Games account, the token says which account that is.
 
@@ -27,7 +27,7 @@ Auth stays off until three values are stored on the listing:
 
 A save replaces a secret. No page, reveal, or MCP result returns the Web API key or the ticket secret, not even a prefix. The Steam tab shows whether each is stored, who set it, and when. After a save the secret fields are empty.
 
-Turning auth off asks you to confirm, then deletes both secrets and revokes Steam sessions. The app id stays. The session-signing **auth key** is separate: it signs the tokens your servers check, and **Show auth key** still reveals it to an owner on the website. Agents cannot reveal it.
+Turning auth off asks you to confirm, then deletes both secrets and revokes Steam sessions. The app id stays. The session-signing **auth key** is separate: together with the game id it is the secret your servers use to check tokens, and **Show auth key** still reveals it to an owner on the website. Agents cannot reveal it.
 
 An agent with `mcp:steam.manage` (or `mcp:write`) can set the app id, the Web API key, and the ticket secret with `set_steam_auth`. `get_steam_auth` returns the app id and the audit fields only. `enabled: false` does nothing unless `confirm` is true.
 
@@ -83,7 +83,7 @@ Ownership is checked again, and the old token is revoked. After 24 hours, or onc
 
 ## Check a token on your servers
 
-Your servers can check a token themselves: verify the HS512 signature with the auth key, then check the claims.
+Your servers can check a token themselves. Derive the signing key, verify the HS512 signature with that key, then check the claims. The signing key is HMAC-SHA512 of the UTF-8 string `blazium.games/session:` followed by the listing's `game_uid`, using the auth key as the HMAC key. The raw auth key is not the JWT signing key. A token signed for another listing does not verify, even with the same auth key. Tokens already issued before this derivation (they last 1 hour) will not verify; the game refreshes with a new ticket.
 
 | Claim | Value |
 |---|---|
