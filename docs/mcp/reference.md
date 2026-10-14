@@ -21,9 +21,20 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `set_lobby` | `uid` (required), `enabled`, `lobby_type` (`relay` or `scripted`), `ice_enabled` | Only the fields you pass change. Write |
 | `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | New store page. Tools, mods and plugins need a `parent` before they can go public. Needs [developer mode](../developer-mode.md) (`4105`). Account only, write |
 | `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | Update a page; only the fields you pass change. Setting `public` fails with `4225` until the listing check passes. An empty `parent` object clears the parent. Write |
-| `get_game_analytics` | `uid` | Visitor analytics and the 30-day `downloads` block (see [Download analytics](../download-analytics.md)) |
+| `get_game_analytics` | `uid`, optional `build` | Visitor analytics, the 30-day `downloads` block, and registered funnel events (count, unique devices, daily series). See [Download analytics](../download-analytics.md) and [Progress](../progress.md) |
 | `get_web_player` | `uid` | Browser player settings: enabled, full build, demo build, size, and embed |
 | `set_web_player` | `uid`, optional `enabled`, `full_build_id`, `demo_build_id` | Chooses the full build and an optional demo. Covered by `mcp:build.write` |
+| `get_achievements` | `uid` | Achievement definitions and their writers |
+| `set_achievements` | `uid`, `achievements` | Replaces the achievement list. Covered by `mcp:catalog.write` |
+| `get_stats` | `uid` | Integer stats, their op, and their writers |
+| `set_stats` | `uid`, `stats` | Replaces the stat list. Covered by `mcp:catalog.write` |
+| `get_funnels` | `uid` | Registered analytics events and their writers |
+| `set_funnels` | `uid`, `funnels` | Replaces the funnel list. Covered by `mcp:catalog.write` |
+| `get_presence_writers` | `uid` | Who may set the short presence status |
+| `set_presence_writers` | `uid`, `writers` | Replaces that list. Covered by `mcp:catalog.write` |
+| `list_server_keys` | `uid` | Game server key prefixes and roles. No secrets |
+| `request_server_key` | `uid`, `role` (`game_server` or `private_server`) | Returns the secret once |
+| `revoke_server_key` | `uid`, `key_id` | Revokes one game server key |
 | `list_game_crashes` | `uid` | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | One crash report including stack excerpt |
 | `request_crash_download` | `uid`, `crash_id`, `kind` | Private download URL for `dump`, `log`, or `stack`, valid for 1 hour. Covered by `mcp:crash.read` |

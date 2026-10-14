@@ -176,6 +176,10 @@ chauffeur lobby status
 
 See [Multiplayer](../multiplayer.md).
 
+## Progress
+
+`chauffeur progress apply --file progress.yml` replaces each section the file includes: `achievements`, `stats`, `funnels`, and `presence_writers`. A missing section is left as it is. The file starts with `spec: progress`. `chauffeur progress show` prints the current definitions. `--json` works on both. Server keys are not in this file. See [Progress](../progress.md).
+
 ## Shell completion
 
 `chauffeur completion bash|zsh|fish|powershell` prints a completion script. For example, `chauffeur completion powershell | Out-String | Invoke-Expression`.
