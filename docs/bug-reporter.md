@@ -46,4 +46,4 @@ The screenshot URL is signed the same way Spaces signs a private object: base64 
 
 ## Notices
 
-When a ticket is marked `fixed`, the player who filed it can read it from `GET /api/v1/games/{game_uid}/bugs/notices` and acknowledge it with `POST .../notices/ack`. A `closed` ticket stays silent.
+When a ticket is marked `fixed`, the player who filed it can read it from `GET /api/v1/games/{game_uid}/bugs/notices` and acknowledge it with `POST .../notices/ack`. A `closed` ticket stays silent. A stable build's changelog uses the same pull: `GET /api/v1/games/{game_uid}/patch/notices` and `POST .../patch/notices/ack`. See [Deploy builds](./deploy.md).
