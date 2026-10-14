@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # Multiplayer
 
-A Blazium game uses the engine module. A game built on another Godot engine vendors the public `games_plugin` addon and sets `blazium/game/game_uid` to the project id from the editor.
+A Blazium game uses the engine module. A game built on another Godot engine vendors the public `games_plugin` addon and sets `blazium/game/game_uid` to the project id from the editor. Unity and Unreal games use the packages on [Engines](./engines.md). They call the native library instead of opening these sockets themselves.
 
 ## Sign-in
 

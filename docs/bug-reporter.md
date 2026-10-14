@@ -33,7 +33,7 @@ The first time the reporter is turned on, that game gets its own signing key. It
 
 Over the daily cap returns code `4291`.
 
-The Godot plugin and the C++ SDK both expose `report_bug`. They send the Blazium JWT, or the Steam session from `sign_in_with_steam_ticket`, and they do not link Steamworks.
+The Godot plugin, the Unity package, the Unreal plugin, and the C++ SDK all expose `report_bug`. They send the Blazium JWT, or the Steam session from `sign_in_with_steam_ticket`, and they do not link Steamworks. See [Engines](./engines.md).
 
 ## Webhooks
 
