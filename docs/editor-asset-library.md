@@ -6,7 +6,7 @@ description: The repository URL Godot and Blazium paste into the AssetLib to lis
 
 # Editor asset library
 
-Blazium Games is the platform for playing and publishing games, applications, mods, and assets. Godot and Blazium already include an AssetLib tab. Point that tab at Blazium Games and it lists and installs packages with no extra plugin.
+Blazium Games is a game publishing platform, with an infrastructure focus. Godot and Blazium already include an AssetLib tab. Point that tab at Blazium Games and it lists and installs packages with no extra plugin.
 
 In the editor, open **Editor Settings**, then **Asset Library**, and add this repository under `asset_library/available_urls`:
 

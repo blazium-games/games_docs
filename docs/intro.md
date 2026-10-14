@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Introduction
 
-This is the documentation for [Blazium Games](https://blazium.games). Blazium Games is the platform for playing and publishing games, applications, mods, and assets.
+This is the documentation for [Blazium Games](https://blazium.games). Blazium Games is a game publishing platform, with an infrastructure focus.
 
 ## The platform
 

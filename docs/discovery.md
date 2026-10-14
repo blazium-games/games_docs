@@ -6,7 +6,7 @@ description: The files machines read to crawl, trust, and find Blazium Games, an
 
 # Discovery files
 
-Blazium Games is the platform for playing and publishing games, applications, mods, and assets. The files below tell crawlers, browsers, and agents where the public site, the docs, the APIs, and the MCP servers are.
+Blazium Games is a game publishing platform, with an infrastructure focus. The files below tell crawlers, browsers, and agents where the public site, the docs, the APIs, and the MCP servers are.
 
 `llms.txt` is a curated map for agents. It is not a search-ranking file, and publishing it does not grant crawl rights. Google does not use it for ranking. Crawlers follow `robots.txt` and the sitemaps. Share titles for each public page are on [SEO and indexing](./seo-and-indexing.md).
 
@@ -21,7 +21,7 @@ Blazium Games is the platform for playing and publishing games, applications, mo
 
 ## Trust
 
-`https://blazium.games/.well-known/security.txt` is the vulnerability contact for the marketplace (RFC 9116):
+`https://blazium.games/.well-known/security.txt` is the vulnerability contact for the publishing platform (RFC 9116):
 
 - Contact: `mailto:support@blazium.games`
 - Contact: [https://github.com/blazium-games/support/security/advisories/new](https://github.com/blazium-games/support/security/advisories/new)

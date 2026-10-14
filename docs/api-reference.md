@@ -6,7 +6,7 @@ description: The OpenAPI description of the public Blazium Games API, how to aut
 
 # Public API reference
 
-Blazium Games is the platform for playing and publishing games, applications, mods, and assets. The public API at `https://api.blazium.online` serves the catalog, the editor asset library, signed-out downloads, game telemetry, and build registration.
+Blazium Games is a game publishing platform, with an infrastructure focus. The public API at `https://api.blazium.online` serves the catalog, the editor asset library, signed-out downloads, game telemetry, and build registration.
 
 ## OpenAPI description
 

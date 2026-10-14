@@ -6,7 +6,7 @@ description: A per-project setting that lets anyone download a free project's fi
 
 # Anonymous downloads
 
-Blazium Games is the platform for playing and publishing games, applications, mods, and assets. Normally a visitor signs in before downloading, and the first download of a free project adds it to their library with a free license.
+Blazium Games is a game publishing platform, with an infrastructure focus. Normally a visitor signs in before downloading, and the first download of a free project adds it to their library with a free license.
 
 Anonymous downloads is a setting on each project. When it is on, anyone can download the project's public files without an account:
 
