@@ -19,6 +19,12 @@ Each achievement, stat, and funnel event names the writers that may change it. A
 
 Removing `client` stops a modified client from granting the stat. The game server key is not the deploy key and not an anticheat key. The secret is returned once.
 
+## Steam
+
+On the **Progress** tab of a game or application, **Pull from Steam** copies published achievement names and integer stats into these lists. Steam auth verification has to be on, with an app id and a stored Web API key. **Push to Steam** and **Two-way sync** stay unavailable, because Steam publishes achievement and stat definitions only on the Steamworks site. Float and average-rate stats are skipped. A definition that exists only here stays, and player unlocks and stat values are not removed. Funnels and presence are not on Steam's list.
+
+The same copy runs when **Achievements and integer stats** is ticked on a Steam import or resync. See [Import from Steam](./steam-import.md).
+
 ## Ownership
 
 `GET /api/v1/private/games/{id}/ownership` answers the signed-in session.
