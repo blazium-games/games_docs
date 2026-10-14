@@ -44,7 +44,9 @@ Replace `GAME_UID` with the game id. Add `allow="fullscreen"` when fullscreen is
 
 ## Discord activity
 
-The Discord section is on the Web player tab only after the saved browser player is enabled. Turn hosting on with the Application ID and the Public Key from that Discord application. Both are required. There is no bot token. Enable Activities, check the supported platforms, and leave Application URL Override off in production. For local proxy testing, use a tunnel you reset when you do not own the domain. Do not trust SDK user, guild, or channel fields as proof.
+The Discord section is on the Web player tab only after the saved browser player is enabled. Turning the browser player off turns Discord hosting off. Hosting can be turned on only while the player is already on. Discord hosting does not follow the embed switch. Adult listings and hidden pages are not offered as a Discord launch, the same way an embed is refused.
+
+Turn hosting on with the Application ID and the Public Key from that Discord application. Both are required. There is no bot token. Enable Activities, check the supported platforms, and leave Application URL Override off in production. For local proxy testing, use a tunnel you reset when you do not own the domain. Do not trust SDK user, guild, or channel fields as proof.
 
 Copy the mappings into the Discord portal. Targets have no `https://`. The shortest prefix, `/`, is last.
 
