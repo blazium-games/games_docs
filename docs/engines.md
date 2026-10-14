@@ -53,3 +53,5 @@ UTF-8 JSON beside the player executable. Unity and Unreal do not write this file
 The native library talks to the Blazium launcher on the player's machine. The Unity package and the Unreal plugin do not call `api.blazium.online`. Lobby, ICE, Steam ticket, and bug report calls return JSON. File a bug with [the in-game reporter](./bug-reporter.md).
 
 Godot, Unity, and Unreal also share ownership, achievement unlocks, stat writes, funnel events, `Progress()` to read unlocks and stat values, `SetPresence` when the client may write presence, and the patch-note pull described in [Deploy builds](./deploy.md).
+
+Inside a Discord activity, only the Blazium module and the Godot addon open the proxied login, lobby, and API addresses. Unity and Unreal do not. See [Multiplayer](./multiplayer.md).
