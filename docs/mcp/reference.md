@@ -22,6 +22,8 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | New store page. Tools, mods and plugins need a `parent` before they can go public. Needs [developer mode](../developer-mode.md) (`4105`). Account only, write |
 | `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | Update a page; only the fields you pass change. Setting `public` fails with `4225` until the listing check passes. An empty `parent` object clears the parent. Write |
 | `get_game_analytics` | `uid` | Visitor analytics and the 30-day `downloads` block (see [Download analytics](../download-analytics.md)) |
+| `get_web_player` | `uid` | Browser player settings: enabled, full build, demo build, size, and embed |
+| `set_web_player` | `uid`, optional `enabled`, `full_build_id`, `demo_build_id` | Chooses the full build and an optional demo. Covered by `mcp:build.write` |
 | `list_game_crashes` | `uid` | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | One crash report including stack excerpt |
 | `request_crash_download` | `uid`, `crash_id`, `kind` | Private download URL for `dump`, `log`, or `stack`, valid for 1 hour. Covered by `mcp:crash.read` |
@@ -208,7 +210,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 99 tools instead of 111. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 105 tools instead of 117. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|

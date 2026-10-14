@@ -35,6 +35,10 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `list_bug_tickets` | `uid`, `status` | | Player bug tickets with counts by status; attachments carry a `crash_id` |
 | `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, `closed`) | `mcp:bugs.write` | Mark a ticket fixed or closed, or reopen it |
 | `get_bug_reporter` / `set_bug_reporter` | `uid`, and for set: `enabled`, `daily_cap`, `webhooks`, `refresh_signing_key` | `mcp:bugs.read` / `mcp:bugs.write` | Per-game in-game reporter. The signing key is unique to the game |
+| `get_review_reporter` | `uid` | `mcp:read` | New-review webhooks: enabled, webhook URLs, and that game's signing key. The key is not the sale, crash, or bug reporter key |
+| `set_review_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | `mcp:catalog.write` | Turns new-review webhooks on, replaces up to five https URLs, or refreshes the signing key. An edit or a delete does not send |
+| `get_sale_reporter` | `uid` | `mcp:money` | Sale and refund webhooks: enabled, webhook URLs, and that game's signing key. The key is not the review, crash, or bug reporter key |
+| `set_sale_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | `mcp:money` | Turns sale and refund webhooks on, replaces up to five https URLs, or refreshes the signing key |
 | `get_steam_auth` / `set_steam_auth` | `uid`, and for set: `app_id`, `web_api_key`, `ticket_secret`, `enabled`, `confirm` | `mcp:steam.manage` | Write-only Web API key and ticket secret. Disable deletes both only when `confirm` is true |
 | `list_copyright_notices` | none | | Paid copyright (DMCA) notices about the account's content, with status and how many of its links each names |
 | `get_copyright_notice` | `uid` | | One notice: claimant, work, statements, the account's named links, staff messages, decision, and `reply_to`. Read only; the human replies by email with the reference in the subject |
