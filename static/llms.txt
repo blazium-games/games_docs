@@ -46,7 +46,8 @@
 ## Deploy and crash reporting
 
 - [Deploy builds](https://docs.blazium.games/docs/deploy): Upload builds and symbols from CI.
-- [Crash reporting](https://docs.blazium.games/docs/crash-reporting): Crashes and events from a game.
+- [Crash reporting](https://docs.blazium.games/docs/crash-reporting): Crashes and the six standard launch events from a game.
+- [Progress](https://docs.blazium.games/docs/progress): Achievements, stats, registered funnel events, and rich presence.
 
 ## SEO and discovery
 

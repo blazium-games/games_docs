@@ -171,7 +171,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 
 | Scope | Covers |
 |-------|--------|
-| `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, dependencies, engine compatibility, license kind, media, review replies, new-review webhooks, mod settings, press kits, community tags |
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, achievements, stats, funnels, presence writers, dependencies, engine compatibility, license kind, media, review replies, new-review webhooks, mod settings, press kits, community tags |
 | `mcp:build.write` | Builds, channels, deploy info, scan status, symbols, bundle check |
 | `mcp:crash.read` | Crash reports, crash groups, crash analysis, and reading the crash webhook setting and signing key |
 | `mcp:crash.write` | Changing crash webhooks and refreshing the signing key. Also covers the crash read routes |
@@ -179,7 +179,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 | `mcp:bugs.write` | Updating bug tickets and changing the in-game bug reporter. Also covers the read routes |
 | `mcp:steam.manage` | Reading and changing Steam auth settings. The Web API key and ticket secret can be set and are never returned |
 | `mcp:analytics.read` | Visitor analytics and events |
-| `mcp:keys.manage` | Deploy keys, MCP keys, MCP access for admins, and project admins |
+| `mcp:keys.manage` | Deploy keys, MCP keys, game server keys, MCP access for admins, and project admins |
 | `mcp:money` | Pricing, editions, sales, sale and refund webhooks, game keys and gift links, wallet, purchases, library, downloads |
 | `mcp:anticheat` | Anticheat for one game. Not included in `mcp:read`, `mcp:write`, or **Full access**. See [Anticheat](#anticheat). |
 
@@ -221,7 +221,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 105 tools instead of 117. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 116 tools instead of 128. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|

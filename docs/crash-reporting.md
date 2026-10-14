@@ -96,7 +96,7 @@ Six event names have fixed meanings. Send them from every build and your listing
 | `quit` | The player chose to quit | |
 | `crash` | Sent by the crash reporter, or on the next launch after an unclean exit | `device_uid` (required) |
 
-If any standard event in a request has a missing or out-of-range field, the whole request is refused with `4158` and the message names the event's index. Other event names are stored as custom events.
+If any standard event in a request has a missing or out-of-range field, the whole request is refused with `4158` and the message names the event's index. A custom name such as `level_complete` is a registered funnel, recorded by the signed-in client, a server key, or the scripted lobby. Unknown names are refused on that route. See [Progress](./progress.md).
 
 A `crash` before a device's first `boot_ok` counts as a crash on boot. Health counts devices, so send the same random `device_uid` from every event of one install.
 
