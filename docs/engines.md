@@ -51,3 +51,5 @@ UTF-8 JSON beside the player executable. Unity and Unreal do not write this file
 `game_uid` is the project id on blazium.games. No other keys are allowed.
 
 The native library talks to the Blazium launcher on the player's machine. The Unity package and the Unreal plugin do not call `api.blazium.online`. Lobby, ICE, Steam ticket, and bug report calls return JSON. File a bug with [the in-game reporter](./bug-reporter.md).
+
+Godot, Unity, and Unreal also share ownership, achievement unlocks, stat writes, funnel events, `Progress()` to read unlocks and stat values, `SetPresence` when the client may write presence, and the patch-note pull described in [Deploy builds](./deploy.md).

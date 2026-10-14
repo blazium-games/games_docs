@@ -33,7 +33,7 @@ The SDK method is `BlaziumUser()->Ownership(edition, listing)`. The Godot plugin
 
 An achievement unlocks once. A stat is an integer with op `set`, `add`, or `max`. A game can have 100 achievements and 50 stats.
 
-The store page lists the definitions. The library shows that player's unlocks and stat values.
+The store page lists the definitions. The library shows that player's unlocks and stat values. A game reads the same rows with `GET /api/v1/private/player/progress?game_id=`. The Godot plugin method is `progress()`. The SDK method is `BlaziumAPI_Progress()`. Unity and Unreal call `Progress()` on the user binding. The answer has `achievements` (`slug`, `name`, `unlocked_at`) and `stats` (`slug`, `name`, `value`).
 
 ## Funnels
 
@@ -44,6 +44,8 @@ Any other name must be a registered funnel. Unknown names are refused. `get_game
 ## Rich presence
 
 Friends see a status of at most 40 characters beside the game name, and the lobby id the lobby API already returns. It is hidden when activity sharing is off. `presence_writers` defaults to `client`.
+
+A single-player game sets its own status with `set_presence(status)` on the Godot plugin and `BlaziumAPI_SetPresence` on the SDK. Unity and Unreal call `SetPresence`. That call is allowed only when `presence_writers` includes `client`. It does not send a lobby signature.
 
 A scripted lobby does not write presence. `lobby:set_presence(user, status)` notifies that player's connection. The lobby host signs that notice. The launcher, the engine host, or the Godot plugin applies it only when the signature is present and `presence_writers` includes `scripted_lobby`. A client cannot claim the scripted lobby writer by itself.
 

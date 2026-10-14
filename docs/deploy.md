@@ -155,6 +155,8 @@ Each channel (`stable`, `beta`, `dev`, or your own lowercase name) points at one
 
 On the **Builds** tab of your game you can promote a build to a channel, set an expiry, roll a channel back to its previous build, and see the history. Over MCP use `list_channels`, `promote_build`, and `rollback_channel`. Promoting to `stable` over MCP waits for your approval by email.
 
+A new or changed changelog on a stable build (an empty channel counts as stable) emails the owner and accepted admins. The store page shows that changelog as the patch note. A game reads the newest stable note that player has not acknowledged with `GET /api/v1/games/{game_uid}/patch/notices` and acknowledges it with `POST .../patch/notices/ack`, the same pull a fixed bug uses. Beta and identical re-uploads do not send the email.
+
 Every file records how it was uploaded (deploy key reference or website) and its scan history. Players see a short line under the scan badge, and `GET /api/v1/public/games/{game_uid}/files/{file_uid}/provenance` returns the full record.
 
 ## GitHub Actions
