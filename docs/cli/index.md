@@ -8,7 +8,7 @@ description: Install chauffeur, the Blazium Games upload tool for builds, debug 
 
 `chauffeur` is the Blazium Games upload tool. Source: [blazium-games/games_cli](https://github.com/blazium-games/games_cli). Everything that sends files to the store goes through it or the [upload API](../deploy.md#2b-upload-with-the-api): builds, per-platform files, Breakpad debug symbols and store page images. The [developer MCP server](../mcp/index.md) can list and delete these but never uploads them. The website can also upload store page images (cover, thumbnail and gallery) on the game's edit page.
 
-Scripted lobby packs are published with `chauffeur lobby publish`. See [Multiplayer](../multiplayer.md). Achievement, stat, funnel, and presence lists are uploaded with `chauffeur progress`. See [Progress](../progress.md).
+Scripted lobby packs are published with `chauffeur lobby publish`. `chauffeur lobby set` turns the lobby on, chooses relay or scripted, and switches TURN. See [Multiplayer](../multiplayer.md). Achievement, stat, funnel, and presence lists are uploaded with `chauffeur progress`. See [Progress](../progress.md).
 
 Agents that ship a build use the `blazium-games-deploy` skill from `npm install @blazium-games/skills`. Store pages and deploy keys use `blazium-games-store-page` and `blazium-games-keys`.
 

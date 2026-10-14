@@ -42,6 +42,9 @@ Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 | [blazium-games-debug-crash](skills/blazium-games-debug-crash/SKILL.md) | Triages crashes and maps them to your code |
 | [blazium-games-analytics](skills/blazium-games-analytics/SKILL.md) | Summarizes store page traffic |
 | [blazium-games-keys](skills/blazium-games-keys/SKILL.md) | Inspects and rotates MCP and deploy keys |
+| [blazium-games-module](skills/blazium-games-module/SKILL.md) | Blazium engine login, lobby, and ICE |
+| [blazium-games-plugin](skills/blazium-games-plugin/SKILL.md) | Godot addon for other engines |
+| [blazium-games-lobby-pack](skills/blazium-games-lobby-pack/SKILL.md) | Publishes a Luau lobby pack |
 | [blazium-games-player](skills/blazium-games-player/SKILL.md) | Acts as a player: recommendations, catalog search, reviews, bug reports, friends |
 | [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buys games and donates from the balance within spending limits |
 

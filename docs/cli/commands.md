@@ -166,9 +166,11 @@ chauffeur builds list --version 1.2.0 --json
 
 ## Scripted lobbies
 
-Turn scripted lobbies on in the game editor, then publish the Luau pack:
+Turn the lobby on, choose relay or scripted, and switch TURN. Pass at least one of `--enabled`, `--type`, or `--ice`:
 
 ```bash
+chauffeur lobby set --enabled true --type scripted
+chauffeur lobby set --ice false
 chauffeur lobby publish --dir .
 chauffeur lobby list
 chauffeur lobby status

@@ -17,6 +17,9 @@ New to Blazium Games in Cursor? Start with [blazium-games-get-started](skills/bl
 | [blazium-games-debug-crash](skills/blazium-games-debug-crash/SKILL.md) | Triage and fix crashes, close bug tickets | `list_crash_groups`, `get_crash`, `request_crash_download`, `update_bug_ticket` |
 | [blazium-games-analytics](skills/blazium-games-analytics/SKILL.md) | Summarize page traffic | `get_game_analytics` |
 | [blazium-games-keys](skills/blazium-games-keys/SKILL.md) | Inspect and rotate credentials, create redeemable game keys | `list_mcp_keys`, `request_mcp_key`, `request_deploy_key`, `grant_keys` |
+| [blazium-games-module](skills/blazium-games-module/SKILL.md) | Blazium engine login, lobby, and ICE | engine module |
+| [blazium-games-plugin](skills/blazium-games-plugin/SKILL.md) | Godot addon for other engines | `games_plugin` |
+| [blazium-games-lobby-pack](skills/blazium-games-lobby-pack/SKILL.md) | Publish a Luau lobby pack | `chauffeur lobby publish` |
 | [blazium-games-player](skills/blazium-games-player/SKILL.md) | Connect the player server, get recommendations, review games, report bugs, check the library and spending limit | `recommend`, `search_catalog`, `write_review`, `get_library` |
 | [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buy, donate, top up, and download with the human's approval | `quote_purchase`, `purchase_game`, `get_wallet` |
 
