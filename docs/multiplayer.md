@@ -18,6 +18,8 @@ Create or join returns only after the player is admitted. The response includes 
 
 The lobby socket is `wss://lobby.blazium.online/`. ICE servers come from `https://stun.blazium.online/v1/ice` using `ice_session_id` from that response. Relay uses `wss://turn.blazium.online/v1/signal`. When the TURN switch is off, the game does not request ICE. A presence notice on the lobby socket does not replace that ICE fetch. Achievements, stats, funnel events, and that notice are described in [Progress](./progress.md).
 
+Inside a Discord activity, the module and the Godot addon open `wss://{applicationId}.discordsays.com/.proxy/blazium/login/api/v1/connect` and `wss://{applicationId}.discordsays.com/.proxy/blazium/lobby/` instead of the public hosts. Turn lobbies on as Relay or Scripted, and leave the TURN switch off. Discord does not carry WebRTC. A Discord player still has to sign in and own the game or hold a license before the lobby socket accepts them. Unity and Unreal do not open these sockets.
+
 ## Scripted lobbies
 
 Turn scripted lobbies on in the game editor. Publish the Luau pack with the CLI:

@@ -42,6 +42,21 @@ The store card embed stays the store card. A separate snippet plays the game:
 
 Replace `GAME_UID` with the game id. Add `allow="fullscreen"` when fullscreen is on.
 
+## Discord activity
+
+The Discord section is on the Web player tab only after the saved browser player is enabled. Turn hosting on with the Application ID and the Public Key from that Discord application. Both are required. There is no bot token. Enable Activities, check the supported platforms, and leave Application URL Override off in production. For local proxy testing, use a tunnel you reset when you do not own the domain. Do not trust SDK user, guild, or channel fields as proof.
+
+Copy the mappings into the Discord portal. Targets have no `https://`. The shortest prefix, `/`, is last.
+
+| Prefix | Target |
+| --- | --- |
+| `/blazium/api` | `api.blazium.online` |
+| `/blazium/login` | `login.blazium.online` |
+| `/blazium/lobby` | `lobby.blazium.online`, only when this game's lobby is on as Relay or Scripted |
+| `/` | `{uid}.play.blazium.online` |
+
+There is no mapping for `stun.blazium.online` or `turn.blazium.online`. Leave the TURN switch off for this activity. A threaded web build is not served with COOP or COEP. A paid game plays the demo. A free game with anonymous play plays the full build. A Discord launch does not grant a license. A Discord player still has to sign in and own the game or hold a license before the lobby socket accepts them.
+
 ## Plays
 
 Plays are counted beside downloads, not inside them. A play is recorded when someone is offered a session. Later requests for the same session are not new plays. Time is how long the tab was visible. Project Analytics and account Analytics show plays for the last 30 days: total, unique players, anonymous plays, seconds, median session, and full versus demo.

@@ -22,8 +22,8 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `create_game` | `name` (required), `tagline`, `description`, `visibility`, `asset_type`, `vanity_name`, `adult`, `indexable`, `parent` | New store page. Tools, mods and plugins need a `parent` before they can go public. Needs [developer mode](../developer-mode.md) (`4105`). Account only, write |
 | `update_game` | `uid` (required), `name`, `tagline`, `description`, `visibility`, `asset_type`, `adult`, `indexable`, `parent` | Update a page; only the fields you pass change. Setting `public` fails with `4225` until the listing check passes. An empty `parent` object clears the parent. Write |
 | `get_game_analytics` | `uid`, optional `build` | Visitor analytics, the 30-day `downloads` block, and registered funnel events (count, unique devices, daily series). See [Download analytics](../download-analytics.md) and [Progress](../progress.md) |
-| `get_web_player` | `uid` | Browser player settings: enabled, full build, demo build, size, and embed |
-| `set_web_player` | `uid`, optional `enabled`, `full_build_id`, `demo_build_id` | Chooses the full build and an optional demo. Covered by `mcp:build.write` |
+| `get_web_player` | `uid` | Browser player settings: enabled, full build, demo build, size, embed, and Discord activity |
+| `set_web_player` | `uid`, optional `enabled`, `full_build_id`, `demo_build_id`, `application_id`, `public_key` | Chooses the full build, an optional demo, and Discord activity hosting. Covered by `mcp:build.write` |
 | `get_achievements` | `uid` | Achievement definitions and their writers |
 | `set_achievements` | `uid`, `achievements` | Replaces the achievement list. Covered by `mcp:catalog.write` |
 | `get_stats` | `uid` | Integer stats, their op, and their writers |
