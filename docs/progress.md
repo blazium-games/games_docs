@@ -19,6 +19,8 @@ Each achievement, stat, and funnel event names the writers that may change it. A
 
 Removing `client` stops a modified client from granting the stat. The game server key is not the deploy key and not an anticheat key. The secret is returned once.
 
+`GET /api/v1/server/progress?user_uid=` uses the same key (`X-Server-Key` or `Bearer bgs_…`). The player must own the game. The body matches the player read: `achievements` (`slug`, `name`, `unlocked_at`) and `stats` (`slug`, `name`, `value`). A missing player and a player who does not own the game are refused the same way as a write. This read has its own limit, separate from the 120 writes a minute. The SDK method is `BlaziumAPI_ServerProgressRead(server_key, user_uid)`. The Godot plugin method is `server_progress(server_key, user_uid)`.
+
 ## Steam
 
 On the **Progress** tab of a game or application, **Pull from Steam** copies published achievement names and integer stats into these lists. Steam auth verification has to be on, with an app id and a stored Web API key. **Push to Steam** and **Two-way sync** stay unavailable, because Steam publishes achievement and stat definitions only on the Steamworks site. Float and average-rate stats are skipped. A definition that exists only here stays, and player unlocks and stat values are not removed. Funnels and presence are not on Steam's list.
@@ -55,7 +57,7 @@ A single-player game sets its own status with `set_presence(status)` on the Godo
 
 A scripted lobby does not write presence. `lobby:set_presence(user, status)` notifies that player's connection. The lobby host signs that notice. The launcher, the engine host, or the Godot plugin applies it only when the signature is present and `presence_writers` includes `scripted_lobby`. A client cannot claim the scripted lobby writer by itself.
 
-The Godot plugin also writes as an official server with `server_unlock_achievement`, `server_set_stat`, and `server_record_event`, using the same server key as the SDK. Those calls do not set presence.
+The Godot plugin also writes as an official server with `server_unlock_achievement`, `server_set_stat`, and `server_record_event`, and reads one owner with `server_progress(server_key, user_uid)`, using the same server key as the SDK. Those calls do not set presence.
 
 ## Scripted lobby
 
