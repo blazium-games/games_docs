@@ -191,7 +191,7 @@ You can store up to five `https` URLs. `http` is allowed only for `localhost`. A
 
 A URL is included only for a file that is already stored. `dump_url`, `log_url`, and `stack_url` use the same signature as a private object: base64 HMAC-SHA1 of `GET\n\n\n{expires}\n/{path}`, with `path` like `games/<game uid>/crashes/<crash id>/log`. `GET` that URL to download the file. A bad or expired signature is rejected. If the file is not stored yet, the response is not found.
 
-A report with no dump and no log is delivered as soon as it is accepted. After a dump or log upload finishes, and again after the stack is stored, the same webhooks are called once more. Delivery is one attempt. Turning the setting off, or having no key or no webhooks, skips delivery. The report is still stored.
+A report with no dump and no log is delivered as soon as it is accepted. After a dump or log upload finishes, and again after the stack is stored, the same webhooks are called once more. Each URL is posted up to three times, and a 2xx stops the retries. Turning the setting off, or having no key or no webhooks, skips delivery. The report is still stored.
 
 ## Reading crashes
 

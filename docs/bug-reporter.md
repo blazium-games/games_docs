@@ -37,7 +37,7 @@ The Godot plugin, the Unity package, the Unreal plugin, and the C++ SDK all expo
 
 ## Webhooks
 
-A new report is delivered to every URL.
+A new report is delivered to every URL. Each URL is posted up to three times with the same signed body, and a 2xx stops the retries. The settings response includes `last_delivery` for each URL: the time, the HTTP status or error, and whether it succeeded.
 
 - A Discord webhook (`https://discord.com/api/webhooks/` or `https://discordapp.com/api/webhooks/`) gets an embed with the game, ticket id, version, and whether a log or screenshot exists. The file is not attached.
 - Any other URL gets JSON. The body includes `signature`, an HMAC-SHA1 of the JSON before that field was added, and a time-limited `screenshot_url` when there is an image.

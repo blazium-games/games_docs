@@ -256,7 +256,7 @@ Payout setup and cash-out need `mcp:write` or `mcp:money` and an account-level t
 
 ### Sales and review webhooks
 
-`get_sale_reporter` and `set_sale_reporter` use `mcp:money`. `get_review_reporter` is a catalog read, so `mcp:read` can read it, and `set_review_reporter` needs `mcp:catalog.write`. Each list stores up to five URLs and its own signing key. Refreshing one key does not change the others. A Discord webhook URL receives an embed and no file. Any other https URL receives JSON. `http` is allowed only for localhost. The `signature` is base64 HMAC-SHA1 of the JSON body before that field is added, using that list's key. One attempt per URL, no retry. One URL failing does not skip the others, and a failed delivery does not fail the sale, refund, or review.
+`get_sale_reporter` and `set_sale_reporter` use `mcp:money`. `get_review_reporter` is a catalog read, so `mcp:read` can read it, and `set_review_reporter` needs `mcp:catalog.write`. Each list stores up to five URLs and its own signing key. Refreshing one key does not change the others. A Discord webhook URL receives an embed and no file. Any other https URL receives JSON. `http` is allowed only for localhost. The `signature` is base64 HMAC-SHA1 of the JSON body before that field is added, using that list's key. Each URL is posted up to three times with the same signed body. A 2xx stops the retries. One URL failing does not skip the others, and a failed delivery does not fail the sale, refund, or review. The settings response includes `last_delivery` for each URL.
 
 A paid purchase or donation, after it commits. `purchase_uid` is the idempotency key. `kind` is `purchase` or `donation`. `buyer` is the username only.
 
