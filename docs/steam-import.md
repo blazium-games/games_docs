@@ -45,8 +45,9 @@ A new listing starts as a draft. Check it over, upload builds, and publish it fr
 | Price | The US price, or free. A non-USD or missing price is skipped. |
 | Content warnings and adult flag | Steam's mature content descriptors and age gate. |
 | Steam store link | The Steam entry in the listing's store links. |
+| Achievements and integer stats | Published achievement names and integer stats. Float and average-rate stats are skipped. A definition that exists only here stays, and player unlocks and stat values are not removed. |
 
-The preview and the result list every field as **imported**, **skipped** (with the reason, such as a value the listing check would refuse), or **not imported**. Languages, system requirements, achievements, and DLC have no field here. Supported operating systems come from the builds you upload. Import each DLC as its own listing.
+The preview and the result list every field as **imported**, **skipped** (with the reason, such as a value the listing check would refuse), or **not imported**. Languages, system requirements, and DLC have no field here. Achievements and integer stats are copied when that part is ticked. Supported operating systems come from the builds you upload. Import each DLC as its own listing.
 
 ## Resync and unlink
 
@@ -73,20 +74,21 @@ The website calls these routes with your session. They are refused for MCP token
 | `POST /api/v1/private/steam/import` | The same, plus `enable_auth` | `game_uid`, `vanity_name`, `created`, the report, and `steam` (the Steam tab settings). |
 | `GET /api/v1/private/games/{game_id}/steam` | | The Steam tab settings. `4244` when the listing isn't linked. |
 | `POST /api/v1/private/games/{game_id}/steam/resync` | `groups`, optional `web_api_key` | The report and the settings. |
+| `POST /api/v1/private/games/{game_id}/steam/progress` | `mode`: `pull`, `push`, or `sync` | `pull` copies published achievements and integer stats. `push` and `sync` are refused, because Steam publishes those definitions only on the Steamworks site. Steam auth verification has to be on, with an app id and a stored Web API key. |
 | `DELETE /api/v1/private/games/{game_id}/steam` | | Unlinks the listing. |
 
-`groups` can include `text`, `taxonomy`, `status`, `images`, `press`, `price`, `age`, and `store_link`. Leaving it out imports every part.
+`groups` can include `text`, `taxonomy`, `status`, `images`, `press`, `price`, `age`, `store_link`, and `progress`. Leaving it out imports every part. A progress pull has its own limit of 30 an hour per listing, separate from the 10 imports a day.
 
 ## Errors
 
 | Code | HTTP | Meaning |
 |---|---|---|
 | `4105` | 403 | Turn on [developer mode](./developer-mode.md) first. |
-| `4240` | 400 or 422 | The app ID, key, or groups are not valid, Steam has no store page for the app, or the app isn't a game. |
+| `4240` | 400 or 422 | The app ID, key, or groups are not valid, Steam has no store page for the app, the app isn't a game, or a progress push or two-way sync was asked for. |
 | `4241` | 403 | The key isn't a Steamworks publisher key for this app. |
 | `4242` | 409 | Another listing has this app, or this listing is linked to a different app. |
 | `4243` | 502 | Steam didn't answer. Try again in a few minutes. |
 | `4244` | 404 | The listing isn't linked to Steam. |
-| `4290` | 429 | Daily preview or import limit reached. |
+| `4290` | 429 | Daily preview or import limit reached, or the hourly progress pull limit. |
 
-What Blazium Games reads from Steam, and what it keeps, is in the [Steam API disclosure](./legal/steam-api-disclosure.md).
+Published achievement and integer-stat names are read with `GetSchemaForGame` when that part is imported or pulled. What else Blazium Games reads from Steam, and what it keeps, is in the [Steam API disclosure](./legal/steam-api-disclosure.md).
