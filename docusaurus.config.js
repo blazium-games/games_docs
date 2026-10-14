@@ -8,7 +8,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Blazium Games Docs',
-  tagline: 'Blazium Games is the platform for playing and publishing games, applications, mods, and assets.',
+  tagline: 'Blazium Games is a game publishing platform, with an infrastructure focus.',
   favicon: 'img/favicon.ico',
 
   future: {
@@ -118,7 +118,7 @@ const config = {
           {
             title: 'Legal',
             items: [
-              {label: 'Terms of Service', href: 'https://blazium.games/terms-of-service'},
+              {label: 'Terms of Service', to: '/docs/legal/terms-of-service'},
               {label: 'Privacy Policy', href: 'https://blazium.games/privacy-policy'},
               {label: 'Permissions', to: '/docs/legal/permissions'},
               {label: 'GitHub API disclosure', to: '/docs/legal/github-api-disclosure'},

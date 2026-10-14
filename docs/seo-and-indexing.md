@@ -51,7 +51,7 @@ Each public page publishes an Open Graph and Twitter card: a title, a short desc
 
 | Page | Title | Description |
 |---|---|---|
-| Home | Blazium Games | Blazium Games is the platform for playing and publishing games, applications, mods, and assets. |
+| Home | Blazium Games | Blazium Games is a game publishing platform, with an infrastructure focus. |
 | Browse | Browse Blazium Games | Find games, applications, mods, and assets to play. |
 | Desktop app | Blazium Games - Desktop App Download | Download BlaziumLauncher for Windows. It installs under the shared Blazium folder. |
 | Profile | `{display name} (@{username}) on Blazium Games` | Up to three project names, then "and N more". Two names use "A and B." None: `{display name} on Blazium Games.` Square card. |

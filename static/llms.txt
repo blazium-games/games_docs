@@ -1,6 +1,6 @@
 # Blazium Games
 
-> Blazium Games is the platform for playing and publishing games, applications, mods, and assets.
+> Blazium Games is a game publishing platform, with an infrastructure focus.
 > Full documentation for language models: https://docs.blazium.games/llms-full.txt
 
 ## The platform

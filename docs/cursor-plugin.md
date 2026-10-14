@@ -6,7 +6,7 @@ description: Install the official Blazium Games plugin for Cursor. It bundles th
 
 # Cursor plugin
 
-Blazium Games is the platform for playing and publishing games, applications, mods, and assets. The official Cursor plugin teaches an agent to do both. A token belongs to one server. It bundles:
+Blazium Games is a game publishing platform, with an infrastructure focus. The official Cursor plugin teaches an agent to do both. A token belongs to one server. It bundles:
 
 - The hosted [Blazium Games MCP server](./mcp/index.md) at `https://mcp.blazium.games/mcp`, and the [player server](./mcp/player.md) at `https://mcp.blazium.games/player`. Both connect with OAuth, so no key is stored in the plugin.
 - Skills that walk the agent through store pages, deploys, crash reporting, crash debugging, analytics, keys, playing, and purchases.
