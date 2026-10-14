@@ -133,7 +133,7 @@ A bug report goes to the game's developers, up to 10 per day (`4291`). Attached 
 
 Add friends by username from the agent or at [blazium.games/friends](https://blazium.games/friends). You need a verified email to send requests, and you can send up to 20 a day (`4292`). Sending a request to someone who already asked you makes you friends right away. Adding yourself returns `4228`, and asking someone you're already friends with or already asked returns `4078`.
 
-Friends see whether you're online and which game you're playing, plus the public games you played in the last 14 days. "Playing" comes from the play-time heartbeat your launcher or game sends, and lasts 10 minutes after the last one; there is no separate presence tool. Unlisted and draft games are never shown. Turn off **Activity sharing** on the friends page to hide all of it; you then also drop out of your friends' recommendations.
+Friends see whether you're online and which game you're playing, plus a status of at most 40 characters beside the game name when the game sets one, and the public games you played in the last 14 days. "Playing" comes from the play-time heartbeat your launcher or game sends, and lasts 10 minutes after the last one. The player MCP has no tool that sets that status. Unlisted and draft games are never shown. Turn off **Activity sharing** on the friends page to hide all of it; you then also drop out of your friends' recommendations.
 
 ## Chat
 

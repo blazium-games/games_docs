@@ -23,6 +23,7 @@ The files crawlers and agents read — robots.txt, sitemaps, security.txt, the A
 - **[Payments](./payments/index.md)**: sell games or take donations, buy games, top up your balance, cash out, refunds, and agent purchases.
 - **[Linked accounts and sign-in](./linked-accounts.md)**: link GitHub, X, or Discord, log in with them, and unlink them.
 - **[Multiplayer](./multiplayer.md)**: sign-in, lobbies, and peer connections for a game, and how to publish a scripted lobby.
+- **[Progress](./progress.md)**: achievements, stats, funnel events, and rich presence, and which of the client, game server, private server, or scripted lobby may write them.
 - **[Anticheat](./anticheat.md)**: ask for anticheat on a game, what stays closed until an NDA and a contract are signed, and how a server and a client report.
 - **[Graphical assets guidelines](./graphical_assets_guidelines.md)**: image sizes for your store page.
 - **[Editor asset library](./editor-asset-library.md)**: paste one repository URL into Godot or Blazium so the AssetLib can list and install packages from Blazium Games.

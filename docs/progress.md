@@ -45,7 +45,9 @@ Any other name must be a registered funnel. Unknown names are refused. `get_game
 
 Friends see a status of at most 40 characters beside the game name, and the lobby id the lobby API already returns. It is hidden when activity sharing is off. `presence_writers` defaults to `client`.
 
-A scripted lobby does not write presence. `lobby:set_presence(user, status)` notifies that player's connection. The launcher, or the Godot plugin when it holds the session, applies it and ignores the notification unless `presence_writers` includes `scripted_lobby`.
+A scripted lobby does not write presence. `lobby:set_presence(user, status)` notifies that player's connection. The lobby host signs that notice. The launcher, the engine host, or the Godot plugin applies it only when the signature is present and `presence_writers` includes `scripted_lobby`. A client cannot claim the scripted lobby writer by itself.
+
+The Godot plugin also writes as an official server with `server_unlock_achievement`, `server_set_stat`, and `server_record_event`, using the same server key as the SDK. Those calls do not set presence.
 
 ## Scripted lobby
 

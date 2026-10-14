@@ -16,7 +16,7 @@ Turn lobbies on in the game editor. Choose Relay or Scripted. Relay seats player
 
 Create or join returns only after the player is admitted. The response includes `lobby_url`, `ice_enabled`, and, when TURN is on, `ice_session_id`. The module opens the lobby socket after that call succeeds. `lobby_seat` and SDK message 19 report `seated`, `lobby_loading`, or `lobby_failed`. The SDK does not open the socket. The `games_plugin` addon opens its own.
 
-The lobby socket is `wss://lobby.blazium.online/`. ICE servers come from `https://stun.blazium.online/v1/ice` using `ice_session_id` from that response. Relay uses `turn.blazium.online`. When the TURN switch is off, the game does not request ICE.
+The lobby socket is `wss://lobby.blazium.online/`. ICE servers come from `https://stun.blazium.online/v1/ice` using `ice_session_id` from that response. Relay uses `wss://turn.blazium.online/v1/signal`. When the TURN switch is off, the game does not request ICE. A presence notice on the lobby socket does not replace that ICE fetch. Achievements, stats, funnel events, and that notice are described in [Progress](./progress.md).
 
 ## Scripted lobbies
 
