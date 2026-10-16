@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/permissions
 
 # Permissions & Scopes
 
-**Effective Date: October 8, 2026**
+**Effective Date: October 15, 2026**
 
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
 It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), [Discord](./discord-api-disclosure.md), and [Steam](./steam-api-disclosure.md).

@@ -22,6 +22,18 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `get_presence_writers` | `uid` | | Who may set the short presence status |
 | `set_presence_writers` | `uid`, `writers` | mcp:catalog.write | Replaces that list |
 | `list_server_keys` | `uid` | | Game server key prefixes and roles. No secrets |
+| `list_items` | `uid`, optional `cursor` | mcp:read | One page of item definitions. `next` is the following page |
+| `create_item` | `uid`, `itemdef_id`, `name` | mcp:catalog.write | Creates a definition. `unique` is only set here |
+| `update_item` | `uid`, `itemdef_id`, `name` | mcp:catalog.write | Edits a definition. `unique` cannot change |
+| `give_items` | `uid`, `itemdef_id`, `quantity`, `request_id`, `recipients` | mcp:catalog.write | Gives copies by handle or email. At most 100 items |
+| `list_item_sets` | `uid`, optional `cursor` | | One page of named sets. Bonuses are stored, not applied |
+| `upsert_item_set` | `uid`, `name` | mcp:catalog.write | Creates or replaces a named set |
+| `sync_item_schema` | `uid`, `mode` | mcp:steam.manage | sync, overwrite, or addon. Does not move player items |
+| `set_inventory_flags` | `uid`, `confirm` | mcp:steam.manage | Turns inventory or transfers on. Neither can be turned off |
+| `list_mint_keys` | `uid`, optional `cursor` | mcp:keys.manage | One page of mint key names and prefixes |
+| `request_mint_key` | `uid`, `name` | mcp:keys.manage | Returns the 128-character secret once. It can mint, set stats, socket, unsocket, and use |
+| `rename_mint_key` | `uid`, `key_id`, `name` | mcp:keys.manage | Renames a live mint key |
+| `revoke_mint_key` | `uid`, `key_id` | mcp:keys.manage | Revokes a mint key |
 | `request_server_key` | `uid`, `role` | | Returns a game_server or private_server secret once |
 | `revoke_server_key` | `uid`, `key_id` | | Revokes one game server key |
 | `get_web_player` | `uid` | | Browser player settings, including the Discord application id and public key |
