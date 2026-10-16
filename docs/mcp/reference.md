@@ -35,6 +35,18 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `list_server_keys` | `uid` | Game server key prefixes and roles. No secrets |
 | `request_server_key` | `uid`, `role` (`game_server` or `private_server`) | Returns the secret once |
 | `revoke_server_key` | `uid`, `key_id` | Revokes one game server key |
+| `list_items` | `uid` | Item definitions with minted and in-the-wild counts. Covered by `mcp:read` |
+| `create_item` | `uid`, `itemdef_id`, `name`, optional platform type, stats, sockets | Creates a definition. `unique` is only set here. Covered by `mcp:catalog.write` |
+| `update_item` | `uid`, `itemdef_id`, `name` | Edits a definition. `unique` cannot change. Covered by `mcp:catalog.write` |
+| `give_items` | `uid`, `itemdef_id`, `quantity`, `request_id`, `recipients` | Gives one item to handles or emails. Covered by `mcp:catalog.write` |
+| `list_item_sets` | `uid` | Named sets. Bonuses are stored, not applied |
+| `upsert_item_set` | `uid`, `name`, optional `set_uid`, `pieces`, `bonus` | Covered by `mcp:catalog.write` |
+| `sync_item_schema` | `uid`, `mode` (`sync`, `overwrite`, or `addon`) | Updates Steam item definitions. Does not move player items. Covered by `mcp:steam.manage` |
+| `set_inventory_flags` | `uid`, `confirm`, optional `inventory`, `transfer` | Turns a switch on. Neither switch can be turned off. Covered by `mcp:steam.manage` |
+| `list_mint_keys` | `uid` | Names and prefixes. Covered by `mcp:keys.manage` |
+| `request_mint_key` | `uid`, `name` | Returns the 128-character secret once. It can mint, set stats, socket, and unsocket |
+| `rename_mint_key` | `uid`, `key_id`, `name` | Covered by `mcp:keys.manage` |
+| `revoke_mint_key` | `uid`, `key_id` | Covered by `mcp:keys.manage` |
 | `list_game_crashes` | `uid` | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | One crash report including stack excerpt |
 | `request_crash_download` | `uid`, `crash_id`, `kind` | Private download URL for `dump`, `log`, or `stack`, valid for 1 hour. Covered by `mcp:crash.read` |
