@@ -9,9 +9,9 @@ Canonical version: https://blazium.games/steam-api-disclosure
 
 # Steam API Disclosure
 
-**Effective Date: October 8, 2026**
+**Effective Date: October 15, 2026**
 
-Blazium Games uses Steam in three ways: to link a Steam account to yours, to import a game's Steam store page for its developer, and to check Steam sign-ins for games whose developers turn on Steam auth verification.
+Blazium Games uses Steam in four ways: to link a Steam account to yours, to import a game's Steam store page for its developer, to check Steam sign-ins for games whose developers turn on Steam auth verification, and, when that developer has also turned on inventory transfers, to move item definitions and the items a player asks to move.
 This page explains what we access in each case and the commitments we make about it.
 
 ## Linking Steam
@@ -40,10 +40,20 @@ A developer can turn on Steam auth verification for their game. The game then se
 - We keep a session record: your Steam ID, the owner's Steam ID, your Blazium Games account if you linked Steam, when the token expires, whether it was revoked, and your IP address. The record is deleted 30 days after the token expires. The ticket itself is not stored.
 - The developer's servers can check the token and ask whether a Steam ID owns the game. They see your Steam ID, whether you own the game, whether Steam reports a VAC ban, and your Blazium Games user ID if you linked Steam.
 
+## Item inventory (players)
+
+A developer who has turned on Steam auth verification can also turn on inventory for that game, and then turn on transfers. Both switches stay on.
+
+- Inventory keeps each item on Blazium Games. We do not read your Steam inventory for that.
+- Transfers run only when the game asks, for items you own. Moving an item to Steam calls Steam's `IInventoryService/AddItem`. Moving it back calls `ConsumeItem` for that same item, then puts the same id back on Blazium Games.
+- A schema sync, overwrite, or addon updates item definitions. It does not move the items you hold.
+- We do not read your Steam library, friends list, or messages.
+
 ## Our commitments
 
 - We never store Steam session tickets.
-- We never read your Steam library, friends, inventory, or messages, and never act on Steam for you.
+- We never read your Steam library, friends, or messages.
+- We read or change a Steam item inventory only for a game whose developer turned transfers on, and only for an item that game asked to move.
 - We store a developer's Steamworks Web API key only while Steam auth verification is on, encrypted, and never show it again or make it available to AI agents.
 - We never use Steam data for advertising.
 - We never use Steam data to train AI or machine-learning models.
