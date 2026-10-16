@@ -45,7 +45,7 @@ A developer can turn on Steam auth verification for their game. The game then se
 A developer who has turned on Steam auth verification can also turn on inventory for that game, and then turn on transfers. Both switches stay on.
 
 - Inventory keeps each item on Blazium Games. We do not read your Steam inventory for that.
-- Transfers run only when the game asks, for items you own. Moving an item to Steam calls Steam's `IInventoryService/AddItem`. Moving it back calls `ConsumeItem` for that same item, then puts the same id back on Blazium Games.
+- A transfer to Steam runs only when you ask, for an item you own, after you have a license and have logged in to that game at least once with the linked Steam account. The item's definition must already be on Steam. The call is Steam's `IInventoryService/AddItem`. Items are not moved back onto Blazium Games.
 - A schema sync, overwrite, or addon updates item definitions. It does not move the items you hold.
 - We do not read your Steam library, friends list, or messages.
 

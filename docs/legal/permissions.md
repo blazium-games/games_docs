@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/permissions
 
 # Permissions & Scopes
 
-**Effective Date: October 8, 2026**
+**Effective Date: October 15, 2026**
 
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
 It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), [Discord](./discord-api-disclosure.md), and [Steam](./steam-api-disclosure.md).
@@ -96,7 +96,8 @@ Steam sign-in uses OpenID 2.0, which has no scopes and gives us no access token.
 - Your Steam ID and public Steam name. Nothing else.
 
 ### We will never
-- Read your Steam library, friends, or inventory, or act on Steam for you.
+- Read your Steam library or friends list.
+- Read your Steam inventory, or change it, except to grant an item you asked to move to Steam for a game whose developer turned transfers on.
 
 Details: [Steam API disclosure](./steam-api-disclosure.md).
 
