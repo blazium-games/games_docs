@@ -35,14 +35,14 @@ Give takes one item and one quantity, for one handle or email or a list. An unkn
 
 ## Mint keys
 
-A mint key is 128 characters, named, and shown once. The stored value is a hash. It can mint, set instance stats, socket, and unsocket for players of that game. It cannot edit definitions, sync or transfer to Steam, list, or sell, and it is not a progress key.
+A mint key is 128 characters, named, and shown once. The stored value is a hash. It can mint, set instance stats, socket, unsocket, and use items for players of that game. It cannot edit definitions, sync or transfer to Steam, list, or sell, and it is not a progress key. A player session cannot do those things. The game owner or an accepted admin can, on routes that name the player.
 
 ## Market
 
-The Items section on a game page lists other players' listings. The buyer pays from their balance. Every sale is 5% to Blazium and 10% to the game owner. A $10 sale pays Blazium $0.50, the game $1.00, and the seller $8.50. Games cannot change that. There is no card charge from the Items section. Both the seller and the game owner cash out through the existing payout balance.
+The Items section on a game page lists other players' listings, one page at a time. The lowest price is $0.03 and the highest is $100,000. At $0.03 the split is one cent for Blazium, one cent for the game, and one cent for the seller. Above that, Blazium keeps 5% and the game keeps 10%, and each of those two shares is at least one cent. A $10 sale pays Blazium $0.50, the game $1.00, and the seller $8.50. Games cannot change that. The buyer pays from their balance. There is no card charge from the Items section. Seller and game earnings settle from pending to available, then both cash out through the existing payout balance. A seller can cancel a listing that is still pending.
 
-Your Inventory page, next to Library, shows items from games you own and items you bought from games you do not own. Grants on a game you do not own stay off that page until you buy one. Socketed items show their attachments and the added stats. Consumable, food, and drink items have a use button.
+Your Inventory page, next to Library, shows items from games you own and items you bought from games you do not own. Each game name links to that game. Grants on a game you do not own stay off that page until you buy one. Socketed items show their attachments and the added stats. Players cannot use, socket, or unsocket items from the website.
 
 ## Game calls
 
-The C SDK and the Godot plugin expose TransferItem, SocketItem, UnsocketItem, SetItemStats, and UseItem. Transfer takes item ids, or a stackable itemdef id and a count, plus `to_steam` or `to_platform` and a request id. The same request id does not move twice. A failure puts the ids back. An attached item has to be unsocketed before it can move or be listed.
+The C SDK and the Godot plugin expose TransferItem. SocketItem, UnsocketItem, SetItemStats, and UseItem return an error and do not call the API. A player can move an item to Steam only: the game has inventory and transfers on, the player holds a license, they have logged in to that game at least once with the linked Steam account, and the definition is already on Steam. `to_platform` is refused. The same request id does not move twice. A failure leaves the item on Blazium Games. An attached item has to be unsocketed by the owner, an accepted admin, or a mint key before it can move or be listed. List commands take `--cursor` and print `next`.

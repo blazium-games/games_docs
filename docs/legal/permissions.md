@@ -96,7 +96,8 @@ Steam sign-in uses OpenID 2.0, which has no scopes and gives us no access token.
 - Your Steam ID and public Steam name. Nothing else.
 
 ### We will never
-- Read your Steam library, friends, or inventory, or act on Steam for you.
+- Read your Steam library or friends list.
+- Read your Steam inventory, or change it, except to grant an item you asked to move to Steam for a game whose developer turned transfers on.
 
 Details: [Steam API disclosure](./steam-api-disclosure.md).
 
