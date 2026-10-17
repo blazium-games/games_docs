@@ -60,8 +60,11 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `get_build_provenance` | `uid`, `file_uid` | | Uploader, deploy key reference, upload time, checksum, and scan history of a file |
 | `list_reviews` | `uid`, `unreplied`, `page` | | Player reviews with the summary (enjoyed, quality average and counts, would play with friends) |
 | `reply_to_review` | `uid`, `review_uid`, `text` | write | Public reply to a review; empty text removes it |
-| `list_bug_tickets` | `uid`, `status` | | Player bug tickets with counts by status; attachments carry a `crash_id` |
-| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, `closed`) | `mcp:bugs.write` | Mark a ticket fixed or closed, or reopen it |
+| `list_bug_tickets` | `uid`, `status`, `page` | | 50 tickets a page. Follow `next_page`. `has_screenshot` and `has_log` mark files |
+| `get_bug_ticket` | `uid`, `bug_uid` | | One ticket |
+| `request_bug_screenshot` | `uid`, `bug_uid` | | One-hour link, not the image |
+| `get_bug_log` | `uid`, `bug_uid`, `offset` | | One log page. Follow `next_offset` |
+| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, `unidentified`, `closed`) | `mcp:bugs.write` | Set status. Closed stays silent in the game |
 | `get_bug_reporter` / `set_bug_reporter` | `uid`, and for set: `enabled`, `daily_cap`, `webhooks`, `refresh_signing_key` | `mcp:bugs.read` / `mcp:bugs.write` | Per-game in-game reporter. The signing key is unique to the game |
 | `get_review_reporter` | `uid` | `mcp:read` | New-review webhooks: enabled, webhook URLs, and that game's signing key. The key is not the sale, crash, or bug reporter key |
 | `set_review_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | `mcp:catalog.write` | Turns new-review webhooks on, replaces up to five https URLs, or refreshes the signing key. An edit or a delete does not send |

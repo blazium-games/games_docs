@@ -48,4 +48,14 @@ The screenshot URL is signed the same way Spaces signs a private object: base64 
 
 ## Notices
 
-When a ticket is marked `fixed` or `unidentified`, the player who filed it can read it from `GET /api/v1/games/{game_uid}/bugs/notices` and acknowledge it with `POST .../notices/ack`. `fixed` means the bug was fixed. `unidentified` means the report could not be pinned down, and it does not say the bug was fixed. A `closed` ticket stays silent. A stable build's changelog uses the same pull: `GET /api/v1/games/{game_uid}/patch/notices` and `POST .../patch/notices/ack`. See [Deploy builds](./deploy.md).
+When a ticket is marked `fixed` or `unidentified`, the player who filed it can read it from `GET /api/v1/games/{game_uid}/bugs/notices` and acknowledge it with `POST .../notices/ack`. `fixed` means the bug was fixed. `unidentified` means the report could not be pinned down, and it does not say the bug was fixed. A `closed` ticket stays silent in the game. A stable build's changelog uses the same pull: `GET /api/v1/games/{game_uid}/patch/notices` and `POST .../patch/notices/ack`. See [Deploy builds](./deploy.md).
+
+## On the website
+
+A developer triages tickets at `/edit/<game>/bugs` and sets `open`, `fixed`, `unidentified`, or `closed`. A player reads their own reports, including closed ones, at `/bugs`. The player cannot change status.
+
+## From MCP and chauffeur
+
+`list_bug_tickets` returns 50 tickets a page. Follow `next_page`. `get_bug_ticket` reads one. `request_bug_screenshot` returns a one-hour link, not the image. `get_bug_log` returns at most 16 KiB; call it again with `next_offset` until that field is absent.
+
+`chauffeur bugs` lists the same tickets with the game's deploy key. `chauffeur bugs screenshot`, `chauffeur bugs log`, and `chauffeur bugs pull` save the files. The deploy key cannot change status and cannot read crash dumps.

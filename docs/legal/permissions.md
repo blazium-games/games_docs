@@ -250,5 +250,5 @@ These are the responses your MCP client, script, or CI job will see.
 
 - A deploy key is an `access_token` and `secret_key` pair for one game. The chauffeur CLI reads them from `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`.
 - `request_deploy_key` returns the secret once and invalidates every previous deploy key for that game, so update your CI secrets right away.
-- Deploy keys can only register builds, upload build files and debug symbols, upload store images, and read the game's basic details (`chauffeur info`). They cannot edit the store page text or settings, and they cannot read analytics or crash reports.
+- Deploy keys can register builds, upload build files and debug symbols, upload store images, read the game's basic details (`chauffeur info`), and list that game's bug reports and download their screenshot and log (`chauffeur bugs`). They cannot edit the store page text or settings, read analytics or crash dumps, or change a ticket's status.
 - See [Deploy builds](../deploy.md) and [Access and keys](../mcp/access-and-keys.md).

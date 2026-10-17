@@ -112,8 +112,11 @@ Players review games they own and file bug tickets from the [player server](./pl
 | `get_review_reporter` | `uid` | Reads new-review webhooks: enabled, webhook URLs, and that game's signing key. The key is not the sale, crash, or bug reporter key. Covered by `mcp:read` |
 | `set_review_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | Turns new-review webhooks on, replaces up to five https URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:catalog.write` |
 | `reply_to_review` | `uid`, `review_uid`, `text` | Public reply shown under the review on the store page (up to 2000 characters). Empty text removes it. Write |
-| `list_bug_tickets` | `uid`, `status` (`open`, `fixed`, `closed`) | Tickets, newest first, with counts by status. A ticket with an attached dump or log has a `crash_id` for `get_crash` and `request_crash_download` |
-| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, or `closed`) | Marks a ticket fixed or closed, or reopens it with `open`. Covered by `mcp:bugs.write`. A fixed ticket can show the player an in-game notice. |
+| `list_bug_tickets` | `uid`, `status` (`open`, `fixed`, `unidentified`, `closed`), `page` | 50 tickets a page, newest first, with counts by status. Follow `next_page` until it is absent. `has_screenshot` and `has_log` say which files exist. A dump or log also has a `crash_id` for `get_crash` and `request_crash_download` |
+| `get_bug_ticket` | `uid`, `bug_uid` | One ticket, including `has_screenshot` and `has_log` |
+| `request_bug_screenshot` | `uid`, `bug_uid` | A one-hour `url` for the screenshot. The tool returns the link, not the image |
+| `get_bug_log` | `uid`, `bug_uid`, `offset` | One page of the log, at most 16 KiB. Call again with `next_offset` until it is absent |
+| `update_bug_ticket` | `uid`, `bug_uid`, `status` (`open`, `fixed`, `unidentified`, or `closed`) | Sets status. Covered by `mcp:bugs.write`. Fixed and unidentified can show an in-game notice. Closed stays silent in the game. |
 | `get_bug_reporter` | `uid` | Reads the in-game reporter: enabled, daily cap, webhooks, and that game's signing key. Covered by `mcp:bugs.read` |
 | `set_bug_reporter` | `uid`, optional `enabled`, `daily_cap`, `webhooks`, `refresh_signing_key` | Turns the reporter on, sets the cap (1–10000), replaces up to five webhook URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:bugs.write` |
 | `get_steam_auth` | `uid` | Reads whether Steam auth is on, the app id, and whether the Web API key and ticket secret are stored, plus who set each and when. Never returns those secrets. Covered by `mcp:steam.manage` |
