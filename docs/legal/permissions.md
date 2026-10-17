@@ -103,7 +103,7 @@ Details: [Steam API disclosure](./steam-api-disclosure.md).
 
 ## MCP access (OAuth)
 
-AI tools such as Cursor, VS Code, and Claude Code connect to one of two Blazium Games MCP servers. The developer server at `https://mcp.blazium.games/mcp` manages your games. The player server at `https://mcp.blazium.games/player` acts for you as a player.
+AI tools such as Cursor, VS Code, and Claude Code connect to one of two Blazium Games MCP servers. The developer server at `https://mcp.blazium.games/developer` manages your games. `https://mcp.blazium.games/mcp` still reaches that server. The player server at `https://mcp.blazium.games/player` acts for you as a player.
 When you approve a tool, it gets a token for one server only, with one or more of that server's scopes. A token never holds scopes for both servers, and neither server accepts the other's tokens or keys.
 
 | Scope | Server | Allows |

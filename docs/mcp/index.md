@@ -8,15 +8,19 @@ description: Connect Cursor, VS Code, Claude Code, or any MCP client to the host
 
 # MCP for Blazium Games
 
-Blazium Games is a game publishing platform, with an infrastructure focus. The developer MCP server lets AI agents create and update pages for those projects, ship and promote builds, fill in press kits, link pages on other stores, read analytics, crash reports, reviews, bug tickets, and copyright notices, moderate game chat, manage game keys, set up payouts and cash out earnings, and issue deploy credentials. Version 1.19.0 has 140 developer tools (128 after 2026-10-28) and 45 player tools. Buying stays on the player server.
+Blazium Games is a game publishing platform, with an infrastructure focus. The developer MCP server lets AI agents create and update pages for those projects, ship and promote builds, fill in press kits, link pages on other stores, read analytics, crash reports, reviews, bug tickets, and copyright notices, moderate game chat, manage game keys, set up payouts and cash out earnings, and issue deploy credentials. Version 1.20.0 has 154 developer tools (142 after 2026-10-28) and 54 player tools. Buying stays on the player server.
+
+A new person joins with `create_account` on the server they connect to, then `confirm_account` with the email code. That pair needs no bearer. The developer server turns developer mode on when the human has agreed to the developer terms. The player server leaves the account a player. An existing player turns developer mode on later with `enable_developer_mode` on the developer server. Builds, images, and symbol files stay on the chauffeur CLI. MCP never uploads files.
 
 Signing in to the developer server and creating developer, project or deploy keys need [developer mode](../developer-mode.md) on your account; without it they return `4105`. The player server works for every account.
 
 | | |
 |---|---|
 | Protocol | MCP 2026-07-28, Streamable HTTP |
-| Endpoint | `https://mcp.blazium.games/mcp` |
+| Endpoint | `https://mcp.blazium.games/developer` |
 | Auth | OAuth 2.1 with PKCE (no token needed), or an API key sent as a Bearer token |
+
+`https://mcp.blazium.games/mcp` still reaches this same server.
 
 Manage access at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
 
@@ -41,7 +45,7 @@ Cursor `mcp.json`:
 {
   "mcpServers": {
     "blazium-games": {
-      "url": "https://mcp.blazium.games/mcp"
+      "url": "https://mcp.blazium.games/developer"
     }
   }
 }
@@ -50,7 +54,7 @@ Cursor `mcp.json`:
 Claude Code:
 
 ```bash
-claude mcp add --transport http blazium-games https://mcp.blazium.games/mcp
+claude mcp add --transport http blazium-games https://mcp.blazium.games/developer
 ```
 
 On the consent screen you choose what the client may manage:
@@ -72,7 +76,7 @@ Cursor `mcp.json` with a key:
 {
   "mcpServers": {
     "blazium-games": {
-      "url": "https://mcp.blazium.games/mcp",
+      "url": "https://mcp.blazium.games/developer",
       "headers": {
         "Authorization": "Bearer bgames_mcp_YOUR_KEY"
       }
@@ -81,7 +85,7 @@ Cursor `mcp.json` with a key:
 }
 ```
 
-Other clients send `Authorization: Bearer bgames_mcp_...` on every request to `https://mcp.blazium.games/mcp`.
+Other clients send `Authorization: Bearer bgames_mcp_...` on every request to `https://mcp.blazium.games/developer`.
 
 Never commit a key. Keep it in your client's config or a secret store.
 

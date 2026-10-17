@@ -6,7 +6,7 @@ description: Every tool, prompt, and resource exposed by the Blazium Games devel
 
 # Reference
 
-This page covers the developer server at `https://mcp.blazium.games/mcp`. The player server is on [Player MCP](./player.md).
+This page covers the developer server at `https://mcp.blazium.games/developer`. `https://mcp.blazium.games/mcp` still reaches that server. The player server is on [Player MCP](./player.md).
 
 `uid` accepts a game uid or its vanity name. "Account only" means a project-bound token is refused with `4030`. "Write" means the token needs `mcp:write` or the narrower write scope for that tool's group (see [Scopes](#scopes)). "Deprecated" tools are removed on 2026-10-28 (see [Account and payments](#account-and-payments)).
 
@@ -56,6 +56,11 @@ This page covers the developer server at `https://mcp.blazium.games/mcp`. The pl
 | `get_setup` | none | Account, games, public URLs, latest `build_id`. No secrets. Account only |
 | `get_deploy_info` | `uid` | Upload, crash, and page URLs, build list, and deploy key prefixes. No secrets |
 | `list_game_builds` | `uid` | Builds. `build_id` is the build UID for CI and crash reporters (`X-Build-Id`), not a version string |
+| `delete_game_build` | `uid`, `build_id`, optional `idempotency_key` | Deletes one build. The owner approves this. Write |
+| `add_game_admin` | `uid`, `invite`, optional `idempotency_key` | Invites an admin. Only the owner can invite, and the owner approves this. Write |
+| `remove_game_admin` | `uid`, `admin_id` | Removes an admin. Only the owner can remove one. Write |
+| `delete_game` | `uid`, optional `idempotency_key` | Deletes a game the caller owns. The owner approves this. Write |
+| `get_account_analytics` | none | Analytics across the signed-in account's games. Account only |
 | `get_game_build` | `uid`, `build_id` | One build, its files, and crash reporter headers |
 | `request_mcp_key` | `idempotency_key` (optional) | New account key. **Revokes all previous account keys.** Needs the human's approval. Account only, write |
 | `request_deploy_key` | `uid`, `idempotency_key` (optional) | New upload keys for CLI and CI. **Revokes that project's previous upload keys.** Needs the human's approval. Write |
@@ -113,6 +118,12 @@ Players review games they own and file bug tickets from the [player server](./pl
 | `set_bug_reporter` | `uid`, optional `enabled`, `daily_cap`, `webhooks`, `refresh_signing_key` | Turns the reporter on, sets the cap (1–10000), replaces up to five webhook URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:bugs.write` |
 | `get_steam_auth` | `uid` | Reads whether Steam auth is on, the app id, and whether the Web API key and ticket secret are stored, plus who set each and when. Never returns those secrets. Covered by `mcp:steam.manage` |
 | `set_steam_auth` | `uid`, optional `enabled`, `confirm`, `app_id`, `web_api_key`, `ticket_secret` | Writes the app id and the two secrets, and turns auth on when all three are stored. `enabled: false` deletes both secrets only when `confirm` is true. Covered by `mcp:steam.manage` |
+| `unlink_steam` | `uid`, `confirm` | Unlinks the game from Steam. `confirm` only after the human agrees. Covered by `mcp:steam.manage` |
+| `rotate_steam_key` | `uid`, `confirm` | Replaces the Steam Web API key. The new key is returned once. `confirm` only after the human agrees. Covered by `mcp:steam.manage` |
+| `resync_steam` | `uid`, `confirm`, optional `groups`, `web_api_key` | Imports the chosen Steam groups again. `confirm` only after the human agrees. Covered by `mcp:steam.manage` |
+| `import_steam_game` | `app_id`, `web_api_key`, `confirm`, optional `groups`, `uid` | Imports a Steam store page into a new or existing listing. `confirm` only after the human agrees. Needs developer mode |
+| `set_anonymous_downloads` | `uid`, `enabled`, `confirm_no_license` | Turns anonymous downloads on or off. Turning them on needs `confirm_no_license` after the human agrees, and the game must be free |
+| `set_adult_content` | `show`, `confirm_18` | Shows or hides adult listings for this account. Turning them on needs `confirm_18` after the human confirms they are 18 or older |
 
 Only the game's owner and admins can read bug tickets and download their attachments.
 
@@ -233,11 +244,14 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 128 tools instead of 140. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 142 tools instead of 154. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
-| `get_account` | none | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open: `legal_acceptance_required` (with `legal_changes`), `setup_required`, `authenticator` (`on`, `skipped`, or `not_chosen`), and `gate` (empty when none). Send the human to blazium.games/account/finish for an open step; never accept terms, finish setup, or set up or skip an authenticator for them. Account only |
+| `get_account` | none | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open: `legal_acceptance_required` (with `legal_changes`), `setup_required`, `authenticator` (`on`, `skipped`, or `not_chosen`), and `gate` (empty when none). Send the human to blazium.games/account/finish for an open step. Authenticator setup and skipping it stay on the website. Account only |
+| `create_account` | `email`, `password`, optional `username`, `accept_legal`, `accept_developer_terms` | Creates an account. No bearer. Send `accept_legal` and `accept_developer_terms` only after the human agrees. On this server both turn developer mode on. An existing address gets the same answer and is not revealed |
+| `confirm_account` | `email`, `code` | Finishes signup with the email code and returns this server's first `bgames_mcp_` key once. No bearer. Authenticator setup stays on the website |
+| `enable_developer_mode` | `accept_terms` | Turns developer mode on. Send `accept_terms` only after the human agrees. Turning it off stays on the website. Account only, write |
 | `request_email_code` | none | Emails a verification code to the account owner. Account only, write |
 | `verify_email` | `code` | Verifies the email with the code the human received. Account only, write |
 | `set_timezone` | `timezone` | Replaces the saved timezone with the human's IANA name. Call it when `get_account` timezone is empty or the human asks to change it. Do not send the machine's timezone. Unknown names return `4085`. Account only, write |

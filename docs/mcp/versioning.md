@@ -27,6 +27,14 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 ## Recent additions
 
+Developer and player servers 1.20:
+
+- A new person joins with `create_account` and `confirm_account`. Those two calls need no bearer. The developer server turns developer mode on when `accept_developer_terms` is true. The player server leaves the account a player. `confirm_account` returns that server's first key once
+- `enable_developer_mode` turns developer mode on for an existing account after the human agrees. Turning it off stays on the website
+- Developer tools: `delete_game_build`, `add_game_admin`, `remove_game_admin`, `delete_game`, `get_account_analytics`, `unlink_steam`, `rotate_steam_key`, `resync_steam`, `set_anonymous_downloads`, `import_steam_game`, and `set_adult_content`. Unlink, rotate, resync, anonymous downloads, Steam import, and adult content run only when the tool sends the human's confirm
+- Player tools: `get_inventory`, `list_listings`, `create_listing`, `cancel_listing`, `remove_friend`, `get_presence`, and `set_presence_sharing`
+- Builds, images, and symbol files stay on the chauffeur CLI. MCP never uploads files
+
 Developer and player servers 1.18:
 
 - Game chat on the player server: `get_chat_connection` (a 10-minute SASL PLAIN sign-in), `get_chat_token_status`, and `request_chat_token` and `revoke_chat_token` (both need `confirm`; the new token is returned once). See [Player tools](./player.md#chat)
@@ -86,4 +94,4 @@ Player server: `get_shelf`, `sku` on `quote_purchase` and `purchase_game`, and `
 
 | Server | What | Replacement | Removed after |
 |---|---|---|---|
-| Developer (`/mcp`) | Wallet, top-up, purchase, donation, agent policy, library, and download tools, plus the `wallet` and `library` resources | The same tools on the [player server](./player.md); `list_library` becomes `get_library` | 2026-10-28 |
+| Developer (`/developer`) | Wallet, top-up, purchase, donation, agent policy, library, and download tools, plus the `wallet` and `library` resources | The same tools on the [player server](./player.md); `list_library` becomes `get_library` | 2026-10-28 |

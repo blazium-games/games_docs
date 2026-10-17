@@ -18,7 +18,7 @@ The first time the agent uses a Blazium Games tool, Cursor opens a browser for t
 
 - Docs: [docs.blazium.games](https://docs.blazium.games) and the map [llms.txt](https://docs.blazium.games/llms.txt)
 - Skills: `npm install @blazium-games/skills`, or Cursor Settings > Plugins > `blazium-games/games_skill`. Index: [SKILL_TREE.md](https://github.com/blazium-games/games_skill/blob/master/SKILL_TREE.md)
-- MCP: [developer server](https://docs.blazium.games/docs/mcp) at `https://mcp.blazium.games/mcp`, and [player server](https://docs.blazium.games/docs/mcp/player) at `https://mcp.blazium.games/player`
+- MCP: [developer server](https://docs.blazium.games/docs/mcp) at `https://mcp.blazium.games/developer` (`/mcp` still reaches it), and [player server](https://docs.blazium.games/docs/mcp/player) at `https://mcp.blazium.games/player`
 - CLI: `npm install -g @blazium-games/cli` (`chauffeur`), guide at [docs.blazium.games/docs/cli](https://docs.blazium.games/docs/cli)
 - Launcher: BlaziumLauncher at `{autopf}\Blazium\Games` on Windows. Shared tools are in `{autopf}\Blazium`. Setup from [Releases](https://github.com/blazium-games/games_launcher/releases), guide at [desktop app](https://docs.blazium.games/docs/storefront/desktop-app)
 - Support: [blazium-games/support](https://github.com/blazium-games/support/issues). Status: [status.blazium.games](https://status.blazium.games)
@@ -29,7 +29,7 @@ This repository is the guide and the plugin source. It loads `./skills` and `mcp
 
 Full guide: [Cursor plugin docs](https://docs.blazium.games/docs/cursor-plugin).
 
-The hosted [developer MCP server](https://docs.blazium.games/docs/mcp) is `https://mcp.blazium.games/mcp`. The [player server](https://docs.blazium.games/docs/mcp/player) is `https://mcp.blazium.games/player`. Both are listed in [mcp.json](mcp.json).
+The hosted [developer MCP server](https://docs.blazium.games/docs/mcp) is `https://mcp.blazium.games/developer`. `https://mcp.blazium.games/mcp` still reaches it. The [player server](https://docs.blazium.games/docs/mcp/player) is `https://mcp.blazium.games/player`. Both are listed in [mcp.json](mcp.json).
 
 Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 

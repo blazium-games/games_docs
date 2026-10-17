@@ -8,9 +8,11 @@ description: Connect an agent to your Blazium Games account as a player to get r
 
 The player server acts for you as a player. It can recommend games and say why, search the catalog, review games you own and report bugs, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, set up payouts and cash out your earnings, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
 
+A new person can join from this server with `create_account` and `confirm_account`. Those two calls need no bearer. `accept_legal` is sent only after the person agrees. The account stays a player. Developer mode is turned on only when the account is created on the developer server, or later with `enable_developer_mode` there. Builds, images, and symbol files are uploaded with the chauffeur CLI, not from either MCP server.
+
 | | Developer server | Player server |
 |---|---|---|
-| URL | `https://mcp.blazium.games/mcp` | `https://mcp.blazium.games/player` |
+| URL | `https://mcp.blazium.games/developer` (`/mcp` still reaches it) | `https://mcp.blazium.games/player` |
 | Scopes | `mcp:read`, `mcp:write` | `player:read`, `player:write`, `player:buy` |
 | API key prefix | `bgames_mcp_` | `bgames_play_` |
 | Server card | `/.well-known/mcp/server-card.json` | `/.well-known/mcp/player-server-card.json` |
@@ -60,6 +62,8 @@ With `player:buy` an agent can also start payout setup, open your Stripe payout 
 | Tool | Inputs | Scope | Notes |
 |------|--------|-------|-------|
 | `get_account` | none | read | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open (`legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`, `gate`) |
+| `create_account` | `email`, `password`, optional `username`, `accept_legal` | none | Creates an account. No bearer. Send `accept_legal` only after the person agrees. An existing address gets the same answer and is not revealed. Then call `confirm_account` |
+| `confirm_account` | `email`, `code` | none | Finishes signup with the email code and returns this server's first `bgames_play_` key once. No bearer. Authenticator setup stays on the website |
 | `request_email_code` | none | write | Emails a verification code to you |
 | `verify_email` | `code` | write | Verifies your email with the code |
 | `set_timezone` | `timezone` | write | Sets your IANA timezone, replacing the saved one. The agent uses your zone, not the machine it is running on |
@@ -97,6 +101,13 @@ With `player:buy` an agent can also start payout setup, open your Stripe payout 
 | `report_bug` | `uid`, `message`, `build_id`, `os`, `arch`, `include_dump`, `include_log` | write | Files a bug ticket with the developers. `include_dump` and `include_log` return one-time upload URLs (`PUT`, 24 hours) |
 | `games_friends_play` | `live_only` | read | What your friends are playing now, then what they played in the last 14 days, with store links. See [Friends](#friends) |
 | `list_friends` | none | read | Friends with their presence (playing, online, offline) and pending requests with their `request_uid` |
+| `remove_friend` | `username` | write | Removes a friend |
+| `get_presence` | none | read | What you are playing, and whether that is shared |
+| `set_presence_sharing` | `share` | write | Shows or hides what you are playing |
+| `get_inventory` | optional `cursor` | read | Items you hold. Page with `cursor` from the previous `next` |
+| `list_listings` | none | read | Your marketplace listings |
+| `create_listing` | `uid`, `price_cents`, and `item_ids` or `itemdef_id` with `count` | write | Lists items for sale |
+| `cancel_listing` | `listing_id` | write | Cancels one of your listings |
 | `send_friend_request` | `username` | write | Sends a friend request. If that person already asked you, it accepts theirs |
 | `respond_friend_request` | `request_uid`, `accept` | write | Accepts or declines an incoming request |
 | `get_chat_connection` | none | write | Chat host, TLS port 6697, the browser websocket, and a SASL PLAIN sign-in token that works for 10 minutes, so the agent can join chat itself. See [Chat](#chat) |

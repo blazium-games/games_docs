@@ -8,7 +8,7 @@ description: Install the official Blazium Games plugin for Cursor. It bundles th
 
 Blazium Games is a game publishing platform, with an infrastructure focus. The official Cursor plugin teaches an agent to do both. A token belongs to one server. It bundles:
 
-- The hosted [Blazium Games MCP server](./mcp/index.md) at `https://mcp.blazium.games/mcp`, and the [player server](./mcp/player.md) at `https://mcp.blazium.games/player`. Both connect with OAuth, so no key is stored in the plugin.
+- The hosted [Blazium Games MCP server](./mcp/index.md) at `https://mcp.blazium.games/developer` (`https://mcp.blazium.games/mcp` still reaches it), and the [player server](./mcp/player.md) at `https://mcp.blazium.games/player`. Both connect with OAuth, so no key is stored in the plugin.
 - Skills that walk the agent through store pages, deploys, crash reporting, crash debugging, analytics, keys, playing, and purchases.
 
 The docs repo remains the guide and the plugin source: [github.com/blazium-games/games_docs](https://github.com/blazium-games/games_docs) (MIT). The versioned release is [github.com/blazium-games/games_skill](https://github.com/blazium-games/games_skill), published as `npm install @blazium-games/skills`.
@@ -48,7 +48,7 @@ For environments where a browser sign-in is not possible, override the server in
 {
   "mcpServers": {
     "blazium-games": {
-      "url": "https://mcp.blazium.games/mcp",
+      "url": "https://mcp.blazium.games/developer",
       "headers": {
         "Authorization": "Bearer bgames_mcp_YOUR_KEY"
       }
