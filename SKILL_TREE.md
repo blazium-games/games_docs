@@ -1,6 +1,6 @@
 # Blazium Games Skill Tree
 
-Blazium Games is a game publishing platform, with an infrastructure focus. A token belongs to one server: `blazium-games` (developer, `https://mcp.blazium.games/mcp`, keys `bgames_mcp_`) publishes pages, builds, crashes, analytics, and keys. `blazium-games-player` (player, `https://mcp.blazium.games/player`, keys `bgames_play_`) finds, reviews, installs, and buys.
+Blazium Games is a game publishing platform, with an infrastructure focus. A token belongs to one server: `blazium-games` (developer, `https://mcp.blazium.games/developer`, `/mcp` still reaches it, keys `bgames_mcp_`) publishes pages, builds, crashes, analytics, and keys. `blazium-games-player` (player, `https://mcp.blazium.games/player`, keys `bgames_play_`) finds, reviews, installs, and buys.
 
 ## Start Here
 

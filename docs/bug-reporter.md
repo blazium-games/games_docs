@@ -27,9 +27,11 @@ The first time the reporter is turned on, that game gets its own signing key. It
 | Field | Limit |
 |---|---|
 | `message` | required, 4000 characters |
-| `client_version`, `os`, `arch`, `build_id` | optional |
-| `log` | 512 KiB. The text is stored with the ticket and is not put in the webhook |
+| `client_version`, `os`, `arch`, `build_id` | optional. `build_id` is the fallback when `X-Build-Id` is absent |
+| `log` | 512 KiB. Steam ids are redacted before the log leaves the game. The text is stored with the ticket and is not put in the webhook |
 | `screenshot` | one PNG, JPEG, or WebP, up to 32 MiB, stored at the size the game sent |
+
+Send `X-App-Id` and `X-Build-Id` with the report, the same headers crash ingest uses. `X-App-Id` is the game uid and must match the path. `X-Build-Id` is that game's build uid. The signed webhook JSON and the Discord embed include `app_id` and `build_id` next to the version.
 
 Over the daily cap returns code `4291`.
 
@@ -46,4 +48,14 @@ The screenshot URL is signed the same way Spaces signs a private object: base64 
 
 ## Notices
 
-When a ticket is marked `fixed`, the player who filed it can read it from `GET /api/v1/games/{game_uid}/bugs/notices` and acknowledge it with `POST .../notices/ack`. A `closed` ticket stays silent. A stable build's changelog uses the same pull: `GET /api/v1/games/{game_uid}/patch/notices` and `POST .../patch/notices/ack`. See [Deploy builds](./deploy.md).
+When a ticket is marked `fixed` or `unidentified`, the player who filed it can read it from `GET /api/v1/games/{game_uid}/bugs/notices` and acknowledge it with `POST .../notices/ack`. `fixed` means the bug was fixed. `unidentified` means the report could not be pinned down, and it does not say the bug was fixed. A `closed` ticket stays silent in the game. A stable build's changelog uses the same pull: `GET /api/v1/games/{game_uid}/patch/notices` and `POST .../patch/notices/ack`. See [Deploy builds](./deploy.md).
+
+## On the website
+
+A developer triages tickets at `/edit/<game>/bugs` and sets `open`, `fixed`, `unidentified`, or `closed`. A player reads their own reports, including closed ones, at `/bugs`. The player cannot change status.
+
+## From MCP and chauffeur
+
+`list_bug_tickets` returns 50 tickets a page. Follow `next_page`. `get_bug_ticket` reads one. `request_bug_screenshot` returns a one-hour link, not the image. `get_bug_log` returns at most 16 KiB; call it again with `next_offset` until that field is absent.
+
+`chauffeur bugs` lists the same tickets with the game's deploy key. `chauffeur bugs screenshot`, `chauffeur bugs log`, and `chauffeur bugs pull` save the files. The deploy key cannot change status and cannot read crash dumps.

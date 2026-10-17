@@ -147,6 +147,19 @@ chauffeur info
 chauffeur info --json
 ```
 
+### `chauffeur bugs`
+
+List bug reports for this deploy key's game. `--status` keeps one of `open`, `fixed`, `unidentified`, or `closed`. `--page` reads one page; otherwise every `next_page` is followed. The key cannot change status.
+
+```bash
+chauffeur bugs
+chauffeur bugs screenshot bug_123 --out shot.png
+chauffeur bugs log bug_123 --out game.log
+chauffeur bugs pull bug_123 --dir ./bugs
+```
+
+See [Bug reports](./bugs.md).
+
 ### `chauffeur builds list`
 
 List the game's builds, newest first, with their files and how many symbol files each has.

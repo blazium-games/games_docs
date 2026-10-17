@@ -103,7 +103,7 @@ Details: [Steam API disclosure](./steam-api-disclosure.md).
 
 ## MCP access (OAuth)
 
-AI tools such as Cursor, VS Code, and Claude Code connect to one of two Blazium Games MCP servers. The developer server at `https://mcp.blazium.games/mcp` manages your games. The player server at `https://mcp.blazium.games/player` acts for you as a player.
+AI tools such as Cursor, VS Code, and Claude Code connect to one of two Blazium Games MCP servers. The developer server at `https://mcp.blazium.games/developer` manages your games. `https://mcp.blazium.games/mcp` still reaches that server. The player server at `https://mcp.blazium.games/player` acts for you as a player.
 When you approve a tool, it gets a token for one server only, with one or more of that server's scopes. A token never holds scopes for both servers, and neither server accepts the other's tokens or keys.
 
 | Scope | Server | Allows |
@@ -250,5 +250,5 @@ These are the responses your MCP client, script, or CI job will see.
 
 - A deploy key is an `access_token` and `secret_key` pair for one game. The chauffeur CLI reads them from `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`.
 - `request_deploy_key` returns the secret once and invalidates every previous deploy key for that game, so update your CI secrets right away.
-- Deploy keys can only register builds, upload build files and debug symbols, upload store images, and read the game's basic details (`chauffeur info`). They cannot edit the store page text or settings, and they cannot read analytics or crash reports.
+- Deploy keys can register builds, upload build files and debug symbols, upload store images, read the game's basic details (`chauffeur info`), and list that game's bug reports and download their screenshot and log (`chauffeur bugs`). They cannot edit the store page text or settings, read analytics or crash dumps, or change a ticket's status.
 - See [Deploy builds](../deploy.md) and [Access and keys](../mcp/access-and-keys.md).
