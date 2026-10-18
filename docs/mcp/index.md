@@ -32,6 +32,17 @@ Install the [Blazium Games Cursor plugin](../cursor-plugin.md). It adds this ser
 
 :::
 
+## Sign up and sign in
+
+Call `initialize` with no token. `tools/list`, `prompts/list`, and `prompts/get` also need no bearer. Then follow one prompt:
+
+- `setup_account` for a new person. Call `create_account`, then `confirm_account` with the email code.
+- `sign_in` for a person who already has an account. Call `login`, then `confirm_account` when the answer is `otp_required`.
+
+`create_account`, `login`, and `confirm_account` need no bearer. Send `accept_legal` and `accept_developer_terms` only after the human agrees. On this server both turn developer mode on. An existing address gets the same answer and is not revealed. `confirm_account` returns this server's first `bgames_mcp_` key once and does not return the website session. A later call does not rotate a key that already exists. An authenticator challenge, and choosing or skipping an authenticator, stay on the website.
+
+Website signup at [blazium.games/signup](https://blazium.games/signup) still works. OAuth consent, below, still works when the client opens the website.
+
 ## Option A: OAuth, no token (recommended)
 
 Add the server URL only. Your client discovers the authorization server, opens a Blazium Games sign-in and consent page, and completes PKCE on its own.

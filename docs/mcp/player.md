@@ -19,6 +19,17 @@ An agent can `initialize` with no token, then follow `setup_account` or `sign_in
 
 A token belongs to exactly one server. A developer key or token is refused by `/player`, and a player key or token is refused by `/mcp`. A token can't hold both `mcp:*` and `player:*` scopes (`4032`).
 
+## Sign up and sign in
+
+Call `initialize` with no token. `tools/list`, `prompts/list`, and `prompts/get` also need no bearer. Then follow one prompt:
+
+- `setup_account` for a new person. Call `create_account`, then `confirm_account` with the email code.
+- `sign_in` for a person who already has an account. Call `login`, then `confirm_account` when the answer is `otp_required`.
+
+`create_account`, `login`, and `confirm_account` need no bearer. Send `accept_legal` only after the person agrees. The account stays a player. An existing address gets the same answer and is not revealed. `confirm_account` returns this server's first `bgames_play_` key once and does not return the website session. A later call does not rotate a key that already exists. Developer mode is turned on only on the developer server, at account creation or later with `enable_developer_mode`. An authenticator challenge, and choosing or skipping an authenticator, stay on the website.
+
+Website signup at [blazium.games/signup](https://blazium.games/signup) still works. OAuth consent, below, still works when the client opens the website.
+
 ## Connect with OAuth (recommended)
 
 Add the server to your client with no token:

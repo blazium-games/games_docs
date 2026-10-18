@@ -253,7 +253,7 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources a
 |------|--------|-------|
 | `get_account` | none | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open: `legal_acceptance_required` (with `legal_changes`), `setup_required`, `authenticator` (`on`, `skipped`, or `not_chosen`), and `gate` (empty when none). Send the human to blazium.games/account/finish for an open step. Authenticator setup and skipping it stay on the website. Account only |
 | `create_account` | `email`, `password`, optional `username`, `accept_legal`, `accept_developer_terms` | Creates an account. No bearer. Call it after `initialize` and the `setup_account` prompt. Send `accept_legal` and `accept_developer_terms` only after the human agrees. On this server both turn developer mode on. An existing address gets the same answer and is not revealed |
-| `login` | `email`, `password` | Emails a sign-in code. No bearer. `otp_required` means call `confirm_account`. An authenticator challenge finishes on the website |
+| `login` | `email`, `password` | Emails a sign-in code. No bearer. Follow the `sign_in` prompt. `otp_required` means call `confirm_account`. An authenticator challenge finishes on the website |
 | `confirm_account` | `email`, `code` | Exchanges the email code and returns this server's first `bgames_mcp_` key once. No bearer. A later call does not rotate an existing key. Authenticator setup stays on the website |
 | `enable_developer_mode` | `accept_terms` | Turns developer mode on. Send `accept_terms` only after the human agrees. Turning it off stays on the website. Account only, write |
 | `request_email_code` | none | Emails a verification code to the account owner. Account only, write |
