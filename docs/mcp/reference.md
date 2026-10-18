@@ -328,6 +328,8 @@ Field values:
 
 | Prompt | Arguments | Purpose |
 |--------|-----------|---------|
+| `setup_account` | none | Create an account, confirm the email code, and save the first MCP key. No bearer |
+| `sign_in` | none | Sign in with email and, when a code is required, confirm it to get the first MCP key. No bearer |
 | `draft_game_page` | `pitch` | Draft a name, tagline, and description from a short pitch |
 | `improve_game_copy` | `description` | Rewrite an existing description, keeping the facts |
 | `analytics_summary` | `uid` | Summarize recent visitors |
