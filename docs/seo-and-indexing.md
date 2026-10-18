@@ -24,7 +24,7 @@ The Settings tab says whether the page can be indexed right now. Other pages sti
 
 | URL | Contents |
 |---|---|
-| `https://blazium.games/sitemap.xml` | The platform's public pages, every developer profile with an indexable listing, and every indexable store page |
+| `https://blazium.games/sitemap.xml` | The platform's public pages, including `/blog` and each published post, every developer profile with an indexable listing, and every indexable store page |
 | `https://<you>.blazium.games/sitemap.xml` | Your profile, and your indexable store pages and their press pages |
 | `https://blazium.games/robots.txt` | Points to the root sitemap and keeps crawlers off signed-in routes. Public pages stay allowed |
 | `https://<you>.blazium.games/robots.txt` | Points to your sitemap and the root sitemap, and keeps crawlers off embed pages (`/<game>/embed`) |
@@ -35,13 +35,13 @@ Sitemaps list listings whose owner has a verified email and a finished account. 
 
 [llms.txt](https://llmstxt.org) files give AI agents a plain-text summary:
 
-- `https://blazium.games/llms.txt` describes the platform, its APIs, and its MCP servers. It is a map for agents, not a search-ranking file. The other files machines read are on [Discovery files](./discovery.md).
+- `https://blazium.games/llms.txt` describes the platform, its APIs, the blog, and its MCP servers. It is a map for agents, not a search-ranking file. The blog is [https://blazium.games/blog](https://blazium.games/blog), the articles API is [https://api.blazium.online/api/v1/public/articles](https://api.blazium.online/api/v1/public/articles), and the feed is [https://cdn.blazium.online/articles/rss.xml](https://cdn.blazium.online/articles/rss.xml). The other files machines read are on [Discovery files](./discovery.md).
 - `https://<you>.blazium.games/llms.txt` lists your indexable listings with a link to each one's summary.
 - `https://<you>.blazium.games/<game>/llms.txt` summarizes one indexable listing: type, price, platforms, genres, tags and community tags, generative AI use, content warnings, parent game, and links to the store page, press kit, tools and mods pages, and the listing JSON. It returns 404 for a listing that can't be indexed.
 
 ## Structured data
 
-Indexable store pages include [JSON-LD](https://json-ld.org): a `VideoGame` for games, mods and plugins, or a `SoftwareApplication` for everything else, with the tagline, cover image, developer, genres, price, operating systems, player count (games, mods and plugins), tags and community tags as keywords, the review rating when there are reviews, and `isBasedOn` when the parent game is on Blazium Games.
+Indexable store pages include [JSON-LD](https://json-ld.org): a `VideoGame` for games, mods and plugins, or a `SoftwareApplication` for everything else, with the tagline, cover image, developer, genres, price, operating systems, player count (games, mods and plugins), tags and community tags as keywords, the review rating when there are reviews, and `isBasedOn` when the parent game is on Blazium Games. `/blog` is a `Blog`. Each post is a `BlogPosting` and links to its markdown file.
 
 Profiles also publish `ProfilePage` / `Person` structured data. Embed pages describe the project and stay out of the index.
 

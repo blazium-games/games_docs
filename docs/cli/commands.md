@@ -195,6 +195,15 @@ See [Multiplayer](../multiplayer.md).
 
 `chauffeur progress apply --file progress.yml` replaces each section the file includes: `achievements`, `stats`, `funnels`, and `presence_writers`. A missing section is left as it is. The file starts with `spec: progress`. `chauffeur progress show` prints the current definitions. `--json` works on both. Server keys are not in this file. See [Progress](../progress.md).
 
+## Blog
+
+`chauffeur blog` lists published posts, newest first. `chauffeur blog show <slug>` prints the title and the markdown. Both call the public articles API and do not need a deploy key. `--json` works on both.
+
+```bash
+chauffeur blog
+chauffeur blog show pardon-our-dust
+```
+
 ## Shell completion
 
 `chauffeur completion bash|zsh|fish|powershell` prints a completion script. For example, `chauffeur completion powershell | Out-String | Invoke-Expression`.

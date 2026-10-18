@@ -7,6 +7,9 @@
 
 - [Blazium Games](https://blazium.games/): Play and publish games, applications, mods, and assets.
 - [Introduction](https://docs.blazium.games/docs/intro): What the platform is and where to start.
+- [About](https://docs.blazium.games/docs/about): Who operates the platform, the fixed fee, and where downloads are hosted.
+- [FAQ](https://docs.blazium.games/docs/faq): Finding games, the library, a missing purchase, reporting a page, and deleting an account.
+- [Blog](https://blazium.games/blog): Published posts. The list API is https://api.blazium.online/api/v1/public/articles and the feed is https://cdn.blazium.online/articles/rss.xml.
 
 ## MCP and the player server
 
