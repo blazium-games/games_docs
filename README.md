@@ -44,6 +44,8 @@ Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 | [blazium-games-keys](skills/blazium-games-keys/SKILL.md) | Inspects and rotates MCP and deploy keys |
 | [blazium-games-module](skills/blazium-games-module/SKILL.md) | Blazium engine login, lobby, and ICE |
 | [blazium-games-plugin](skills/blazium-games-plugin/SKILL.md) | Godot addon for other engines |
+| [blazium-games-unity](skills/blazium-games-unity/SKILL.md) | Unity package `com.blazium.games` |
+| [blazium-games-unreal](skills/blazium-games-unreal/SKILL.md) | Unreal plugin `BlaziumGames` |
 | [blazium-games-lobby-pack](skills/blazium-games-lobby-pack/SKILL.md) | Publishes a Luau lobby pack |
 | [blazium-games-player](skills/blazium-games-player/SKILL.md) | Acts as a player: recommendations, catalog search, reviews, bug reports, friends |
 | [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buys games and donates from the balance within spending limits |
