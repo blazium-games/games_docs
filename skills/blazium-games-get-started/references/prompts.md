@@ -2,6 +2,8 @@
 
 | Prompt | Arguments | Purpose |
 |--------|-----------|---------|
+| `setup_account` | none | Create an account, confirm the email code, and save the first MCP key. No bearer |
+| `sign_in` | none | Sign in with email and, when a code is required, confirm it to get the first MCP key. No bearer |
 | `draft_game_page` | `pitch` (required) | Draft a name, one-line tagline, and two-paragraph description from a short pitch |
 | `improve_game_copy` | `description` (required) | Rewrite an existing store description while keeping the facts |
 | `analytics_summary` | `uid` (required) | Summarize the week's visitors using `get_game_analytics` |

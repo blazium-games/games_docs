@@ -204,6 +204,26 @@ chauffeur blog
 chauffeur blog show pardon-our-dust
 ```
 
+## Patrons
+
+These commands use the signed-in account token (`BLAZIUM_USER_TOKEN` or `--user-token`), not a deploy key.
+
+```bash
+chauffeur patron status
+chauffeur patron list
+chauffeur patron get <username>
+chauffeur patron tiers
+chauffeur patron tier create --name Supporter --rank 1 --price-cents 500 --billing monthly
+chauffeur patron tier update <uid> --name Supporter --price-cents 700 --active true
+chauffeur patron tier delete <uid>
+chauffeur patron posts
+chauffeur patron post create --title Hello --body "A note" --status published --visibility public
+chauffeur patron post update <uid> --title Hello --visibility tiers --tier <tier-uid>
+chauffeur patron post delete <uid>
+```
+
+Rank, billing, and unlock stay fixed after a tier is created. `--active false` hides a tier that still has members.
+
 ## Shell completion
 
 `chauffeur completion bash|zsh|fish|powershell` prints a completion script. For example, `chauffeur completion powershell | Out-String | Invoke-Expression`.

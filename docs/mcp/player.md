@@ -8,7 +8,7 @@ description: Connect an agent to your Blazium Games account as a player to get r
 
 The player server acts for you as a player. It can recommend games and say why, search the catalog, review games you own and report bugs, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, set up payouts and cash out your earnings, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
 
-A new person can join from this server with `create_account` and `confirm_account`. Those two calls need no bearer. `accept_legal` is sent only after the person agrees. The account stays a player. Developer mode is turned on only when the account is created on the developer server, or later with `enable_developer_mode` there. Builds, images, and symbol files are uploaded with the chauffeur CLI, not from either MCP server.
+An agent can `initialize` with no token, then follow `setup_account` or `sign_in`. A new person can join from this server with `create_account` and `confirm_account`. An existing person uses `login`, then `confirm_account` when a code is required. Those calls need no bearer. `accept_legal` is sent only after the person agrees. The account stays a player. Developer mode is turned on only when the account is created on the developer server, or later with `enable_developer_mode` there. Builds, images, and symbol files are uploaded with the chauffeur CLI, not from either MCP server.
 
 | | Developer server | Player server |
 |---|---|---|
@@ -63,7 +63,8 @@ With `player:buy` an agent can also start payout setup, open your Stripe payout 
 |------|--------|-------|-------|
 | `get_account` | none | read | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open (`legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`, `gate`) |
 | `create_account` | `email`, `password`, optional `username`, `accept_legal` | none | Creates an account. No bearer. Send `accept_legal` only after the person agrees. An existing address gets the same answer and is not revealed. Then call `confirm_account` |
-| `confirm_account` | `email`, `code` | none | Finishes signup with the email code and returns this server's first `bgames_play_` key once. No bearer. Authenticator setup stays on the website |
+| `login` | `email`, `password` | none | Emails a sign-in code. No bearer. `otp_required` means call `confirm_account` |
+| `confirm_account` | `email`, `code` | none | Exchanges the email code and returns this server's first `bgames_play_` key once. No bearer. A later call does not rotate an existing key |
 | `request_email_code` | none | write | Emails a verification code to you |
 | `verify_email` | `code` | write | Verifies your email with the code |
 | `set_timezone` | `timezone` | write | Sets your IANA timezone, replacing the saved one. The agent uses your zone, not the machine it is running on |

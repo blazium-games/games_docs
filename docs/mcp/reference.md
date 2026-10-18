@@ -247,13 +247,14 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 134 tools instead of 146. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 145 tools instead of 157. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
 | `get_account` | none | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open: `legal_acceptance_required` (with `legal_changes`), `setup_required`, `authenticator` (`on`, `skipped`, or `not_chosen`), and `gate` (empty when none). Send the human to blazium.games/account/finish for an open step. Authenticator setup and skipping it stay on the website. Account only |
-| `create_account` | `email`, `password`, optional `username`, `accept_legal`, `accept_developer_terms` | Creates an account. No bearer. Send `accept_legal` and `accept_developer_terms` only after the human agrees. On this server both turn developer mode on. An existing address gets the same answer and is not revealed |
-| `confirm_account` | `email`, `code` | Finishes signup with the email code and returns this server's first `bgames_mcp_` key once. No bearer. Authenticator setup stays on the website |
+| `create_account` | `email`, `password`, optional `username`, `accept_legal`, `accept_developer_terms` | Creates an account. No bearer. Call it after `initialize` and the `setup_account` prompt. Send `accept_legal` and `accept_developer_terms` only after the human agrees. On this server both turn developer mode on. An existing address gets the same answer and is not revealed |
+| `login` | `email`, `password` | Emails a sign-in code. No bearer. `otp_required` means call `confirm_account`. An authenticator challenge finishes on the website |
+| `confirm_account` | `email`, `code` | Exchanges the email code and returns this server's first `bgames_mcp_` key once. No bearer. A later call does not rotate an existing key. Authenticator setup stays on the website |
 | `enable_developer_mode` | `accept_terms` | Turns developer mode on. Send `accept_terms` only after the human agrees. Turning it off stays on the website. Account only, write |
 | `request_email_code` | none | Emails a verification code to the account owner. Account only, write |
 | `verify_email` | `code` | Verifies the email with the code the human received. Account only, write |
@@ -280,6 +281,14 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources a
 | `get_patron_status` | `developer` (optional) | Read-only memberships for the caller: tier, billing, status, period end, whether the 12 hour check is open, and license ids. No card data |
 | `list_patrons` | `page` (optional) | Developer only. Usernames, tiers, status, and since |
 | `get_patron` | `username` | Developer only. One patron's tier, status, and since |
+| `list_tiers` | none | Developer only. Tiers and proposed game links |
+| `create_tier` | `name`, `rank`, `price_cents`, `billing`, optional `unlock`, `until` | Developer only. Rank, billing, and unlock stay fixed after create |
+| `update_tier` | `uid`, optional `name`, `price_cents`, `active` | Developer only. A new price applies to new pledges. `active` hides or shows the tier |
+| `delete_tier` | `uid` | Developer only. Refused while a membership is pending or active |
+| `list_posts` | `page` (optional) | Developer only. Drafts and published posts, with `tier_uids` |
+| `create_post` | `title`, `body`, `status`, `visibility`, `tier_uids` | Developer only. `visibility` is `public` or `tiers` |
+| `update_post` | `uid` plus the create fields | Developer only |
+| `delete_post` | `uid` | Developer only. The public page then 404s |
 | `get_agent_policy` | none | This agent's limit mode (`unset`, `unlimited`, `monthly`, `yearly`, `one_time`), limit, and spend in the period. Changed only on the website. Account only. **Deprecated** |
 | `get_approval` | `approval_id` | State of a purchase approval: `pending`, `approved`, `denied`, `expired`, or `used`. Account only |
 | `confirm_approval` | `approval_id`, `code` | Approves with the 6-digit code the human read from their email. Account only, write |
@@ -319,6 +328,8 @@ Field values:
 
 | Prompt | Arguments | Purpose |
 |--------|-----------|---------|
+| `setup_account` | none | Create an account, confirm the email code, and save the first MCP key. No bearer |
+| `sign_in` | none | Sign in with email and, when a code is required, confirm it to get the first MCP key. No bearer |
 | `draft_game_page` | `pitch` | Draft a name, tagline, and description from a short pitch |
 | `improve_game_copy` | `description` | Rewrite an existing description, keeping the facts |
 | `analytics_summary` | `uid` | Summarize recent visitors |
