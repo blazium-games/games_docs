@@ -28,14 +28,14 @@ The first time the reporter is turned on, that game gets its own signing key. It
 |---|---|
 | `message` | required, 4000 characters |
 | `client_version`, `os`, `arch`, `build_id` | optional. `build_id` is the fallback when `X-Build-Id` is absent |
-| `log` | 512 KiB. Steam ids are redacted before the log leaves the game. The text is stored with the ticket and is not put in the webhook |
+| `log` | 512 KiB. The service redacts a SteamID64, `discord_id`, a bearer token, an API key, an email address, and a session cookie before the log is stored. The text is stored with the ticket and is not put in the webhook |
 | `screenshot` | one PNG, JPEG, or WebP, up to 32 MiB, stored at the size the game sent |
 
 Send `X-App-Id` and `X-Build-Id` with the report, the same headers crash ingest uses. `X-App-Id` is the game uid and must match the path. `X-Build-Id` is that game's build uid. The signed webhook JSON and the Discord embed include `app_id` and `build_id` next to the version.
 
 Over the daily cap returns code `4291`.
 
-The Godot plugin, the Unity package, the Unreal plugin, and the C++ SDK all expose `report_bug`. They send the Blazium JWT, or the Steam session from `sign_in_with_steam_ticket`, and they do not link Steamworks. See [Engines](./engines.md).
+The Godot plugin, the Unity package, the Unreal plugin, and the C++ SDK expose two calls. `report_bug` is the short store-style report and does not send `X-Build-Id`, the log, or the screenshot. The longer in-game call (`report_ingame_bug` on the engine, `ReportInGameBug` on the native library) sends those fields. Godot, Unity, and Unreal take the extra fields on their `report_bug` entry point and send the in-game call when a build id or a screenshot path is set. A screenshot path has to sit under the game's user directory, and the read stops at 32 MiB. They send the Blazium JWT, or the Steam session from `sign_in_with_steam_ticket`, and they do not link Steamworks. See [Engines](./engines.md).
 
 ## Webhooks
 
