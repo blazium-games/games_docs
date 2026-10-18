@@ -16,7 +16,8 @@ Blazium Games is a game publishing platform, with an infrastructure focus. The f
 |---|---|
 | `https://blazium.games/robots.txt` | `User-agent: *` and `Allow: /`. Disallows the signed-in routes `/settings`, `/login`, `/signup`, `/setup`, `/logout`, `/password`, `/library`, `/friends`, `/redeem`, `/purchase`, `/approve`, `/dashboard`, `/edit`, and `/new`. Home, browse, the desktop app, support, the legal pages, `llms.txt`, `humans.txt`, and the sitemap stay allowed. |
 | `https://<you>.blazium.games/robots.txt` | Allows the public developer site and disallows `/<game>/embed`. |
-| `https://blazium.games/sitemap.xml` | The platform's public pages, every developer profile with an indexable listing, and every indexable store page. |
+| `https://blazium.games/sitemap.xml` | The platform's public pages (including `/blog` and each published post), every developer profile with an indexable listing, and every indexable store page. |
+| `https://blazium.games/blog` | The blog. Posts are also at `GET https://api.blazium.online/api/v1/public/articles` and `GET https://api.blazium.online/api/v1/public/articles/{slug}`, and in [the RSS file](https://cdn.blazium.online/articles/rss.xml). |
 | `https://<you>.blazium.games/sitemap.xml` | That developer's profile, and their indexable store pages and press pages. |
 
 ## Trust
@@ -44,7 +45,7 @@ Also published:
 
 These files are maps. They do not replace `robots.txt` or the sitemaps.
 
-- `https://blazium.games/llms.txt` describes the platform, its APIs, and its MCP servers.
+- `https://blazium.games/llms.txt` describes the platform, its APIs, the blog, and its MCP servers. The blog is `https://blazium.games/blog`, the articles API is `https://api.blazium.online/api/v1/public/articles`, and the feed is `https://cdn.blazium.online/articles/rss.xml`.
 - `https://<you>.blazium.games/llms.txt` lists that developer's indexable listings.
 - `https://<you>.blazium.games/<game>/llms.txt` summarizes one indexable listing.
 - [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt) is a short map of these docs.
@@ -65,7 +66,8 @@ The public site does not serve a Markdown twin of every page. The docs map above
 - OAuth protected-resource metadata (RFC 9728) for [the developer server](https://mcp.blazium.games/.well-known/oauth-protected-resource/mcp) and [the player server](https://mcp.blazium.games/.well-known/oauth-protected-resource/player)
 - The public API's OpenAPI 3.1 description, as the `service-desc` of `https://api.blazium.online/api/v1/public/`: [JSON](https://api.blazium.online/api/v1/public/openapi.json) and [YAML](https://api.blazium.online/api/v1/public/openapi.yaml). Its `service-doc` is the [public API reference](./api-reference.md).
 - The [editor asset library](./editor-asset-library.md) repository URL: `https://api.blazium.online/api/v1/public/asset-library`
-- Public JSON: [search](https://api.blazium.online/api/v1/public/search) and [sitemap](https://api.blazium.online/api/v1/public/sitemap)
+- Public JSON: [search](https://api.blazium.online/api/v1/public/search), [articles](https://api.blazium.online/api/v1/public/articles), and [sitemap](https://api.blazium.online/api/v1/public/sitemap)
+- Blog RSS: [https://cdn.blazium.online/articles/rss.xml](https://cdn.blazium.online/articles/rss.xml)
 
 Indexable store pages publish `VideoGame` or `SoftwareApplication` JSON-LD. Profiles publish `ProfilePage` and `Person`.
 
