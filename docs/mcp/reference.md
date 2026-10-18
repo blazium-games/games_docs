@@ -277,6 +277,9 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources a
 | `start_payout_setup` | none | Starts or continues Stripe Connect payout setup and returns a Stripe link for the human, who enters identity, tax, and bank details on Stripe only. Needs a verified email. US only. Account only, money write |
 | `get_payout_dashboard_link` | none | One-time Stripe Express dashboard link for the human. `4095` until payout setup has started. Account only, money write |
 | `cash_out` | `amount_cents` (at least 2500) | Cashes out available earnings to the account's own Stripe payout account without asking the human; the owner is emailed after each agent cash-out. Fees as on the website. Money can take up to 72 business hours to reach the bank. `4095` finish payout setup, `4021` not enough available earnings, `4057` below the minimum. Account only, money write |
+| `get_patron_status` | `developer` (optional) | Read-only memberships for the caller: tier, billing, status, period end, whether the 12 hour check is open, and license ids. No card data |
+| `list_patrons` | `page` (optional) | Developer only. Usernames, tiers, status, and since |
+| `get_patron` | `username` | Developer only. One patron's tier, status, and since |
 | `get_agent_policy` | none | This agent's limit mode (`unset`, `unlimited`, `monthly`, `yearly`, `one_time`), limit, and spend in the period. Changed only on the website. Account only. **Deprecated** |
 | `get_approval` | `approval_id` | State of a purchase approval: `pending`, `approved`, `denied`, `expired`, or `used`. Account only |
 | `confirm_approval` | `approval_id`, `code` | Approves with the 6-digit code the human read from their email. Account only, write |
