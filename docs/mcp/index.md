@@ -8,7 +8,7 @@ description: Connect Cursor, VS Code, Claude Code, or any MCP client to the host
 
 # MCP for Blazium Games
 
-Blazium Games is a game publishing platform, with an infrastructure focus. The developer MCP server lets AI agents create and update pages for those projects, ship and promote builds, fill in press kits, link pages on other stores, read analytics, crash reports, reviews, bug tickets, and copyright notices, moderate game chat, manage game keys, set up payouts and cash out earnings, and issue deploy credentials. Version 1.21.0 has 146 developer tools (134 after 2026-10-28) and 46 player tools. Buying stays on the player server.
+Blazium Games is a game publishing platform, with an infrastructure focus. The developer MCP server lets AI agents create and update pages for those projects, ship and promote builds, fill in press kits, link pages on other stores, read analytics, crash reports, reviews, bug tickets, and copyright notices, moderate game chat, manage game keys, set up payouts and cash out earnings, and issue deploy credentials. Version 1.21.0 has 146 developer tools (134 after 2026-10-28) and 48 player tools. Buying stays on the player server.
 
 A new person joins with `create_account` on the server they connect to, then `confirm_account` with the email code. That pair needs no bearer. The developer server turns developer mode on when the human has agreed to the developer terms. The player server leaves the account a player. An existing player turns developer mode on later with `enable_developer_mode` on the developer server. Builds, images, and symbol files stay on the chauffeur CLI. MCP never uploads files.
 
