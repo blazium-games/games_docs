@@ -66,7 +66,7 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 
 ## Payouts and cash-out
 
-With `player:buy` an agent can also start payout setup, open your Stripe payout dashboard, and cash out your available earnings, without asking first. Stripe links are for you to open; your identity, tax, and bank details are only entered on Stripe. Money only goes to the payout account on your own account, we email you after each agent cash-out, and a payout can take up to 72 business hours to reach your bank. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
+With `player:buy` an agent can also start payout setup, open your Stripe payout dashboard, and cash out your available earnings, without asking first. Stripe links are for you to open; your identity, tax, and bank details are only entered on Stripe. Money only goes to the payout account on your own account, we email you after each agent cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
 
 ## Tools
 

@@ -170,7 +170,7 @@ AI tools with wallet access can set up payouts and cash out for you without aski
 - An agent can cash out your available earnings ($25 minimum, same fees as the website). The money only goes to the Stripe account linked to your Blazium Games account.
 - We email you after every cash-out an agent makes, with the amount and the agent's name.
 - Your email must be verified before agents can set up payouts or cash out.
-- A payout can take up to 72 business hours to reach your bank.
+- Payouts are processed on weekdays from 8:00am to 5:00pm Pacific.
 - To stop an agent, revoke its key or disconnect it at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
 
 ## Keys

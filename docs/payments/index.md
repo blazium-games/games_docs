@@ -31,7 +31,7 @@ Verify at [blazium.games/settings/verify](https://blazium.games/settings/verify)
 | Sales tax | Buyer | Calculated by Stripe Tax where Blazium Games is registered |
 | Adding balance by card | Buyer | The card processing fee; no tax |
 | Adding balance with USDC (x402) | Buyer | A 1.5% network fee |
-| Cashing out earnings | Developer | 8% plus Stripe's payout fee (0.25% + $0.25); up to 72 business hours to reach your bank |
+| Cashing out earnings | Developer | 8% plus Stripe's payout fee (0.25% + $0.25). Payouts are processed on weekdays from 8:00am to 5:00pm Pacific |
 
 A $10 game sold by card: the buyer pays $10, any tax, and the card fee. Blazium Games keeps $1.05 ($0.25 + $0.80), and the developer's pending earnings grow by $8.95.
 

@@ -12,7 +12,7 @@ If content on Blazium Games infringes your copyright, file a notice at [blazium.
 
 Filing costs **$100, plus $100 for each uploader account** your links belong to. Links to two games by the same developer cost $200; links to games by two different developers cost $300. The form shows the total before you pay.
 
-The fee pays for reviewing and verifying the claim, and it discourages spam and false claims. **It is not refundable**, whether the claim is accepted, rejected, resolved, closed or withdrawn. If you dispute the charge with your bank, we may close the claim.
+The fee pays for reviewing and verifying the claim. The notice work is performed when the fee is paid. **It is not refundable**, whether the claim is accepted, rejected, resolved, closed, or withdrawn. A refund or chargeback started in Stripe is noted on the claim. The claim stays open, and the fee is not returned.
 
 ## File a notice
 

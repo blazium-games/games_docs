@@ -52,7 +52,7 @@ Buyers pay tax and any card fee on top of the price, so those never come out of 
 
 New earnings are **pending**. They become **available** 7 days after the sale, when the refund window closes. The buyer's playtime does not release them sooner. See [Wallet and cash-out](./wallet-and-cash-out.md).
 
-If a purchase is refunded or charged back, its earnings are taken back from your balance and the sale fee is not charged.
+If a purchase is refunded or charged back, its earnings are taken back from your balance. The platform fee is not returned.
 
 ## Taxes
 
