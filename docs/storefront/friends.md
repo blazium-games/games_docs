@@ -41,3 +41,11 @@ Under **Activity sharing** you choose whether friends see what you play:
 
 - **Stop sharing** hides your current and recent games from friends.
 - **Share with friends** shows them again.
+
+## Profile visibility
+
+Profile visibility is separate from activity sharing and from each game's visibility. Set it on Profile at [settings](https://blazium.games/settings).
+
+- **Public:** anyone can open your profile.
+- **Private:** a signed-in friend and you can open it. Everyone else sees a page that says the profile is private.
+- **Hidden:** nobody else can open it, including friends. The page says the profile is hidden. You can still open your own page while signed in.

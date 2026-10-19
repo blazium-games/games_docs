@@ -36,13 +36,13 @@ An AI agent can do the same for you. See [Agent payouts](#agent-payouts).
 
 Cash out any amount from $25 of available earnings. The fee is 8% of the amount plus Stripe's payout fee (0.25% + $0.25). The rest is transferred to your Stripe account and then paid out to your bank.
 
-A payout can take up to **72 business hours** to reach your bank after you cash out. Weekends and United States federal holidays don't count. Stripe verification, tax-form holds, or a Stripe review can add to that.
+Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Stripe verification, tax-form holds, or a Stripe review can add time after a payout is sent.
 
 ## USDC
 
 On the wallet page you can choose USD or USDC. USD stays on Stripe Connect and is limited to US accounts. USDC does not need Stripe Connect. It uses the same email check, the same $25 minimum, and the same cash-out and payout fees. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused. Blazium pays the network fee.
 
-USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A new address is unverified for up to 24 business hours, counted only Monday through Friday, and nothing is sent before that. The first payout to a verified address waits 7 business days. Each later payout to that same address can send about 10 minutes after you request it. Changing the address starts verification over, and the next payout to the new address is a first payout. The address cannot change while a cash-out is pending or while verification is still open.
+USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A new address is checked before anything is sent. Changing the address starts that check over. The address cannot change while a cash-out is pending or while the check is still open. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Each cash-out can send at most 10,000 USDC.
 
 | You cash out | 8% fee | Payout fee | Transferred |
 | --- | --- | --- | --- |

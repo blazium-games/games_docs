@@ -20,14 +20,18 @@ We may refund outside the window at our discretion, for example for a broken bui
 
 ## What you get back
 
-- **Paid by card:** the price and tax go back to your card. The card processing fee is not refunded.
-- **Paid from balance:** the price and tax go back to your credit.
+A refund credits your Blazium account with the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. To get money out, request a payout.
+
+- **Paid by card or USDC:** the credit lands in available earnings.
+- **Paid from balance:** the credit lands in credit, which cannot be cashed out.
 
 The license is revoked when the refund goes through, and the game can no longer be downloaded.
 
+A paid copyright-notice fee is not a purchase refund. Filing starts the review, so the work is performed when the fee is paid. Support does not refund that fee, whether the claim is accepted, rejected, resolved, closed, or withdrawn.
+
 ## What happens for the developer
 
-The sale's earnings are taken back from the developer's balance, and Blazium Games returns its sale fee ($0.25 + 8%), so the developer does not pay a fee on a refunded sale.
+The sale's earnings are taken back from the developer's balance. The platform fee is not returned.
 
 ## Chargebacks
 

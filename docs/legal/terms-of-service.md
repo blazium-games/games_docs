@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/terms-of-service
 
 # Terms of Service
 
-**Effective Date: October 14, 2026**
+**Effective Date: October 18, 2026**
 
 These Terms of Service ("Terms") are a contract between you and Divine Games, Inc.,
 a California corporation that runs its business from Arizona ("Divine Games," "we," "us," or "our").
@@ -126,7 +126,7 @@ Your account can hold money in three parts:
 - Creators can cash out available earnings of $25 USD or more to a bank account through Stripe Connect. Cash-outs are currently available only to Creators in the United States.
 - To cash out you must complete Stripe's identity verification and tax information checks. You are responsible for supplying accurate information, such as your legal name, address, and tax forms. Stripe may refuse or delay payouts under its own rules, and we may hold cash-outs until verification is complete.
 - Each cash-out costs 8% of the amount, plus Stripe's payout fee (currently 0.25% + $0.25), which we pass through at cost. The remaining amount is transferred to your Stripe account and then paid to your bank.
-- **Timing.** A payout can take up to 72 business hours to reach your bank after you cash out. Business hours do not count weekends or United States federal holidays. Verification holds, tax-form holds, and Stripe's own reviews can add to that time.
+- **Timing.** Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Verification holds, tax-form holds, and Stripe's own reviews can add time after a payout is sent.
 - If a transfer fails or is reversed, the amount and fee are returned to your available balance.
 - We may refuse, delay, or reverse a cash-out that looks fraudulent, fails sanctions screening, or would leave your balance short of pending refunds and fees.
 - **Through an AI agent.** You can set up payouts and cash out on the website, or let an AI agent connected through our MCP server do it for you (section 13). Money is only ever sent to the payout account on your own account, and identity, tax, and bank details are entered by you on Stripe's own pages.
@@ -137,8 +137,9 @@ Your account can hold money in three parts:
 - **Donations are not refundable**, except where the law requires a refund or we reverse a donation tied to fraud. A chargeback on a donation is handled as described below.
 - Content you got from a game key or gift link was not bought, so there is nothing to refund.
 - To ask for a refund, email [support@blazium.games](mailto:support@blazium.games) from your account email. We may also refund outside this window at our discretion, for example for a broken build.
-- Refunds of card payments return the price and tax to your card. The card processing fee is not refunded. Refunds of balance purchases return the price and tax to your credit.
-- When a purchase is refunded, the license is revoked, the Creator's earnings from that sale are taken back, and we return our sale fee, so the Creator pays no fee on a refunded sale.
+- A refund credits your Blazium account with the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
+- A refund of a purchase paid from your balance is credited back to credit, which cannot be cashed out. A refund of a card or USDC purchase is credited to available earnings.
+- When a purchase is refunded, the license is revoked and the Creator's earnings from that sale are taken back. The platform fee is not returned.
 - If you dispute a card payment with your bank (a chargeback), the license is revoked while the dispute is open and the Creator's earnings from that sale are held. We may suspend accounts that file chargebacks in bad faith.
 - Nothing in these Terms limits refund rights you have under the law where you live.
 
@@ -193,7 +194,7 @@ We may remove Content, suspend accounts, or terminate access for violations.
 ### 17.1 Copyright and DMCA Notices
 
 - **Only through the DMCA page.** We accept copyright notices, including notices under the Digital Millennium Copyright Act, only through the paid form at [blazium.games/dmca](https://blazium.games/dmca). Notices sent by email, post, phone, or any other way are not filed and are not acted on. If you email a notice to [dmca@blazium.games](mailto:dmca@blazium.games), you get an automatic reply with a link to the form, filled in with your email address and any links from your message.
-- **The filing fee.** Filing costs $100, plus $100 for each uploader account the links in the notice belong to. The form shows the total before you pay, and the notice is filed only once the fee is paid. The fee covers reviewing and verifying the claim and handling the work it needs, and it discourages spam and false claims. **The fee is not refundable**, whether the claim is accepted, rejected, resolved, closed, or withdrawn. If you dispute the charge with your bank or card issuer, we may close the claim.
+- **The filing fee.** Filing costs $100, plus $100 for each uploader account the links in the notice belong to. The form shows the total before you pay, and the notice is filed only once the fee is paid. The fee covers reviewing and verifying the claim. The notice work is performed when the fee is paid. **The fee is not refundable**, whether the claim is accepted, rejected, resolved, closed, or withdrawn. A refund or chargeback started in Stripe is noted on the claim. The claim stays open, and the fee is not returned.
 - **What a notice must include.** The links to the Content on the Service, a description of the work you say is infringed, your name, postal address, phone number, and email address, a statement of good faith belief that the use is not authorized, a statement under penalty of perjury that the notice is accurate and that you own or are authorized to act for the owner of the right, and your signature.
 - **We forward notices to the uploader.** After the fee is paid, we forward the notice, including the sender's name, company, and email address, to each uploader named in it. Uploaders can also see it in their account settings and through our developer tools for AI agents. Our staff alone see the sender's postal address and phone number. We keep the sender's IP address and browser information to prevent fraud and abuse. We do not give the sender the uploader's identity or contact details; that needs a United States court order (section 5.4).
 - **Staff review.** Our staff review each paid notice and may ask the sender or the uploader for more information. Whether a claim is valid, and what to do about it, is our decision alone (section 17). If we decide a claim is valid, we may disable or remove the Content named in it, and we may suspend or ban the account that uploaded it. If we decide a claim is not valid, we close it and leave the Content as posted. Filing a notice does not mean the Content will be removed, and we do not owe the sender or the uploader an explanation or an appeal.
