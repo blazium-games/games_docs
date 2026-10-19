@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/terms-of-service
 
 # Terms of Service
 
-**Effective Date: October 14, 2026**
+**Effective Date: October 18, 2026**
 
 These Terms of Service ("Terms") are a contract between you and Divine Games, Inc.,
 a California corporation that runs its business from Arizona ("Divine Games," "we," "us," or "our").
