@@ -23,6 +23,7 @@ Pick the type on the **Settings** tab of the edit page, or pass `asset_type` to 
 | `plugin` | Extends a game or engine without changing its content | Required to go public |
 | `game_asset` | Art, audio or other content for making games | None |
 | `dev_asset` | Code, shaders, plugins for engines and other development assets | None |
+| `rom` | A standalone title, published and shown with games | None |
 
 ## Visibility
 
@@ -100,22 +101,23 @@ Changing a page to `public` runs the listing check. If anything in the errors co
 | Check | Applies to | Level |
 |---|---|---|
 | At least 3 tags | all | error |
-| At least 1 genre, a session length, a player count, a network mode, and at least 1 input | games | error |
+| At least 1 genre, a session length, a player count, a network mode, and at least 1 input | games and ROMs | error |
 | At least 1 engine | mods, plugins, game assets, dev assets | error |
 | A parent game | tools, mods, plugins | error |
 | At least 4 gallery images | all | error |
 | A cover image (1024x576 to 2048x1152, 16:9) and a thumbnail (960x540 to 1920x1080, 16:9) | all | error |
 | At least one build that passed the virus scan | all | error |
-| A tagline | all | warning |
+| A tagline of at least 50 characters | all | error |
+| A description of at least 50 characters | all | error |
 | Similar titles | all | warning |
 
 Run it any time from the Listing tab, with `GET /api/v1/private/games/{uid}/lint`, or with the `validate_listing` tool.
 
-Pages that were already public on September 28, 2026 have a 30-day grace period. When it ends, a page that still fails the check is switched to `invisible` (reachable by link, left out of search). While a page is public, taxonomy edits that would add new errors are refused.
+Pages that were already public on September 28, 2026 have a 30-day grace period. When it ends, a page that still fails the check is switched to `invisible` (reachable by link, left out of search). While a page is public, a save that would leave it failing the listing check is refused. That includes a taxonomy edit that fixes one field and clears another.
 
 ## Similar titles
 
-List up to 10 public games that players of yours would also like, most similar first. They show on your store page and feed recommendations. A title that isn't public, or your own game, returns `4072`.
+List up to 10 public games, applications, or ROMs that players of yours would also like, most similar first. They show on your store page and feed recommendations. A title that isn't public, or your own game, returns `4072`.
 
 ## Other stores
 
@@ -194,16 +196,16 @@ The home page is built from shelves. Every shelf only takes public listings with
 
 | Shelf | What qualifies | Order |
 |---|---|---|
-| `featured` (Featured) | Games with a thumbnail and a newest stable build rated `excellent` or `healthy` | Daily |
-| `new` (New releases) | Games and applications published in the last 30 days | Newest first |
-| `recently_updated` (Recently updated) | Games and applications | Newest clean stable upload first |
-| `made_with_blazium` (Made with Blazium) | Games and applications that list the Blazium engine in [Made with](#made-with) | Daily |
-| `in_development` (In development) | Games with the status `development` or `prototype` | Daily |
-| `browser_playable` (Play in your browser) | Games with a clean stable `web` build | Daily |
-| `community` (From the community) | Games and applications with reviews in the last 90 days or [community tags](#community-tags) | Most reviews and tags first |
+| `featured` (Featured) | Games and ROMs with a thumbnail and a newest stable build rated `excellent` or `healthy` | Daily |
+| `new` (New releases) | Games, applications, and ROMs published in the last 30 days | Newest first |
+| `recently_updated` (Recently updated) | Games, applications, and ROMs | Newest clean stable upload first |
+| `made_with_blazium` (Made with Blazium) | Games, applications, and ROMs that list the Blazium engine in [Made with](#made-with) | Daily |
+| `in_development` (In development) | Games and ROMs with the status `development` or `prototype` | Daily |
+| `browser_playable` (Play in your browser) | Games and ROMs with a clean stable `web` build | Daily |
+| `community` (From the community) | Games, applications, and ROMs with reviews in the last 90 days or [community tags](#community-tags) | Most reviews and tags first |
 | `tools_and_assets` (Tools, mods & assets) | Tools, mods, plugins, game assets and dev assets | Daily |
-| `tonight` (Something for tonight) | Games with a 15-minute session length and a newest stable build rated `excellent` or `healthy` | Daily |
-| `unheard_of` (Unheard of) | Games and applications published in the last 60 days that pass the listing check and haven't been played on many devices yet. A listing shows for a limited time after its first `boot_ok` | Daily |
+| `tonight` (Something for tonight) | Games and ROMs with a 15-minute session length and a newest stable build rated `excellent` or `healthy` | Daily |
+| `unheard_of` (Unheard of) | Games, applications, and ROMs published in the last 60 days that pass the listing check and haven't been played on many devices yet. A listing shows for a limited time after its first `boot_ok` | Daily |
 
 `GET https://api.blazium.online/api/v1/public/shelves/{shelf}?os=windows&limit=12` returns a shelf without sign-in, and the player MCP `get_shelf` tool reads it. `limit` is 1 to 24 (default 12). An unknown shelf is a `404`, and a `limit` outside 1 to 24 is a `400`.
 
@@ -233,7 +235,7 @@ On [Browse](https://blazium.games/browse) each filter is a group of checkboxes: 
 | Parameter | Notes |
 |---|---|
 | `q` (or `search`) | Free text across name, tagline, and description |
-| `asset_type` (or `type`) | List of `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, `dev_asset` |
+| `asset_type` (or `type`) | List of `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, `dev_asset`, `rom` |
 | `genres`, `tags`, `tone` | Lists. `tags` also matches community tags |
 | `ai_uses` | List. Only listings that disclose generative AI for any of them |
 | `session_bucket`, `net`, `authorship` | Lists. `authorship` is `human`, `human_agent`, or `agent_heavy`; it filters only and never changes ranking |

@@ -320,7 +320,7 @@ A new review only. An edit or a delete does not send.
 Field values:
 
 - `visibility`: `draft` (you and admins), `owner` (only you), `invisible` (anyone with the link), or `public`
-- `asset_type`: `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, or `dev_asset`
+- `asset_type`: `game`, `application`, `tool`, `mod`, `plugin`, `game_asset`, `dev_asset`, or `rom`
 - `adult`: marks 18+ content. See [Content rules](../content-rules.md#adult-content)
 - `indexable`: `false` keeps the store page out of search engines. See [SEO and indexing](../seo-and-indexing.md)
 
