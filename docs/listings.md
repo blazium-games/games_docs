@@ -40,7 +40,7 @@ Draft and owner pages show a notice saying who can see them, ask search engines 
 
 ## Parent games, tools, mods and plugins
 
-Tools, mods and plugins name the game they are for; applications may. The parent is either a game or application on Blazium Games, or an external game with a name and an `https://` link. Set it on the **Settings** tab, or with `parent` on `create_game` and `update_game` (`{"game": "uid-or-vanity"}` or `{"external_name": "...", "external_url": "https://..."}`). A parent that isn't a game or application, the listing itself, an external parent without an https link, or another developer's listing that isn't public returns `4233`. Changing the type to one without a parent drops it.
+Tools, mods and plugins name the game they are for; applications may. The parent is either a game, an application or a ROM on Blazium Games, or an external game with a name and an `https://` link. Set it on the **Settings** tab, or with `parent` on `create_game` and `update_game` (`{"game": "uid-or-vanity"}` or `{"external_name": "...", "external_url": "https://..."}`). A parent that isn't a game, an application or a ROM, the listing itself, an external parent without an https link, or another developer's listing that isn't public returns `4233`. Changing the type to one without a parent drops it. A game, application or ROM that still has a public child can't be deleted, removed with its owner's account, or changed into a tool, mod or plugin (`4233`). When the listing check hides that parent, its public children are hidden at the same time.
 
 The parent's store page shows public children in two rows, each item marked **From the developer** (the parent's owner or admins) or **Community**; the full lists split them into **From the developer** and **From the community**:
 
@@ -103,7 +103,8 @@ Changing a page to `public` runs the listing check. If anything in the errors co
 | At least 3 tags | all | error |
 | At least 1 genre, a session length, a player count, a network mode, and at least 1 input | games and ROMs | error |
 | At least 1 engine | mods, plugins, game assets, dev assets | error |
-| A parent game | tools, mods, plugins | error |
+| A parent game. On a public page the parent is public, and is a game, an application or a ROM | tools, mods, plugins | error |
+| A sexual or nudity content warning | adult pages | error |
 | At least 4 gallery images | all | error |
 | A cover image (1024x576 to 2048x1152, 16:9) and a thumbnail (960x540 to 1920x1080, 16:9) | all | error |
 | At least one build that passed the virus scan | all | error |
@@ -113,7 +114,7 @@ Changing a page to `public` runs the listing check. If anything in the errors co
 
 Run it any time from the Listing tab, with `GET /api/v1/private/games/{uid}/lint`, or with the `validate_listing` tool.
 
-Pages that were already public on September 28, 2026 have a 30-day grace period. When it ends, a page that still fails the check is switched to `invisible` (reachable by link, left out of search). While a page is public, a save that would leave it failing the listing check is refused. That includes a taxonomy edit that fixes one field and clears another.
+Pages that were already public on September 28, 2026 have a 30-day grace period. When it ends, a page that still fails the check is switched to `invisible` (reachable by link, left out of search). While a page is public, a save that would leave it failing the listing check is refused. That includes a taxonomy edit that fixes one field and clears another, deleting a gallery image that would leave fewer than 4, and deleting the last build that passed the virus scan.
 
 ## Similar titles
 
@@ -130,11 +131,11 @@ Each link must be an `https://` link on that store's own site, one per store:
 | Steam | `steam` | store.steampowered.com |
 | GOG | `gog` | gog.com |
 | Epic Games Store | `epic` | store.epicgames.com |
-| itch.io | `itch` | itch.io and its subdomains, such as `you.itch.io` |
+| itch.io | `itch` | a game page on a creator subdomain, such as `you.itch.io/game` |
 | Humble Store | `humble` | humblebundle.com |
-| Microsoft Store | `microsoft` | xbox.com, apps.microsoft.com, microsoft.com |
+| Microsoft Store | `microsoft` | xbox.com, apps.microsoft.com, or a microsoft.com store or product page |
 | PlayStation Store | `playstation` | store.playstation.com |
-| Nintendo eShop | `nintendo` | nintendo.com and Nintendo's regional sites |
+| Nintendo eShop | `nintendo` | www or store on nintendo.com and Nintendo's regional sites |
 | App Store | `apple` | apps.apple.com |
 | Google Play | `google_play` | play.google.com |
 | Game Jolt | `gamejolt` | gamejolt.com |
