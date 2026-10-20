@@ -14,7 +14,7 @@ Every upload is scanned for viruses. The **Builds** tab lists each build with it
 
 ### Release channels
 
-A clean upload moves its channel forward:
+A clean upload moves beta, dev, and custom channels forward. Stable waits until you promote a build onto it:
 
 - **stable** is what every player gets.
 - **beta** is shown to players who join the beta.
