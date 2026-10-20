@@ -67,7 +67,7 @@ This page covers the developer server at `https://mcp.blazium.games/developer`. 
 
 ### Releases and trust
 
-Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or your own lowercase name. Each channel points at one build. A clean upload moves its channel forward on its own; `promote_build` and `rollback_channel` move it by hand. Players see the build each channel points at, plus anything uploaded after the last move. `dev` is only visible to the game's owner and admins, and `beta` only to players who joined the beta.
+Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or your own lowercase name. Each channel points at one build. A clean upload moves beta, dev, and custom channels forward on its own. Stable waits until you call `promote_build`. `rollback_channel` moves a channel by hand. Players see the build each channel points at, plus anything uploaded after the last move. `dev` is only visible to the game's owner and admins, and `beta` only to players who joined the beta.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
