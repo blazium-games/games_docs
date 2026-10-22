@@ -30,10 +30,11 @@ Your agent spending limit (ask every time, unlimited, or a budget up to $1,000) 
 ## Planned: approval prompts in your AI client
 
 :::note Planned, not live
-Direction per Bioblaze via Manager, 2026-10-22, needs Bioblaze confirmation. None of this works yet.
+These approval prompts are planned and not live yet. Details may change.
 :::
 
 - **Every website action available to your agent.** We plan to let your agent do every step on blazium.games that you can do yourself, through the MCP servers.
 - **Prompts in your AI client.** When a step needs you, your AI client will ask you directly, using MCP [input-required tool results](https://modelcontextprotocol.io/specification/2026-07-28/server/tools#input-required-tool-results). You'll answer **Yes**, **No**, **Always yes**, or **Always no**.
 - **Standing choices.** Always yes and Always no are remembered for that agent and action. You'll be able to see, change, and remove them in your settings.
-- **Spend limit and email approval stay.** Past your spending limit, you'll still approve each purchase, even with Always yes. Some high-risk actions, such as cash-out, will always ask every time. Clients that don't support prompts will keep using email approval.
+- **Spend limit and email approval stay.** Past your spending limit, you'll still approve each purchase, even with Always yes. Clients that don't support prompts will keep using email approval.
+- **Always ask (proposed, awaiting confirmation).** Cash-out, payout address changes, key changes (rotating or deleting deploy and MCP keys), adding an admin, and deleting a game would ask every time, with no Always yes.
