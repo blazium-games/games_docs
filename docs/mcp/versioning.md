@@ -29,7 +29,7 @@ Anything scheduled for removal is listed under `deprecations` on the server card
 
 Developer server 1.21:
 
-- `get_bug_ticket`, `request_bug_screenshot`, and `get_bug_log`. `list_bug_tickets` takes `page` and returns `next_page`. The screenshot tool returns a link. The log tool returns one page. The player server lists 51 tools. The developer server lists 157 tools, 145 after 2026-10-28
+- `get_bug_ticket`, `request_bug_screenshot`, and `get_bug_log`. `list_bug_tickets` takes `page` and returns `next_page`. The screenshot tool returns a link. The log tool returns one page. The player server lists 51 tools. The developer server lists 161 tools, 149 after 2026-10-28
 
 Developer and player servers 1.20:
 
