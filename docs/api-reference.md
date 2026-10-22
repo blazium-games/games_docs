@@ -69,7 +69,7 @@ An invalid or expired token returns `401`. It is never treated as anonymous.
 
 ## Rate limits
 
-These limits are per IP address, per minute. Past a limit the answer is `429`.
+Unless a row says otherwise, these limits are per IP address, per minute. Past a limit the answer is `429`.
 
 | Routes | Limit |
 |---|---|
@@ -78,7 +78,8 @@ These limits are per IP address, per minute. Past a limit the answer is `429`.
 | Signed-out downloads (`/downloads/{file_uid}` and `/redirect`) | 60 |
 | OpenAPI document | 120 |
 | Press kit zip | 30 |
-| Crash reports and events (`POST`) | 60 |
+| Events (`POST`) | 60 |
+| Crash reports (`POST /api/v1/public/crashes`) | 60 per game (counted by `X-App-Id`), not per IP |
 
 Shelves, tags, the sitemap, mods and tools, and press kits also have overall limits across all callers.
 
