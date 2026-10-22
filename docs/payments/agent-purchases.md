@@ -79,4 +79,4 @@ Agents always pay from the balance. If it is too low (`4020`), the agent can:
 
 Agents cannot pay by card, change their own limits, approve their own requests except with the code you give them, or request refunds.
 
-Agents with the same wallet access can set up payouts and cash out your earnings to your own payout account without asking first. You're emailed after each cash-out. See [Agent payouts](./wallet-and-cash-out.md#agent-payouts).
+Agents with the same wallet access can set up payouts and cash out your earnings to your own payout account. A cash-out from the developer server waits for your email approval; one with a player key or token does not ask first. You're emailed after each cash-out. See [Agent payouts](./wallet-and-cash-out.md#agent-payouts).
