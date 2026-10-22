@@ -53,7 +53,7 @@ If a transfer fails or is reversed, the cash-out amount and the fee return to yo
 
 ## Agent payouts
 
-An AI agent connected with wallet access can set up payouts and cash out for you, without asking you first:
+An AI agent connected with wallet access can set up payouts and cash out for you. A cash-out from the developer server waits for your email approval; a cash-out with a player key or token does not ask you first:
 
 - Wallet access means a player key or token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-project tokens can't.
 - `start_payout_setup` and `get_payout_dashboard_link` return a Stripe link for you to open. Your identity, tax, and bank details are only ever entered on Stripe's pages, never through the agent.
