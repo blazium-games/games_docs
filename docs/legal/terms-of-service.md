@@ -137,8 +137,8 @@ Your account can hold money in three parts:
 - **Donations are not refundable**, except where the law requires a refund or we reverse a donation tied to fraud. A chargeback on a donation is handled as described below.
 - Content you got from a game key or gift link was not bought, so there is nothing to refund.
 - To ask for a refund, email [support@blazium.games](mailto:support@blazium.games) from your account email. We may also refund outside this window at our discretion, for example for a broken build.
-- A refund credits your Blazium account with the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
-- A refund of a purchase paid from your balance is credited back to credit, which cannot be cashed out. A refund of a card or USDC purchase is credited to available earnings.
+- A refund is credited to your account balance: the price plus tax, minus the platform fee. Refunds are never sent back to a card. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
+- Every refund is credited to your account balance. A refund of a purchase paid from your balance returns as credit, which cannot be cashed out. A refund of a card or USDC purchase is credited to available earnings in your account balance.
 - When a purchase is refunded, the license is revoked and the Creator's earnings from that sale are taken back. The platform fee is not returned.
 - If you dispute a card payment with your bank (a chargeback), the license is revoked while the dispute is open and the Creator's earnings from that sale are held. We may suspend accounts that file chargebacks in bad faith.
 - Nothing in these Terms limits refund rights you have under the law where you live.

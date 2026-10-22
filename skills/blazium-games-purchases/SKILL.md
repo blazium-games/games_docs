@@ -97,7 +97,7 @@ Top-ups add a processing fee (shown by `get_payment_options`). Credit can be spe
 
 ## Rules to tell the human when relevant
 
-- Refunds are only through support@blazium.games: purchases within 7 days and before 2 hours of play. Donations are not refundable.
+- Refunds are only through support@blazium.games: purchases within 7 days and before 2 hours of play. A refund is credited to your account balance, never to a card. Donations are not refundable.
 - With `player:buy` you can set up payouts (`start_payout_setup`, `get_payout_dashboard_link`; the human opens the Stripe link) and cash out available earnings (`cash_out`, $25 minimum) without approval. Money only goes to the account's own payout account, the owner is emailed after each cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific.
 
 ## Docs

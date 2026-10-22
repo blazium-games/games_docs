@@ -20,10 +20,10 @@ We may refund outside the window at our discretion, for example for a broken bui
 
 ## What you get back
 
-A refund credits your Blazium account with the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. To get money out, request a payout.
+A refund is always credited to your account balance, never to a card: the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. To get money out, request a payout.
 
-- **Paid by card or USDC:** the credit lands in available earnings.
-- **Paid from balance:** the credit lands in credit, which cannot be cashed out.
+- **Paid by card or USDC:** credited to your account balance as available earnings.
+- **Paid from balance:** credited to your account balance as credit, which cannot be cashed out.
 
 The license is revoked when the refund goes through, and the game can no longer be downloaded.
 
