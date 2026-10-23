@@ -40,7 +40,7 @@ Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Stripe verifica
 
 ## USDC
 
-On the wallet page you can choose USD or USDC. USD stays on Stripe Connect and is limited to US accounts. USDC does not need Stripe Connect. It uses the same email check, the same $25 minimum, and the same 8% + $0.25 cash-out fee. You also pay the network (gas) fee for the transfer: the wallet page shows the estimated network fee, and it is taken from the amount sent. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
+On the wallet page you can choose USD or USDC. USD stays on Stripe Connect and is limited to US accounts. USDC does not need Stripe Connect. It uses the same email check, the same $25 minimum, and the same 8% + $0.25 cash-out fee. You also pay a network estimate of $0.02, twice a typical Base or Solana transfer. The wallet page shows that estimate, and it is taken from the amount sent. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
 
 USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A new address is checked before anything is sent. Changing the address starts that check over. The address cannot change while a cash-out is pending or while the check is still open. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Each cash-out can send at most 10,000 USDC.
 
@@ -49,7 +49,7 @@ USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A ne
 | $25.00 | $2.00 | $0.25 | $22.75 |
 | $100.00 | $8.00 | $0.25 | $91.75 |
 
-If a transfer fails or is reversed, the cash-out amount returns to your available balance.
+If a transfer fails or is reversed, the cash-out amount and the fee return to your available balance.
 
 ## Agent payouts
 
