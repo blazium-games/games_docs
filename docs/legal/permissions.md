@@ -163,7 +163,7 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 
 ## Agent payouts
 
-AI tools with wallet access can set up payouts and cash out for you without asking first.
+AI tools with wallet access can set up payouts and cash out for you. A cash-out from the developer server waits for your email approval; one with a player key or token does not ask first.
 
 - Wallet access means a player token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-game (project) tokens cannot.
 - An agent can start payout setup and open your Stripe payout dashboard. Both return a Stripe link for you to open: identity, tax, and bank details are entered by you on Stripe's own pages and never pass through the agent or us.
