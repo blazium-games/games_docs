@@ -12,7 +12,7 @@ Blazium Games is operated by Divine Games, Inc. The canonical versions of these 
 | --- | --- |
 | [Privacy Policy](https://blazium.games/privacy-policy) | What is collected (including payment data and what chat keeps), the 1-year analytics retention, cookies, and account deletion. |
 | [Terms of Service](./terms-of-service.md) | The terms for using Blazium Games, including payments, fees, taxes, the account balance, cash-outs and payout timing, refunds (donations are not refundable), agent purchases and payouts, and copyright (DMCA) notices, which are filed only through a paid form, forwarded to the uploader, and reviewed by our staff. |
-| [Permissions & Scopes](./permissions.md) | GitHub, X and Discord sign-in and linking scopes, Steam linking, MCP scopes, agent spending limits, agent payouts, keys (including Steam keys), and cookies, plus how scopes behave for developers. |
+| [Permissions & Scopes](./permissions.md) | GitHub, X and Discord sign-in and linking scopes, Steam linking, MCP scopes, agent spending limits, agent payouts, keys (including Steam auth keys and Steamworks Web API keys), and cookies, plus how scopes behave for developers. |
 | [GitHub API disclosure](./github-api-disclosure.md) | What is read from GitHub and the commitments made about it. |
 | [X API disclosure](./x-api-disclosure.md) | What is read from X and the commitments made about it. |
 | [Discord API disclosure](./discord-api-disclosure.md) | What is read from Discord and the commitments made about it. |
