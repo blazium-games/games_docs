@@ -8,7 +8,7 @@ description: Achievements, integer stats, funnel events, rich presence, and who 
 
 # Progress, funnels, and presence
 
-Each achievement, stat, and funnel event names the writers that may change it. A call is refused when the caller's role is not in that list. An empty writer list refuses every write. A new definition defaults to `client`.
+Each achievement, stat, and funnel event names the writers that may change it. A call is refused when the caller's role is not in that list. An empty writer list refuses every write. A new definition defaults to `client`. Definitions stay on every plan. How far back the funnel series can be read depends on the game's [plan](./plans.md).
 
 | Writer | Who it is |
 |---|---|

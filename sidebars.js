@@ -57,6 +57,7 @@ const sidebars = {
         'storefront/builds-and-reports',
         'deploy',
         'download-analytics',
+        'plans',
         'anonymous-downloads',
         'editor-asset-library',
         'cursor-plugin',

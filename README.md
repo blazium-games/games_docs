@@ -22,6 +22,7 @@ The first time the agent uses a Blazium Games tool, Cursor opens a browser for t
 - CLI: `npm install -g @blazium-games/cli` (`chauffeur`), guide at [docs.blazium.games/docs/cli](https://docs.blazium.games/docs/cli)
 - Launcher: BlaziumLauncher at `{autopf}\Blazium\Games` on Windows. Shared tools are in `{autopf}\Blazium`. Setup from [Releases](https://github.com/blazium-games/games_launcher/releases), guide at [desktop app](https://docs.blazium.games/docs/storefront/desktop-app)
 - Support: [blazium-games/support](https://github.com/blazium-games/support/issues). Status: [status.blazium.games](https://status.blazium.games)
+- Plans: each game is [Free, Premium, or Business](https://docs.blazium.games/docs/plans). Free reads 90 days of analytics, crashes, funnels, and bug reports. Premium is $29/month and 360 days. Business is $99/month and 5 years.
 
 ## This repo
 
