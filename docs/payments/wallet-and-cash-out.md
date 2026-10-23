@@ -34,22 +34,22 @@ An AI agent can do the same for you. See [Agent payouts](#agent-payouts).
 
 ## Cash out
 
-Cash out any amount from $25 of available earnings. The fee is 8% of the amount plus Stripe's payout fee (0.25% + $0.25). The rest is transferred to your Stripe account and then paid out to your bank.
+Cash out any amount from $25 of available earnings. The fee is a flat 8% of the amount plus $0.25. The rest is transferred to your Stripe account and then paid out to your bank.
 
 Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Stripe verification, tax-form holds, or a Stripe review can add time after a payout is sent.
 
 ## USDC
 
-On the wallet page you can choose USD or USDC. USD stays on Stripe Connect and is limited to US accounts. USDC does not need Stripe Connect. It uses the same email check, the same $25 minimum, and the same cash-out and payout fees. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused. Blazium pays the network fee.
+On the wallet page you can choose USD or USDC. USD stays on Stripe Connect and is limited to US accounts. USDC does not need Stripe Connect. It uses the same email check, the same $25 minimum, and the same 8% + $0.25 cash-out fee. You also pay a network estimate of $0.02, twice a typical Base or Solana transfer. The wallet page shows that estimate, and it is taken from the amount sent. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
 
 USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A new address is checked before anything is sent. Changing the address starts that check over. The address cannot change while a cash-out is pending or while the check is still open. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Each cash-out can send at most 10,000 USDC.
 
-| You cash out | 8% fee | Payout fee | Transferred |
+| You cash out | 8% fee | Fixed fee | Transferred (USD) |
 | --- | --- | --- | --- |
-| $25.00 | $2.00 | $0.32 | $22.68 |
-| $100.00 | $8.00 | $0.50 | $91.50 |
+| $25.00 | $2.00 | $0.25 | $22.75 |
+| $100.00 | $8.00 | $0.25 | $91.75 |
 
-If a transfer fails or is reversed, the full amount returns to your available balance and the fee is refunded.
+If a transfer fails or is reversed, the cash-out amount and the fee return to your available balance.
 
 ## Agent payouts
 

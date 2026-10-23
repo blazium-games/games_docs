@@ -125,9 +125,9 @@ Your account can hold money in three parts:
 
 - Creators can cash out available earnings of $25 USD or more to a bank account through Stripe Connect. Cash-outs are currently available only to Creators in the United States.
 - To cash out you must complete Stripe's identity verification and tax information checks. You are responsible for supplying accurate information, such as your legal name, address, and tax forms. Stripe may refuse or delay payouts under its own rules, and we may hold cash-outs until verification is complete.
-- Each cash-out costs 8% of the amount, plus Stripe's payout fee (currently 0.25% + $0.25), which we pass through at cost. The remaining amount is transferred to your Stripe account and then paid to your bank.
+- Each cash-out costs 8% of the amount plus $0.25. For USDC cash-outs, you also pay the blockchain network fee, which is deducted from the amount sent. The remaining amount is transferred to your Stripe account and then paid to your bank.
 - **Timing.** Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Verification holds, tax-form holds, and Stripe's own reviews can add time after a payout is sent.
-- If a transfer fails or is reversed, the amount and fee are returned to your available balance.
+- If a transfer fails or is reversed, the cash-out amount is returned to your available balance.
 - We may refuse, delay, or reverse a cash-out that looks fraudulent, fails sanctions screening, or would leave your balance short of pending refunds and fees.
 - **Through an AI agent.** You can set up payouts and cash out on the website, or let an AI agent connected through our MCP server do it for you (section 13). Money is only ever sent to the payout account on your own account, and identity, tax, and bank details are entered by you on Stripe's own pages.
 
@@ -137,8 +137,8 @@ Your account can hold money in three parts:
 - **Donations are not refundable**, except where the law requires a refund or we reverse a donation tied to fraud. A chargeback on a donation is handled as described below.
 - Content you got from a game key or gift link was not bought, so there is nothing to refund.
 - To ask for a refund, email [support@blazium.games](mailto:support@blazium.games) from your account email. We may also refund outside this window at our discretion, for example for a broken build.
-- A refund credits your Blazium account with the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
-- A refund of a purchase paid from your balance is credited back to credit, which cannot be cashed out. A refund of a card or USDC purchase is credited to available earnings.
+- A refund is credited to your account balance: the price plus tax, minus the platform fee. Refunds are never sent back to a card. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
+- Every refund is credited to your account balance. A refund of a purchase paid from your balance returns as credit, which cannot be cashed out. A refund of a card or USDC purchase is credited to your account balance.
 - When a purchase is refunded, the license is revoked and the Creator's earnings from that sale are taken back. The platform fee is not returned.
 - If you dispute a card payment with your bank (a chargeback), the license is revoked while the dispute is open and the Creator's earnings from that sale are held. We may suspend accounts that file chargebacks in bad faith.
 - Nothing in these Terms limits refund rights you have under the law where you live.
