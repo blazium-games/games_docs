@@ -6,7 +6,7 @@ description: Let a game file a bug with a Blazium login or a Steam session, and 
 
 # In-game bug reporter
 
-The reporter is off until you turn it on for that game. A licensed Blazium player can still file a ticket from the store with `report_bug`. The in-game route is only available when the reporter is on.
+The reporter is off until you turn it on for that game. A licensed Blazium player can still file a ticket from the store with `report_bug`. The in-game route is only available when the reporter is on. How far back an owner or admin can read tickets depends on the game's [plan](./plans.md). Intake caps are separate from that window, and a Free game can still receive new tickets.
 
 ## Turn it on
 

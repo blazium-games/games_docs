@@ -31,7 +31,7 @@ Verify at [blazium.games/settings/verify](https://blazium.games/settings/verify)
 | Sales tax | Buyer | Calculated by Stripe Tax where Blazium Games is registered |
 | Adding balance by card | Buyer | The card processing fee; no tax |
 | Adding balance with USDC (x402) | Buyer | A 1.5% network fee |
-| Cashing out earnings | Developer | 8% + $0.25 (USDC cash-outs also pay the network fee). Payouts are processed on weekdays from 8:00am to 5:00pm Pacific |
+| Cashing out earnings | Developer | 8% + $0.25 on Free, 7% + $0.25 on Premium, and 6% + $0.25 on Business. The wallet uses the best plan the account owns. USDC cash-outs also pay the network fee. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific |
 
 A $10 game sold by card: the buyer pays $10, any tax, and the card fee. Blazium Games keeps $1.05 ($0.25 + $0.80), and the developer's pending earnings grow by $8.95.
 
