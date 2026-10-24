@@ -84,3 +84,50 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `ui://blazium-games/account.html` | Verification, timezone, and links to finish sign-in on the website |
 | `ui://blazium-games/feedback.html` | Reviews, bug reports, taste, and tag suggestions. Send only what the human wrote |
 | `ui://blazium-games/friends.html` | Friends and requests. Send and answer only from a click |
+
+## Live server names
+
+- accept_invite
+- ack_patch_notices
+- buy_post
+- cancel_cash_out
+- cancel_membership
+- check_update
+- decline_invite
+- delete_article_comment
+- export_account
+- file_counter_notice
+- file_dmca_claim
+- get_asset_library_item
+- get_game_display_name
+- get_my_inventory
+- get_patch_notices
+- list_article_comments
+- list_asset_library
+- list_changelog
+- list_connections
+- list_market
+- list_my_bug_reports
+- list_spare_copies
+- list_standing_choices
+- open_account_finish
+- open_password_settings
+- pledge
+- redeem_spare_copy
+- report_cheater
+- report_game
+- report_player
+- request_refund
+- revoke_standing_choice
+- send_spare_copy
+- set_game_display_name
+- set_payout_currency
+- set_profile_visibility
+- set_standing_choice
+- sign_out
+- sign_out_everywhere
+- start_connection
+- start_email_change
+- unfriend
+- unlink_connection
+- write_article_comment

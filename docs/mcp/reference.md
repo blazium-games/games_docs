@@ -247,7 +247,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 149 tools instead of 161. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+The tools marked **Deprecated** below and the `wallet` and `library` resources are removed from the developer server at the end of 2026-10-28 (UTC), including from servers that are already running. The developer server then lists 207 tools instead of 219. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -450,3 +450,57 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `5031` | Email codes aren't configured on the server |
 | `5032` | Payments, or a sign-in provider, aren't configured on the server |
 | `5033` | x402 top-ups aren't configured on the server |
+
+## Live server names
+
+- accept_invite
+- ack_patch_notices
+- buy_post
+- cancel_cash_out
+- cancel_membership
+- check_update
+- decline_invite
+- delete_article_comment
+- delete_web_player_poster
+- export_account
+- file_counter_notice
+- file_dmca_claim
+- get_asset_library_item
+- get_game_display_name
+- get_my_inventory
+- get_patch_notices
+- get_sign_in_providers
+- list_article_comments
+- list_asset_library
+- list_changelog
+- list_connections
+- list_market
+- list_my_bug_reports
+- list_spare_copies
+- list_standing_choices
+- open_account_finish
+- open_password_settings
+- open_web_player_poster
+- redeem_spare_copy
+- report_cheater
+- report_game
+- report_player
+- request_refund
+- revoke_gift_link
+- revoke_key_code
+- revoke_key_pool
+- revoke_standing_choice
+- send_spare_copy
+- set_game_display_name
+- set_payout_currency
+- set_presence_sharing
+- set_profile_visibility
+- set_sign_in_providers
+- set_standing_choice
+- sign_out
+- sign_out_everywhere
+- start_connection
+- start_email_change
+- unfriend
+- unlink_connection
+- write_article_comment

@@ -254,3 +254,58 @@ These tools need `mcp:anticheat`. `mcp:read`, `mcp:write`, and **Full access** d
 | `add_anticheat_note` | `uid`, note | `mcp:anticheat` | Add a note |
 | `enqueue_anticheat_action` | `uid`, action, player id, `confirm` | `mcp:anticheat` | `confirm` must be true. Warn, mute, kick, ban, or a screenshot |
 | `list_anticheat_audit` | `uid` | `mcp:anticheat` | Who changed settings, keys, or actions |
+
+## Live server names
+
+- accept_invite
+- ack_patch_notices
+- buy_post
+- cancel_cash_out
+- cancel_membership
+- check_update
+- decline_invite
+- delete_article_comment
+- delete_web_player_poster
+- export_account
+- file_counter_notice
+- file_dmca_claim
+- get_asset_library_item
+- get_game_display_name
+- get_my_inventory
+- get_patch_notices
+- get_sign_in_providers
+- list_article_comments
+- list_asset_library
+- list_changelog
+- list_connections
+- list_market
+- list_my_bug_reports
+- list_spare_copies
+- list_standing_choices
+- open_account_finish
+- open_password_settings
+- open_web_player_poster
+- pledge
+- redeem_spare_copy
+- report_cheater
+- report_game
+- report_player
+- request_refund
+- revoke_gift_link
+- revoke_key_code
+- revoke_key_pool
+- revoke_standing_choice
+- send_spare_copy
+- set_game_display_name
+- set_payout_currency
+- set_presence_sharing
+- set_profile_visibility
+- set_sign_in_providers
+- set_standing_choice
+- sign_out
+- sign_out_everywhere
+- start_connection
+- start_email_change
+- unfriend
+- unlink_connection
+- write_article_comment

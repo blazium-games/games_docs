@@ -190,3 +190,50 @@ A host that supports MCP Apps shows an interactive view beside the tool result. 
 ## Moving from the developer server
 
 Until 2026-10-28 the developer server still lists `get_wallet`, `list_wallet_transactions`, `get_payment_options`, `create_top_up_link`, `create_x402_top_up`, `pay_with_x402`, `quote_purchase`, `purchase_game`, `donate_to_game`, `get_agent_policy`, `list_library`, and `get_download_link`, marked deprecated. At the end of that day they disappear from `/mcp`, even on a server that is already running, and are only on `/player`; purchases or top-ups made with a developer token then return `4034`. `list_library` is named `get_library` here. See [Versioning](./versioning.md).
+
+## Live server names
+
+- accept_invite
+- ack_patch_notices
+- buy_post
+- cancel_cash_out
+- cancel_membership
+- check_update
+- decline_invite
+- delete_article_comment
+- export_account
+- file_counter_notice
+- file_dmca_claim
+- get_asset_library_item
+- get_game_display_name
+- get_my_inventory
+- get_patch_notices
+- list_article_comments
+- list_asset_library
+- list_changelog
+- list_connections
+- list_market
+- list_my_bug_reports
+- list_spare_copies
+- list_standing_choices
+- open_account_finish
+- open_password_settings
+- pledge
+- redeem_spare_copy
+- report_cheater
+- report_game
+- report_player
+- request_refund
+- revoke_standing_choice
+- send_spare_copy
+- set_game_display_name
+- set_payout_currency
+- set_profile_visibility
+- set_standing_choice
+- sign_out
+- sign_out_everywhere
+- start_connection
+- start_email_change
+- unfriend
+- unlink_connection
+- write_article_comment
