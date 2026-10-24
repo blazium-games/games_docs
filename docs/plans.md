@@ -8,7 +8,7 @@ description: How long an owner or admin can read analytics, crashes, funnels, an
 
 Each game or application has its own plan. A new game is Free. The public store page does not show the plan. Only the owner and an accepted admin can see it, on the project's Plan page. Either of them can start, upgrade, downgrade, or cancel it.
 
-The card is charged to the person who subscribes, monthly, through Stripe. The marketplace fee is not added on top. Cash-out stays a flat 8% + $0.25 on every plan.
+The card is charged to the person who subscribes, monthly, through Stripe. The marketplace fee is not added on top. Cash-out is 8% + $0.25 on Free, 7% + $0.25 on Premium, and 6% + $0.25 on Business. The wallet uses the best plan the account owns. The per-sale fee stays $0.25 + 8%.
 
 | Plan | Price | History an owner or admin can read |
 |---|---|---|

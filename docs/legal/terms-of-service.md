@@ -125,7 +125,7 @@ Your account can hold money in three parts:
 
 - Creators can cash out available earnings of $25 USD or more to a bank account through Stripe Connect. Cash-outs are currently available only to Creators in the United States.
 - To cash out you must complete Stripe's identity verification and tax information checks. You are responsible for supplying accurate information, such as your legal name, address, and tax forms. Stripe may refuse or delay payouts under its own rules, and we may hold cash-outs until verification is complete.
-- Each cash-out costs 8% of the amount plus $0.25. For USDC cash-outs, you also pay the blockchain network fee, which is deducted from the amount sent. The remaining amount is transferred to your Stripe account and then paid to your bank.
+- Each cash-out costs 8% + $0.25 when every game you own is Free, 7% + $0.25 when the best plan you own is Premium, or 6% + $0.25 when the best plan you own is Business. For USDC cash-outs, you also pay the blockchain network fee, which is deducted from the amount sent. The remaining amount is transferred to your Stripe account and then paid to your bank.
 - **Timing.** Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Verification holds, tax-form holds, and Stripe's own reviews can add time after a payout is sent.
 - If a transfer fails or is reversed, the cash-out amount is returned to your available balance.
 - We may refuse, delay, or reverse a cash-out that looks fraudulent, fails sanctions screening, or would leave your balance short of pending refunds and fees.
