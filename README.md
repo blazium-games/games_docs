@@ -22,7 +22,7 @@ The first time the agent uses a Blazium Games tool, Cursor opens a browser for t
 - CLI: `npm install -g @blazium-games/cli` (`chauffeur`), guide at [docs.blazium.games/docs/cli](https://docs.blazium.games/docs/cli)
 - Launcher: BlaziumLauncher at `{autopf}\Blazium\Games` on Windows. Shared tools are in `{autopf}\Blazium`. Setup from [Releases](https://github.com/blazium-games/games_launcher/releases), guide at [desktop app](https://docs.blazium.games/docs/storefront/desktop-app)
 - Support: [blazium-games/support](https://github.com/blazium-games/support/issues). Status: [status.blazium.games](https://status.blazium.games)
-- Plans: each game is [Free, Premium, or Business](https://docs.blazium.games/docs/plans). Free reads 90 days of analytics, crashes, funnels, and bug reports. Premium is $29/month or $290/year and 360 days. Business is $99/month or $990/year and 5 years. A year is ten months' price. Cash-out is 8% + $0.25, 7% + $0.25, or 6% + $0.25, from the best plan the account owns.
+- Plans: each game is [Free, Premium, or Business](https://docs.blazium.games/docs/plans). Free reads 45 days of analytics, stats, crash reports, and bug reports. Premium is $29/month or $278.40/year and 360 days, and adds lobby settings and achievement and stats settings. Business is $99/month or $950.40/year and 5 years, includes Premium, and adds anticheat settings. A year is 20% off twelve times the monthly price. Cash-out is 8% + $0.25, 7% + $0.25, or 6% + $0.25, from the best plan the account owns.
 
 ## This repo
 

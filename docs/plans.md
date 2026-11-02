@@ -12,16 +12,16 @@ The card is charged to the person who subscribes, monthly or annually, through S
 
 | Plan | Price | History an owner or admin can read |
 |---|---|---|
-| Free | $0 | 90 days |
-| Premium | $29/month or $290/year | 360 days |
-| Business | $99/month or $990/year | 5 years |
+| Free | $0 | 45 days |
+| Premium | $29/month or $278.40/year | 360 days |
+| Business | $99/month or $950.40/year | 5 years |
 
-Business includes everything Premium includes, and Premium includes everything Free includes. Premium and Business can license anticheat for that game. This page does not sell anticheat and does not set a license price.
+A year is 20% off twelve times the monthly price, so Premium is 27840 cents and Business is 95040 cents. Business includes everything Premium includes, and Premium includes everything Free includes. Premium adds lobby settings and achievement and stats settings. Business adds the anticheat settings for that game. Free and Premium do not include anticheat settings. This page does not sell anticheat and does not set a license price.
 
 The window covers analytics events, including funnel series and owner stats, crash report list and detail, and bug ticket list and detail. Funnel, achievement, and stat definitions stay. The bug intake caps stay. A Free game can still receive new crashes and bug reports. Developer tools that call these private routes see the same cutoff.
 
 Rows are kept until they are 5 years old, so a later upgrade can read them again. A daily job then deletes analytics events, crash reports, and bug tickets older than 5 years.
 
-A year costs ten months, so two months are free. An upgrade, including monthly to annual, charges the new price immediately and does not credit unused time. A downgrade, annual to monthly, or a cancel to Free takes effect at the end of the period already paid. Until then the higher plan stays in force.
+A year is 20% off twelve times the monthly price. An upgrade, including monthly to annual, charges the new price immediately and does not credit unused time. A downgrade, annual to monthly, or a cancel to Free takes effect at the end of the period already paid. Until then the higher plan stays in force.
 
 A failed renewal is retried every 48 hours. The third failure emails the payer and the owner. Fifteen days after the original due time, the game becomes Free and the subscription is canceled. A successful retry before that clears the failure and keeps the paid plan.
