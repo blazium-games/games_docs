@@ -23,8 +23,6 @@ Write clients that ignore fields they don't know.
 - Making an optional input required
 - Changing what an existing field or error code means
 
-Anything scheduled for removal is listed under `deprecations` on the server card with its replacement and the earliest removal date, and the tool description starts with "Deprecated here". It keeps working for at least 30 days after it is first listed.
-
 ## Recent additions
 
 Developer server 1.21:
@@ -54,8 +52,8 @@ Developer and player servers 1.16:
 
 - Interactive views (MCP Apps). Tools a person should see carry `_meta.ui.resourceUri` (and the older `_meta["ui/resourceUri"]`) pointing at a `ui://blazium-games/…` resource served as `text/html;profile=mcp-app`, and both servers advertise the `io.modelcontextprotocol/ui` extension. See [Player tools](./player.md#interactive-views) and the [reference](./reference.md)
 - A purchase, donation, key redeem, friend request, or price change runs only when the human clicks in the view. Key-issuing tools, x402 signing, payout setup, and cash-out stay text-only
-- The `checkout`, `wallet`, and `library` views leave the developer server with the deprecated buying tools after 2026-10-28
-- The servers no longer advertise the deprecated `logging` capability. No tools were added or removed
+- The `checkout`, `wallet`, and `library` views are on the player server. Buying is only there
+- The servers no longer advertise the `logging` capability. No tools were added or removed
 
 Developer and player servers 1.15:
 
@@ -94,9 +92,3 @@ Developer server 1.11:
 - `set_media` returns the `chauffeur media` commands to upload local files (it no longer accepts `url`)
 
 Player server: `get_shelf`, `sku` on `quote_purchase` and `purchase_game`, and `authorship` on `search_catalog`.
-
-## Current deprecations
-
-| Server | What | Replacement | Removed after |
-|---|---|---|---|
-| Developer (`/developer`) | Wallet, top-up, purchase, donation, agent policy, library, and download tools, plus the `wallet` and `library` resources | The same tools on the [player server](./player.md); `list_library` becomes `get_library` | 2026-10-28 |

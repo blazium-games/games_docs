@@ -1,6 +1,6 @@
 # Blazium Games MCP tools
 
-All tools call the Blazium Games API on behalf of the connected user. `uid` accepts a game uid or its vanity name. Tools marked **account** need an account-level token (a project token gets `4030`); tools marked **write** need `mcp:write` or the narrower write scope for that tool's group. Tools marked **deprecated** are removed from this server on 2026-10-28; use the player server at `https://mcp.blazium.games/player` instead.
+All tools call the Blazium Games API on behalf of the connected user. `uid` accepts a game uid or its vanity name. Tools marked **account** need an account-level token (a project token gets `4030`); tools marked **write** need `mcp:write` or the narrower write scope for that tool's group. Buying, wallet, and library are only on the player server at `https://mcp.blazium.games/player`. A developer token that purchases or tops up gets `4034`.
 
 | Tool | Inputs | Access | What it does |
 |------|--------|--------|--------------|
@@ -143,20 +143,8 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `verify_email` | `code` | account, write | Verify the email with the code the human read from their inbox |
 | `set_timezone` | `timezone` | account, write | Replace the saved timezone with the human's IANA name, when it is empty or the human asks. Do not send the timezone of the machine running the agent. Unknown names: `4085` |
 | `get_security_status` | none | account, read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Changes happen only on the website |
-| `get_wallet` | none | account | Credit, pending, and available balances with fee, refund, and cash-out rules, payout status, and recent cash-outs. **Deprecated** |
-| `list_wallet_transactions` | `limit` (1-200, default 50), `before` | account | Ledger entries, newest first. **Deprecated** |
-| `get_payment_options` | none | account | Card top-up link option and x402 USDC networks with fees. **Deprecated** |
-| `create_top_up_link` | `amount_cents` (500-50000) | account, write | Card Checkout link for the human; agents cannot pay by card. **Deprecated** |
-| `create_x402_top_up` | `amount_cents`, `network` (default Base) | account, write | x402 payment requirements to sign with the agent's own wallet. **Deprecated** |
-| `pay_with_x402` | `top_up_id`, `payment_payload` | account, write | Submit the signed payment; credit is added after on-chain settlement. **Deprecated** |
-| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations), `sku` (edition; empty quotes the cheapest) | account, write | Price, tax, and `total_cents` to show the human. **Deprecated** |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key`, `sku` (same as the quote) | account, write | Buy a license from the balance; beyond the agent's limit returns `approval_required`. **Deprecated** |
-| `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | account, write | Donate to a free game from the balance. **Deprecated** |
-| `list_library` | none | account | Owned games with refund windows and playtime. **Deprecated** |
-| `get_download_link` | `file_id` | account | 5-minute signed URL for a build file; needs a verified email and, for paid games, a license. **Deprecated** |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | write | Set price or donations. Owners and game admins only |
 | `list_game_sales` | `uid` | | Sales, donations, refunds, and seller earnings for a game you manage |
-| `get_agent_policy` | none | account | This agent's limit mode, limit, and spend in the period; only the human changes them, on the website. **Deprecated** |
 | `get_approval` | `approval_id` | account | State of a purchase approval |
 | `confirm_approval` | `approval_id`, `code` | account, write | Approve with the 6-digit code the human read from their email |
 | `start_payout_setup` | none | account, money | Stripe payout setup link for the human |
@@ -177,7 +165,7 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `login` | `email`, `password` | none | No bearer. Follow the `sign_in` prompt |
 | `confirm_account` | `email`, `code` | none | Returns the first `bgames_mcp_` key once |
 
-Payout tools are not deprecated and need `mcp:write` or `mcp:money`.
+Payout tools need `mcp:write` or `mcp:money`.
 
 ## Field values
 

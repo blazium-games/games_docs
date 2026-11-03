@@ -26,7 +26,7 @@ Limits go up to $1,000. They count each purchase's total, including tax; refunde
 
 Agents buy through the [player server](../mcp/player.md) at `https://mcp.blazium.games/player`, with a token that has `player:buy` (tick **Allow purchases** on the consent page or when creating a player key). Without it, purchase calls return `4212`.
 
-The developer server's buying tools are deprecated and stop working on 2026-10-29 (`4034`). Until then they need a token with `mcp:write` for the whole account; project-bound tokens get `4030`.
+A developer token that purchases or tops up gets `4034`. Buying is only on the player server.
 
 ## How an agent buys
 

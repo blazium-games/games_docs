@@ -8,7 +8,7 @@ description: Every tool, prompt, and resource exposed by the Blazium Games devel
 
 This page covers the developer server at `https://mcp.blazium.games/developer`. `https://mcp.blazium.games/mcp` still reaches that server. The player server is on [Player MCP](./player.md).
 
-`uid` accepts a game uid or its vanity name. "Account only" means a project-bound token is refused with `4030`. "Write" means the token needs `mcp:write` or the narrower write scope for that tool's group (see [Scopes](#scopes)). "Deprecated" tools are removed on 2026-10-28 (see [Account and payments](#account-and-payments)).
+`uid` accepts a game uid or its vanity name. "Account only" means a project-bound token is refused with `4030`. "Write" means the token needs `mcp:write` or the narrower write scope for that tool's group (see [Scopes](#scopes)). Buying, wallet, and library are only on the [player server](./player.md). A developer token that purchases or tops up gets `4034`.
 
 ## Tools
 
@@ -248,7 +248,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-The tools marked **Deprecated** below and the `wallet` and `library` resources left the developer server on 2026-10-28 (UTC). The developer server lists 208 tools. From 2026-10-29 the API also refuses purchases and top-ups made with developer tokens (`4034`). Use the [player server](./player.md) instead, where `list_library` is `get_library`. See [Versioning](./versioning.md).
+Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 208 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -261,17 +261,6 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources l
 | `verify_email` | `code` | Verifies the email with the code the human received. Account only, write |
 | `set_timezone` | `timezone` | Replaces the saved timezone with the human's IANA name. Call it when `get_account` timezone is empty or the human asks to change it. Do not send the machine's timezone. Unknown names return `4085`. Account only, write |
 | `get_security_status` | none | Whether an authenticator app protects the account: `state` (`on`, `skipped`, or `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Setting up or turning off an authenticator happens only on the website. Account only, read |
-| `get_wallet` | none | Credit, pending, and available balances plus fee and refund rules. Account only. **Deprecated** |
-| `list_wallet_transactions` | `limit` (1-200), `before` | Ledger entries, newest first. Account only. **Deprecated** |
-| `get_payment_options` | none | Card top-up and x402 USDC networks with fees. Account only. **Deprecated** |
-| `create_top_up_link` | `amount_cents` | Card Checkout link for the human to add balance. Account only, write. **Deprecated** |
-| `create_x402_top_up` | `amount_cents`, `network` | x402 payment requirements for a USDC top-up. Account only, write. **Deprecated** |
-| `pay_with_x402` | `top_up_id`, `payment_payload` | Submits the signed x402 payment. Credit arrives after settlement. Account only, write. **Deprecated** |
-| `quote_purchase` | `uid`, `kind` (`purchase` or `donation`), `amount_cents` (donations), `sku` (edition uid or slug; empty quotes the cheapest) | Price, tax, and total. Show the total to the human first. Account only, write. **Deprecated** |
-| `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key`, `sku` (the same edition passed to `quote_purchase`) | Buys a license from the balance. Beyond this agent's limit it returns `approval_required`; retry with the same key once approved. Account only, write. **Deprecated** |
-| `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | Donates to a free game from the balance. Account only, write. **Deprecated** |
-| `list_library` | none | Owned games with refund windows and playtime. Account only. **Deprecated** |
-| `get_download_link` | `file_id` | 5-minute signed URL for a build file. Needs a verified email and, for paid games, a license. Account only. **Deprecated** |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | Owners and game admins. Write |
 | `list_game_sales` | `uid` | Sales, donations, refunds, and seller earnings |
 | `get_sale_reporter` | `uid` | Reads sale and refund webhooks: enabled, webhook URLs, and that game's signing key. The key is not the review, crash, or bug reporter key. Covered by `mcp:money` |
@@ -290,11 +279,10 @@ The tools marked **Deprecated** below and the `wallet` and `library` resources l
 | `create_post` | `title`, `body`, `status`, `visibility`, `tier_uids` | Developer only. `visibility` is `public` or `tiers` |
 | `update_post` | `uid` plus the create fields | Developer only |
 | `delete_post` | `uid` | Developer only. The public page then 404s |
-| `get_agent_policy` | none | This agent's limit mode (`unset`, `unlimited`, `monthly`, `yearly`, `one_time`), limit, and spend in the period. Changed only on the website. Account only. **Deprecated** |
 | `get_approval` | `approval_id` | State of a purchase approval: `pending`, `approved`, `denied`, `expired`, or `used`. Account only |
 | `confirm_approval` | `approval_id`, `code` | Approves with the 6-digit code the human read from their email. Account only, write |
 
-Payout setup and cash-out need `mcp:write` or `mcp:money` and an account-level token; project tokens can't use them. They are not deprecated and stay on both servers. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
+Payout setup and cash-out need `mcp:write` or `mcp:money` and an account-level token; project tokens can't use them. They stay on both servers. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
 
 ### Sales and review webhooks
 
@@ -347,19 +335,14 @@ Field values:
 | `blazium-games://games/{uid}/crashes` | Crash reports |
 | `blazium-games://games/{uid}/deploy` | Non-secret deploy endpoints and key prefixes |
 | `blazium-games://games/{uid}/builds` | Builds and crash reporter `build_id` values |
-| `blazium-games://wallet` | Stored balance and payment rules. Account only. **Deprecated** |
-| `blazium-games://library` | Owned games and licenses. Account only. **Deprecated** |
 | `ui://blazium-games/account.html` | Account status, with links to finish sign-in on the website |
 | `ui://blazium-games/approval.html` | Approval status, confirm link, and the emailed code |
 | `ui://blazium-games/dev-game.html` | Store pages you can edit |
 | `ui://blazium-games/analytics.html` | Visitor analytics |
 | `ui://blazium-games/sales.html` | Sales, and a price form that saves when you click |
 | `ui://blazium-games/crashes.html` | Crash reports and a private download link |
-| `ui://blazium-games/checkout.html` | Quote, buy, and donate. **Deprecated** with the buying tools after 2026-10-28 |
-| `ui://blazium-games/wallet.html` | Balance and a card top-up link. **Deprecated** after 2026-10-28 |
-| `ui://blazium-games/library.html` | Owned games and download links. **Deprecated** after 2026-10-28 |
 
-A host that supports MCP Apps renders these `ui://` resources (`text/html;profile=mcp-app`) beside the tool result. You confirm a price change in the sales view. Card payment happens on the Checkout link. Other hosts keep the text result. Key-issuing tools, payout setup, and cash-out stay text-only.
+A host that supports MCP Apps renders these `ui://` resources (`text/html;profile=mcp-app`) beside the tool result. You confirm a price change in the sales view. Other hosts keep the text result. Key-issuing tools, payout setup, and cash-out stay text-only. Buying views are on the player server.
 
 Template `{uid}` values must be a uid or vanity name made of letters, digits, `-` and `_`. Anything else, including dots or slashes, returns an error instead of calling the API.
 
@@ -397,7 +380,7 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4074` | The file isn't on a channel you can see (for example a beta build when you haven't joined the beta) |
 | `4075` | The channel has no earlier build to roll back to |
 | `4226` | Invalid channel name or `expires_in_hours` out of range (HTTP 422) |
-| `4034` | Buying and top-ups moved to the player server; developer tokens can't buy from 2026-10-29 |
+| `4034` | Buying and top-ups are only on the player server; a developer token gets this code |
 | `4076` | Reviews and bug reports need a copy of the game (bought, or downloaded if it's free) |
 | `4077` | You can't review your own game |
 | `4227` | Invalid review: `enjoyed` missing, `quality` outside 1 to 5, or text too long (HTTP 422) |
