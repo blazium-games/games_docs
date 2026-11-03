@@ -59,13 +59,13 @@ Mods and plugins can add install details, shown on their store page under **Inst
 |---|---|
 | `genres` | Up to 3 of: action, adventure, arcade, card, casual, fighting, horror, idle, management, platformer, puzzle, racing, rhythm, roguelike, rpg, sandbox, shooter, simulation, sports, stealth, strategy, survival, tower-defense, visual-novel, educational, tool, utility, other |
 | `tags` | 3 to 20 free lowercase slugs up to 32 characters, for example `co-op` or `pixel-art`. Spaces and underscores become dashes |
-| `tone` | Up to 3 of: cozy, dark, funny, relaxing, tense, wholesome, weird, serious, chaotic |
+| `tone` | Optional. Up to 3 of: cozy, dark, funny, relaxing, tense, wholesome, weird, serious, chaotic. This is the vibe of the game, used by browse and search. It is not required to go public |
 | `inputs` | keyboard_mouse, gamepad, touch, vr, motion |
 | `content_warnings` | violence, gore, sexual, nudity, language, drugs, gambling, horror, flashing_lights |
 | `engines` | Up to 5 engine slugs, for example `blazium` or `godot` |
-| `session_bucket` | How long one sitting usually lasts: `15m`, `1h`, `3h`, or `endless` |
+| `session_bucket` | How long one sitting usually lasts: `15m`, `30m`, `1h`, `3h`, or `endless` |
 | `net` | `offline`, `local`, `online`, or `local_online` |
-| `players_min`, `players_max` | 1 to 64 |
+| `players_min`, `players_max` | 1 when multiplayer is off. When multiplayer is on, each is 1 to 64 and the maximum is at least the minimum |
 | `authorship` | `human`, `human_agent`, or `agent_heavy`. See [Made with](#made-with) |
 | `authorship_credit` | Optional credit line, up to 120 characters |
 | `ai_uses` | Parts made with generative AI: art, audio, code, text, voice, runtime. See [Generative AI disclosure](./content-rules.md#generative-ai-disclosure) |
