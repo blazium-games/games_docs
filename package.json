@@ -46,6 +46,8 @@
   },
   "overrides": {
     "serialize-javascript": "7.1.2",
-    "tinypool": "2.2.0"
+    "tinypool": "2.2.0",
+    "follow-redirects": "1.16.2",
+    "joi": "17.13.9"
   }
 }
