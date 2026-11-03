@@ -42,8 +42,8 @@ you agree to these Terms. If you do not agree, do not use the Service.
 - Do not use an AI agent or any other means to evade a ban, create accounts you are not allowed to hold, misstate your age or identity, or hide who controls an account. We may ask for proof that a person controls an account, and close it if none is given.
 - You are responsible for keeping your credentials, keys, and tokens confidential and for all activity under your account.
 - You agree to provide accurate information and notify us of any unauthorized use.
-- You must accept these Terms and the [Privacy Policy](/privacy-policy) when you create an account. We record which version you accepted and when.
-- After you sign in, you finish any account setup you left incomplete, and you either set up an authenticator app or choose to skip it. We record that choice; you can set one up later in [Settings](/settings/authenticator).
+- You must accept these Terms and the [Privacy Policy](https://blazium.games/privacy-policy) when you create an account. We record which version you accepted and when.
+- After you sign in, you finish any account setup you left incomplete, and you either set up an authenticator app or choose to skip it. We record that choice; you can set one up later in [Settings](https://blazium.games/settings/authenticator).
 
 ## 4. Where You Use the Service From
 
@@ -153,8 +153,8 @@ Your account can hold money in three parts:
 
 - You can let AI tools connected through our MCP server act for you. Anything an agent does on your account is done by you.
 - An agent can only buy if you granted it the `player:buy` permission on the player server (developer tokens for your whole account can also buy until October 28, 2026). By default each agent's purchase waits until you approve it by emailed link or code.
-- At [MCP settings](/settings/mcp) you can let an agent spend on its own: without a limit, or up to a monthly, yearly, or one-time limit of up to $1,000 (UTC periods). Anything beyond that still needs your approval. Agents can only pay from your account balance, never by card, and cannot change their own limits.
-- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can start payout setup and open your Stripe payout dashboard. A cash-out always waits until you approve it, whether the agent used a developer key or a player key. Our fee is 8% + $0.25. The money only goes to the payout account on your own account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](/settings/mcp) if something looks wrong.
+- At [MCP settings](https://blazium.games/settings/mcp) you can let an agent spend on its own: without a limit, or up to a monthly, yearly, or one-time limit of up to $1,000 (UTC periods). Anything beyond that still needs your approval. Agents can only pay from your account balance, never by card, and cannot change their own limits.
+- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can start payout setup and open your Stripe payout dashboard. A cash-out always waits until you approve it, whether the agent used a developer key or a player key. Our fee is 8% + $0.25. The money only goes to the payout account on your own account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](https://blazium.games/settings/mcp) if something looks wrong.
 - Purchases an agent makes within the limits you set, or that you approve, are purchases made by you. The refund rules in section 11 apply to them the same way.
 
 ## 14. User-Generated Content (UGC)
@@ -179,7 +179,7 @@ We may remove Content, suspend accounts, or terminate access for violations.
 ## 16. Community Guidelines and Reports
 
 - Be respectful. No harassment, threats, or disruptive behavior.
-- Chat follows the [Chat Rules](/chat-rules). Breaking them can lock your account out of chat, suspend it, or lead to harsher action.
+- Chat follows the [Chat Rules](https://blazium.games/chat-rules). Breaking them can lock your account out of chat, suspend it, or lead to harsher action.
 - You can report Content, Users, and reviews with the report buttons on the Service. Reports are input to our own decisions; filing one does not oblige us to act on it or to explain what we decided.
 - We may moderate and remove offending content or accounts at our discretion.
 
@@ -215,7 +215,7 @@ We may remove Content, suspend accounts, or terminate access for violations.
 
 Version 2026-09-30. These terms apply in addition to the rest of these Terms when you turn on developer mode.
 
-- **Developer mode.** Creating projects, joining a project team as an admin, deploy keys, and developer MCP keys need developer mode, which you turn on in your [account settings](/settings) by accepting these developer terms. Playing, buying, and reviewing do not need it. When these developer terms change, we ask you to accept the new version; until you do, we may limit developer features.
+- **Developer mode.** Creating projects, joining a project team as an admin, deploy keys, and developer MCP keys need developer mode, which you turn on in your [account settings](https://blazium.games/settings) by accepting these developer terms. Playing, buying, and reviewing do not need it. When these developer terms change, we ask you to accept the new version; until you do, we may limit developer features.
 - **Your projects.** You are responsible for every project you own or help run, including its builds, store page, prices, and support. You may only upload builds and media you have the right to distribute.
 - **Honest listings.** Your store page, taxonomy, content warnings, adult rating, "made with" label, and generative-AI disclosure (section 21) must be accurate and kept up to date. Mods, plugins, and tools must name the game they are for, and you must have the right to distribute them for that game.
 - **Turning it off.** You can turn off developer mode after you transfer or delete your projects and leave the project teams you help run. Your earnings and past sales records are kept.
