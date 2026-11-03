@@ -150,8 +150,7 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 - At [blazium.games/settings/mcp](https://blazium.games/settings/mcp) you can let an agent spend on its own: unlimited, or up to a monthly, yearly, or one-time limit (up to $1,000, UTC periods). Anything beyond the limit waits for your approval. Agents cannot change their own limits.
 - An approval covers one purchase, for the amount shown, and expires after 30 minutes.
 - The limit counts each purchase's total, including tax. Refunded purchases stop counting.
-- Buying needs a player token with `player:buy`, or until October 28, 2026 a developer token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy (error 4030).
-- From October 28, 2026 the developer server no longer buys: its buying tools are removed and direct requests get error 4034. Use the player server instead.
+- Buying needs a player token with `player:buy`. Read-only and single-game (project) tokens can never buy (error 4030). A developer token gets error 4034.
 - Agents pay only from your account balance, never by card. They cannot request refunds.
 - Your email must be verified before agents can buy.
 - Each agent purchase is recorded with the agent that made it, and shows in your wallet transactions and library.

@@ -16,7 +16,7 @@ Agents buy only from the stored balance and only after telling the human the exa
 
 ## Prerequisites
 
-- The `blazium-games-player` MCP server (`https://mcp.blazium.games/player`) is connected with `player:buy` (the human ticked **Allow purchases**). See [player](../blazium-games-player/SKILL.md). The developer server still has these tools until 2026-10-28, marked deprecated; prefer the player server
+- The `blazium-games-player` MCP server (`https://mcp.blazium.games/player`) is connected with `player:buy` (the human ticked **Allow purchases**). See [player](../blazium-games-player/SKILL.md). Buying is only on that server; a developer token gets `4034`
 - The account email is verified
 - Optional: the human set a spending mode for this agent at https://blazium.games/settings/mcp (unlimited, monthly, yearly, or one-time limit). Without one, every purchase needs their approval
 
@@ -24,7 +24,7 @@ Agents buy only from the stored balance and only after telling the human the exa
 
 1. Call `get_account`. If `email_verified` is false, call `request_email_code`, ask the human for the code from their inbox, and call `verify_email`.
 2. Call `get_agent_policy`. `limit_mode` is `unset` (every purchase needs approval), `unlimited`, `monthly`, `yearly`, or `one_time`; `limit_cents` minus `spent_in_period_cents` is what you can spend without approval. Only the human changes it, at https://blazium.games/settings/mcp.
-3. Call `get_library` (`list_library` on the developer server) to see whether the game is already owned. If it is, skip to step 5 (Download).
+3. Call `get_library` to see whether the game is already owned. If it is, skip to step 5 (Download).
 
 ## 2. Quote
 

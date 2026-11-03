@@ -189,7 +189,7 @@ A host that supports MCP Apps shows an interactive view beside the tool result. 
 
 ## Moving from the developer server
 
-Until 2026-10-28 the developer server still lists `get_wallet`, `list_wallet_transactions`, `get_payment_options`, `create_top_up_link`, `create_x402_top_up`, `pay_with_x402`, `quote_purchase`, `purchase_game`, `donate_to_game`, `get_agent_policy`, `list_library`, and `get_download_link`, marked deprecated. At the end of that day they disappear from `/mcp`, even on a server that is already running, and are only on `/player`; purchases or top-ups made with a developer token then return `4034`. `list_library` is named `get_library` here. See [Versioning](./versioning.md).
+Buying, wallet, and library are only on this server. `get_library` is the library tool here. A developer token that purchases or tops up gets `4034`.
 
 ## Live server names
 
