@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/terms-of-service
 
 # Terms of Service
 
-**Effective Date: October 18, 2026**
+**Effective Date: November 3, 2026**
 
 These Terms of Service ("Terms") are a contract between you and Divine Games, Inc.,
 a California corporation that runs its business from Arizona ("Divine Games," "we," "us," or "our").
@@ -125,9 +125,9 @@ Your account can hold money in three parts:
 
 - Creators can cash out available earnings of $25 USD or more to a bank account through Stripe Connect. Cash-outs are currently available only to Creators in the United States.
 - To cash out you must complete Stripe's identity verification and tax information checks. You are responsible for supplying accurate information, such as your legal name, address, and tax forms. Stripe may refuse or delay payouts under its own rules, and we may hold cash-outs until verification is complete.
-- Each cash-out costs 8% of the amount plus $0.25. For USDC cash-outs, you also pay the blockchain network fee, which is deducted from the amount sent. The remaining amount is transferred to your Stripe account and then paid to your bank.
+- Each cash-out costs 8% + $0.25 when every game you own is Free, 7% + $0.25 when the best plan you own is Premium, or 6% + $0.25 when the best plan you own is Business. The remaining amount is transferred to your Stripe account and then paid to your bank.
 - **Timing.** Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Verification holds, tax-form holds, and Stripe's own reviews can add time after a payout is sent.
-- If a transfer fails or is reversed, the cash-out amount is returned to your available balance.
+- If a transfer fails or is reversed, the amount and fee are returned to your available balance.
 - We may refuse, delay, or reverse a cash-out that looks fraudulent, fails sanctions screening, or would leave your balance short of pending refunds and fees.
 - **Through an AI agent.** You can set up payouts and cash out on the website, or let an AI agent connected through our MCP server do it for you (section 13). Money is only ever sent to the payout account on your own account, and identity, tax, and bank details are entered by you on Stripe's own pages.
 
@@ -137,8 +137,8 @@ Your account can hold money in three parts:
 - **Donations are not refundable**, except where the law requires a refund or we reverse a donation tied to fraud. A chargeback on a donation is handled as described below.
 - Content you got from a game key or gift link was not bought, so there is nothing to refund.
 - To ask for a refund, email [support@blazium.games](mailto:support@blazium.games) from your account email. We may also refund outside this window at our discretion, for example for a broken build.
-- A refund is credited to your account balance: the price plus tax, minus the platform fee. Refunds are never sent back to a card. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
-- Every refund is credited to your account balance. A refund of a purchase paid from your balance returns as credit, which cannot be cashed out. A refund of a card or USDC purchase is credited to your account balance.
+- A refund credits your Blazium account with the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
+- A refund of a purchase is credited to your account balance, which cannot be cashed out.
 - When a purchase is refunded, the license is revoked and the Creator's earnings from that sale are taken back. The platform fee is not returned.
 - If you dispute a card payment with your bank (a chargeback), the license is revoked while the dispute is open and the Creator's earnings from that sale are held. We may suspend accounts that file chargebacks in bad faith.
 - Nothing in these Terms limits refund rights you have under the law where you live.
@@ -154,7 +154,7 @@ Your account can hold money in three parts:
 - You can let AI tools connected through our MCP server act for you. Anything an agent does on your account is done by you.
 - An agent can only buy if you granted it the `player:buy` permission on the player server (developer tokens for your whole account can also buy until October 28, 2026). By default each agent's purchase waits until you approve it by emailed link or code.
 - At [MCP settings](https://blazium.games/settings/mcp) you can let an agent spend on its own: without a limit, or up to a monthly, yearly, or one-time limit of up to $1,000 (UTC periods). Anything beyond that still needs your approval. Agents can only pay from your account balance, never by card, and cannot change their own limits.
-- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can also start payout setup, open your Stripe payout dashboard, and cash out your available earnings. A cash-out started from the developer server waits until you approve it from the email we send you; a cash-out started with a player key or token does not ask you first. The money only goes to the payout account on your own account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](https://blazium.games/settings/mcp) if something looks wrong.
+- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can start payout setup and open your Stripe payout dashboard. A cash-out always waits until you approve it, whether the agent used a developer key or a player key. Our fee is 8% + $0.25. The money only goes to the payout account on your own account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](https://blazium.games/settings/mcp) if something looks wrong.
 - Purchases an agent makes within the limits you set, or that you approve, are purchases made by you. The refund rules in section 11 apply to them the same way.
 
 ## 14. User-Generated Content (UGC)
@@ -194,6 +194,7 @@ We may remove Content, suspend accounts, or terminate access for violations.
 ### 17.1 Copyright and DMCA Notices
 
 - **Only through the DMCA page.** We accept copyright notices, including notices under the Digital Millennium Copyright Act, only through the paid form at [blazium.games/dmca](https://blazium.games/dmca). Notices sent by email, post, phone, or any other way are not filed and are not acted on. If you email a notice to [dmca@blazium.games](mailto:dmca@blazium.games), you get an automatic reply with a link to the form, filled in with your email address and any links from your message.
+- **Registered agent.** Our designated agent for notices under the Digital Millennium Copyright Act is registered with the United States Copyright Office as DMCA-1085117. The agent is reached only through the form at blazium.games/dmca.
 - **The filing fee.** Filing costs $100, plus $100 for each uploader account the links in the notice belong to. The form shows the total before you pay, and the notice is filed only once the fee is paid. The fee covers reviewing and verifying the claim. The notice work is performed when the fee is paid. **The fee is not refundable**, whether the claim is accepted, rejected, resolved, closed, or withdrawn. A refund or chargeback started in Stripe is noted on the claim. The claim stays open, and the fee is not returned.
 - **What a notice must include.** The links to the Content on the Service, a description of the work you say is infringed, your name, postal address, phone number, and email address, a statement of good faith belief that the use is not authorized, a statement under penalty of perjury that the notice is accurate and that you own or are authorized to act for the owner of the right, and your signature.
 - **We forward notices to the uploader.** After the fee is paid, we forward the notice, including the sender's name, company, and email address, to each uploader named in it. Uploaders can also see it in their account settings and through our developer tools for AI agents. Our staff alone see the sender's postal address and phone number. We keep the sender's IP address and browser information to prevent fraud and abuse. We do not give the sender the uploader's identity or contact details; that needs a United States court order (section 5.4).

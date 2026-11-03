@@ -8,6 +8,8 @@ description: File a paid copyright notice about content on Blazium Games, and wh
 
 If content on Blazium Games infringes your copyright, file a notice at [blazium.games/dmca](https://blazium.games/dmca). It's the only way we accept copyright notices. The rules are in [section 17.1 of the Terms of Service](https://blazium.games/terms-of-service#171-copyright-and-dmca-notices).
 
+Blazium Games' designated DMCA agent is registered with the United States Copyright Office as DMCA-1085117, and notices are still filed only through this form.
+
 ## The fee
 
 Filing costs **$100, plus $100 for each uploader account** your links belong to. Links to two games by the same developer cost $200; links to games by two different developers cost $300. The form shows the total before you pay.
