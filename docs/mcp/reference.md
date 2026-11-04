@@ -248,7 +248,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 208 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
+Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 213 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -323,6 +323,8 @@ Field values:
 | `improve_game_copy` | `description` | Rewrite an existing description, keeping the facts |
 | `analytics_summary` | `uid` | Summarize recent visitors |
 | `bootstrap_game` | `pitch`, `uid` (optional) | Create or update the store page and rotate deploy keys so an agent can ship a build |
+| `setup_oauth_app` | `uid` | Call `list_oauth_apps`, then create one sign-in application after the human supplies the name, redirect URLs, and email choice |
+| `review_oauth_apps` | `uid` | Report each sign-in application. Do not create, rotate, or delete on its own |
 
 ## Resources
 

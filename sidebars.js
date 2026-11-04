@@ -138,6 +138,7 @@ const sidebars = {
         'anticheat',
         'engines',
         'steam-auth',
+        'project-oauth',
         'steam-import',
         'api-reference',
         'discovery',

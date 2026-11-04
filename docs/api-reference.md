@@ -114,6 +114,8 @@ The asset library, signed-out downloads, and the OpenAPI document allow any orig
 | `POST /api/v1/public/crashes` | Send a crash report. |
 | `POST /api/v1/public/events` | Send game events. |
 | `POST /api/v1/tool/upload/build` | Register a build with a deploy key. |
+| `POST /api/v1/oauth/token` | Exchange a project's sign-in code, or refresh that access token. See [Sign in with a project's application](./project-oauth.md). |
+| `GET /api/v1/oauth/userinfo` | The claims a player agreed to share. Accepts only an access token from the row above. |
 | `POST /api/v1/steam/{game_uid}/auth`, `/refresh` | Trade a Steam session ticket for a session token, or refresh one. See [Steam auth verification](./steam-auth.md). |
 | `POST /api/v1/steam/{game_uid}/server/verify`, `/server/revoke` | Check or revoke session tokens with the game's Steam auth key. |
 | `GET /api/v1/steam/{game_uid}/server/ownership/{steam_id}` | Ask whether a Steam account owns the game, with the Steam auth key. |
