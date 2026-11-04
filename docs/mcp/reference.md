@@ -54,7 +54,7 @@ This page covers the developer server at `https://mcp.blazium.games/developer`. 
 | `set_crash_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | Turns crash webhooks on, replaces up to five https URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:crash.write` |
 | `list_mcp_keys` | none | Account key prefixes only. Account only |
 | `get_setup` | none | Account, games, public URLs, latest `build_id`. No secrets. Account only |
-| `get_deploy_info` | `uid` | Upload, crash, and page URLs, build list, and deploy key prefixes. No secrets |
+| `get_deploy_info` | `uid` | Upload, crash, and page URLs, and the build list. get_deploy_info lists the short code only. It does not include the access token or the secret |
 | `list_game_builds` | `uid` | Builds. `build_id` is the build UID for CI and crash reporters (`X-Build-Id`), not a version string |
 | `delete_game_build` | `uid`, `build_id`, optional `idempotency_key` | Deletes one build. The owner approves this. Write |
 | `add_game_admin` | `uid`, `invite`, optional `idempotency_key` | Invites an admin. Only the owner can invite, and the owner approves this. Write |
@@ -63,7 +63,7 @@ This page covers the developer server at `https://mcp.blazium.games/developer`. 
 | `get_account_analytics` | none | Analytics across the signed-in account's games. Account only |
 | `get_game_build` | `uid`, `build_id` | One build, its files, and crash reporter headers |
 | `request_mcp_key` | `idempotency_key` (optional) | New account key. **Revokes all previous account keys.** Needs the human's approval. Account only, write |
-| `request_deploy_key` | `uid`, `idempotency_key` (optional) | New upload keys for CLI and CI. **Revokes that project's previous upload keys.** Needs the human's approval. Write |
+| `request_deploy_key` | `uid`, `idempotency_key` (optional) | Creating a new deploy key replaces the previous one. Uploads that used the old key stop working. Returns both values once, after the project owner approves. The access token can be copied later from the Deploy keys tab. The secret cannot. Write |
 
 ### Releases and trust
 
@@ -333,7 +333,7 @@ Field values:
 | `blazium-games://games/{uid}` | One game page |
 | `blazium-games://games/{uid}/analytics` | Visitor analytics |
 | `blazium-games://games/{uid}/crashes` | Crash reports |
-| `blazium-games://games/{uid}/deploy` | Non-secret deploy endpoints and key prefixes |
+| `blazium-games://games/{uid}/deploy` | Non-secret deploy endpoints and the short code of each deploy key |
 | `blazium-games://games/{uid}/builds` | Builds and crash reporter `build_id` values |
 | `ui://blazium-games/account.html` | Account status, with links to finish sign-in on the website |
 | `ui://blazium-games/approval.html` | Approval status, confirm link, and the emailed code |

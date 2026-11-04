@@ -41,7 +41,7 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `list_game_crashes` | `uid` | | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | | One crash with metadata, analysis, and stack availability |
 | `request_crash_download` | `uid`, `crash_id`, `kind` (`dump`, `log`, or `stack`; default `dump`) | | Private download URL valid for 1 hour |
-| `get_deploy_info` | `uid` | | Upload, crash, and events URLs, recent builds, env var names, deploy key prefixes. No secrets |
+| `get_deploy_info` | `uid` | | Upload, crash, and events URLs, recent builds, and env var names. get_deploy_info lists the short code only. It does not include the access token or the secret |
 | `list_game_builds` | `uid` | | Up to 50 builds. Each `build_id` is the `X-Build-Id` for crash reporters |
 | `delete_game_build` | `uid`, `build_id` | write | Deletes one build after the owner approves |
 | `add_game_admin` | `uid`, `invite` | write | Invites an admin. Owner only, and the owner approves |
@@ -51,7 +51,7 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `get_game_build` | `uid`, `build_id` | | One build with its files and crash reporter headers |
 | `list_mcp_keys` | none | account | MCP API key prefixes. Secrets are never returned |
 | `request_mcp_key` | `idempotency_key` | account, write | Issue a new MCP API key and invalidate every previous one. Waits for the human's approval, then returns the secret once |
-| `request_deploy_key` | `uid`, `idempotency_key` | write | Issue a new upload `access_token` and `secret_key` for a game and invalidate the previous ones. Waits for the human's approval, then returns secrets once |
+| `request_deploy_key` | `uid`, `idempotency_key` | write | Creating a new deploy key replaces the previous one. Uploads that used the old key stop working. Returns both values once, after the project owner approves. The access token can be copied later from the Deploy keys tab. The secret cannot |
 | `list_channels` | `uid` | | Channel pointers (stable, beta, dev, custom), expiry, beta subscribers, and history |
 | `promote_build` | `uid`, `channel`, `build_id`, `expires_in_hours`, `idempotency_key` | write | Point a channel at a clean build. `stable` waits for the human's approval |
 | `rollback_channel` | `uid`, `channel` | write | Move a channel back to its previous build |
