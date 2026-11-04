@@ -39,7 +39,8 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 ## Keys and rotation
 
 - Rotating on [blazium.games/settings/mcp](https://blazium.games/settings/mcp), or calling `request_mcp_key`, issues a new account key and revokes all previous account keys. Project keys are not affected.
-- Secrets are shown once. Only key prefixes are listed afterwards.
-- `request_deploy_key` issues a new `X-Access-Token` and `X-Secret-Key` for CLI and CI, and revokes that project's previous upload keys.
+- MCP keys and player keys are shown once. Only their short codes are listed afterwards.
+- `get_deploy_info` lists the short code only. It does not include the access token or the secret. The short code is the start of the access token and is not enough to upload.
+- `request_deploy_key` replaces the previous key and returns both values once, after the project owner approves. The access token is `BLAZIUM_ACCESS_TOKEN`, sent as `X-Access-Token`. It can be copied later from the Deploy keys tab. The secret is `BLAZIUM_SECRET_KEY`, sent as `X-Secret-Key`. It cannot be shown again. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working.
 
 Before rotating, find every place the old key is used (MCP client configs, CI secrets) so you can update them right away.

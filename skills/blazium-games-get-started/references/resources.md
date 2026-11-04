@@ -24,5 +24,5 @@ A host that supports MCP Apps renders a `ui://` resource beside the tool result.
 | `blazium-games://games/{uid}` | `game` | One game page |
 | `blazium-games://games/{uid}/analytics` | `game-analytics` | Visitor analytics for a game |
 | `blazium-games://games/{uid}/crashes` | `game-crashes` | Crash reports for a game |
-| `blazium-games://games/{uid}/deploy` | `game-deploy` | Non-secret deploy endpoints and key prefixes |
+| `blazium-games://games/{uid}/deploy` | `game-deploy` | Non-secret deploy endpoints and the short code of each deploy key |
 | `blazium-games://games/{uid}/builds` | `game-builds` | Uploaded builds and crash reporter build_ids |

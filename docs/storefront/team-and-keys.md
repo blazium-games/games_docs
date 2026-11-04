@@ -28,13 +28,13 @@ On the **Admins** tab, click **Remove** next to their name and confirm. This als
 
 ## Deploy keys
 
-Deploy keys let your CI or the [chauffeur CLI](../cli/index.md) upload builds for one project.
+A deploy key is two values for one project: an access token and a secret. chauffeur and CI need both.
 
 1. Open the **Deploy keys** tab.
-2. Click **New key**.
-3. Copy the key now. It is shown once, and disappears when you reload the page.
+2. Click **New deploy key** and confirm. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working.
+3. Copy the secret before you leave the page. It is shown once. It cannot be shown again. The access token is `BLAZIUM_ACCESS_TOKEN`, sent as `X-Access-Token`. It stays on the Deploy keys tab. The secret is `BLAZIUM_SECRET_KEY`, sent as `X-Secret-Key`. The short code in the table is the start of the access token and is not enough to upload.
 
-To revoke a key, click **Delete** next to it. Anything using it can no longer upload builds. How to upload is covered in [Deploy](../deploy.md).
+To remove a key, click **Delete** next to it. Uploads that used it stop working. How to upload is covered in [Deploy](../deploy.md).
 
 ## Game keys and gift links
 

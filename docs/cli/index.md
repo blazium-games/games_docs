@@ -56,8 +56,8 @@ On macOS, a binary downloaded with a browser may be quarantined. Remove the flag
 Get a deploy key from your game's edit page (**Deploy keys** tab) and export it, then:
 
 ```bash
-export BLAZIUM_ACCESS_TOKEN=...   # from the Deploy keys tab
-export BLAZIUM_SECRET_KEY=...
+export BLAZIUM_ACCESS_TOKEN=...   # access token; it stays on the Deploy keys tab
+export BLAZIUM_SECRET_KEY=...     # secret; shown once, and it cannot be shown again
 
 chauffeur info                                              # 1. check the key and see what the listing still needs
 chauffeur genbuild --version 1.0.0                          # 2. write build.yml, then edit its title and description

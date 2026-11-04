@@ -12,17 +12,19 @@ Uploads go through the [chauffeur CLI](./cli/index.md) or the upload API with th
 
 ## 1. Get deploy keys
 
-Deploy keys are an `access_token` and `secret_key` pair for one game. Get them from the game's edit page on [blazium.games](https://blazium.games), or ask an agent to call the MCP tool `request_deploy_key`. Issuing them needs [developer mode](./developer-mode.md) (`4105`).
+A deploy key is two values for one project: an access token and a secret. chauffeur and CI need both. The access token is `BLAZIUM_ACCESS_TOKEN`, sent as `X-Access-Token`. It stays on the Deploy keys tab. The secret is `BLAZIUM_SECRET_KEY`, sent as `X-Secret-Key`. It is shown once. Copy it before you leave the page. It cannot be shown again.
+
+Get them from the game's edit page on [blazium.games](https://blazium.games), or ask an agent to call the MCP tool `request_deploy_key`. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working. Issuing them needs [developer mode](./developer-mode.md) (`4105`).
 
 :::warning
 
-Issuing a new deploy key immediately revokes every previous deploy key for that game. Update your CI secrets right away.
+Creating a new deploy key replaces the previous one. Uploads that used the old key stop working. Update your CI values right away.
 
 :::
 
-Store them as CI secrets, for example GitHub Actions secrets `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`. Never commit them.
+Store them as CI values, for example GitHub Actions secrets `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`. Never commit them.
 
-The MCP tool `get_deploy_info` returns every URL below for your game, plus recent builds and key prefixes. It never returns secrets.
+`get_deploy_info` lists the short code only. It does not include the access token or the secret. It does return every URL below for your game, plus recent builds. The short code in the table is the start of the access token and is not enough to upload.
 
 ## 2a. Upload with chauffeur
 

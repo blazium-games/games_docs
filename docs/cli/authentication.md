@@ -6,7 +6,7 @@ description: How chauffeur authenticates with a game's deploy key, where it read
 
 # Authentication
 
-chauffeur uses the game's **deploy key**: an `access_token` and `secret_key` pair that can upload to one game and nothing else. It sends them as the `X-Access-Token` and `X-Secret-Key` headers, over HTTPS only.
+chauffeur uses the game's **deploy key**. A deploy key is two values for one project: an access token and a secret. chauffeur and CI need both. It sends the access token as `X-Access-Token` and the secret as `X-Secret-Key`, over HTTPS only. The access token is `BLAZIUM_ACCESS_TOKEN`. It stays on the Deploy keys tab. The secret is `BLAZIUM_SECRET_KEY`. It is shown once. Copy it before you leave the page. It cannot be shown again.
 
 ## Deploy keys and MCP keys
 
@@ -47,7 +47,7 @@ chauffeur never prints the secret, including in error messages and `--json` outp
 
 ## Rotating the key
 
-Issue a new deploy key on the **Deploy keys** tab or with MCP `request_deploy_key`. The new key replaces every previous deploy key for that game at once, so update your CI secrets right away. Over MCP, rotation waits for the owner's approval by email.
+Issue a new deploy key on the **Deploy keys** tab or with MCP `request_deploy_key`. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working. `request_deploy_key` returns both values once, after the project owner approves. The access token can be copied later from the Deploy keys tab. The secret cannot.
 
 Rotate the key if it may have leaked, when someone with access leaves the project, or on a schedule.
 

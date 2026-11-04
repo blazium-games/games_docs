@@ -176,7 +176,7 @@ AI tools with wallet access can set up payouts and cash out for you. A cash-out 
 
 - **MCP keys** (account keys and project keys) are shown once when you create them and are stored only as a hash. You can rotate them at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) or on a game's MCP tab; rotating invalidates the previous key.
 - **Player keys** (starting `bgames_play_`) work only on the player server. They are shown once, stored only as a hash, and rotated at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) separately from MCP keys.
-- **Deploy keys** let the chauffeur CLI or CI upload builds and debug symbols for one game. Issuing a new deploy key invalidates the previous one.
+- **Deploy keys** are two values for one project: an access token and a secret. chauffeur and CI need both. The access token stays on the Deploy keys tab. The secret is shown once. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working.
 - **Steamworks Web API keys** that developers enter to import a game from Steam are used for that import and discarded. With Steam auth verification on, the key is stored encrypted, never shown again, and never available to AI agents.
 - **Steam auth keys** (128 characters) sign a game's Steam session tokens and let its servers call Blazium Games. They are stored encrypted, can be shown to the game's owner and admins on its Steam tab, and are never available to AI agents. Making a new one revokes every session token.
 
@@ -247,7 +247,7 @@ These are the responses your MCP client, script, or CI job will see.
 
 ### Deploy keys
 
-- A deploy key is an `access_token` and `secret_key` pair for one game. The chauffeur CLI reads them from `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY`.
-- `request_deploy_key` returns the secret once and invalidates every previous deploy key for that game, so update your CI secrets right away.
+- A deploy key is two values for one project: an access token and a secret. chauffeur and CI need both. The access token is `BLAZIUM_ACCESS_TOKEN`, sent as `X-Access-Token`. It stays on the Deploy keys tab. The secret is `BLAZIUM_SECRET_KEY`, sent as `X-Secret-Key`. It is shown once. Copy it before you leave the page. It cannot be shown again.
+- `request_deploy_key` replaces the previous key and returns both values once, after the project owner approves. The access token can be copied later from the Deploy keys tab. The secret cannot. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working.
 - Deploy keys can register builds, upload build files and debug symbols, upload store images, read the game's basic details (`chauffeur info`), and list that game's bug reports and download their screenshot and log (`chauffeur bugs`). They cannot edit the store page text or settings, read analytics or crash dumps, or change a ticket's status.
 - See [Deploy builds](../deploy.md) and [Access and keys](../mcp/access-and-keys.md).
