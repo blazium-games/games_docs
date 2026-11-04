@@ -27,7 +27,7 @@ Write clients that ignore fields they don't know.
 
 Developer server 1.22:
 
-- `list_oauth_apps`, `create_oauth_app`, `update_oauth_app`, `rotate_oauth_app_secret`, and `delete_oauth_app`. Prompts `setup_oauth_app` and `review_oauth_apps`. One sign-in application is included on Free. Another one needs Premium at $29 a month on that project. Business includes that. The player server still lists 98 player tools. The developer server lists 213 developer tools
+- `list_oauth_apps`, `create_oauth_app`, `update_oauth_app`, `rotate_oauth_app_secret`, and `delete_oauth_app`. Prompts `setup_oauth_app` and `review_oauth_apps`. One sign-in application is included on Free. Another one needs Premium at $29 a month on that project. Business includes that. The player server still lists 98 player tools
 - `game_setup_walkthrough` adds an optional `player_sign_in` step. It does not change `ready` or `next_tool`
 
 Developer server 1.21:
