@@ -16,7 +16,7 @@ The card is charged to the person who subscribes, monthly or annually, through S
 | Premium | $29/month or $278.40/year | 360 days |
 | Business | $99/month or $950.40/year | 5 years |
 
-A year is 20% off twelve times the monthly price, so Premium is 27840 cents and Business is 95040 cents. Business includes everything Premium includes, and Premium includes everything Free includes. Premium adds lobby settings and achievement and stats settings. Business adds the anticheat settings for that game. Free and Premium do not include anticheat settings. This page does not sell anticheat and does not set a license price.
+A year is 20% off twelve times the monthly price, so Premium is 27840 cents and Business is 95040 cents. Business includes everything Premium includes, and Premium includes everything Free includes. Premium adds lobby settings, achievement and stats settings, and more than one OAuth application. Business adds the anticheat settings for that game. Free and Premium do not include anticheat settings. This page does not sell anticheat and does not set a license price.
 
 The window covers analytics events, including funnel series and owner stats, crash report list and detail, and bug ticket list and detail. Funnel, achievement, and stat definitions stay. The bug intake caps stay. A Free game can still receive new crashes and bug reports. Developer tools that call these private routes see the same cutoff.
 
