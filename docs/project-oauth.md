@@ -14,7 +14,7 @@ Create one on the project's **Sign-in** tab, or with `list_oauth_apps` and `crea
 
 ## What the player agrees to share
 
-The consent page names the project and the application.
+The person sees the project, the application, and the claims, then Allow or Deny. The browser returns to the application.
 
 - Always: the account's user id, the username when one is set, and the avatar URL when one is set.
 - Email only when the application has email turned on and the request includes the `email` scope. An unverified email is not released. The page says so.
@@ -34,4 +34,4 @@ The player can revoke a link from **Settings > Linked apps**. Revoking deletes t
 
 Codes work once and expire after 10 minutes. Access tokens expire after 1 hour. Refresh tokens rotate and keep a 30-day family. The token endpoint answers with `error` and `error_description`. `userinfo` accepts only an access token from this flow.
 
-The owner on a website session creates, changes, rotates, and deletes immediately. An agent, or an admin who is not the owner, waits for the owner's approval.
+The owner on a website session creates, changes, rotates, and deletes immediately. An agent create waits for the owner. The action is not done and no secret was issued. The person opens `confirm_url`. The agent calls `get_approval`, then retries the same tool with the same `idempotency_key`. An admin who is not the owner waits the same way.

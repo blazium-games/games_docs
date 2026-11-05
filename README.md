@@ -54,7 +54,7 @@ Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 ### Authentication
 
 - **OAuth (default):** choose your whole account or a single project on the consent page, and a preset such as **CI**, **Crash triage**, or **Read-only**. The player server has its own consent with `player:read`, `player:write`, and `player:buy`.
-- **API key:** for headless use, create a key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) and send it as `Authorization: Bearer bgames_mcp_...`. See [Access and keys](https://docs.blazium.games/docs/mcp/access-and-keys).
+- **API key:** for a pasted client config, create a key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). The agent does not set `Authorization`. It calls `elevate_session`. See [Access and keys](https://docs.blazium.games/docs/mcp/access-and-keys).
 
 Never commit keys to a repository.
 

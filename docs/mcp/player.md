@@ -8,7 +8,7 @@ description: Connect an agent to your Blazium Games account as a player to get r
 
 The player server acts for you as a player. It can recommend games and say why, search the catalog, review games you own and report bugs, see your account, wallet, and library, top up your balance, buy games and donate within the spending limit you set, set up payouts and cash out your earnings, fetch download links, and hand installs and launches to the Blazium launcher. It cannot touch game pages, builds, crash reports, analytics, or keys; those are on the [developer server](./index.md).
 
-An agent can `initialize` with no token, then follow `setup_account` or `sign_in`. A new person can join from this server with `create_account` and `confirm_account`. An existing person uses `login`, then `confirm_account` when a code is required. Those calls need no bearer. `accept_legal` is sent only after the person agrees. The account stays a player. Developer mode is turned on only when the account is created on the developer server, or later with `enable_developer_mode` there. Builds, images, and symbol files are uploaded with the chauffeur CLI, not from either MCP server.
+No token is required to connect. Call `initialize`, then `prompts/get` for `setup_account` or `sign_in`. The prompt list, tool list, and resource list are readable with no token. A call that needs an account names that prompt, or `elevate_session` when a key already exists. Do not set Authorization and do not call the server with Python. `accept_legal` is sent only after the person agrees. The account stays a player. Developer mode is turned on only when the account is created on the developer server, or later with `enable_developer_mode` there. Builds, images, and symbol files are uploaded with the chauffeur CLI, not from either MCP server.
 
 | | Developer server | Player server |
 |---|---|---|
@@ -21,12 +21,14 @@ A token belongs to exactly one server. A developer key or token is refused by `/
 
 ## Sign up and sign in
 
-Call `initialize` with no token. `tools/list`, `prompts/list`, and `prompts/get` also need no bearer. Then follow one prompt:
+Call `initialize` with no token. `tools/list`, `prompts/list`, `prompts/get`, `resources/list`, and `resources/templates/list` are readable with no token. Then follow one prompt:
 
 - `setup_account` for a new person. Call `create_account`, then `confirm_account` with the email code.
 - `sign_in` for a person who already has an account. Call `login`, then `confirm_account` when the answer is `otp_required`.
 
-`create_account`, `login`, and `confirm_account` need no bearer. Send `accept_legal` only after the person agrees. The account stays a player. An existing address gets the same answer and is not revealed. `confirm_account` returns this server's first `bgames_play_` key once and does not return the website session. A later call does not rotate a key that already exists. Developer mode is turned on only on the developer server, at account creation or later with `enable_developer_mode`. An authenticator challenge, and choosing or skipping an authenticator, stay on the website.
+`create_account` shows Continue or Generate only when the call has no password. Generate shows a 20-character password. `login` never offers Generate. A password already on either call skips the form. The checkbox "Do not return this password. I will copy it." keeps it out of the agent result. When `create_account` or `set_timezone` has no timezone, the person gets Enter a timezone or Use this machine. Use this machine is the only time the agent may send the machine's IANA zone.
+
+Send `accept_legal` only after the person agrees. The account stays a player. An existing address gets the same answer and is not revealed. The connection becomes logged in only after sign-in succeeds. `confirm_account` returns this server's first `bgames_play_` key once and does not return the website session. A later call does not rotate a key that already exists. A later connection calls `elevate_session`. Do not set Authorization and do not call the server with Python. Developer mode is turned on only on the developer server. An authenticator challenge, and choosing or skipping an authenticator, stay on the website.
 
 Website signup at [blazium.games/signup](https://blazium.games/signup) still works. OAuth consent, below, still works when the client opens the website.
 
@@ -48,7 +50,7 @@ Your client discovers OAuth from `https://mcp.blazium.games/.well-known/oauth-pr
 
 ## Connect with a player key
 
-Create a player key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) under **Player MCP**. Untick **Allow purchases** to create a key without `player:buy`. The key is shown once; send it as `Authorization: Bearer bgames_play_...`. Rotating revokes all your player keys and leaves your developer keys alone.
+Create a player key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) under **Player MCP**. Untick **Allow purchases** to create a key without `player:buy`. The key is shown once. A pasted client config may contain `Authorization: Bearer bgames_play_...`. The agent does not set that header. It calls `elevate_session`. Rotating revokes all your player keys and leaves your developer keys alone.
 
 ## Scopes
 
@@ -73,9 +75,10 @@ With `player:buy` an agent can send you to Balance and ask to cash out. `start_p
 | Tool | Inputs | Scope | Notes |
 |------|--------|-------|-------|
 | `get_account` | none | read | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open (`legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`, `gate`) |
-| `create_account` | `email`, `password`, optional `username`, `accept_legal` | none | Creates an account. No bearer. Send `accept_legal` only after the person agrees. An existing address gets the same answer and is not revealed. Then call `confirm_account` |
-| `login` | `email`, `password` | none | Emails a sign-in code. No bearer. `otp_required` means call `confirm_account` |
-| `confirm_account` | `email`, `code` | none | Exchanges the email code and returns this server's first `bgames_play_` key once. No bearer. A later call does not rotate an existing key |
+| `create_account` | `email`, optional `password`, `username`, `timezone`, `accept_legal` | none | Creates an account. Continue or Generate only when password is omitted. Enter a timezone or Use this machine when timezone is omitted |
+| `login` | `email`, optional `password` | none | The person types the password. Generate is not offered. The connection is elevated only when sign-in succeeds. `otp_required` means call `confirm_account` |
+| `confirm_account` | `email`, `code` | none | Exchanges the email code, elevates this connection, and returns this server's first `bgames_play_` key once. A later call does not rotate an existing key |
+| `elevate_session` | `key` | none | Signs this connection in with a saved `bgames_play_` key. No Authorization header |
 | `request_email_code` | none | write | Emails a verification code to you |
 | `verify_email` | `code` | write | Verifies your email with the code |
 | `set_timezone` | `timezone` | write | Sets your IANA timezone, replacing the saved one. The agent uses your zone, not the machine it is running on |

@@ -258,9 +258,10 @@ Buying, wallet, and library are only on the [player server](./player.md), where 
 | Tool | Inputs | Notes |
 |------|--------|-------|
 | `get_account` | none | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open: `legal_acceptance_required` (with `legal_changes`), `setup_required`, `authenticator` (`on`, `skipped`, or `not_chosen`), and `gate` (empty when none). Send the human to blazium.games/account/finish for an open step. Authenticator setup and skipping it stay on the website. Account only |
-| `create_account` | `email`, `password`, optional `username`, `accept_legal`, `accept_developer_terms` | Creates an account. No bearer. Call it after `initialize` and the `setup_account` prompt. Send `accept_legal` and `accept_developer_terms` only after the human agrees. On this server both turn developer mode on. An existing address gets the same answer and is not revealed |
-| `login` | `email`, `password` | Emails a sign-in code. No bearer. Follow the `sign_in` prompt. `otp_required` means call `confirm_account`. An authenticator challenge finishes on the website |
-| `confirm_account` | `email`, `code` | Exchanges the email code and returns this server's first `bgames_mcp_` key once. No bearer. A later call does not rotate an existing key. Authenticator setup stays on the website |
+| `create_account` | `email`, optional `password`, `username`, `timezone`, `accept_legal`, `accept_developer_terms` | Creates an account. Continue or Generate only when password is omitted. Enter a timezone or Use this machine when timezone is omitted. Send `accept_legal` and `accept_developer_terms` only after the human agrees |
+| `login` | `email`, optional `password` | The person types the password. Generate is not offered. The connection is elevated only when sign-in succeeds. `otp_required` means call `confirm_account` |
+| `confirm_account` | `email`, `code` | Exchanges the email code, elevates this connection, and returns this server's first `bgames_mcp_` key once. A later call does not rotate an existing key |
+| `elevate_session` | `key` | Signs this connection in with a saved `bgames_mcp_` key. No Authorization header |
 | `enable_developer_mode` | `accept_terms` | Turns developer mode on. Send `accept_terms` only after the human agrees. Turning it off stays on the website. Account only, write |
 | `request_email_code` | none | Emails a verification code to the account owner. Account only, write |
 | `verify_email` | `code` | Verifies the email with the code the human received. Account only, write |
@@ -322,13 +323,13 @@ Field values:
 
 | Prompt | Arguments | Purpose |
 |--------|-----------|---------|
-| `setup_account` | none | Create an account, confirm the email code, and save the first MCP key. No bearer |
-| `sign_in` | none | Sign in with email and, when a code is required, confirm it to get the first MCP key. No bearer |
+| `setup_account` | none | Create an account, confirm the email code, and save the first key. A later connection calls `elevate_session`. Do not set Authorization |
+| `sign_in` | none | Sign in with a typed password and, when a code is required, confirm it. The connection is logged in only after sign-in succeeds |
 | `draft_game_page` | `pitch` | Draft a name, tagline, and description from a short pitch |
 | `improve_game_copy` | `description` | Rewrite an existing description, keeping the facts |
 | `analytics_summary` | `uid` | Summarize recent visitors |
 | `bootstrap_game` | `pitch`, `uid` (optional) | Create or update the store page and rotate deploy keys so an agent can ship a build |
-| `setup_oauth_app` | `uid` | Call `list_oauth_apps`, then create one sign-in application after the human supplies the name, redirect URLs, and email choice |
+| `setup_oauth_app` | `uid` | Call `list_oauth_apps`, then create one sign-in application. If the owner must approve, the action is not done and no secret was issued. The person opens `confirm_url`. Call `get_approval`, then retry with the same `idempotency_key` |
 | `review_oauth_apps` | `uid` | Report each sign-in application. Do not create, rotate, or delete on its own |
 
 ## Resources

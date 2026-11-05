@@ -37,7 +37,7 @@ Developer server 1.21:
 
 Developer and player servers 1.20:
 
-- Call `initialize` with no token, then follow `setup_account` or `sign_in`. A new person joins with `create_account` and `confirm_account`. An existing person uses `login`, then `confirm_account` when a code is required. Those calls need no bearer. The developer server turns developer mode on when `accept_developer_terms` is true. The player server leaves the account a player. `confirm_account` returns that server's first key once and does not rotate a key that already exists
+- No token is required to connect. Call `initialize`, then `prompts/get` for `setup_account` or `sign_in`. The prompt list, tool list, and resource list are readable with no token. A call that needs an account names that prompt, or `elevate_session` when a key already exists. Do not set Authorization and do not call the server with Python. The connection becomes logged in only after sign-in succeeds. `confirm_account` returns that server's first key once and does not rotate a key that already exists. A later connection calls `elevate_session`
 - `enable_developer_mode` turns developer mode on for an existing account after the human agrees. Turning it off stays on the website
 - Developer tools: `delete_game_build`, `add_game_admin`, `remove_game_admin`, `delete_game`, `get_account_analytics`, `unlink_steam`, `rotate_steam_key`, `resync_steam`, `set_anonymous_downloads`, `import_steam_game`, and `set_adult_content`. Unlink, rotate, resync, anonymous downloads, Steam import, and adult content run only when the tool sends the human's confirm
 - Player tools: `get_inventory`, `list_listings`, `create_listing`, `cancel_listing`, `remove_friend`, `get_presence`, and `set_presence_sharing`
