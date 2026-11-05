@@ -57,7 +57,7 @@ For environments where a browser sign-in is not possible, override the server in
 }
 ```
 
-Create the key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). Never commit it.
+Create the key at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). Never commit it. That header is for a client config a person pastes. The agent does not set it. The agent calls `elevate_session`. Do not call the server with Python.
 
 ## Read-only use
 
