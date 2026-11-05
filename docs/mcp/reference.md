@@ -243,6 +243,11 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 | `set_similar_games` | `uid`, `games` (up to 10 uids or vanity names) | Replaces the similar titles; an empty list clears them. Write |
 | `set_media` | `uid`, `kind` (`cover`, `thumbnail`, or `gallery`) | Returns the matching [`chauffeur media`](../cli/media.md) commands and the image limits (PNG, JPEG, GIF, or WebP, sniffed from the file). Wide images need width/height between 1.70 and 1.85. Thumbnail 1280x720 recommended, 960x540 to 1920x1080, 5 MB. Cover 1024x576 recommended, 1024x576 to 2048x1152, 8 MB. Screenshot 1920x1080 recommended, 1280x720 to 2048x1152, 10 MB. Avatar 256x256 to 512x512, square (0.95 to 1.05), 2 MB, on the account settings page. MCP never uploads images; use chauffeur or the website. Write |
 | `scan_status` | `uid` | Scan state and history of every build file, plus files removed in the last 30 days because their scan failed |
+| `list_oauth_apps` | `uid` | Sign-in applications, the plan, and whether another one can be created. Never returns a secret. One application is included on Free. Another one needs Premium at $29 a month on that project. Business includes that. `mcp:read` |
+| `create_oauth_app` | `uid`, `name`, `redirects`, `email` | Creates a sign-in application. The secret is shown once. Ask the human for the name, redirect URLs, and email choice. `mcp:write` |
+| `update_oauth_app` | `uid`, `app_id`, optional `name`, `redirects`, `email` | Changes the name, redirect URLs, or email flag. `mcp:write` |
+| `rotate_oauth_app_secret` | `uid`, `app_id` | Replaces the secret. The old one stops working. The new secret is shown once. `mcp:write` |
+| `delete_oauth_app` | `uid`, `app_id` | Deletes the application. Players can no longer sign in with it. `mcp:write` |
 
 ### Account and payments
 

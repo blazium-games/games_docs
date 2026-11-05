@@ -99,6 +99,11 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `set_similar_games` | `uid`, `games` | write | Replace the similar titles (up to 10) |
 | `set_media` | `uid`, `kind` (`cover`, `thumbnail`, `gallery`) | write | Returns the `chauffeur media` commands and image limits (PNG, JPEG, GIF, WebP, sniffed from the file). Wide images need width/height between 1.70 and 1.85. Thumbnail 1280x720 recommended, 960x540 to 1920x1080, 5 MB. Cover 1024x576 recommended, 1024x576 to 2048x1152, 8 MB. Screenshot 1920x1080 recommended, 1280x720 to 2048x1152, 10 MB. Avatar 256x256 to 512x512, square (0.95 to 1.05), 2 MB, on the account settings page. MCP never uploads images |
 | `scan_status` | `uid` | | Virus-scan state and history per build file, and files removed for failing the scan |
+| `list_oauth_apps` | `uid` | mcp:read | Sign-in applications and whether another one can be created. Never returns a secret |
+| `create_oauth_app` | `uid`, `name`, `redirects`, `email` | mcp:write | Creates a sign-in application. The secret is shown once |
+| `update_oauth_app` | `uid`, `app_id` | mcp:write | Changes the name, redirect URLs, or email flag |
+| `rotate_oauth_app_secret` | `uid`, `app_id` | mcp:write | Replaces the secret. The new one is shown once |
+| `delete_oauth_app` | `uid`, `app_id` | mcp:write | Deletes the application |
 
 ## Tools, mods and press
 
