@@ -8,6 +8,8 @@
 | `improve_game_copy` | `description` (required) | Rewrite an existing store description while keeping the facts |
 | `analytics_summary` | `uid` (required) | Summarize the week's visitors using `get_game_analytics` |
 | `bootstrap_game` | `pitch`, `uid` (both optional) | Create or find a store page, read deploy info and builds, and issue rotated deploy keys so an agent can ship from CI |
+| `setup_oauth_app` | `uid` | Register one sign-in application after the human supplies the name, redirect URLs, and email choice |
+| `review_oauth_apps` | `uid` | Report each sign-in application. Do not create, rotate, or delete on its own |
 
 ## `bootstrap_game` steps
 

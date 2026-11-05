@@ -66,7 +66,7 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 
 ## Payouts and cash-out
 
-With `player:buy` an agent can also start payout setup, open your Stripe payout dashboard, and cash out your available earnings, without asking first. Stripe links are for you to open; your identity, tax, and bank details are only entered on Stripe. Money only goes to the payout account on your own account, we email you after each agent cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
+With `player:buy` an agent can send you to Balance and ask to cash out. `start_payout_setup` and `get_payout_dashboard_link` return that page. You open Stripe from Set up payouts with Stripe, and identity, tax, and bank details are entered on Stripe only after that. A cash-out waits for you, including a player key. The fee is the account's rate from `get_wallet` (8%, 7%, or 6%, plus $0.25). Money only goes to the Express account on that same account, we email you after each agent cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
 
 ## Tools
 
@@ -94,9 +94,9 @@ With `player:buy` an agent can also start payout setup, open your Stripe payout 
 | `get_library` | none | read | Games you own, with refund windows and play time |
 | `get_download_link` | `file_id` | read | 5-minute signed URL for a build file |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
-| `start_payout_setup` | none | buy | Starts or continues Stripe payout setup and returns a link for you |
-| `get_payout_dashboard_link` | none | buy | One-time link to your Stripe Express dashboard (`4095` until setup has started) |
-| `cash_out` | `amount_cents` | buy | Cashes out available earnings ($25 minimum) to your own payout account; you're emailed after each one |
+| `start_payout_setup` | none | buy | Returns the Balance page. You open Stripe from Set up payouts with Stripe |
+| `get_payout_dashboard_link` | none | buy | Returns the Balance page, where you open the Express dashboard |
+| `cash_out` | `amount_cents` | buy | Cashes out available earnings ($25 minimum) to your own Express account and waits for your approval; you're emailed after each one |
 | `get_patron_status` | `developer` (optional) | read | Your patron memberships. No card data |
 | `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `ai_uses`, `exclude_types`, `exclude_genres`, `exclude_tone`, `exclude_tags`, `exclude_warnings`, `exclude_ai_uses`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `authorship`, `sort`, `page`, `page_size` | read | Public games, tools, mods, and assets with a score, scan state, platforms, made-with label, content warnings, AI disclosure, launch-health band, and a short reason for each match. Several values in one filter match any of them (comma-separate `asset_type`, `session_bucket`, `net`, `os`, and `authorship`); the `exclude_` filters leave out listings with any of their values. `sort` is `relevance` (default, best match), `newest`, or `updated`. Adult listings appear only if you turned on adult content. See [Listings and search](../listings.md#search) |
 | `list_articles` | `limit` (1-50, default 20), `query` | read | Newest published blog posts. `query` matches the title or description. Returns slug, title, description, date, and URL. Does not post or delete comments |

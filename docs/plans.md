@@ -10,6 +10,8 @@ Each game or application has its own plan. A new game is Free. The public store 
 
 The card is charged to the person who subscribes, monthly or annually, through Stripe. The marketplace fee is not added on top. Cash-out is 8% + $0.25 on Free, 7% + $0.25 on Premium, and 6% + $0.25 on Business. The wallet uses the best plan the account owns. The per-sale fee stays $0.25 + 8%.
 
+Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A Premium or Business subscription is charged to the subscriber and is not transferred to an Express account. A project cannot charge money until its owner has finished Stripe payout setup. A price of 0 stays allowed.
+
 | Plan | Price | History an owner or admin can read |
 |---|---|---|
 | Free | $0 | 45 days |

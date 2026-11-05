@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/terms-of-service
 
 # Terms of Service
 
-**Effective Date: November 3, 2026**
+**Effective Date: November 4, 2026**
 
 These Terms of Service ("Terms") are a contract between you and Divine Games, Inc.,
 a California corporation that runs its business from Arizona ("Divine Games," "we," "us," or "our").
@@ -123,13 +123,14 @@ Your account can hold money in three parts:
 
 ## 10. Cash-Outs
 
-- Creators can cash out available earnings of $25 USD or more to a bank account through Stripe Connect. Cash-outs are currently available only to Creators in the United States.
+- Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Premium or Business subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and cannot be cashed out. USDC cash-out does not use Stripe.
+- Creators can cash out available earnings of $25 USD or more. The transfer goes only to the Express account on that same account. Stripe is available for United States accounts.
 - To cash out you must complete Stripe's identity verification and tax information checks. You are responsible for supplying accurate information, such as your legal name, address, and tax forms. Stripe may refuse or delay payouts under its own rules, and we may hold cash-outs until verification is complete.
-- Each cash-out costs 8% + $0.25 when every game you own is Free, 7% + $0.25 when the best plan you own is Premium, or 6% + $0.25 when the best plan you own is Business. The remaining amount is transferred to your Stripe account and then paid to your bank.
+- Each cash-out costs 8% + $0.25 when every game you own is Free, 7% + $0.25 when the best plan you own is Premium, or 6% + $0.25 when the best plan you own is Business. The remaining amount is transferred to your Express account and then paid to your bank. Identity, tax, and bank details are entered on Stripe's hosted onboarding. The Express dashboard is where you see the payout to your bank. Blazium pays Stripe's processing fees and is responsible for a negative balance. A refund or dispute stays on Blazium's balance. Stripe does not reverse a transfer that was already sent.
 - **Timing.** Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Verification holds, tax-form holds, and Stripe's own reviews can add time after a payout is sent.
 - If a transfer fails or is reversed, the amount and fee are returned to your available balance.
 - We may refuse, delay, or reverse a cash-out that looks fraudulent, fails sanctions screening, or would leave your balance short of pending refunds and fees.
-- **Through an AI agent.** You can set up payouts and cash out on the website, or let an AI agent connected through our MCP server do it for you (section 13). Money is only ever sent to the payout account on your own account, and identity, tax, and bank details are entered by you on Stripe's own pages.
+- **Through an AI agent.** An agent can send you to Balance. You open Stripe from Set up payouts with Stripe on that page (section 13). Money is only ever sent to the Express account on your own account, and identity, tax, and bank details are entered by you on Stripe's own pages.
 
 ## 11. Refunds and Chargebacks
 
@@ -154,7 +155,7 @@ Your account can hold money in three parts:
 - You can let AI tools connected through our MCP server act for you. Anything an agent does on your account is done by you.
 - An agent can only buy if you granted it the `player:buy` permission on the player server (developer tokens for your whole account can also buy until October 28, 2026). By default each agent's purchase waits until you approve it by emailed link or code.
 - At [MCP settings](https://blazium.games/settings/mcp) you can let an agent spend on its own: without a limit, or up to a monthly, yearly, or one-time limit of up to $1,000 (UTC periods). Anything beyond that still needs your approval. Agents can only pay from your account balance, never by card, and cannot change their own limits.
-- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can start payout setup and open your Stripe payout dashboard. A cash-out always waits until you approve it, whether the agent used a developer key or a player key. Our fee is 8% + $0.25. The money only goes to the payout account on your own account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](https://blazium.games/settings/mcp) if something looks wrong.
+- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can send you to Balance. `start_payout_setup` and `get_payout_dashboard_link` return that page. You open Stripe from Set up payouts with Stripe. A cash-out always waits until you approve it, whether the agent used a developer key or a player key. The cash-out fee is 8% + $0.25, 7% + $0.25, or 6% + $0.25, from the best plan that account owns. The transfer goes only to the Express account on that same account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](https://blazium.games/settings/mcp) if something looks wrong.
 - Purchases an agent makes within the limits you set, or that you approve, are purchases made by you. The refund rules in section 11 apply to them the same way.
 
 ## 14. User-Generated Content (UGC)
