@@ -6,7 +6,9 @@ description: How credit, pending, and available balances work, and how developer
 
 # Wallet and cash-out
 
-Your [wallet](https://blazium.games/settings/wallet) shows three amounts:
+Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Premium or Business subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and cannot be cashed out.
+
+Your [Balance](https://blazium.games/settings/wallet) page shows three amounts:
 
 | Balance | Where it comes from | Spend it | Cash it out |
 | --- | --- | --- | --- |
@@ -24,27 +26,32 @@ The wallet page also lists every transaction: sales, purchases, top-ups, refunds
 
 ## Set up payouts
 
-Cash-outs are paid through [Stripe Connect](https://stripe.com/connect) Express. For now, payout accounts can only be set up in the United States.
+A project cannot charge money until its owner has finished payout setup. A price of 0 stays allowed. An existing paid price stays in place and can still be bought. The owner cannot change it to another paid price, turn donations on, add a paid edition, or add a paid patron tier until transfers are active.
 
-1. On the wallet page choose **Set up payouts with Stripe**. Stripe opens in a new tab, where you confirm your identity and add a bank account. Stripe may ask for tax information (KYC).
-2. When you come back, the wallet page shows whether payouts are ready. If Stripe needs more information, choose **Continue payout setup**.
-3. **Open Stripe payout dashboard** opens your Express dashboard in a new tab, where you manage your bank account and see payouts.
+Cash-outs are paid through [Stripe Connect](https://stripe.com/connect) Express. Stripe is available for United States accounts. USDC does not use Stripe.
 
-An AI agent can do the same for you. See [Agent payouts](#agent-payouts).
+1. The owner verifies their email.
+2. On Balance, with USD or USDC selected, choose **Set up payouts with Stripe**. That creates the Express account if needed and opens Stripe-hosted onboarding in a new tab. Identity, tax, and bank details are entered there. Return and refresh land on Balance.
+3. Until payouts are ready, Balance says to finish setup, or that Stripe is still reviewing after it has accepted the details and transfers are not active yet. **Continue payout setup** opens the hosted form again.
+4. When transfers are active, Balance shows **Open Stripe payout dashboard** and **Cash out**. The Express dashboard is where the creator sees the payout to their bank. Blazium pays Stripe's processing fees and is responsible for a negative balance.
+
+An agent can send you to Balance. You open Stripe from that page. See [Agent payouts](#agent-payouts).
 
 ## Cash out
 
-Cash out any amount from $25 of available earnings. The fee is a flat 8% of the amount plus $0.25. The rest is transferred to your Stripe account and then paid out to your bank.
+A creator cashes out available earnings of $25 or more. The cash-out fee is 8% + $0.25, 7% + $0.25, or 6% + $0.25, from the best plan that account owns. The transfer goes only to the Express account on that same account.
 
-Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Stripe verification, tax-form holds, or a Stripe review can add time after a payout is sent.
+Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Stripe verification, tax-form holds, or a Stripe review can add time after a payout is sent. A refund or dispute stays on Blazium's balance. Stripe does not reverse a transfer that was already sent.
 
 ## USDC
 
-On the wallet page you can choose USD or USDC. USD stays on Stripe Connect and is limited to US accounts. USDC does not need Stripe Connect. It uses the same email check, the same $25 minimum, and the same 8% + $0.25 cash-out fee. You also pay a network estimate of $0.02, twice a typical Base or Solana transfer. The wallet page shows that estimate, and it is taken from the amount sent. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
+On Balance you can choose USD or USDC. **Set up payouts with Stripe** stays on the page for both. USD is paid through the Express account and is limited to United States accounts. USDC does not use Stripe. It uses the same email check, the same $25 minimum, and the same plan cash-out fee. You also pay a network estimate of $0.02, twice a typical Base or Solana transfer. Balance shows that estimate, and it is taken from the amount sent. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
 
 USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A new address is checked before anything is sent. Changing the address starts that check over. The address cannot change while a cash-out is pending or while the check is still open. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Each cash-out can send at most 10,000 USDC.
 
-| You cash out | 8% fee | Fixed fee | Transferred (USD) |
+The Free examples below use 8%. Premium is 7% + $0.25, and Business is 6% + $0.25.
+
+| You cash out (Free) | Fee | Fixed fee | Transferred (USD) |
 | --- | --- | --- | --- |
 | $25.00 | $2.00 | $0.25 | $22.75 |
 | $100.00 | $8.00 | $0.25 | $91.75 |
@@ -53,11 +60,11 @@ If a transfer fails or is reversed, the cash-out amount and the fee return to yo
 
 ## Agent payouts
 
-An AI agent connected with wallet access can set up payouts and cash out for you. A cash-out from the developer server waits for your email approval; a cash-out with a player key or token does not ask you first:
+An agent can send you to Balance. Every agent cash-out waits for you, including a player key.
 
 - Wallet access means a player key or token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-project tokens can't.
-- `start_payout_setup` and `get_payout_dashboard_link` return a Stripe link for you to open. Your identity, tax, and bank details are only ever entered on Stripe's pages, never through the agent.
-- `cash_out` sends available earnings to the payout account on your own Blazium Games account. The same $25 minimum and fees apply. Money can't be sent anywhere else.
+- `start_payout_setup` and `get_payout_dashboard_link` return the Balance page. You open Stripe from **Set up payouts with Stripe**. Identity, tax, and bank details are entered on Stripe only after you open that page, never through the agent.
+- `cash_out` sends available earnings to the Express account on that same account. The same $25 minimum and the account's plan fee apply. The fee is the rate from `get_wallet`: 8%, 7%, or 6%, plus $0.25. Money can't be sent anywhere else.
 - We email you after every cash-out an agent makes, with the amount and the agent's name.
 - Your email must be verified first.
 
