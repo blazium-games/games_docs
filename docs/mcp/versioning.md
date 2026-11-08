@@ -25,14 +25,18 @@ Write clients that ignore fields they don't know.
 
 ## Recent additions
 
+Developer and player servers 1.23:
+
+- The live cards list 214 developer tools and 99 player tools.
+
 Developer server 1.22:
 
-- `list_oauth_apps`, `create_oauth_app`, `update_oauth_app`, `rotate_oauth_app_secret`, and `delete_oauth_app`. Prompts `setup_oauth_app` and `review_oauth_apps`. One sign-in application is included on Free. Another one needs Premium at $29 a month on that project. Business includes that. The player server still lists 98 player tools
+- `list_oauth_apps`, `create_oauth_app`, `update_oauth_app`, `rotate_oauth_app_secret`, and `delete_oauth_app`. Prompts `setup_oauth_app` and `review_oauth_apps`. One sign-in application is included on Free. Another one needs Premium at $29 a month on that project. Business includes that. The player tool list was unchanged
 - `game_setup_walkthrough` adds an optional `player_sign_in` step. It does not change `ready` or `next_tool`
 
 Developer server 1.21:
 
-- `get_bug_ticket`, `request_bug_screenshot`, and `get_bug_log`. `list_bug_tickets` takes `page` and returns `next_page`. The screenshot tool returns a link. The log tool returns one page. The player server lists 98 player tools. The developer server then listed 208 tools
+- `get_bug_ticket`, `request_bug_screenshot`, and `get_bug_log`. `list_bug_tickets` takes `page` and returns `next_page`. The screenshot tool returns a link. The log tool returns one page. The player tool list was unchanged. The developer server then listed 208 tools
 - `game_setup_walkthrough` is read-only. It returns the ordered setup steps, the `validate_listing` checks that still fail, the field limits, and `next_tool`. It does not change the game and does not return secrets
 
 Developer and player servers 1.20:
