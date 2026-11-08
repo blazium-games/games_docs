@@ -27,7 +27,7 @@ const parts = files(docs).sort().map(path => {
 const text = [
   "# Blazium Games documentation",
   "",
-  "Concatenated documentation for language models. The short index is https://docs.blazium.games/llms.txt.",
+  "Concatenated documentation for language models. The short indexes are https://docs.blazium.games/llms.txt, https://blazium.games/llms.txt, and https://mcp.blazium.games/llms.txt.",
   "",
   parts.join("\n\n"),
   "",

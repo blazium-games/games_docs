@@ -45,10 +45,10 @@ Also published:
 
 These files are maps. They do not replace `robots.txt` or the sitemaps.
 
-- `https://blazium.games/llms.txt` describes the platform, its APIs, the blog, and its MCP servers. The blog is `https://blazium.games/blog`, the articles API is `https://api.blazium.online/api/v1/public/articles`, and the feed is `https://cdn.blazium.online/articles/rss.xml`.
+- `https://blazium.games/llms.txt` describes the platform, its APIs, the blog, and its MCP servers. The same connect and sign-in steps are at `https://mcp.blazium.games/llms.txt` and [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt). The full guides are `https://blazium.games/llms-full.txt`, `https://mcp.blazium.games/llms-full.txt`, and [https://docs.blazium.games/llms-full.txt](https://docs.blazium.games/llms-full.txt). The blog is `https://blazium.games/blog`, the articles API is `https://api.blazium.online/api/v1/public/articles`, and the feed is `https://cdn.blazium.online/articles/rss.xml`.
 - `https://<you>.blazium.games/llms.txt` lists that developer's indexable listings.
 - `https://<you>.blazium.games/<game>/llms.txt` summarizes one indexable listing.
-- [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt) is a short map of these docs.
+- [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt) is a short map of these docs, starting with the MCP steps.
 
 There is no training opt-out file. Public pages stay allowed for every user-agent. Naming training crawlers, or publishing a Content-Signal or a text-and-data-mining reservation, would be a separate decision.
 
