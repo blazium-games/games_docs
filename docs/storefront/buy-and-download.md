@@ -51,7 +51,7 @@ To get an earlier build, open **Older versions** and pick one from **Choose an o
 
 Some free projects allow downloads without an account. They say "No account needed. Sign in to keep it in your library."
 
-Games marked **Play in browser** have a web build.
+Games marked **Play in browser** have a browser pack. A web demo is marked **Demo**. Web files are hosted and are not download buttons. Download buttons are Windows, Linux, content packs, and a non-web demo labeled **Demo**. A host name appears only when that build is assigned and the page may offer it. Steam, GOG, Epic, and itch stay on **Also on**.
 
 ## Join a beta
 

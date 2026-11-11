@@ -93,9 +93,9 @@ With `player:buy` an agent can send you to Balance and ask to cash out. `start_p
 | `purchase_game` | `uid`, `confirm_total_cents`, `idempotency_key`, `sku` | buy | Buys a license (or an edition upgrade) from your balance, with the same `sku` as the quote. Beyond the limit it returns `approval_required` |
 | `donate_to_game` | `uid`, `amount_cents`, `confirm_total_cents`, `idempotency_key` | buy | Donates to a free game from your balance |
 | `get_approval` | `approval_id` | read | `pending`, `approved`, `denied`, `expired`, or `used` |
-| `confirm_approval` | `approval_id`, `code` | write | Approves with the 6-digit code you read to the agent |
+| `confirm_approval` | `approval_id`, `code` | write | Approves with the 6-digit code you read to the agent. accepted and already_approved mean retry once. already_completed means it finished. Do not request another code. |
 | `get_library` | none | read | Games you own, with refund windows and play time |
-| `get_download_link` | `file_id` | read | 5-minute signed URL for a build file |
+| `get_download_link` | `file_id` | read | 5-minute signed URL for a Windows, Linux, or content-pack file. A web build is hosted and is not downloaded. |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
 | `start_payout_setup` | none | buy | Returns the Balance page. You open Stripe from Set up payouts with Stripe |
 | `get_payout_dashboard_link` | none | buy | Returns the Balance page, where you open the Express dashboard |

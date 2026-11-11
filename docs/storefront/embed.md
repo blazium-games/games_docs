@@ -24,7 +24,7 @@ The code looks like this:
 ## What the widget shows
 
 - The thumbnail, the name, the developer and the tagline.
-- **Free** for free games and **Play in browser** for games with a web build.
+- **Free** for free games and **Play in browser** for a browser pack. A web file is not a download.
 - The download count, when the game has been downloaded at least once.
 - A main button: **Buy** for paid games, otherwise **Play now** (web build), **Download** or **View**.
 - A **Blazium Games** link.
