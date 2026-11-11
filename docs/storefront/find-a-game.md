@@ -35,7 +35,7 @@ If a shelf fails to load, the page says "Some sections could not be loaded. Relo
 
 Each card shows the title, the developer, a short tagline and the price (or **Free**). Depending on the game, it can also show:
 
-- **Play in browser** (the game has a web build) or **Download**.
+- **Play in browser** for a browser pack, **Demo** for a web demo, or **Download** for Windows, Linux, and content packs. Web files are not downloaded.
 - **In development** or **Prototype**.
 - How long a session usually lasts and how many players it supports.
 - How it was made: **Made by people**, **People with AI agents** or **Mostly AI agents**, as the developer states it.

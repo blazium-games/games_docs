@@ -34,7 +34,7 @@ If nothing matches, click **Show all**.
 Each card has buttons for what the game offers:
 
 - **Download** opens the game's store page at its downloads. See [Buy and download a game](./buy-and-download.md#download).
-- **Play** appears for games with a web build and also opens the store page at its downloads.
+- **Play** appears for games with a browser pack and opens the store page to play in the browser. It does not start a web download.
 - **Store page** opens the store page.
 
 You can also install and update your games with the [desktop app](./desktop-app.md).

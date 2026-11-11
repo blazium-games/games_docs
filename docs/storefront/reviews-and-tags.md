@@ -26,7 +26,7 @@ Developers can reply to reviews. A reply shows under your review as "Developer r
 
 ## Player tags
 
-**Players say** lists tags that players agree describe the game.
+**Players say** lists tags that players agree describe the game. With no public tags, the page says "You can add tags to this" instead of an empty section. With no reviews, the page says "Be the first to review this game."
 
 You can suggest tags for a game you own after you have played it for an hour:
 

@@ -76,7 +76,7 @@ The tags field on the Listing tab suggests popular tags as you type. `GET https:
 
 ## Community tags
 
-Players who own a game and have played it for at least an hour can suggest up to 5 tags for it, from the store page or with the player MCP `suggest_tag` tool. A tag appears under **Players say** on the store page once 3 players suggest it, up to 10 tags, most suggested first. Tags you already set yourself aren't repeated.
+Players who own a game and have played it for at least an hour can suggest up to 5 tags for it, from the store page or with the player MCP `suggest_tag` tool. A tag appears under **Players say** on the store page once 3 players suggest it, up to 10 tags, most suggested first. With no public tags, the page says "You can add tags to this." Tags you already set yourself aren't repeated. The item market is omitted until inventory is on and the game has an item definition.
 
 You can hide any suggested tag on the **Player tags** tab of the edit page or with the `hide_community_tag` MCP tool, and show it again later. Hiding keeps the votes. Search matches community tags along with your own.
 
