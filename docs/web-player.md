@@ -67,7 +67,7 @@ Telegram is a launch of the same browser pack, not a second profile. Turn it on 
 
 Playables, Devvit, itch, Newgrounds, Yandex, CrazyGames, Poki, Meta Instant Games, and GameDistribution are checks on a browser pack. YouTube and those portals host the zip. Blazium does not submit it and does not call their ad or purchase APIs. A Playables pack cannot use `.br` or `.gz`, a threaded build, or WebGPU. Devvit files cannot contain an absolute URL. Meta accepts Instant Games SDK 8.0 for Facebook and Messenger. Instagram is not a launch. Facebook Web Games ended. A TikTok, Douyin, or WeChat pack is not played in the browser. The platform DevTool remains the release check.
 
-Each build can have its own price. A demo cannot be priced. A web demo is the browser demo. Any other demo is the downloadable demo. A build marked embeddable, or assigned to a platform, cannot be priced.
+Each build can record its own price. A demo cannot be priced. A web demo is the browser demo. Any other demo is the downloadable demo. Only one build is the demo. A build marked embeddable, or designated for a launch host, cannot be priced. A store shelf (Steam, GOG, Epic, or itch) says where else the file is published and can still have a Blazium price. One build holds each host. Assigning that host to a second build removes it from the first. Send `designations`, `for_sale`, `price_cents`, `is_demo`, and `embed_supported` with the upload, or set them later on the Builds page. A designation does not run an export check. TikTok, Douyin, and WeChat need that host's mini-game pack. Discord, Telegram, and the other launch hosts need a browser pack. The recorded price is not a separate buy button. The game is still bought at the listing price.
 
 ## Plays
 
