@@ -4,7 +4,7 @@ sidebar_position: 12
 
 # Browser player
 
-A game or application can play in the browser. Upload a web build for Godot, Blazium, or Unreal HTML5 (4.0 through 4.23), then open **Edit project → Web player**.
+A game or application can play in the browser. Upload a web build, then open **Edit project → Web player**. The player hosts Godot and Blazium single-pack shells, Godot and Blazium HTML5, Unreal 4.23, Unreal 5.8 and 5.9 WebGPU, Unity WebGL, and a browser pack for BabylonJS, Cocos, Construct, Defold, Flutter, melonJS, Phaser, PixiJS, PlayCanvas, React, three.js, Kaplay, p5, GDevelop, GameMaker, or a custom page.
 
 Pick one web build as the full game. You can pick a different web build as the demo. The player uses the same page rules as the store page: who can see the page, adult content, and whether anonymous play is allowed. Status (released, in development, and the rest) is a badge. It does not hide the player. Hiding the page hides the player.
 
@@ -26,11 +26,11 @@ Pick one web build as the full game. You can pick a different web build as the d
 | Someone who already has the game | Paid | Full build |
 | Everyone else | Paid | The demo, if you set one. Otherwise the buy button |
 
-A paid embed always plays the demo. Adult listings and drafts cannot be embedded. Embed is off until you turn it on, and only a public page can be embedded.
+An embed plays the build marked embed-supported. That build cannot be priced, and the launch does not grant a license. Adult listings and drafts cannot be embedded. Embed is off until you turn it on, and only a public page can be embedded. Turning on **Enable embedded game** refuses a listing price and every build price.
 
 ## Upload
 
-Send `os=web` with `web_engine` (`godot`, `blazium`, or `unreal`), `web_version`, and `web_variant`. Godot and Blazium packs contain one `.pck`. An Unreal cook includes `Utility.js`. The version has to be one the player host publishes. The zip download of a paid game still requires a purchase.
+Send `os=web` with `web_engine`, `web_version`, and `web_variant`. Add `web_pack` (`browser`, `tiktok`, `douyin`, or `wechat`) and `export_targets` when the pack is checked for another host. A Godot or Blazium `web_nothreads` pack is one `.pck`. An Unreal 4.23 cook includes `Utility.js` and stays on the generated page. Unreal 5.8 and 5.9 WebGPU packs bring their own `index.html`, one `.js`, and one `.wasm`, and they need cross-origin isolation outside Discord, Telegram, and a Playables preview. A Unity WebGL folder needs `index.html`, a `.loader.js`, a `.framework.js` or `.js`, a `.data`, and a `.wasm`. A mini-game pack needs `game.js`, `game.json`, and `project.config.json`, and it is downloaded for TikTok ttmg, Douyin DevTools, or WeChat DevTools. The version has to be one the player host publishes. Unity WebGL and the generic `web` rows accept the publisher's version. The zip download of a paid game still requires a purchase.
 
 ## Embed
 
@@ -57,7 +57,17 @@ Copy the mappings into the Discord portal. Targets have no `https://`. The short
 | `/blazium/lobby` | `lobby.blazium.online`, only when this game's lobby is on as Relay or Scripted |
 | `/` | `{uid}.play.blazium.online` |
 
-There is no mapping for `stun.blazium.online` or `turn.blazium.online`. Leave the TURN switch off for this activity. A threaded web build is not served with COOP or COEP. A paid game plays the demo. A free game with anonymous play plays the full build. A Discord launch does not grant a license. A Discord player still has to sign in and own the game or hold a license before the lobby socket accepts them.
+There is no mapping for `stun.blazium.online` or `turn.blazium.online`. Leave the TURN switch off for this activity. A threaded web build is not served with COOP or COEP. Assign the build that Discord launches. That build cannot be priced, and the launch does not grant a license. A paid game with no assigned build plays its demo. A free game with anonymous play plays the full build. A Discord player still has to sign in and own the game or hold a license before the lobby socket accepts them.
+
+## Telegram Mini App
+
+Telegram is a launch of the same browser pack, not a second profile. Turn it on with the numeric bot id and paste `https://{uid}.play.blazium.online/` into the bot menu or an inline button. No bot token is stored. The page loads `https://telegram.org/js/telegram-web-app.js`, then calls `Telegram.WebApp.ready()` and `Telegram.WebApp.expand()`. games_service checks `initData` with Telegram's published Ed25519 key and the bot id, and rejects `auth_date` older than one hour. That check is not a Blazium sign-in. The play cookie is `SameSite=None` and `Partitioned`. The launch plays the build assigned to Telegram. That build cannot be priced, and the launch does not charge or grant a license. `connect-src` adds `api.blazium.online`, `login.blazium.online`, and `lobby.blazium.online`. There is no URL-mapping proxy. Threaded and WebGPU packs are refused. Adult listings and hidden pages are not offered.
+
+## Other hosts
+
+Playables, Devvit, itch, Newgrounds, Yandex, CrazyGames, Poki, Meta Instant Games, and GameDistribution are checks on a browser pack. YouTube and those portals host the zip. Blazium does not submit it and does not call their ad or purchase APIs. A Playables pack cannot use `.br` or `.gz`, a threaded build, or WebGPU. Devvit files cannot contain an absolute URL. Meta accepts Instant Games SDK 8.0 for Facebook and Messenger. Instagram is not a launch. Facebook Web Games ended. A TikTok, Douyin, or WeChat pack is not played in the browser. The platform DevTool remains the release check.
+
+Each build can have its own price. A demo cannot be priced. A web demo is the browser demo. Any other demo is the downloadable demo. A build marked embeddable, or assigned to a platform, cannot be priced.
 
 ## Plays
 

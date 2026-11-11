@@ -77,4 +77,8 @@ Godot, Unity, and Unreal share ownership, achievement unlocks, stat writes, funn
 
 The Godot addon also transfers an item. Unity and Unreal export the item calls and the server progress read. `record_standard_events` on all three is one batch with zero times, the same kind of call the native library makes.
 
-Inside a Discord activity, only the Blazium module and the Godot addon open the proxied login, lobby, and API addresses. Unity and Unreal do not. See [Multiplayer](./multiplayer.md).
+Inside a Discord activity, only the Blazium module and the Godot addon open the proxied login, lobby, and API addresses. Unity and Unreal do not. A Telegram Mini App uses the public hosts instead. See [Multiplayer](./multiplayer.md).
+
+## Browser exports
+
+The player catalog accepts Godot and Blazium HTML5, Unreal 4.23, Unreal 5.8 and 5.9 WebGPU, Unity WebGL, and the named browser frameworks. Unreal 5.8 is the community WebGPU pack. Unreal 5.9 WebGPU is experimental and needs cross-origin isolation. Godot 4.6.1, 4.6.3, and 4.7.2 mini-game exports, plus Unity, Cocos, and Laya mini-game packs, are stored for TikTok, Douyin, or WeChat. They are not booted in the browser. See [Browser player](./web-player.md).
