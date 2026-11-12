@@ -83,6 +83,7 @@ With `player:buy` an agent can send you to Balance and ask to cash out. `start_p
 | `verify_email` | `code` | write | Verifies your email with the code |
 | `set_timezone` | `timezone` | write | Sets your IANA timezone, replacing the saved one. The agent uses your zone, not the machine it is running on |
 | `get_security_status` | none | read | Whether an authenticator app protects your account, and how many recovery codes are left |
+| `skip_authenticator` | none | write | Records that you chose not to set up an authenticator. An agent calls this only when you asked. Later sign-in uses `confirm_account` with the email code |
 | `get_wallet` | none | read | Credit, pending, and available balances, fee and refund rules, payout status, and recent cash-outs |
 | `list_wallet_transactions` | `limit` (1-200), `before` | read | Ledger entries, newest first |
 | `get_payment_options` | none | read | Card top-up and x402 USDC networks with fees |

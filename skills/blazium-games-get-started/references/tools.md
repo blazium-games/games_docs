@@ -38,6 +38,7 @@ All tools call the Blazium Games API on behalf of the connected user. `uid` acce
 | `revoke_server_key` | `uid`, `key_id` | | Revokes one game server key |
 | `get_web_player` | `uid` | | Browser player settings, including the Discord application id, public key, and share links |
 | `set_web_player` | `uid` | `enabled`, `full_build_id`, `demo_build_id`, `width`, `height`, `fullscreen`, `mobile`, `click_to_play`, `hide_branding`, `start_fullscreen`, `embed_enabled`, `embed_domains`, `discord_enabled`, `application_id`, `public_key`, `share_build_id`, `share_enabled` | Choose the full build, an optional demo, the player size, branding, fullscreen launch, embed settings, and Discord activity hosting. `share_build_id` and `share_enabled` together turn one web build's unlisted link on or off. Hosting stays off unless `discord_enabled` is set, and it still requires the player to be on plus both values. Needs mcp:build.write |
+| `set_host_fetch` | `uid`, `build_id`, `enabled` | `rotate` | Turns on, turns off, or rotates the file URL a host uses to download one web build. TikTok, Douyin, WeChat, YouTube, Reddit, Newgrounds, CrazyGames, Poki, Meta, and GameDistribution can have one. Discord, Telegram, Steam, GOG, Epic, and itch do not. The player server does not return this URL |
 | `list_game_crashes` | `uid` | | Recent crash reports |
 | `get_crash` | `uid`, `crash_id` | | One crash with metadata, analysis, and stack availability |
 | `request_crash_download` | `uid`, `crash_id`, `kind` (`dump`, `log`, or `stack`; default `dump`) | | Private download URL valid for 1 hour |
@@ -147,7 +148,8 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `request_email_code` | none | account, write | Email a verification code to the human |
 | `verify_email` | `code` | account, write | Verify the email with the code the human read from their inbox |
 | `set_timezone` | `timezone` | account, write | Replace the saved timezone with the human's IANA name, when it is empty or the human asks. Do not send the timezone of the machine running the agent. Unknown names: `4085` |
-| `get_security_status` | none | account, read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Changes happen only on the website |
+| `get_security_status` | none | account, read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Enroll, replace, and turn-off stay on the website |
+| `skip_authenticator` | none | account | Records that the human chose not to set up an authenticator. Call it only when the human asked. Later sign-in uses `confirm_account` with the email code |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | write | Set price or donations. Owners and game admins only |
 | `list_game_sales` | `uid` | | Sales, donations, refunds, and seller earnings for a game you manage |
 | `get_approval` | `approval_id` | account | State of a purchase approval |
