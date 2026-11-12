@@ -126,7 +126,7 @@ Players review games they own and file bug tickets from the [player server](./pl
 | `rotate_steam_key` | `uid`, `confirm` | Replaces the Steam Web API key. The new key is returned once. `confirm` only after the human agrees. Covered by `mcp:steam.manage` |
 | `resync_steam` | `uid`, `confirm`, optional `groups`, `web_api_key` | Imports the chosen Steam groups again. `confirm` only after the human agrees. Covered by `mcp:steam.manage` |
 | `import_steam_game` | `app_id`, `web_api_key`, `confirm`, optional `groups`, `uid` | Imports a Steam store page into a new or existing listing. `confirm` only after the human agrees. Needs developer mode |
-| `set_anonymous_downloads` | `uid`, `enabled`, `confirm_no_license` | Turns anonymous downloads on or off. Turning them on needs `confirm_no_license` after the human agrees, and the game must be free |
+| `set_anonymous_downloads` | `uid`, `enabled`, `confirm_no_license` | Turns the switch on or off. When on, signed-out visitors can download the files and play the full web build and the web demo, with no license. Turning it on needs `confirm_no_license` after the human agrees. Needs `mcp:write`. A missing confirm is `4109`. A paid game or an edition is `4113`. A price while it is on is `4114` |
 | `set_adult_content` | `show`, `confirm_18` | Shows or hides adult listings for this account. Turning them on needs `confirm_18` after the human confirms they are 18 or older |
 
 Only the game's owner and admins can read bug tickets and download their attachments.
@@ -382,7 +382,10 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4095` | The idempotency key belongs to a different purchase, or payout setup isn't finished (payout tools) |
 | `4097` | The approval was already used |
 | `4098` | The approval was already decided or expired |
-| `4083` | Website only (for example account settings, approval links, or key management) |
+| `4083` | Website only (for example account settings, approval links, or key management). It does not apply to `set_anonymous_downloads` |
+| `4109` | Anonymous downloads were turned on without `confirm_no_license` |
+| `4113` | Anonymous downloads are only available on a free listing |
+| `4114` | A price or an edition was set while anonymous downloads are on |
 | `4071` | A taxonomy value isn't allowed; `validate_listing` lists the allowed values |
 | `4072` | A similar title isn't a public game, or is this game |
 | `4225` | The listing check failed, so the page can't go public (HTTP 422, report in `data.lint`) |

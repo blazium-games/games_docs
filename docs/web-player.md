@@ -21,10 +21,11 @@ Pick one web build as the full game. You can pick a different web build as the d
 | --- | --- | --- |
 | You or an accepted admin | Any | Full build |
 | Signed-in player | Free | Full build. They receive a free license first, and they keep the full build if you later add a price |
-| Signed-out visitor | Free, and anonymous downloads are on | Full build, with no license |
+| Signed-out visitor | Free, and anonymous downloads are on | The full build when it can play. Otherwise the web demo. No license |
 | Signed-out visitor | Free, anonymous downloads off | No player. They need to sign in |
+| Signed-out visitor | Paid | No player. They need to sign in. The store demo does not start |
 | Someone who already has the game | Paid | Full build |
-| Everyone else | Paid | The demo, if you set one. Otherwise the buy button |
+| Signed-in player who does not have the game | Paid | The demo, if you set one. Otherwise the buy button |
 
 An embed plays the build marked embed-supported. That build cannot be priced, and the launch does not grant a license. Adult listings and drafts cannot be embedded. Embed is off until you turn it on, and only a public page can be embedded. Turning on **Enable embedded game** refuses a listing price and every build price.
 
