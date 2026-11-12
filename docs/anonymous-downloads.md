@@ -1,14 +1,14 @@
 ---
 title: Anonymous downloads
 sidebar_position: 2.85
-description: A per-project setting that lets anyone download a free project's files without an account, from the website, the editor asset library, and the API, and what you give up by turning it on.
+description: A per-project setting that lets anyone download a free project's files, and play its web build and demo, without an account.
 ---
 
 # Anonymous downloads
 
 Blazium Games is a game publishing platform, with an infrastructure focus. Normally a visitor signs in before downloading, and the first download of a free project adds it to their library with a free license.
 
-Anonymous downloads is a setting on each project. When it is on, anyone can download the project's public files without an account:
+Anonymous downloads is a setting on each project. When it is on, anyone can download the project's public files without an account, and a signed-out visitor can play the web build and the web demo with no license:
 
 - from the store page, where signed-out visitors get a direct download link;
 - from the Godot or Blazium [editor asset library](./editor-asset-library.md), which doesn't sign in;
@@ -20,7 +20,8 @@ Signed-in players still download the usual way and still get a free license.
 
 Read this before turning it on. The website shows the same list and asks you to confirm it.
 
-- **No license or library entry.** Anonymous downloads don't add the project to anyone's library, so the downloader doesn't own it on Blazium Games.
+- **No license or library entry.** Anonymous downloads and anonymous play don't add the project to anyone's library, so the visitor doesn't own it on Blazium Games.
+- **The web build and the demo play with no account.** A signed-out visitor on the store page starts the full web build when that build can play, and the web demo when it cannot. Turning the setting off stops new play sessions. Embed, Discord, and Telegram are unchanged.
 - **You can't see who downloaded.** Anonymous downloads are counted in [download analytics](./download-analytics.md), with the source, client, and country, but not tied to an account.
 - **No update notices.** Anonymous downloaders don't hear about new versions through their library.
 - **Problems can't be followed up.** A failed or broken anonymous download has no account to contact.
@@ -38,15 +39,15 @@ Anonymous downloads only work on free projects:
 
 ## Turning it on or off
 
-The setting is on the website only. An agent or API key can't change it, because the person turning it on has to see the warning above.
+The owner or an accepted admin turns it on from the website, or an agent does it after the human agrees.
 
 1. Open your project's editor on blazium.games and go to the **Settings** tab.
 2. Under **Anonymous downloads**, choose **Turn on anonymous downloads**.
 3. Read the list, tick **I understand downloads will not be tied to an account**, and choose **Turn on**.
 
-**Turn off anonymous downloads** on the same tab switches it off after a confirmation.
+**Turn off anonymous downloads** on the same tab switches it off after a confirmation. Turning it off needs no extra confirm.
 
-The site calls `PUT /api/v1/private/games/{game_id}/anonymous-downloads` with `{"enabled": true, "confirm_no_license": true}`. Turning it on without `confirm_no_license` returns `400`, code `4109`. Only the owner and accepted admins can change it. MCP tokens are refused.
+An agent reads `anonymous_downloads` from `get_game`, tells the human that signed-out visitors can download the files and play the web build and the demo with no license, and calls `set_anonymous_downloads` only after the human agrees. The call is `PUT /api/v1/private/games/{game_id}/anonymous-downloads` with `{"enabled": true, "confirm_no_license": true}`. Turning it on without `confirm_no_license` returns `400`, code `4109`. The tool needs `mcp:write`. A paid game or a game with an edition returns `4113`. Setting a price while it is on returns `4114`. After a successful call, `get_game` shows `anonymous_downloads: true`.
 
 ## Signed-out download routes
 

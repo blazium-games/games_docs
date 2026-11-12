@@ -53,7 +53,7 @@ Some free projects allow downloads without an account. They say "No account need
 
 Games marked **Play in browser** have a browser pack. A web demo is marked **Demo**. Web files are hosted and are not download buttons. Download buttons are Windows, Linux, content packs, and a non-web demo labeled **Download Demo**. A host name appears only when that build is assigned and the page may offer it. Steam, GOG, Epic, and itch stay on **Also on**.
 
-The control at the top of the store page follows whether this visitor can start that build. **Play in browser** opens the full game. **Demo** opens the demo. **Sign in to play**, **Verify your email to play**, and **Buy to play** go to those steps and do not start a session. The player beside the page uses the same address. From the library, **Play** opens that control. **Download** still opens the download list. A mini-game pack is not **Play in browser**.
+The control at the top of the store page follows whether this visitor can start that build. **Play in browser** opens the full game. **Demo** opens the demo. A priced game's store demo needs an account, so a signed-out visitor sees **Sign in to play**. **Sign in to play**, **Verify your email to play**, and **Buy to play** go to those steps and do not start a session. The player beside the page uses the same address. From the library, **Play** opens that control. **Download** still opens the download list. A mini-game pack is not **Play in browser**.
 
 ## Join a beta
 
