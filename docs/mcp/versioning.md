@@ -27,7 +27,7 @@ Write clients that ignore fields they don't know.
 
 Developer and player servers 1.23:
 
-- The live cards list 216 developer tools and 100 player tools.
+- The live cards list 217 developer tools and 100 player tools.
 - `set_host_fetch` turns on, turns off, or rotates the file URL a host uses to download one web build. The player server does not return that URL.
 - `skip_authenticator` records that the human chose not to set up an authenticator. Call it only when the human asked.
 - `set_anonymous_downloads` turns the switch on after the human agrees (`confirm_no_license`). The switch covers file downloads, the full web build, and the web demo. `4083` no longer applies to this tool. It needs `mcp:write`.
