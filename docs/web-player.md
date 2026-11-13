@@ -38,7 +38,7 @@ Send `os=web` with `web_engine`, `web_version`, and `web_variant`. Add `web_pack
 The store card embed stays the store card. A separate snippet plays the game:
 
 ```html
-<iframe src="https://GAME_UID.play.blazium.online/" width="960" height="540" sandbox="allow-scripts allow-pointer-lock"></iframe>
+<iframe src="https://GAME_UID.play.blazium.online/" width="960" height="540" sandbox="allow-scripts allow-same-origin allow-pointer-lock"></iframe>
 ```
 
 Replace `GAME_UID` with the game id. Add `allow="fullscreen"` when fullscreen is on.
