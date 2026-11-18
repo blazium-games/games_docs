@@ -6,13 +6,14 @@ description: How credit, pending, and available balances work, and how developer
 
 # Wallet and cash-out
 
-Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and cannot be cashed out.
+Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out, subject to the 8% + $0.25 cash-out fee.
 
 Your [Balance](https://blazium.games/settings/wallet) page shows three amounts:
 
 | Balance | Where it comes from | Spend it | Cash it out |
 | --- | --- | --- | --- |
-| **Credit** | Top-ups and refunds of balance purchases | Yes | No |
+| **Credit from a top-up** | Card or USDC top-ups | Yes | Yes, subject to the 8% + $0.25 cash-out fee |
+| **Credit from a refund** | Refunds of purchases paid from the balance | Yes | No |
 | **Pending** | Your sales that can still be refunded | No | No |
 | **Available** | Sales past the refund window | Yes | Yes, from $25 |
 

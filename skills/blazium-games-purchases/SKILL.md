@@ -93,7 +93,7 @@ Call `get_wallet` and `get_payment_options`, then either:
 - **Card:** `create_top_up_link` with `amount_cents` (500 to 50000). Give the URL to the human; you cannot pay by card. Check `get_wallet` after they say it is done.
 - **USDC over x402:** only if you have your own wallet and the human agreed. Call `create_x402_top_up` (`amount_cents`, optional `network`), sign a payment for exactly the returned requirements, then call `pay_with_x402` with `top_up_id` and the signed `payment_payload`. Credit appears after settlement.
 
-Top-ups add a processing fee (shown by `get_payment_options`). Credit can be spent but never cashed out.
+Top-ups add a processing fee (shown by `get_payment_options`). Credit from a top-up can be spent and can be cashed out, subject to the 8% + $0.25 cash-out fee.
 
 ## Rules to tell the human when relevant
 

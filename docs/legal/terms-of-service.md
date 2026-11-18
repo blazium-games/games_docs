@@ -112,7 +112,7 @@ license to use the Content as permitted by the Creator's settings (e.g., for per
 
 Your account can hold money in three parts:
 
-- **Credit:** money you add by card or USDC ($5 to $500 per top-up), and refunds of purchases paid from your balance. Credit can be spent on Content on the Service. It **cannot be withdrawn or cashed out**, and it is not refundable except where the law requires.
+- **Credit:** money you add by card or USDC ($5 to $500 per top-up), and refunds of purchases paid from your balance. Credit can be spent on Content on the Service. A top-up balance can be cashed out, subject to the 8% + $0.25 cash-out fee in section 10. A refund of a purchase paid from the balance cannot be cashed out. Credit is not refundable except where the law requires.
 - **Pending:** a Creator's earnings from sales that can still be refunded.
 - **Available:** a Creator's earnings from sales past the refund window. Available earnings can be spent or cashed out.
 
@@ -123,7 +123,7 @@ Your account can hold money in three parts:
 
 ## 10. Cash-Outs
 
-- Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and cannot be cashed out. USDC cash-out does not use Stripe.
+- Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out, subject to the 8% + $0.25 cash-out fee. USDC cash-out does not use Stripe.
 - Creators can cash out available earnings of $25 USD or more. The transfer goes only to the Express account on that same account. Stripe is available for United States accounts.
 - To cash out you must complete Stripe's identity verification and tax information checks. You are responsible for supplying accurate information, such as your legal name, address, and tax forms. Stripe may refuse or delay payouts under its own rules, and we may hold cash-outs until verification is complete.
 - Each cash-out costs 8% + $0.25 on every plan. The remaining amount is transferred to your Express account and then paid to your bank. Identity, tax, and bank details are entered on Stripe's hosted onboarding. The Express dashboard is where you see the payout to your bank. Blazium pays Stripe's processing fees and is responsible for a negative balance. A refund or dispute stays on Blazium's balance. Stripe does not reverse a transfer that was already sent.
@@ -262,7 +262,7 @@ You will defend and indemnify us and our directors, officers, employees, and age
 - You may stop using the Service and close your account at any time.
 - We may terminate or suspend your access for violations of these Terms or under sections 17, 17.1, and 18. We do not close accounts just because a third party asked; a paid copyright notice is reviewed and decided by our staff (section 17.1).
 - Upon termination, your right to use the Service ends, but licenses to previously downloaded Content persist, except licenses revoked under section 11.
-- If your account is closed, contact [support@blazium.games](mailto:support@blazium.games) to cash out any available earnings to a verified payout account, less fees, pending refunds, and chargeback reserves, unless United States law requires us to hold them. Credit is not paid out in cash.
+- If your account is closed, contact [support@blazium.games](mailto:support@blazium.games) to cash out any available earnings to a verified payout account, less fees, pending refunds, and chargeback reserves, unless United States law requires us to hold them. A top-up balance can be cashed out, subject to the 8% + $0.25 cash-out fee. Credit from a refund is not paid out in cash.
 - Sections that by their nature should survive, including governing law, venue, legal process, balance reconciliation, licenses already granted, disclaimers, limitation of liability, and indemnity, survive the end of your use.
 
 ## 27. Changes to Terms
