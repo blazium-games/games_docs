@@ -6,20 +6,20 @@ description: How credit, pending, and available balances work, and how developer
 
 # Wallet and cash-out
 
-Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out, subject to the cash-out fee for the best plan the account owns.
+Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out at the account's cash-out rate, which is the rate for the best plan the account owns.
 
 Your [Balance](https://blazium.games/settings/wallet) page shows these balances:
 
 | Balance | Where it comes from | Spend it | Cash it out |
 | --- | --- | --- | --- |
-| **Credit from a top-up** | Card or USDC top-ups | Yes | Yes, subject to the cash-out fee for the best plan the account owns |
+| **Credit from a top-up** | Card or USDC top-ups | Yes | Yes, at the account's cash-out rate |
 | **Credit from a refund** | Refunds of purchases paid from the balance | Yes | No |
 | **Pending** | Your sales that can still be refunded | No | No |
-| **Available** | Sales past the refund window | Yes | Yes, from $25, 14 business days after the refund window closes |
+| **Available** | Sales past the refund window, 7 days after the sale | Yes | Yes, from $25, once the refund window ends |
 
 When you buy from your balance, credit is used first, then available earnings.
 
-Pending earnings become available 7 days after the sale, when the refund window closes. Playtime can end the buyer's right to a refund sooner, but it never releases earnings early. Sale earnings can be cashed out 14 business days after that refund window closes. A top-up is not held for those 14 business days.
+Pending earnings become available 7 days after the sale, when the refund window closes. Playtime can end the buyer's right to a refund sooner, but it never releases earnings early. Sale earnings can be cashed out once that refund window ends. A top-up can be cashed out at the account's cash-out rate, which is the rate for the best plan the account owns.
 
 If a balance goes negative, for example because a top-up was refunded or disputed, the debt is repaid from your other balance first. Until then it is subtracted from what you can spend and cash out.
 
@@ -40,7 +40,7 @@ An agent can send you to Balance. You open Stripe from that page. See [Agent pay
 
 ## Cash out
 
-A creator cashes out available earnings of $25 or more. Sale earnings can be cashed out 14 business days after that sale's refund window closes. The cash-out fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns, in addition to the $0.25 + 8% kept on the sale. The transfer goes only to the Express account on that same account.
+A creator cashes out available earnings of $25 or more. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. The cash-out fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns, in addition to the $0.25 + 8% kept on the sale. The transfer goes only to the Express account on that same account.
 
 | You cash out | Free fee | Free transferred | Grow fee | Grow transferred | Scale fee | Scale transferred |
 | --- | --- | --- | --- | --- | --- | --- |

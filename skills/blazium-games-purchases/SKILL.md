@@ -93,12 +93,12 @@ Call `get_wallet` and `get_payment_options`, then either:
 - **Card:** `create_top_up_link` with `amount_cents` (500 to 50000). Give the URL to the human; you cannot pay by card. Check `get_wallet` after they say it is done.
 - **USDC over x402:** only if you have your own wallet and the human agreed. Call `create_x402_top_up` (`amount_cents`, optional `network`), sign a payment for exactly the returned requirements, then call `pay_with_x402` with `top_up_id` and the signed `payment_payload`. Credit appears after settlement.
 
-Top-ups add a processing fee (shown by `get_payment_options`). Credit from a top-up can be spent and can be cashed out, subject to the cash-out fee for the best plan the account owns.
+Top-ups add a processing fee (shown by `get_payment_options`). Credit from a top-up can be spent and can be cashed out at the account's cash-out rate, which is the rate for the best plan the account owns.
 
 ## Rules to tell the human when relevant
 
 - Refunds are only through support@blazium.games: purchases within 7 days and before 2 hours of play. A refund is credited to your account balance, never to a card. Donations are not refundable.
-- With `player:buy` you can send the human to Balance (`start_payout_setup` and `get_payout_dashboard_link` return that page; the human opens Stripe from Set up payouts with Stripe). `cash_out` of available earnings ($25 minimum) waits for the owner, including a player key. Sale earnings can be cashed out 14 business days after that sale's refund window closes. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Money only goes to the Express account on that same account, the owner is emailed after each cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific.
+- With `player:buy` you can send the human to Balance (`start_payout_setup` and `get_payout_dashboard_link` return that page; the human opens Stripe from Set up payouts with Stripe). `cash_out` of available earnings ($25 minimum) waits for the owner, including a player key. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Money only goes to the Express account on that same account, the owner is emailed after each cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific.
 
 ## Docs
 

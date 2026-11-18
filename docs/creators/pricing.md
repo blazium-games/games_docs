@@ -18,4 +18,4 @@ A listing can have editions: standard, deluxe, beta access, and a bundle of 1 to
 
 A page can have up to 12 patron tiers. A higher tier includes the lower tier's games, locked posts, and patron-only sales. Monthly tiers renew by card. A one-time tier is paid by card or from the balance. The fee is the same $0.25 plus 8%. A membership payment is not refundable. Access starts after the 12 hour payment check. The full rules are on [Patron memberships](../payments/patrons.md).
 
-Sale earnings can be cashed out 14 business days after that sale's refund window closes. Cash-out is USD through Stripe Connect, or USDC on Base or Solana from the wallet page. See [USDC](../payments/wallet-and-cash-out.md#usdc).
+Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. Cash-out is USD through Stripe Connect, or USDC on Base or Solana from the wallet page. See [USDC](../payments/wallet-and-cash-out.md#usdc).

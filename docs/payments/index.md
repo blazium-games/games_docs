@@ -40,7 +40,7 @@ A $10 game sold by card: the buyer pays $10, any tax, and the card fee. Blazium 
 - [Selling games](./selling.md): prices, donations, the sale fee, and the sales view.
 - [Buying games](./buying.md): the Buy button, paying from the balance, your library, and downloads.
 - [Adding balance](./top-up.md): card top-ups and USDC over x402.
-- [Wallet and cash-out](./wallet-and-cash-out.md): credit, pending and available earnings, Stripe Connect, the $25 minimum, the 14 business days after the refund window closes before sale earnings can be cashed out, and agent payouts.
+- [Wallet and cash-out](./wallet-and-cash-out.md): credit, pending and available earnings, Stripe Connect, the $25 minimum, cash-out once the refund window ends 7 days after the sale, and agent payouts.
 - [Patron memberships](./patrons.md): tiers, posts, the 12 hour check, and why a membership cannot be refunded.
 - [Refunds](./refunds.md): the 7-day and 2-hour rule, non-refundable donations, and how to ask.
 - [Agent purchases](./agent-purchases.md): letting AI agents buy from your balance, with per-agent limits.
