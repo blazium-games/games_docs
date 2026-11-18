@@ -57,4 +57,4 @@ The downloads section splits downloads by where they came from, how players had 
 
 ## Sales
 
-**Sales** shows sales and donations, gross revenue, platform fees and your earnings, then a list of each sale. Earnings become available after the refund window ends. Refunded and disputed sales are counted separately. See [Selling](../payments/selling.md) and [Wallet and cash out](../payments/wallet-and-cash-out.md).
+**Sales** shows sales and donations, gross revenue, platform fees and your earnings, then a list of each sale. Earnings become available after the refund window ends. Sale earnings can be cashed out 14 business days after that refund window closes. Refunded and disputed sales are counted separately. See [Selling](../payments/selling.md) and [Wallet and cash out](../payments/wallet-and-cash-out.md).

@@ -113,8 +113,8 @@ The live tool list is `tools/list`. The server cards are https://mcp.blazium.gam
 
 ## Payments
 
-- [Plans](https://docs.blazium.games/docs/plans): Free, Grow at $29 per game per month, and Scale at $99 per game per month. Until January 31, 2027, Grow is $10 per game per month for 3 months, or $278.40 per game per year. The sale fee is $0.25 + 8% on every plan. A cash-out costs another 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. A $25 cash-out on Free costs $2.25 and transfers $22.75. Buyers pay card processing.
-- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs at 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns (also by agents; payouts are processed on weekdays from 8:00am to 5:00pm Pacific), and refunds (donations are not refundable). The sale fee is $0.25 + 8%. Buyers pay card processing.
+- [Plans](https://docs.blazium.games/docs/plans): Free, Grow at $29 per game per month, and Scale at $99 per game per month. Until January 31, 2027, Grow is $10 per game per month for 3 months, or $278.40 per game per year. The sale fee is $0.25 + 8% on every plan. A cash-out costs another 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Sale earnings can be cashed out 14 business days after the refund window closes. A $25 cash-out on Free costs $2.25 and transfers $22.75. Buyers pay card processing.
+- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs at 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns (also by agents; payouts are processed on weekdays from 8:00am to 5:00pm Pacific). Sale earnings can be cashed out 14 business days after the refund window closes. The earnings pages say that window closes 7 days after the sale, and that playtime does not release earnings sooner. Donations are not refundable. The sale fee is $0.25 + 8%. Buyers pay card processing.
 
 ## Public API and the editor asset library
 
