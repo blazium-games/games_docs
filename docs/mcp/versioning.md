@@ -34,7 +34,7 @@ Developer and player servers 1.23:
 
 Developer server 1.22:
 
-- `list_oauth_apps`, `create_oauth_app`, `update_oauth_app`, `rotate_oauth_app_secret`, and `delete_oauth_app`. Prompts `setup_oauth_app` and `review_oauth_apps`. One sign-in application is included on Free. Another one needs Grow ($30/mo per game); Scale includes it. The player tool list was unchanged
+- `list_oauth_apps`, `create_oauth_app`, `update_oauth_app`, `rotate_oauth_app_secret`, and `delete_oauth_app`. Prompts `setup_oauth_app` and `review_oauth_apps`. One sign-in application is included on Free. Another one needs Grow ($29/mo per game); Scale includes it. The player tool list was unchanged
 - `game_setup_walkthrough` adds an optional `player_sign_in` step. It does not change `ready` or `next_tool`
 
 Developer server 1.21:

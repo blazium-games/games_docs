@@ -15,8 +15,8 @@ Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of 
 | Plan | Price | History an owner or admin can read |
 |---|---|---|
 | Free | $0 | 45 days |
-| Grow | $30 per game per month | 360 days |
-| Scale | $100 per game per month | 5 years |
+| Grow | $29 per game per month | 360 days |
+| Scale | $99 per game per month | 5 years |
 
 Grow includes everything Free includes. Scale includes everything Grow includes. The window covers analytics events, including funnel series and owner stats, crash report list and detail, and bug ticket list and detail. Funnel, achievement, and stat definitions stay. The bug intake caps stay. A Free game can still receive new crashes and bug reports. Developer tools that call these private routes see the same cutoff.
 
@@ -30,11 +30,11 @@ Grow adds lobbies (relay, or scripted with Luau), STUN/TURN relay, achievement a
 
 Scale adds anticheat settings for that game. Anticheat is by request. Free and Grow do not include anticheat settings. This page does not sell anticheat and does not set a license price. Scale history is 5 years.
 
-One sign-in application is included on Free. Another one needs Grow ($30/mo per game); Scale includes it.
+One sign-in application is included on Free. Another one needs Grow ($29/mo per game); Scale includes it.
 
 ## Launch offer
 
-Until January 31, 2027, Grow is $10 per game per month for 3 months, or 20% off yearly at $288 per game per year. After that date the monthly Grow price is $30 per game.
+Until January 31, 2027, Grow is $10 per game per month for 3 months, or 20% off yearly at $278.40 per game per year. After that date the monthly Grow price is $29 per game.
 
 ## Changes and failed renewals
 
