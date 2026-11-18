@@ -8,7 +8,7 @@ description: Per-game plans, the sale fee, and how long an owner or admin can re
 
 Each game or application has its own plan. A new game is Free. The public store page does not show the plan. Only the owner and an accepted admin can see it, on the project's Plan page. Either of them can start, upgrade, downgrade, or cancel it.
 
-The card is charged to the person who subscribes, monthly or annually, through Stripe. The marketplace fee is not added on top. There is no cash-out fee. On every plan, Blazium keeps $0.25 + 8% of a sale. Buyers pay card processing.
+The card is charged to the person who subscribes, monthly or annually, through Stripe. The marketplace fee is not added on top. On every plan, Blazium keeps $0.25 + 8% of a sale. A cash-out costs another 8% + $0.25 on every plan. Buyers pay card processing.
 
 Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A project cannot charge money until its owner has finished Stripe payout setup. A price of 0 stays allowed.
 

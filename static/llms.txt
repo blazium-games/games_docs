@@ -113,8 +113,8 @@ The live tool list is `tools/list`. The server cards are https://mcp.blazium.gam
 
 ## Payments
 
-- [Plans](https://docs.blazium.games/docs/plans): Free, Grow at $30 per game per month, and Scale at $100 per game per month. Until January 31, 2027, Grow is $10 per game per month for 3 months, or $288 per game per year. The sale fee is $0.25 + 8% on every plan. There is no cash-out fee. Buyers pay card processing.
-- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs with no cash-out fee (also by agents; payouts are processed on weekdays from 8:00am to 5:00pm Pacific), and refunds (donations are not refundable). The sale fee is $0.25 + 8%. Buyers pay card processing.
+- [Plans](https://docs.blazium.games/docs/plans): Free, Grow at $30 per game per month, and Scale at $100 per game per month. Until January 31, 2027, Grow is $10 per game per month for 3 months, or $288 per game per year. The sale fee is $0.25 + 8% on every plan. A cash-out costs another 8% + $0.25 on every plan. A $25 cash-out costs $2.25 and transfers $22.75. Buyers pay card processing.
+- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs at 8% + $0.25 on every plan (also by agents; payouts are processed on weekdays from 8:00am to 5:00pm Pacific), and refunds (donations are not refundable). The sale fee is $0.25 + 8%. Buyers pay card processing.
 
 ## Public API and the editor asset library
 

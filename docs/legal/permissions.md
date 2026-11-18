@@ -166,7 +166,7 @@ An agent can send you to Balance. A cash-out always waits until you approve it, 
 
 - Wallet access means a player token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-game (project) tokens cannot.
 - `start_payout_setup` and `get_payout_dashboard_link` return the Balance page. You open Stripe from Set up payouts with Stripe. Identity, tax, and bank details are entered on Stripe only after you open that page, and they never pass through the agent or us.
-- An agent can ask to cash out available earnings of $25 or more. You approve each cash-out, including when the agent used a player key. The transfer goes only to the Express account on that same account.
+- An agent can ask to cash out available earnings of $25 or more. The cash-out fee is 8% + $0.25 on every plan. You approve each cash-out, including when the agent used a player key. The transfer goes only to the Express account on that same account.
 - We email you after every cash-out an agent makes, with the amount and the agent's name.
 - Your email must be verified before agents can set up payouts or cash out.
 - Payouts are processed on weekdays from 8:00am to 5:00pm Pacific.
