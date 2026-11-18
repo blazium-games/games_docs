@@ -8,7 +8,7 @@ description: A project registers an OAuth application so its players can sign in
 
 An OAuth application lets a project's players sign in, or create a Blazium account, and link it. The application has a client id and a secret. The player's platform sends both. This is not the MCP server at `mcp.blazium.games`, and it is not Steam auth. A token from this flow cannot call MCP or spend money.
 
-One application is included. Another one needs Premium at $29 a month on that project. Business includes that. After a downgrade, the first application stays usable. Extra applications stay listed and paused, and their authorize requests fail until the project is Premium or Business again.
+One application is included. Another one needs Grow ($30/mo per game); Scale includes it. After a downgrade, the first application stays usable. Extra applications stay listed and paused, and their authorize requests fail until the project is Grow or Scale again.
 
 Create one on the project's **Sign-in** tab, or with `list_oauth_apps` and `create_oauth_app`. The secret is shown once. Copy it before you leave the page. It cannot be shown again.
 

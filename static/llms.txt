@@ -113,7 +113,8 @@ The live tool list is `tools/list`. The server cards are https://mcp.blazium.gam
 
 ## Payments
 
-- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs (up to 72 business hours to the bank, also by agents), and refunds (donations are not refundable).
+- [Plans](https://docs.blazium.games/docs/plans): Free, Grow at $30 per game per month, and Scale at $100 per game per month. Until January 31, 2027, Grow is $10 per game per month for 3 months, or $288 per game per year. The sale fee is $0.25 + 8% on every plan. There is no cash-out fee. Buyers pay card processing.
+- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs with no cash-out fee (also by agents; payouts are processed on weekdays from 8:00am to 5:00pm Pacific), and refunds (donations are not refundable). The sale fee is $0.25 + 8%. Buyers pay card processing.
 
 ## Public API and the editor asset library
 
@@ -128,6 +129,8 @@ The live tool list is `tools/list`. The server cards are https://mcp.blazium.gam
 - [Deploy builds](https://docs.blazium.games/docs/deploy): Upload builds and symbols from CI.
 - [Crash reporting](https://docs.blazium.games/docs/crash-reporting): Crashes and the six standard launch events from a game.
 - [Progress](https://docs.blazium.games/docs/progress): Achievements, stats, registered funnel events, and rich presence.
+- [Engines](https://docs.blazium.games/docs/engines): Godot, Unity, and Unreal bindings.
+- [Unity and the native library](https://docs.blazium.games/docs/unity): The `com.blazium.games` package and `blazium_api64.dll` / `libblazium_api.so`. The library talks to the Blazium launcher, not to `api.blazium.online`.
 
 ## SEO and discovery
 

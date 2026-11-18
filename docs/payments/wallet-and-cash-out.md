@@ -6,7 +6,7 @@ description: How credit, pending, and available balances work, and how developer
 
 # Wallet and cash-out
 
-Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Premium or Business subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and cannot be cashed out.
+Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and cannot be cashed out.
 
 Your [Balance](https://blazium.games/settings/wallet) page shows three amounts:
 
@@ -39,24 +39,17 @@ An agent can send you to Balance. You open Stripe from that page. See [Agent pay
 
 ## Cash out
 
-A creator cashes out available earnings of $25 or more. The cash-out fee is 8% + $0.25, 7% + $0.25, or 6% + $0.25, from the best plan that account owns. The transfer goes only to the Express account on that same account.
+A creator cashes out available earnings of $25 or more. There is no cash-out fee. The transfer goes only to the Express account on that same account.
 
 Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Stripe verification, tax-form holds, or a Stripe review can add time after a payout is sent. A refund or dispute stays on Blazium's balance. Stripe does not reverse a transfer that was already sent.
 
 ## USDC
 
-On Balance you can choose USD or USDC. **Set up payouts with Stripe** stays on the page for both. USD is paid through the Express account and is limited to United States accounts. USDC does not use Stripe. It uses the same email check, the same $25 minimum, and the same plan cash-out fee. You also pay a network estimate of $0.02, twice a typical Base or Solana transfer. Balance shows that estimate, and it is taken from the amount sent. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
+On Balance you can choose USD or USDC. **Set up payouts with Stripe** stays on the page for both. USD is paid through the Express account and is limited to United States accounts. USDC does not use Stripe. It uses the same email check and the same $25 minimum. There is no cash-out fee. The amount is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
 
 USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A new address is checked before anything is sent. Changing the address starts that check over. The address cannot change while a cash-out is pending or while the check is still open. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Each cash-out can send at most 10,000 USDC.
 
-The Free examples below use 8%. Premium is 7% + $0.25, and Business is 6% + $0.25.
-
-| You cash out (Free) | Fee | Fixed fee | Transferred (USD) |
-| --- | --- | --- | --- |
-| $25.00 | $2.00 | $0.25 | $22.75 |
-| $100.00 | $8.00 | $0.25 | $91.75 |
-
-If a transfer fails or is reversed, the cash-out amount and the fee return to your available balance.
+If a transfer fails or is reversed, the cash-out amount returns to your available balance.
 
 ## Agent payouts
 
@@ -64,7 +57,7 @@ An agent can send you to Balance. Every agent cash-out waits for you, including 
 
 - Wallet access means a player key or token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-project tokens can't.
 - `start_payout_setup` and `get_payout_dashboard_link` return the Balance page. You open Stripe from **Set up payouts with Stripe**. Identity, tax, and bank details are entered on Stripe only after you open that page, never through the agent.
-- `cash_out` sends available earnings to the Express account on that same account. The same $25 minimum and the account's plan fee apply. The fee is the rate from `get_wallet`: 8%, 7%, or 6%, plus $0.25. Money can't be sent anywhere else.
+- `cash_out` sends available earnings to the Express account on that same account. The same $25 minimum applies. There is no cash-out fee. Money can't be sent anywhere else.
 - We email you after every cash-out an agent makes, with the amount and the agent's name.
 - Your email must be verified first.
 

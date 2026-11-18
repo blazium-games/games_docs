@@ -22,7 +22,7 @@ The first time the agent uses a Blazium Games tool, Cursor opens a browser for t
 - CLI: `npm install -g @blazium-games/cli` (`chauffeur`), guide at [docs.blazium.games/docs/cli](https://docs.blazium.games/docs/cli)
 - Launcher: BlaziumLauncher at `{autopf}\Blazium\Games` on Windows. Shared tools are in `{autopf}\Blazium`. Setup from [Releases](https://github.com/blazium-games/games_launcher/releases), guide at [desktop app](https://docs.blazium.games/docs/storefront/desktop-app)
 - Support: [blazium-games/support](https://github.com/blazium-games/support/issues). Status: [status.blazium.games](https://status.blazium.games)
-- Plans: each game is [Free, Premium, or Business](https://docs.blazium.games/docs/plans). Free reads 45 days of analytics, stats, crash reports, and bug reports. Premium is $29/month or $278.40/year and 360 days, and adds lobby settings and achievement and stats settings. Business is $99/month or $950.40/year and 5 years, includes Premium, and adds anticheat settings. A year is 20% off twelve times the monthly price. Cash-out is 8% + $0.25, 7% + $0.25, or 6% + $0.25, from the best plan the account owns.
+- Plans: each game is [Free, Grow, or Scale](https://docs.blazium.games/docs/plans). Free reads 45 days of analytics, stats, crash reports, and bug reports. Grow is $30 per game per month and 360 days, and adds lobby settings and achievement and stats settings. Scale is $100 per game per month and 5 years, includes Grow, and adds anticheat settings. Until January 31, 2027, Grow is $10 per game per month for 3 months, or $288 per game per year. The sale fee is $0.25 + 8% on every plan. There is no cash-out fee. Buyers pay card processing.
 
 ## This repo
 
