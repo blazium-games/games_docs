@@ -68,7 +68,7 @@ Purchases always come from your stored balance. Set a limit per agent at [blaziu
 
 ## Payouts and cash-out
 
-With `player:buy` an agent can send you to Balance and ask to cash out. `start_payout_setup` and `get_payout_dashboard_link` return that page. You open Stripe from Set up payouts with Stripe, and identity, tax, and bank details are entered on Stripe only after that. A cash-out waits for you, including a player key. The fee is 8% + $0.25 on every plan. Money only goes to the Express account on that same account, we email you after each agent cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
+With `player:buy` an agent can send you to Balance and ask to cash out. `start_payout_setup` and `get_payout_dashboard_link` return that page. You open Stripe from Set up payouts with Stripe, and identity, tax, and bank details are entered on Stripe only after that. A cash-out waits for you, including a player key. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Money only goes to the Express account on that same account, we email you after each agent cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
 
 ## Tools
 

@@ -6,13 +6,13 @@ description: How credit, pending, and available balances work, and how developer
 
 # Wallet and cash-out
 
-Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out, subject to the 8% + $0.25 cash-out fee.
+Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out, subject to the cash-out fee for the best plan the account owns.
 
 Your [Balance](https://blazium.games/settings/wallet) page shows these balances:
 
 | Balance | Where it comes from | Spend it | Cash it out |
 | --- | --- | --- | --- |
-| **Credit from a top-up** | Card or USDC top-ups | Yes | Yes, subject to the 8% + $0.25 cash-out fee |
+| **Credit from a top-up** | Card or USDC top-ups | Yes | Yes, subject to the cash-out fee for the best plan the account owns |
 | **Credit from a refund** | Refunds of purchases paid from the balance | Yes | No |
 | **Pending** | Your sales that can still be refunded | No | No |
 | **Available** | Sales past the refund window | Yes | Yes, from $25 |
@@ -40,18 +40,18 @@ An agent can send you to Balance. You open Stripe from that page. See [Agent pay
 
 ## Cash out
 
-A creator cashes out available earnings of $25 or more. The cash-out fee is 8% + $0.25 on every plan, in addition to the $0.25 + 8% kept on the sale. The transfer goes only to the Express account on that same account.
+A creator cashes out available earnings of $25 or more. The cash-out fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns, in addition to the $0.25 + 8% kept on the sale. The transfer goes only to the Express account on that same account.
 
-| You cash out | Fee | Transferred |
-| --- | --- | --- |
-| $25.00 | $2.25 | $22.75 |
-| $100.00 | $8.25 | $91.75 |
+| You cash out | Free fee | Free transferred | Grow fee | Grow transferred | Scale fee | Scale transferred |
+| --- | --- | --- | --- | --- | --- | --- |
+| $25.00 | $2.25 | $22.75 | $2.00 | $23.00 | $1.75 | $23.25 |
+| $100.00 | $8.25 | $91.75 | $7.25 | $92.75 | $6.25 | $93.75 |
 
 Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Stripe verification, tax-form holds, or a Stripe review can add time after a payout is sent. A refund or dispute stays on Blazium's balance. Stripe does not reverse a transfer that was already sent.
 
 ## USDC
 
-On Balance you can choose USD or USDC. **Set up payouts with Stripe** stays on the page for both. USD is paid through the Express account and is limited to United States accounts. USDC does not use Stripe. It uses the same email check, the same $25 minimum, and the same 8% + $0.25 cash-out fee. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
+On Balance you can choose USD or USDC. **Set up payouts with Stripe** stays on the page for both. USD is paid through the Express account and is limited to United States accounts. USDC does not use Stripe. It uses the same email check, the same $25 minimum, and the same plan cash-out fee. The net is converted to USDC one-for-one and capped at 10,000 USDC per cash-out. A larger request is refused.
 
 USDC needs a Base address (`0x` and 40 hex characters) or a Solana address. A new address is checked before anything is sent. Changing the address starts that check over. The address cannot change while a cash-out is pending or while the check is still open. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Each cash-out can send at most 10,000 USDC.
 
@@ -63,7 +63,7 @@ An agent can send you to Balance. Every agent cash-out waits for you, including 
 
 - Wallet access means a player key or token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-project tokens can't.
 - `start_payout_setup` and `get_payout_dashboard_link` return the Balance page. You open Stripe from **Set up payouts with Stripe**. Identity, tax, and bank details are entered on Stripe only after you open that page, never through the agent.
-- `cash_out` sends available earnings to the Express account on that same account. The same $25 minimum and the same 8% + $0.25 fee apply. Money can't be sent anywhere else.
+- `cash_out` sends available earnings to the Express account on that same account. The same $25 minimum and the account's plan fee apply. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Money can't be sent anywhere else.
 - We email you after every cash-out an agent makes, with the amount and the agent's name.
 - Your email must be verified first.
 
