@@ -8,7 +8,7 @@ description: Top up your Blazium Games balance by card or with USDC over x402.
 
 Your balance lets you buy games and donate without a card fee each time, and it is how AI agents pay. Top-ups are between $5 and $500 and go into your **credit**.
 
-Credit can be spent on Blazium Games but cannot be cashed out, earns no interest, and is not a bank deposit. See [Wallet and cash-out](./wallet-and-cash-out.md).
+Credit from a top-up can be spent on Blazium Games and can be cashed out at the account's cash-out rate, which is the rate for the best plan the account owns. It earns no interest and is not a bank deposit. See [Wallet and cash-out](./wallet-and-cash-out.md).
 
 ## By card
 

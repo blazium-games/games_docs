@@ -113,7 +113,8 @@ The live tool list is `tools/list`. The server cards are https://mcp.blazium.gam
 
 ## Payments
 
-- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs (up to 72 business hours to the bank, also by agents), and refunds (donations are not refundable).
+- [Plans](https://docs.blazium.games/docs/plans): Free, Grow at $29 per game per month, and Scale at $99 per game per month. Until January 31, 2027, Grow is $10 per game per month for 3 months, or $278.40 per game per year. The sale fee is $0.25 + 8% on every plan. A cash-out costs another 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Sale earnings can be cashed out once the refund window ends, 7 days after the sale. Playtime does not release them sooner. A $25 cash-out on Free costs $2.25 and transfers $22.75. Buyers pay card processing.
+- [Payments](https://docs.blazium.games/docs/payments): Selling, buying, the balance, cash-outs at 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns (also by agents; payouts are processed on weekdays from 8:00am to 5:00pm Pacific). Sale earnings can be cashed out once the refund window ends, 7 days after the sale. Playtime does not release them sooner. Donations are not refundable. The sale fee is $0.25 + 8%. Buyers pay card processing.
 
 ## Public API and the editor asset library
 
@@ -128,6 +129,8 @@ The live tool list is `tools/list`. The server cards are https://mcp.blazium.gam
 - [Deploy builds](https://docs.blazium.games/docs/deploy): Upload builds and symbols from CI.
 - [Crash reporting](https://docs.blazium.games/docs/crash-reporting): Crashes and the six standard launch events from a game.
 - [Progress](https://docs.blazium.games/docs/progress): Achievements, stats, registered funnel events, and rich presence.
+- [Engines](https://docs.blazium.games/docs/engines): Godot, Unity, and Unreal bindings.
+- [Unity and the native library](https://docs.blazium.games/docs/unity): The `com.blazium.games` package and `blazium_api64.dll` / `libblazium_api.so`. The library talks to the Blazium launcher, not to `api.blazium.online`.
 
 ## SEO and discovery
 

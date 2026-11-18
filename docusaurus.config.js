@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'Blazium Games Docs',
   tagline: 'Blazium Games is a game publishing platform, with an infrastructure focus.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.svg',
 
   future: {
     v4: true,
@@ -65,8 +65,9 @@ const config = {
       navbar: {
         title: 'Blazium Games',
         logo: {
-          alt: 'Blazium Games Logo',
+          alt: 'Blazium Games logo',
           src: 'img/logo.svg',
+          srcDark: 'img/logo-white.svg',
         },
         items: [
           {

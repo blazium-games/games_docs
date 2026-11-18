@@ -6,29 +6,35 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --hue: 300;
-  --ifm-color-primary: oklch(0.55 0.11 var(--hue));
-  --ifm-color-primary-dark: oklch(0.51 0.10 var(--hue));
-  --ifm-color-primary-darker: oklch(0.49 0.10 var(--hue));
-  --ifm-color-primary-darkest: oklch(0.43 0.08 var(--hue));
-  --ifm-color-primary-light: oklch(0.59 0.12 var(--hue));
-  --ifm-color-primary-lighter: oklch(0.61 0.12 var(--hue));
-  --ifm-color-primary-lightest: oklch(0.67 0.14 var(--hue));
+  --ifm-color-primary: #AF40DF;
+  --ifm-color-primary-dark: #9637C0;
+  --ifm-color-primary-darker: #8531A9;
+  --ifm-color-primary-darkest: #692686;
+  --ifm-color-primary-light: #BC5FE4;
+  --ifm-color-primary-lighter: #C575E8;
+  --ifm-color-primary-lightest: #D396ED;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --hue: 300;
-  --ifm-color-primary: oklch(0.73 0.13 var(--hue));
-  --ifm-color-primary-dark: oklch(0.68 0.12 var(--hue));
-  --ifm-color-primary-darker: oklch(0.65 0.12 var(--hue));
-  --ifm-color-primary-darkest: oklch(0.56 0.10 var(--hue));
-  --ifm-color-primary-light: oklch(0.78 0.14 var(--hue));
-  --ifm-color-primary-lighter: oklch(0.79 0.14 var(--hue));
-  --ifm-color-primary-lightest: oklch(0.81 0.13 var(--hue));
+  --ifm-color-primary: #CB83EA;
+  --ifm-color-primary-dark: #BD62E5;
+  --ifm-color-primary-darker: #B54FE2;
+  --ifm-color-primary-darkest: #AF40DF;
+  --ifm-color-primary-light: #D59CEE;
+  --ifm-color-primary-lighter: #DDAFF2;
+  --ifm-color-primary-lightest: #E7C6F5;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.navbar__logo {
+  height: 2rem;
+}
+
+.navbar__logo img {
+  height: 2rem;
 }
 
 .navbar-sidebar__item,

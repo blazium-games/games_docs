@@ -137,6 +137,7 @@ const sidebars = {
         'bug-reporter',
         'anticheat',
         'engines',
+        'unity',
         'steam-auth',
         'project-oauth',
         'steam-import',

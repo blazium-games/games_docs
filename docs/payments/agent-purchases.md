@@ -79,4 +79,4 @@ Agents always pay from the balance. If it is too low (`4020`), the agent can:
 
 Agents cannot pay by card, change their own limits, approve their own requests except with the code you give them, or request refunds.
 
-An agent can send you to Balance. Every cash-out waits for you, including a player key. You're emailed after each cash-out. See [Agent payouts](./wallet-and-cash-out.md#agent-payouts).
+An agent can send you to Balance. Every cash-out waits for you, including a player key. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. You're emailed after each cash-out. See [Agent payouts](./wallet-and-cash-out.md#agent-payouts).
