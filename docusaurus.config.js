@@ -73,7 +73,7 @@ const config = {
     ],
   ],
 
-  plugins: [engineRedirects()],
+  plugins: [engineRedirects],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
