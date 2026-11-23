@@ -3,7 +3,24 @@
 // (when paired with `@ts-check`).
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
+import fs from 'fs';
+import path from 'path';
 import {themes as prismThemes} from 'prism-react-renderer';
+
+function engineRedirects() {
+  return {
+    name: 'engine-redirects',
+    async postBuild({outDir}) {
+      const html = '<!doctype html><meta http-equiv="refresh" content="0; url=/docs/engines"><link rel="canonical" href="/docs/engines"><script>location.replace("/docs/engines")</script>';
+      for (const slug of ['unity', 'godot']) {
+        const dir = path.join(outDir, 'docs', slug);
+        fs.mkdirSync(dir, {recursive: true});
+        fs.writeFileSync(path.join(dir, 'index.html'), html);
+        fs.writeFileSync(path.join(outDir, 'docs', slug + '.html'), html);
+      }
+    },
+  };
+}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -55,6 +72,8 @@ const config = {
       }),
     ],
   ],
+
+  plugins: [engineRedirects()],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
