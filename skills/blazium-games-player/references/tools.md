@@ -30,7 +30,7 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | `get_agent_policy` | read | This agent's spending limit |
 | `start_payout_setup` | buy | Start or continue Stripe payout setup; returns a link only the human opens to enter identity, tax, and bank details |
 | `get_payout_dashboard_link` | buy | One-time Stripe Express dashboard link for the human (`4095` until setup has started) |
-| `cash_out` | buy | Cash out available earnings (`amount_cents`, at least 2500) to the human's own payout account. No approval; the owner is emailed. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. `4021` not enough available, `4057` below the minimum |
+| `cash_out` | buy | Cash out available earnings (`amount_cents`, at least 2500) to the human's own payout account. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. No approval; the owner is emailed. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. `4021` not enough available, `4057` below the minimum |
 | `get_patron_status` | read | The caller's patron memberships: tier, billing, status, period end, and whether the 12 hour check is open. No card data |
 | `create_account` | none | Continue or Generate only when password is omitted. Does not turn on developer mode |
 | `login` | none | The person types the password. Generate is not offered |

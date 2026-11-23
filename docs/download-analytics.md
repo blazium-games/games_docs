@@ -8,7 +8,7 @@ description: How Blazium Games counts downloads of your builds, where they came 
 
 Blazium Games is a game publishing platform, with an infrastructure focus. Every download of one of your build files is recorded, whether it came from the website, the editor asset library, the API, or an agent. Attempts that were refused are recorded too.
 
-You see downloads on your project's **Analytics** page, on the account-wide [Analytics](https://blazium.games/analytics) page, and through the MCP tool `get_game_analytics`. Each covers the last 30 days.
+You see downloads on your project's **Analytics** page, on the account-wide [Analytics](https://blazium.games/dashboard/analytics) page, and through the MCP tool `get_game_analytics`. Each covers the last 30 days.
 
 ## The downloads block
 

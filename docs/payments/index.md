@@ -31,7 +31,7 @@ Verify at [blazium.games/settings/verify](https://blazium.games/settings/verify)
 | Sales tax | Buyer | Calculated by Stripe Tax where Blazium Games is registered |
 | Adding balance by card | Buyer | The card processing fee; no tax |
 | Adding balance with USDC (x402) | Buyer | A 1.5% network fee |
-| Cashing out earnings | Developer | 8% + $0.25 on Free, 7% + $0.25 on Premium, or 6% + $0.25 on Business, from the best plan that account owns. USDC cash-outs also pay the network fee and do not use Stripe. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific |
+| Cashing out earnings | Developer | 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns, in addition to the sale fee. A $25 cash-out on Free costs $2.25 and transfers $22.75. USDC cash-outs do not use Stripe. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific |
 
 A $10 game sold by card: the buyer pays $10, any tax, and the card fee. Blazium Games keeps $1.05 ($0.25 + $0.80), and the developer's pending earnings grow by $8.95.
 
@@ -40,7 +40,7 @@ A $10 game sold by card: the buyer pays $10, any tax, and the card fee. Blazium 
 - [Selling games](./selling.md): prices, donations, the sale fee, and the sales view.
 - [Buying games](./buying.md): the Buy button, paying from the balance, your library, and downloads.
 - [Adding balance](./top-up.md): card top-ups and USDC over x402.
-- [Wallet and cash-out](./wallet-and-cash-out.md): credit, pending and available earnings, Stripe Connect, the $25 minimum, payout timing, and agent payouts.
+- [Wallet and cash-out](./wallet-and-cash-out.md): credit, pending and available earnings, Stripe Connect, the $25 minimum, cash-out once the refund window ends 7 days after the sale, and agent payouts.
 - [Patron memberships](./patrons.md): tiers, posts, the 12 hour check, and why a membership cannot be refunded.
 - [Refunds](./refunds.md): the 7-day and 2-hour rule, non-refundable donations, and how to ask.
 - [Agent purchases](./agent-purchases.md): letting AI agents buy from your balance, with per-agent limits.

@@ -33,7 +33,7 @@ Inside a Discord activity, the addon proxies login, lobby, and API.
 
 ## Unity
 
-The package is [blazium-games/games_unity](https://github.com/blazium-games/games_unity). The package name is `com.blazium.games`. Download `com.blazium.games-<version>.tgz` and install it with Package Manager (**Add package from tarball**), or copy the package into the project as `Packages/com.blazium.games`. Package Manager can import the Client and Dedicated server samples.
+Setup for the package and for `blazium_api64.dll` is on [Unity and the native library](./unity.md). The package is [blazium-games/games_unity](https://github.com/blazium-games/games_unity). The package name is `com.blazium.games`. Download `com.blazium.games-<version>.tgz` and install it with Package Manager (**Add package from tarball**), or copy the package into the project as `Packages/com.blazium.games`. Package Manager can import the Client and Dedicated server samples.
 
 Put `blazium_api64.dll` or `libblazium_api.so` from the redistributable zip in `Assets/Plugins/x86_64`. Put `game.blaze` beside the built player. Add a `BlaziumTick` component to one object. It calls `RunCallbacks` from `Update`. Do not also call `RunCallbacks` every frame.
 

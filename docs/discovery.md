@@ -31,7 +31,7 @@ Blazium Games is a game publishing platform, with an infrastructure focus. The f
 - Preferred languages: `en`
 - **Expires: `2027-09-29T00:00:00.000Z`.** Renew this date before it passes. Clients are expected to ignore an expired file.
 
-The same contact is in the [security policy](https://github.com/blazium-games/support/blob/main/SECURITY.md). Developer sites do not serve this file.
+The same contact is in the [security policy](https://github.com/blazium-games/support/blob/master/SECURITY.md). Developer sites do not serve this file.
 
 Also published:
 
