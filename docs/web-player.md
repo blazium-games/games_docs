@@ -56,13 +56,41 @@ Copy the mappings into the Discord portal. Targets have no `https://`. The short
 | `/blazium/api` | `api.blazium.online` |
 | `/blazium/login` | `login.blazium.online` |
 | `/blazium/lobby` | `lobby.blazium.online`, only when this game's lobby is on as Relay or Scripted |
+| `/blazium/sapi` | `sapi.blazium.online`, only when this game's [Scripted API](./scripted-api.md) is on |
 | `/` | `{uid}.play.blazium.online` |
 
 There is no mapping for `stun.blazium.online` or `turn.blazium.online`. Leave the TURN switch off for this activity. A threaded web build is not served with COOP or COEP. Assign the build that Discord launches. That build cannot be priced, and the launch does not grant a license. A paid game with no assigned build plays its demo. A free game with anonymous play plays the full build. A Discord player still has to sign in and own the game or hold a license before the lobby socket accepts them.
 
 ## Telegram Mini App
 
-Telegram is a launch of the same browser pack, not a second profile. Turn it on with the numeric bot id and paste `https://{uid}.play.blazium.online/` into the bot menu or an inline button. No bot token is stored. The page loads `https://telegram.org/js/telegram-web-app.js`, then calls `Telegram.WebApp.ready()` and `Telegram.WebApp.expand()`. games_service checks `initData` with Telegram's published Ed25519 key and the bot id, and rejects `auth_date` older than one hour. That check is not a Blazium sign-in. The play cookie is `SameSite=None` and `Partitioned`. The launch plays the build assigned to Telegram. That build cannot be priced, and the launch does not charge or grant a license. `connect-src` adds `api.blazium.online`, `login.blazium.online`, and `lobby.blazium.online`. There is no URL-mapping proxy. Threaded and WebGPU packs are refused. Adult listings and hidden pages are not offered.
+Telegram is a launch of the same browser pack, not a second profile. Turn it on with the numeric bot id and paste `https://{uid}.play.blazium.online/` into the bot menu or an inline button. No bot token is stored. The page loads `https://telegram.org/js/telegram-web-app.js`, then calls `Telegram.WebApp.ready()` and `Telegram.WebApp.expand()`. games_service checks `initData` with Telegram's published Ed25519 key and the bot id, and rejects `auth_date` older than one hour. That check is not a Blazium sign-in. The play cookie is `SameSite=None` and `Partitioned`. The launch plays the build assigned to Telegram. That build cannot be priced, and the launch does not charge or grant a license. `connect-src` adds `api.blazium.online`, `login.blazium.online`, and `lobby.blazium.online`, plus `sapi.blazium.online` when this game's Scripted API is on. There is no URL-mapping proxy. Threaded and WebGPU packs are refused. Adult listings and hidden pages are not offered.
+
+## Scripted API and lobbies in the browser
+
+A browser game has no engine host and no login token to hand to a service. It asks the page that serves it. On the play origin (`https://GAME_UID.play.blazium.online`) the player answers `POST /blazium/token`:
+
+```http
+POST /blazium/token
+Content-Type: application/json
+
+{"audience":"sapi"}
+```
+
+`audience` is `sapi` for the [Scripted API](./scripted-api.md#tokens) or `lobby` for the game's lobby. The reply is `token`, `audience`, `game_uid`, `expires_at` and `expires_in`, with `Cache-Control: no-store`. The token is for that one game and audience and is short-lived, so the game asks again when it expires. In a browser it is tied to the play session, not to a login: it stops when the player is banned, the game stops being playable for them, or the play session is a day old. The Godot addon and the Unity WebGL client do this for you.
+
+The route answers only a same-origin request that carries the play cookie (`__Host-play`) of that game. A request without the cookie, from another origin, or with the cookie of another game gets `404`. A visitor who is not signed in, such as a share or embed session, has no token to give. Inside a Discord activity the same path is reached through the `/` mapping at `https://{application id}.discordsays.com/.proxy/blazium/token`. A file in the pack called `blazium/token` is never served.
+
+The page can reach a service only if its Content Security Policy allows it. For the engine shells and for a browser pack, `connect-src` is the play origin plus the connect hosts the platform returns for the game. With the Scripted API on, that includes `https://sapi.blazium.online`. The player keeps a host only if it is an `https` or `wss` origin with no wildcard, user name, path or query. Anything else is dropped. Nothing else needs a setting.
+
+## A build served from your own site
+
+A build you host yourself (your own domain, itch.io, or another site) is not in the play shell, so it has no play cookie. It signs the player in with the sign-in service instead: `POST https://login.blazium.online/api/v1/session`, then poll for the result. See [Sign-in without the launcher](./standalone-sign-in.md). The service accepts the request only from an origin you listed under **Web origins** in the game's sign-in settings (`set_sign_in_providers` through MCP). An origin that is not listed gets a refusal and no CORS headers. The player returns to your page through a **Return URI** you listed, which has to match exactly.
+
+## Shells and sessions
+
+The player serves official Godot web shells for every release it lists, including 4.3, and Blazium 0.6.927 alongside the earlier Blazium releases. A pack for a Godot or Blazium version the player does not host is refused at upload. A request for an engine file the player does not have is `404`.
+
+A single-thread web build (`web_nothreads`) is no longer served with cross-origin isolation. Only threaded and WebGPU builds are, and not inside Discord, Telegram or a Playables preview. The play cookie is `SameSite=None`, `Secure`, `HttpOnly` and `Partitioned` for every launch, so it works inside an embedding page. An embed on another site starts its own play session from the address of the page that embeds it, and that site is added to the frame's allowed ancestors.
 
 ## Other hosts
 

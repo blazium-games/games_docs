@@ -175,6 +175,27 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 
 Payout tools need `mcp:write` or `mcp:money`.
 
+## Scripted API
+
+Full reference: [Scripted API](../../../docs/scripted-api.md). MCP never uploads a pack; `chauffeur sapi publish` does, with the game's deploy key. Turning it on, activating a pack, deleting a secret, and a real `reset_sapi_data` wait for the owner's approval.
+
+| Tool | Inputs | Access | What it does |
+|------|--------|--------|--------------|
+| `get_sapi` | `uid` | | Enabled, anonymous calls, allowed origins, active pack per channel, plan limits, base URL, packs, and the publish command |
+| `set_sapi` | `uid`, optional `enabled`, `anonymous_enabled`, `allowed_origins` | write | Only the fields you pass change. Turning it on waits for the owner's approval |
+| `list_sapi_packs` | `uid` | | Checksum, channel, size, publisher, the channels each serves, and its logic list |
+| `activate_sapi_pack` | `uid`, `checksum`, optional `channel` | write | Serves a stored pack on a channel (default `stable`). An empty checksum stops the channel. Also how you roll back |
+| `get_sapi_logs` | `uid`, optional `logic`, `channel`, `level`, `request_id`, `since`, `until`, `cursor`, `limit` | | Stored script logs, oldest first. Follow `next_cursor`. Secret values are scrubbed |
+| `get_sapi_usage` | `uid` | | Stored data, keys, players and leaderboard entries against the plan |
+| `get_sapi_data` | `uid`, optional `scope`, `channel`, `user`, `prefix`, `after`, `limit` | | One page of keys and values in a scope, at most 200. Follow `next` |
+| `set_sapi_data` | `uid`, `key`, `value`, optional `scope`, `channel`, `user`, `ttl` | write | Writes one value. Obeys the plan's write limits |
+| `delete_sapi_data` | `uid`, `key`, optional `scope`, `channel`, `user` | write | Deletes one key |
+| `reset_sapi_data` | `uid`, `scope`, optional `channel`, `user`, `prefix`, `dry_run`, `confirm` | write | Deletes many keys at once. A dry run counts and changes nothing; a real reset needs `confirm` |
+| `get_sapi_config` | `uid` | | Remote config values per channel, and whether each is public |
+| `set_sapi_config` | `uid`, `name`, optional `channel`, `value`, `public`, `delete` | write | Sets or deletes one config value |
+| `list_sapi_secrets` | `uid` | | Secret names per channel. Values are never returned |
+| `set_sapi_secret` | `uid`, `name`, optional `channel`, `value`, `delete` | keys | Stores or deletes one write-only secret |
+| `list_sapi_schedules` | `uid` | | Scheduled logic, its cron and channel, and recent runs |
 ## Field values
 
 - `visibility`: `draft` (owner and admins), `owner` (owner only), `invisible` (link only), or `public`
@@ -301,6 +322,7 @@ These tools need `mcp:anticheat`. `mcp:read`, `mcp:write`, and **Full access** d
 - set_presence_sharing
 - set_profile_visibility
 - set_sign_in_providers
+- get_sign_in_funnel
 - set_standing_choice
 - sign_out
 - sign_out_everywhere

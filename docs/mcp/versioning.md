@@ -25,9 +25,16 @@ Write clients that ignore fields they don't know.
 
 ## Recent additions
 
+Developer and player servers 1.24:
+
+- The live cards list 233 developer tools and 100 player tools.
+- [Scripted API](../scripted-api.md) tools: `get_sapi`, `set_sapi`, `list_sapi_packs`, `activate_sapi_pack`, `get_sapi_logs`, `get_sapi_usage`, `get_sapi_data`, `set_sapi_data`, `delete_sapi_data`, `reset_sapi_data`, `get_sapi_config`, `set_sapi_config`, `list_sapi_secrets`, `set_sapi_secret`, and `list_sapi_schedules`. Turning the Scripted API on, activating a pack, deleting a secret, and a real reset_sapi_data wait for the owner's approval. get_sapi_logs also takes until and cursor. The player tool list was unchanged.
+- `get_sign_in_funnel` reads the per-game sign-in funnel by day and method.
+- Progress writers accept `scripted_api`.
+
 Developer and player servers 1.23:
 
-- The live cards list 217 developer tools and 100 player tools.
+- At 1.23 the developer server had 217 tools and the player server 100.
 - `set_host_fetch` turns on, turns off, or rotates the file URL a host uses to download one web build. The player server does not return that URL.
 - `skip_authenticator` records that the human chose not to set up an authenticator. Call it only when the human asked.
 - `set_anonymous_downloads` turns the switch on after the human agrees (`confirm_no_license`). The switch covers file downloads, the full web build, and the web demo. `4083` no longer applies to this tool. It needs `mcp:write`.

@@ -8,13 +8,15 @@ A Blazium game uses the engine module. A game built on another Godot engine vend
 
 ## Sign-in
 
-The game opens a websocket to `wss://login.blazium.online/api/v1/connect` with protocols `blazium` and the project id. It sends `getid`, then `getlogin`, and receives the session token. GitHub, X, Discord, and Steam are the providers a game can turn on.
+The game opens a websocket to `wss://login.blazium.online/api/v1/connect` with protocols `blazium` and the project id. It sends `getid`, then `getlogin`, and receives the session token. GitHub, X, Discord, and Steam are the providers a game can turn on, and email and password is a fifth that is off until the developer turns it on. A game with no websocket (a phone, a console, an engine client) starts the same sign-in over HTTPS and polls for the result, and the player can enter a short code at `https://blazium.games/connect` instead of opening a link. See [Sign-in without the launcher](./standalone-sign-in.md).
 
 ## Lobby and connections
 
 Turn lobbies on in the game editor. Choose Relay or Scripted. Relay seats players without a pack. Scripted runs a published Luau pack. A separate switch turns TURN and STUN on or off for that game.
 
 Create or join returns only after the player is admitted. The response includes `lobby_url`, `ice_enabled`, and, when TURN is on, `ice_session_id`. The module opens the lobby socket after that call succeeds. `lobby_seat` and SDK message 19 report `seated`, `lobby_loading`, or `lobby_failed`. The SDK does not open the socket. The `games_plugin` addon opens its own.
+
+A game that cannot hold the login session, such as a browser game, can create, join, and read the status of a lobby with a scoped token for the `lobby` audience instead. A player who signed in without the launcher gets one from the session (see [Sign-in without the launcher](./standalone-sign-in.md)). It asks for one the same way as for the [Scripted API](./scripted-api.md#tokens) and sends it as `Authorization: Bearer <token>`. The token opens these lobby routes for its own game only. Any other route, and another game's lobby, refuses it, and a `sapi` token is not accepted here. The player must still own the game or hold a license, and the lobby must be on.
 
 The lobby socket is `wss://lobby.blazium.online/`. ICE servers come from `https://stun.blazium.online/v1/ice` using `ice_session_id` from that response. Relay uses `wss://turn.blazium.online/v1/signal`. When the TURN switch is off, the game does not request ICE. A presence notice on the lobby socket does not replace that ICE fetch. Achievements, stats, funnel events, and that notice are described in [Progress](./progress.md).
 

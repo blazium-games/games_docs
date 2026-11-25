@@ -66,6 +66,28 @@ This page covers the developer server at `https://mcp.blazium.games/developer`. 
 | `request_mcp_key` | `idempotency_key` (optional) | New account key. **Revokes all previous account keys.** Needs the human's approval. Account only, write |
 | `request_deploy_key` | `uid`, `idempotency_key` (optional) | Creating a new deploy key replaces the previous one. Uploads that used the old key stop working. Returns both values once, after the project owner approves. The access token can be copied later from the Deploy keys tab. The secret cannot. Write |
 
+### Scripted API
+
+See [Scripted API](../scripted-api.md). MCP never uploads a pack; `chauffeur sapi publish` does, with the game's deploy key.
+
+| Tool | Inputs | Notes |
+|------|--------|-------|
+| `get_sapi` | `uid` | Enabled, anonymous calls, allowed origins, active pack per channel, plan limits, base URL, packs, and the publish command |
+| `set_sapi` | `uid`, optional `enabled`, `anonymous_enabled`, `allowed_origins` | Only the fields you pass change. Turning it on waits for the owner's approval. Covered by `mcp:catalog.write` |
+| `list_sapi_packs` | `uid` | Checksum, channel, size, publisher, the channels each serves, and its logic list |
+| `activate_sapi_pack` | `uid`, `checksum`, optional `channel` | Serves a stored pack on a channel (default `stable`). An empty checksum stops the channel. Also how you roll back. Waits for the owner's approval. Covered by `mcp:catalog.write` |
+| `get_sapi_logs` | `uid`, optional `logic`, `channel`, `level`, `request_id`, `since`, `until`, `cursor`, `limit` | Stored script logs, oldest first, at most 1000 lines a page. `since` and `until` take RFC 3339 or Unix milliseconds. When a page is full the reply has `next_cursor`; pass it as `cursor` for the older lines. Secret values are scrubbed |
+| `get_sapi_usage` | `uid` | Stored data, keys, players and leaderboard entries against the plan. `read_only` is true while writes are blocked |
+| `get_sapi_data` | `uid`, optional `scope`, `channel`, `user`, `prefix`, `after`, `limit` | One page of keys and values in a scope (`global`, `channel` or `user`), at most 200. Follow `next` |
+| `set_sapi_data` | `uid`, `key`, `value`, optional `scope`, `channel`, `user`, `ttl` | Writes one value. Obeys the plan's write limits. Covered by `mcp:catalog.write` |
+| `delete_sapi_data` | `uid`, `key`, optional `scope`, `channel`, `user` | Deletes one key. Deleting all of a game's data is done on the website. Covered by `mcp:catalog.write` |
+| `reset_sapi_data` | `uid`, `scope`, optional `channel`, `user`, `prefix`, `dry_run`, `confirm` | Deletes many keys at once: a scope, one channel, one player, or the keys under a prefix. `scope` is required, and so is `dry_run` or `confirm`. A dry run counts keys and bytes and changes nothing. A real reset needs `confirm` and waits for the owner's approval. The whole-game purge is done on the website. Covered by `mcp:catalog.write` |
+| `get_sapi_config` | `uid` | Remote config values per channel, and whether each is public |
+| `set_sapi_config` | `uid`, `name`, optional `channel`, `value`, `public`, `delete` | Sets or deletes one value for a channel, or for every channel when `channel` is empty. Covered by `mcp:catalog.write` |
+| `list_sapi_secrets` | `uid` | Secret names per channel. Values are never returned |
+| `set_sapi_secret` | `uid`, `name`, optional `channel`, `value`, `delete` | Stores or deletes one write-only secret. No tool returns the value. Deleting waits for the owner's approval. Covered by `mcp:keys.manage` |
+| `list_sapi_schedules` | `uid` | Scheduled logic, its cron and channel, and recent runs |
+
 ### Releases and trust
 
 Every build file belongs to a channel: `stable` (the default), `beta`, `dev`, or your own lowercase name. Each channel points at one build. A clean upload moves beta, dev, and custom channels forward on its own. Stable waits until you call `promote_build`. `rollback_channel` moves a channel by hand. Players see the build each channel points at, plus anything uploaded after the last move. `dev` is only visible to the game's owner and admins, and `beta` only to players who joined the beta.
@@ -190,7 +212,7 @@ Keys give a game to someone for free, for press, bundles, or giveaways. Each cod
 
 ### Approvals for risky actions
 
-Over MCP, rotating an account or deploy key, deleting a deploy key, creating more than 100 game keys at once, adding a project admin, promoting to `stable`, and deleting a game or build wait for the account owner, even with full access. The call returns HTTP 202 with `approval_required: true`, code `4214`, `email_sent`, and an `approval` object whose `uid` you pass as `approval_id` and whose `confirm_url` the owner can open. The owner also gets an email with the link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once and expires if nobody decides. Project tokens can't use `get_approval` or `confirm_approval` (`4030`), so approve those from the email. On the website these actions don't need an approval.
+Over MCP, rotating an account or deploy key, deleting a deploy key, creating more than 100 game keys at once, adding a project admin, promoting to `stable`, turning the Scripted API on, activating or stopping a Scripted API pack, deleting a Scripted API secret, and deleting a game or build wait for the account owner, even with full access. The call returns HTTP 202 with `approval_required: true`, code `4214`, `email_sent`, and an `approval` object whose `uid` you pass as `approval_id` and whose `confirm_url` the owner can open. The owner also gets an email with the link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once and expires if nobody decides. Project tokens can't use `get_approval` or `confirm_approval` (`4030`), so approve those from the email. On the website these actions don't need an approval.
 
 ### Scopes
 
@@ -198,7 +220,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 
 | Scope | Covers |
 |-------|--------|
-| `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, achievements, stats, funnels, presence writers, dependencies, engine compatibility, license kind, media, review replies, new-review webhooks, mod settings, press kits, community tags |
+| `mcp:catalog.write` | Game pages, taxonomy, similar titles, lobby settings, Scripted API settings, packs, data and config, achievements, stats, funnels, presence writers, dependencies, engine compatibility, license kind, media, review replies, new-review webhooks, mod settings, press kits, community tags |
 | `mcp:build.write` | Builds, channels, deploy info, scan status, symbols, bundle check |
 | `mcp:crash.read` | Crash reports, crash groups, crash analysis, and reading the crash webhook setting and signing key |
 | `mcp:crash.write` | Changing crash webhooks and refreshing the signing key. Also covers the crash read routes |
@@ -206,7 +228,7 @@ Over MCP, rotating an account or deploy key, deleting a deploy key, creating mor
 | `mcp:bugs.write` | Updating bug tickets and changing the in-game bug reporter. Also covers the read routes |
 | `mcp:steam.manage` | Reading and changing Steam auth settings. The Web API key and ticket secret can be set and are never returned |
 | `mcp:analytics.read` | Visitor analytics and events |
-| `mcp:keys.manage` | Deploy keys, MCP keys, game server keys, MCP access for admins, and project admins |
+| `mcp:keys.manage` | Deploy keys, MCP keys, game server keys, Scripted API secrets, MCP access for admins, and project admins |
 | `mcp:money` | Pricing, editions, sales, sale and refund webhooks, game keys and gift links, wallet, purchases, library, downloads |
 | `mcp:anticheat` | Anticheat for one game. Not included in `mcp:read`, `mcp:write`, or **Full access**. See [Anticheat](#anticheat). |
 
@@ -254,7 +276,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 213 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
+Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 232 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -466,6 +488,7 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 - get_game_display_name
 - get_my_inventory
 - get_patch_notices
+- get_sign_in_funnel
 - get_sign_in_providers
 - list_article_comments
 - list_asset_library

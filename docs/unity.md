@@ -7,9 +7,9 @@ description: Install the Unity package, place the native DLL, and call init, aut
 
 # Unity and the native library
 
-The Unity package is [blazium-games/games_unity](https://github.com/blazium-games/games_unity). The package name is `com.blazium.games`, version 2.0.0, for Unity 2021.3. It is MIT licensed. It is a thin binding over the native library in [blazium-games/games_sdk](https://github.com/blazium-games/games_sdk). That library's `BLAZIUM_SDK_VERSION` is `2.0.0`.
+The Unity package is [blazium-games/games_unity](https://github.com/blazium-games/games_unity). The package name is `com.blazium.games`, version 2.2.0, for Unity 2021.3. It is MIT licensed. It is a thin binding over the native library in [blazium-games/games_sdk](https://github.com/blazium-games/games_sdk). That library's `BLAZIUM_SDK_VERSION` is `2.2.0`. The standalone calls need 2.2.0; an older library answers `sdk_too_old` to them.
 
-The DLL does not call `api.blazium.online`. `BlaziumAPI_Init` and `BlaziumGameServer_Init` read `game.blaze`, then connect to a running Blazium host over `\\.\pipe\blazium` on Windows, or `$XDG_RUNTIME_DIR/blazium.sock` on Linux (otherwise `/tmp/blazium.sock`). That host is `games_module`, compiled into the Windows and Linux export templates. macOS has no player build of the library. This package does not proxy a Discord activity.
+This page is the launcher path. A game that ships outside the launcher (web, mobile, console, or its own store build) signs the player in with `BlaziumPlayerSession` or the SDK's standalone mode instead; see [Sign-in without the launcher](./standalone-sign-in.md). On the launcher path the DLL does not call `api.blazium.online`. `BlaziumAPI_Init` and `BlaziumGameServer_Init` read `game.blaze`, then connect to a running Blazium host over `\\.\pipe\blazium` on Windows, or `$XDG_RUNTIME_DIR/blazium.sock` on Linux (otherwise `/tmp/blazium.sock`). That host is `games_module`, compiled into the Windows and Linux export templates. macOS has no player build of the library. This package does not proxy a Discord activity.
 
 Godot uses [games_plugin](https://github.com/blazium-games/games_plugin) and does not load this library. Unreal uses [games_unreal](https://github.com/blazium-games/games_unreal) and loads the same library from beside the game executable. The short comparison is on [Engines](./engines.md).
 
@@ -93,7 +93,7 @@ The DLL cannot start a login and does not browse the catalog. After a successful
 
 ## Auth
 
-A client init that returns `OK` still has to have a logged-on user. The client sample shuts down and logs an error when `BlaziumUser.IsLoggedOn()` is false.
+A client init that returns `OK` still has to have a logged-on user (on the launcher path; a `"mode": "standalone"` game gets `OK` with nobody signed in, then calls `StartLogin` and reads `LoginState`). The client sample shuts down and logs an error when `BlaziumUser.IsLoggedOn()` is false.
 
 | Method | Returns |
 | --- | --- |
@@ -128,6 +128,15 @@ A client init that returns `OK` still has to have a logged-on user. The client s
 `BugNotices()` and `AckBugNotices(uidsJson)` read and acknowledge bug notices. `PatchNotices()` and `AckPatchNotices(uidsJson)` do the same for patch notices. `uidsJson` is a JSON string.
 
 `TransferItem` is the player call. `SocketItem`, `UnsocketItem`, `SetItemStats`, and `UseItem` are forwarded to the library. The server still rejects those four on a player session. They need the owner, an accepted admin, or a mint key.
+
+## Tokens for the Scripted API and lobbies
+
+| Method | Returns |
+| --- | --- |
+| `RequestToken(audience)` | The library's JSON string for `"sapi"` or `"lobby"`: `ok`, `token`, `audience`, `game_uid`, `expires_at` and `expires_in`, or `ok: false` with `code` and `error`. |
+| `ForgetTokens()` | Drops held tokens, so the next request asks again. Call it after a `401`. |
+
+The library asks the host for the token and the host asks the platform. The package never mints a token and never sees the login token. A token is for this game and one audience, and it expires within minutes. Failure codes include `bad_audience`, `not_logged_on`, `no_host`, `server_mode`, `user_changed` and `host_too_old` (the engine build is older than tokens). A library older than SDK 2.1.0 returns `sdk_too_old`. `BlaziumSapi` and `BlaziumUnitySapi.Create()` use these calls for you; see [Scripted API](./scripted-api.md#calling-from-a-game). Without a client session, or in a dedicated server, no token is given.
 
 ## Lobbies
 
