@@ -76,7 +76,7 @@ Content-Type: application/json
 {"audience":"sapi"}
 ```
 
-`audience` is `sapi` for the [Scripted API](./scripted-api.md#tokens) or `lobby` for the game's lobby. The reply is `token`, `audience`, `game_uid`, `expires_at` and `expires_in`, with `Cache-Control: no-store`. The token is for that one game and audience and is short-lived, so the game asks again when it expires. The Godot addon and the Unity WebGL client do this for you.
+`audience` is `sapi` for the [Scripted API](./scripted-api.md#tokens) or `lobby` for the game's lobby. The reply is `token`, `audience`, `game_uid`, `expires_at` and `expires_in`, with `Cache-Control: no-store`. The token is for that one game and audience and is short-lived, so the game asks again when it expires. In a browser it is tied to the play session, not to a login: it stops when the player is banned, the game stops being playable for them, or the play session is a day old. The Godot addon and the Unity WebGL client do this for you.
 
 The route answers only a same-origin request that carries the play cookie (`__Host-play`) of that game. A request without the cookie, from another origin, or with the cookie of another game gets `404`. A visitor who is not signed in, such as a share or embed session, has no token to give. Inside a Discord activity the same path is reached through the `/` mapping at `https://{application id}.discordsays.com/.proxy/blazium/token`. A file in the pack called `blazium/token` is never served.
 
