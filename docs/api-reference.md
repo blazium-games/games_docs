@@ -67,6 +67,8 @@ The editor asset library is the exception. Its successful answers are the raw ob
 
 An invalid or expired token returns `401`. It is never treated as anonymous.
 
+Codes `4300` to `4399` come from the [Scripted API](./scripted-api.md) at `sapi.blazium.online`, and pass through unchanged when the website, chauffeur or MCP reach it for you. The [Scripted API reference](./scripted-api-reference.md#error-codes) lists each one.
+
 ## Rate limits
 
 Unless a row says otherwise, these limits are per IP address, per minute. Past a limit the answer is `429`.

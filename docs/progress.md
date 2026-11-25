@@ -16,6 +16,7 @@ Each achievement, stat, and funnel event names the writers that may change it. A
 | `game_server` | The studio's official dedicated server, using a game server key. May name any player who owns the game. |
 | `private_server` | A community server, using a key with that role. Same ownership check, and only definitions that list this role. |
 | `scripted_lobby` | The published Luau pack running on the lobby host, for a player seated in that lobby. |
+| `scripted_api` | The game's [Scripted API](./scripted-api.md) logic, through `progress.unlock`, `progress.stat`, and `progress.event`, for the player the logic names. |
 
 Removing `client` stops a modified client from granting the stat. The game server key is not the deploy key and not an anticheat key. The secret is returned once.
 

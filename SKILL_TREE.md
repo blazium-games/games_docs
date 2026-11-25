@@ -22,6 +22,7 @@ New to Blazium Games in Cursor? Start with [blazium-games-get-started](skills/bl
 | [blazium-games-unity](skills/blazium-games-unity/SKILL.md) | Unity package `com.blazium.games` | `games_unity` |
 | [blazium-games-unreal](skills/blazium-games-unreal/SKILL.md) | Unreal plugin `BlaziumGames` | `games_unreal` |
 | [blazium-games-lobby-pack](skills/blazium-games-lobby-pack/SKILL.md) | Publish a Luau lobby pack | `chauffeur lobby publish` |
+| [blazium-games-sapi](skills/blazium-games-sapi/SKILL.md) | Write, test, and publish Scripted API logic with stored data, leaderboards, and schedules | `chauffeur sapi publish`, `get_sapi`, `activate_sapi_pack` |
 | [blazium-games-player](skills/blazium-games-player/SKILL.md) | Connect the player server, get recommendations, review games, report bugs, check the library and spending limit | `recommend`, `search_catalog`, `write_review`, `get_library` |
 | [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buy, donate, top up, and download with the human's approval | `quote_purchase`, `purchase_game`, `get_wallet` |
 
@@ -31,6 +32,7 @@ New to Blazium Games in Cursor? Start with [blazium-games-get-started](skills/bl
 - **Sell a game:** store-page (verify email, set a price), deploy
 - **Buy a game:** player, purchases
 - **Existing game, new build:** deploy, crash-reporting
+- **Game logic without a server (scores, rewards, leaderboards):** sapi
 - **Players report crashes:** debug-crash
 - **Find something to play:** player
 - **Leaked key:** keys

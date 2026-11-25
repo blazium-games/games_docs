@@ -25,6 +25,12 @@ Write clients that ignore fields they don't know.
 
 ## Recent additions
 
+Developer and player servers 1.24:
+
+- The live cards list 231 developer tools and 100 player tools.
+- [Scripted API](../scripted-api.md) tools: `get_sapi`, `set_sapi`, `list_sapi_packs`, `activate_sapi_pack`, `get_sapi_logs`, `get_sapi_usage`, `get_sapi_data`, `set_sapi_data`, `delete_sapi_data`, `get_sapi_config`, `set_sapi_config`, `list_sapi_secrets`, `set_sapi_secret`, and `list_sapi_schedules`. Turning the Scripted API on, activating a pack, and deleting a secret wait for the owner's approval. The player tool list was unchanged.
+- Progress writers accept `scripted_api`.
+
 Developer and player servers 1.23:
 
 - The live cards list 217 developer tools and 100 player tools.

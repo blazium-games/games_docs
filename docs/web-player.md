@@ -56,6 +56,7 @@ Copy the mappings into the Discord portal. Targets have no `https://`. The short
 | `/blazium/api` | `api.blazium.online` |
 | `/blazium/login` | `login.blazium.online` |
 | `/blazium/lobby` | `lobby.blazium.online`, only when this game's lobby is on as Relay or Scripted |
+| `/blazium/sapi` | `sapi.blazium.online`, only when this game's [Scripted API](./scripted-api.md) is on |
 | `/` | `{uid}.play.blazium.online` |
 
 There is no mapping for `stun.blazium.online` or `turn.blazium.online`. Leave the TURN switch off for this activity. A threaded web build is not served with COOP or COEP. Assign the build that Discord launches. That build cannot be priced, and the launch does not grant a license. A paid game with no assigned build plays its demo. A free game with anonymous play plays the full build. A Discord player still has to sign in and own the game or hold a license before the lobby socket accepts them.

@@ -191,6 +191,38 @@ chauffeur lobby status
 
 See [Multiplayer](../multiplayer.md).
 
+## Scripted API
+
+`chauffeur sapi` publishes and manages [Scripted API](../scripted-api.md) logic for the deploy key's game.
+
+| Command | What it does |
+|---------|--------------|
+| `chauffeur sapi validate --dir <path> [--plan free]` | Check a pack against a plan's limits with the local engine |
+| `chauffeur sapi test --dir <path>` | Run the pack's `*.test.luau` files |
+| `chauffeur sapi dev --dir <path> [--port 8787] [--users users.json]` | Serve the pack at `http://127.0.0.1:8787/v1/dev/<logic>` and reload on change |
+| `chauffeur sapi publish --dir <path> [--channel stable] [--activate]` | Zip every `.lua` and `.luau` file and upload it as a pack |
+| `chauffeur sapi status` | Settings, active pack per channel, and the plan's limits |
+| `chauffeur sapi packs` | Stored packs |
+| `chauffeur sapi activate <checksum\|none> [--channel stable]` | Serve a stored pack on a channel, roll back, or stop the channel |
+| `chauffeur sapi logs [--logic] [--channel] [--level] [--since] [--request-id] [--limit 200]` | Recent script logs |
+| `chauffeur sapi usage` | Stored data against the plan, and whether writes are blocked |
+| `chauffeur sapi config get\|set <name> <json>\|delete <name> [--channel] [--public]` | Remote config values |
+| `chauffeur sapi secret list\|set <name>\|delete <name> [--channel] [--from-file]` | Write-only secrets. `set` reads the value from stdin unless `--from-file` is given |
+| `chauffeur sapi schedules` and `chauffeur sapi schedules run <logic>` | Scheduled logic, recent runs, and a run now |
+| `chauffeur sapi data list\|get\|set\|delete [--scope global\|channel\|user] [--channel] [--user]` | Read and change stored data |
+| `chauffeur sapi data export [--out file]` and `chauffeur sapi data import <file>` | Copy a scope to and from JSON |
+| `chauffeur sapi data copy --channel <from> --to <to>` | Copy one channel's data into another |
+
+`validate`, `test` and `dev` run the `games_sapi` binary from `--binary`, `SAPI_BINARY`, `PATH` or chauffeur's cache. On Linux x86_64 chauffeur downloads it when none is found. A value that is not JSON is stored as a string. Secret values are at most 16 KiB; when the deploy secret also comes from stdin (`--secret-stdin`), pass the value with `--from-file`. A deploy key cannot delete all of a game's data; do that on the website.
+
+```bash
+chauffeur sapi test --dir sapi
+chauffeur sapi publish --dir sapi --channel beta --activate
+chauffeur sapi config set motd '"Double XP this weekend"' --public
+printf '%s' "$SHOP_SECRET" | chauffeur sapi secret set shop_hook
+chauffeur sapi data get best --scope user --user 5f1c2d3e-0000-4000-8000-000000000000
+```
+
 ## Progress
 
 `chauffeur progress apply --file progress.yml` replaces each section the file includes: `achievements`, `stats`, `funnels`, and `presence_writers`. A missing section is left as it is. The file starts with `spec: progress`. `chauffeur progress show` prints the current definitions. `--json` works on both. Server keys are not in this file. See [Progress](../progress.md).
@@ -230,4 +262,4 @@ Rank, billing, and unlock stay fixed after a tier is created. `--active false` h
 
 ## What chauffeur doesn't do
 
-Promoting builds between channels, rolling back, changing prices and editing store page text happen on the website or through [MCP](../mcp/index.md). A deploy key can't do them.
+Promoting builds between channels, rolling back builds, changing prices and editing store page text happen on the website or through [MCP](../mcp/index.md). A deploy key can't do them.

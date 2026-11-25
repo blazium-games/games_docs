@@ -130,6 +130,8 @@ const sidebars = {
           ],
         },
         'multiplayer',
+        'scripted-api',
+        'scripted-api-reference',
         'progress',
         'web-player',
         'inventory',
