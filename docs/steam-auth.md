@@ -64,7 +64,7 @@ The answer:
 }
 ```
 
-`blazium_user_uid` is only there when the player linked Steam. A token is issued only when Steam accepts the ticket, the account owns the game, and it has no publisher ban. The game sends the token to your servers, which check it as below.
+`blazium_user_uid` is only there when the player linked Steam. A Steam session whose Steam account is linked to a Blazium account can also ask for the short-lived `sapi`, `lobby`, and `server` tokens that the Scripted API, lobbies, and your servers accept: `POST /api/v1/steam/{game_uid}/tokens` with `{"token": "<session token>", "audience": "sapi"}`. A Steam session with no linked account gets no token, and it has no chat, because chat belongs to an account. The tokens end when the Steam session is signed out, expires, or is revoked. See [Sign-in without the launcher](./standalone-sign-in.md). A token is issued only when Steam accepts the ticket, the account owns the game, and it has no publisher ban. The game sends the token to your servers, which check it as below.
 
 The exact URLs for your listing are on its Steam tab, under **Endpoints**.
 

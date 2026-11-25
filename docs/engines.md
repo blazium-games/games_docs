@@ -45,7 +45,7 @@ The public `ReportBug` method always sends the in-game report. An empty build id
 
 ## Unreal
 
-The plugin is [blazium-games/games_unreal](https://github.com/blazium-games/games_unreal). Copy the `BlaziumGames` folder from `BlaziumGames-<version>.zip` to `Plugins/BlaziumGames` and enable Blazium Games. Windows (`Win64`) and Linux are the supported targets.
+The plugin is [blazium-games/games_unreal](https://github.com/blazium-games/games_unreal). Copy the `BlaziumGames` folder from `BlaziumGames-<version>.zip` to `Plugins/BlaziumGames` and enable Blazium Games. Windows (`Win64`) and Linux are the targets for the native library. The player session (`UBlaziumPlayerSession`) needs no native library, so the module also loads on Mac, Android, and iOS, and on a console once you add its platform name to `PlatformAllowList` in `BlaziumGames.uplugin`. See [Sign-in without the launcher](./standalone-sign-in.md).
 
 Put `blazium_api64.dll` or `libblazium_api.so` from the redistributable zip, and `game.blaze`, beside the game executable. `UBlaziumSubsystem` calls `RunCallbacks` while a session is open. Do not also call it every frame. Blueprint nodes are in the Blazium category.
 
@@ -63,9 +63,19 @@ UTF-8 JSON beside the player executable. Unity and Unreal do not write this file
 }
 ```
 
-`game_uid` is the project id on blazium.games. No other keys are allowed.
+`game_uid` is the project id on blazium.games. The only other keys are `mode` and `persist`, below.
 
-The native library talks to the Blazium launcher on the player's machine. The Unity package and the Unreal plugin do not call `api.blazium.online` for sign-in. Their Scripted API clients call `sapi.blazium.online`. Lobby, ICE, Steam ticket, and bug report calls return JSON.
+By default (`"mode": "launcher"`) the native library talks to the Blazium launcher on the player's machine. With `"mode": "standalone"` there is no launcher: the SDK signs the player in itself over HTTPS, and `"persist": true` keeps the session between runs. See [Sign-in without the launcher](./standalone-sign-in.md).
+
+```json
+{
+  "game_uid": "550e8400-e29b-41d4-a716-446655440000",
+  "mode": "standalone",
+  "persist": true
+}
+```
+
+The Unity package and the Unreal plugin also have an engine-native player session that needs no native library and no launcher: `BlaziumPlayerSession` in Unity and `UBlaziumPlayerSession` in Unreal. They call `login.blazium.online` and `api.blazium.online` over HTTPS for sign-in, renewal, and tokens. Their Scripted API clients call `sapi.blazium.online`. Lobby, ICE, Steam ticket, and bug report calls return JSON.
 
 ## Bug reports
 

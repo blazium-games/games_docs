@@ -82,6 +82,10 @@ The route answers only a same-origin request that carries the play cookie (`__Ho
 
 The page can reach a service only if its Content Security Policy allows it. For the engine shells and for a browser pack, `connect-src` is the play origin plus the connect hosts the platform returns for the game. With the Scripted API on, that includes `https://sapi.blazium.online`. The player keeps a host only if it is an `https` or `wss` origin with no wildcard, user name, path or query. Anything else is dropped. Nothing else needs a setting.
 
+## A build served from your own site
+
+A build you host yourself (your own domain, itch.io, or another site) is not in the play shell, so it has no play cookie. It signs the player in with the sign-in service instead: `POST https://login.blazium.online/api/v1/session`, then poll for the result. See [Sign-in without the launcher](./standalone-sign-in.md). The service accepts the request only from an origin you listed under **Web origins** in the game's sign-in settings (`set_sign_in_providers` through MCP). An origin that is not listed gets a refusal and no CORS headers. The player returns to your page through a **Return URI** you listed, which has to match exactly.
+
 ## Shells and sessions
 
 The player serves official Godot web shells for every release it lists, including 4.3, and Blazium 0.6.927 alongside the earlier Blazium releases. A pack for a Godot or Blazium version the player does not host is refused at upload. A request for an engine file the player does not have is `404`.

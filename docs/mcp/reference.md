@@ -488,6 +488,7 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 - get_game_display_name
 - get_my_inventory
 - get_patch_notices
+- get_sign_in_funnel
 - get_sign_in_providers
 - list_article_comments
 - list_asset_library

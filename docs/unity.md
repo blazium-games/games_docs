@@ -7,9 +7,9 @@ description: Install the Unity package, place the native DLL, and call init, aut
 
 # Unity and the native library
 
-The Unity package is [blazium-games/games_unity](https://github.com/blazium-games/games_unity). The package name is `com.blazium.games`, version 2.0.0, for Unity 2021.3. It is MIT licensed. It is a thin binding over the native library in [blazium-games/games_sdk](https://github.com/blazium-games/games_sdk). That library's `BLAZIUM_SDK_VERSION` is `2.0.0`.
+The Unity package is [blazium-games/games_unity](https://github.com/blazium-games/games_unity). The package name is `com.blazium.games`, version 2.2.0, for Unity 2021.3. It is MIT licensed. It is a thin binding over the native library in [blazium-games/games_sdk](https://github.com/blazium-games/games_sdk). That library's `BLAZIUM_SDK_VERSION` is `2.2.0`. The standalone calls need 2.2.0; an older library answers `sdk_too_old` to them.
 
-The DLL does not call `api.blazium.online`. `BlaziumAPI_Init` and `BlaziumGameServer_Init` read `game.blaze`, then connect to a running Blazium host over `\\.\pipe\blazium` on Windows, or `$XDG_RUNTIME_DIR/blazium.sock` on Linux (otherwise `/tmp/blazium.sock`). That host is `games_module`, compiled into the Windows and Linux export templates. macOS has no player build of the library. This package does not proxy a Discord activity.
+This page is the launcher path. A game that ships outside the launcher (web, mobile, console, or its own store build) signs the player in with `BlaziumPlayerSession` or the SDK's standalone mode instead; see [Sign-in without the launcher](./standalone-sign-in.md). On the launcher path the DLL does not call `api.blazium.online`. `BlaziumAPI_Init` and `BlaziumGameServer_Init` read `game.blaze`, then connect to a running Blazium host over `\\.\pipe\blazium` on Windows, or `$XDG_RUNTIME_DIR/blazium.sock` on Linux (otherwise `/tmp/blazium.sock`). That host is `games_module`, compiled into the Windows and Linux export templates. macOS has no player build of the library. This package does not proxy a Discord activity.
 
 Godot uses [games_plugin](https://github.com/blazium-games/games_plugin) and does not load this library. Unreal uses [games_unreal](https://github.com/blazium-games/games_unreal) and loads the same library from beside the game executable. The short comparison is on [Engines](./engines.md).
 
@@ -93,7 +93,7 @@ The DLL cannot start a login and does not browse the catalog. After a successful
 
 ## Auth
 
-A client init that returns `OK` still has to have a logged-on user. The client sample shuts down and logs an error when `BlaziumUser.IsLoggedOn()` is false.
+A client init that returns `OK` still has to have a logged-on user (on the launcher path; a `"mode": "standalone"` game gets `OK` with nobody signed in, then calls `StartLogin` and reads `LoginState`). The client sample shuts down and logs an error when `BlaziumUser.IsLoggedOn()` is false.
 
 | Method | Returns |
 | --- | --- |

@@ -301,6 +301,7 @@ These tools need `mcp:anticheat`. `mcp:read`, `mcp:write`, and **Full access** d
 - set_presence_sharing
 - set_profile_visibility
 - set_sign_in_providers
+- get_sign_in_funnel
 - set_standing_choice
 - sign_out
 - sign_out_everywhere

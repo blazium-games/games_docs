@@ -122,5 +122,14 @@ The asset library, signed-out downloads, and the OpenAPI document allow any orig
 | `POST /api/v1/steam/{game_uid}/auth`, `/refresh` | Trade a Steam session ticket for a session token, or refresh one. See [Steam auth verification](./steam-auth.md). |
 | `POST /api/v1/steam/{game_uid}/server/verify`, `/server/revoke` | Check or revoke session tokens with the game's Steam auth key. |
 | `GET /api/v1/steam/{game_uid}/server/ownership/{steam_id}` | Ask whether a Steam account owns the game, with the Steam auth key. |
+| `POST /api/v1/steam/{game_uid}/tokens` | A Steam session whose Steam account is linked to a Blazium account asks for a short-lived `sapi`, `lobby`, or `server` token. See [Sign-in without the launcher](./standalone-sign-in.md). |
+| `GET /api/v1/public/games/{game_id}/providers` | The sign-in methods, web origins, and return links the sign-in page uses for a game, and the game's name. |
+| `POST /api/v1/public/token/refresh` | Renew a session. A renewed session ends the short-lived tokens made with the old one. |
+| `POST /api/v1/private/games/{game_uid}/tokens` | A short-lived `sapi`, `lobby`, or `server` token for one game, for a signed-in player. |
+| `POST /api/v1/private/irc/token` | A ten minute password for the Blazium IRC server, for a signed-in player with a username. |
+| `POST /api/v1/server/verify-player` | A dedicated server or backend trades a player's `server` token for who they are. Send the game's server key in `X-Server-Key`. A token works once. |
+| `GET /api/v1/private/games/{game_uid}/sign-in-stats` | Counts of sign-ins opened, pending, and finished per day and method, for the game's team. |
+
+The sign-in service (`login.blazium.online`) has its own calls for a game that cannot hold a websocket: `POST /api/v1/session`, `GET /api/v1/session/{cid}`, and `DELETE /api/v1/session/{cid}`. See [Sign-in without the launcher](./standalone-sign-in.md#the-http-calls).
 
 File uploads go to `uploader.blazium.online` and are described in [Deploy builds](./deploy.md) and the [chauffeur CLI](./cli/index.md).
