@@ -76,11 +76,12 @@ See [Scripted API](../scripted-api.md). MCP never uploads a pack; `chauffeur sap
 | `set_sapi` | `uid`, optional `enabled`, `anonymous_enabled`, `allowed_origins` | Only the fields you pass change. Turning it on waits for the owner's approval. Covered by `mcp:catalog.write` |
 | `list_sapi_packs` | `uid` | Checksum, channel, size, publisher, the channels each serves, and its logic list |
 | `activate_sapi_pack` | `uid`, `checksum`, optional `channel` | Serves a stored pack on a channel (default `stable`). An empty checksum stops the channel. Also how you roll back. Waits for the owner's approval. Covered by `mcp:catalog.write` |
-| `get_sapi_logs` | `uid`, optional `logic`, `channel`, `level`, `request_id`, `since`, `limit` | Recent script logs, at most 1000 lines. Secret values are scrubbed |
+| `get_sapi_logs` | `uid`, optional `logic`, `channel`, `level`, `request_id`, `since`, `until`, `cursor`, `limit` | Stored script logs, oldest first, at most 1000 lines a page. `since` and `until` take RFC 3339 or Unix milliseconds. When a page is full the reply has `next_cursor`; pass it as `cursor` for the older lines. Secret values are scrubbed |
 | `get_sapi_usage` | `uid` | Stored data, keys, players and leaderboard entries against the plan. `read_only` is true while writes are blocked |
 | `get_sapi_data` | `uid`, optional `scope`, `channel`, `user`, `prefix`, `after`, `limit` | One page of keys and values in a scope (`global`, `channel` or `user`), at most 200. Follow `next` |
 | `set_sapi_data` | `uid`, `key`, `value`, optional `scope`, `channel`, `user`, `ttl` | Writes one value. Obeys the plan's write limits. Covered by `mcp:catalog.write` |
 | `delete_sapi_data` | `uid`, `key`, optional `scope`, `channel`, `user` | Deletes one key. Deleting all of a game's data is done on the website. Covered by `mcp:catalog.write` |
+| `reset_sapi_data` | `uid`, `scope`, optional `channel`, `user`, `prefix`, `dry_run`, `confirm` | Deletes many keys at once: a scope, one channel, one player, or the keys under a prefix. `scope` is required, and so is `dry_run` or `confirm`. A dry run counts keys and bytes and changes nothing. A real reset needs `confirm` and waits for the owner's approval. The whole-game purge is done on the website. Covered by `mcp:catalog.write` |
 | `get_sapi_config` | `uid` | Remote config values per channel, and whether each is public |
 | `set_sapi_config` | `uid`, `name`, optional `channel`, `value`, `public`, `delete` | Sets or deletes one value for a channel, or for every channel when `channel` is empty. Covered by `mcp:catalog.write` |
 | `list_sapi_secrets` | `uid` | Secret names per channel. Values are never returned |
@@ -275,7 +276,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 231 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
+Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 232 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|

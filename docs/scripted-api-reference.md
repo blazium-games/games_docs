@@ -18,7 +18,7 @@ Inside a Discord activity the same path is under `https://{applicationId}.discor
 
 | Header | Meaning |
 |---|---|
-| `Authorization: Bearer <token>` | A player's Blazium session. Required by `auth = "user"`. |
+| `Authorization: Bearer <token>` | A scoped token for this game and the `sapi` audience, requested for the signed-in player. Required by `auth = "user"`. A login session token is not accepted, and a token for another game is refused. See [Tokens](./scripted-api.md#tokens). |
 | `X-Sapi-Key` | A game server key. Runs any logic as the `service` caller. |
 | `X-Sapi-User` | With `X-Sapi-Key`, the player id the call acts for (at most 64 characters). |
 | `X-Sapi-Timestamp`, `X-Sapi-Nonce`, `X-Sapi-Signature` | A [signed request](#signed-requests). |
@@ -168,7 +168,7 @@ Errors use `{ "ok": false, "error": { "code": 4307, "key": "rate_limited", "mess
 | `4301` | `unknown_game` | 404 | No such game. |
 | `4302` | `unknown_logic` | 404 | No such logic, or no pack is active on the channel. |
 | `4303` | `method_not_allowed` | 405 | The logic's `methods` do not include this one. |
-| `4304` | `unauthorized` | 401 | Missing or invalid session or key. |
+| `4304` | `unauthorized` | 401 | Missing, expired or invalid token or key. A client asks for a new token once and retries. |
 | `4305` | `forbidden` | 403 | The caller cannot reach that data. |
 | `4306` | `game_disabled` | 403 | The Scripted API is off, or staff turned it off. |
 | `4307` | `rate_limited` | 429 | Over a game, player, address or logic rate. |

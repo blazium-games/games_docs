@@ -122,14 +122,14 @@ The live tool list is `tools/list`. The server cards are https://mcp.blazium.gam
 - [Editor asset library](https://docs.blazium.games/docs/editor-asset-library): The Godot and Blazium AssetLib repository URL, https://api.blazium.online/api/v1/public/asset-library, with optional player sign-in.
 - [Anonymous downloads](https://docs.blazium.games/docs/anonymous-downloads): Downloading free projects without an account, and its trade-offs.
 - [Download analytics](https://docs.blazium.games/docs/download-analytics): Download sources, access, clients, outcomes, and what is recorded.
-- [Browser player](https://docs.blazium.games/docs/web-player): Play a browser pack in the browser, with an optional demo, a Discord activity, and a Telegram Mini App. Mini-game packs are downloaded. Export targets are checks. Blazium does not submit the pack.
+- [Browser player](https://docs.blazium.games/docs/web-player): Play a browser pack in the browser, with an optional demo, a Discord activity, a Telegram Mini App, and the same-origin token route a browser game uses for the Scripted API and lobbies. Mini-game packs are downloaded. Export targets are checks. Blazium does not submit the pack.
 
 ## Deploy and crash reporting
 
 - [Deploy builds](https://docs.blazium.games/docs/deploy): Upload builds and symbols from CI.
 - [Crash reporting](https://docs.blazium.games/docs/crash-reporting): Crashes and the six standard launch events from a game.
 - [Progress](https://docs.blazium.games/docs/progress): Achievements, stats, registered funnel events, and rich presence.
-- [Scripted API](https://docs.blazium.games/docs/scripted-api): Per-game Luau logic at sapi.blazium.online with stored data, leaderboards, schedules, secrets, and remote config.
+- [Scripted API](https://docs.blazium.games/docs/scripted-api): Per-game Luau logic at sapi.blazium.online with stored data, leaderboards, schedules, secrets, and remote config. Callers use short-lived game tokens the SDK requests; Godot, Unity, and Unreal have clients. Includes bulk data reset and stored logs.
 - [Scripted API reference](https://docs.blazium.games/docs/scripted-api-reference): Headers, logic table fields, Luau functions, error codes 4300 to 4322, and plan limits.
 - [Engines](https://docs.blazium.games/docs/engines): Godot, Unity, and Unreal bindings.
 - [Unity and the native library](https://docs.blazium.games/docs/unity): The `com.blazium.games` package and `blazium_api64.dll` / `libblazium_api.so`. The library talks to the Blazium launcher, not to `api.blazium.online`.

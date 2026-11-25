@@ -204,7 +204,7 @@ See [Multiplayer](../multiplayer.md).
 | `chauffeur sapi status` | Settings, active pack per channel, and the plan's limits |
 | `chauffeur sapi packs` | Stored packs |
 | `chauffeur sapi activate <checksum\|none> [--channel stable]` | Serve a stored pack on a channel, roll back, or stop the channel |
-| `chauffeur sapi logs [--logic] [--channel] [--level] [--since] [--request-id] [--limit 200]` | Recent script logs |
+| `chauffeur sapi logs [--logic] [--channel] [--level] [--since] [--until] [--cursor] [--request-id] [--limit 200]` | Stored script logs. `--since` and `--until` take a time or how long ago (`30m`, `2h`, `7d`). A full page prints a `next_cursor` for `--cursor` |
 | `chauffeur sapi usage` | Stored data against the plan, and whether writes are blocked |
 | `chauffeur sapi config get\|set <name> <json>\|delete <name> [--channel] [--public]` | Remote config values |
 | `chauffeur sapi secret list\|set <name>\|delete <name> [--channel] [--from-file]` | Write-only secrets. `set` reads the value from stdin unless `--from-file` is given |
@@ -212,8 +212,9 @@ See [Multiplayer](../multiplayer.md).
 | `chauffeur sapi data list\|get\|set\|delete [--scope global\|channel\|user] [--channel] [--user]` | Read and change stored data |
 | `chauffeur sapi data export [--out file]` and `chauffeur sapi data import <file>` | Copy a scope to and from JSON |
 | `chauffeur sapi data copy --channel <from> --to <to>` | Copy one channel's data into another |
+| `chauffeur sapi data reset --scope global\|channel\|user [--channel] [--user] [--prefix] [--dry-run] --confirm <game id>` | Delete every key in a scope, or the keys under a prefix. `--dry-run` counts and changes nothing |
 
-`validate`, `test` and `dev` run the `games_sapi` binary from `--binary`, `SAPI_BINARY`, `PATH` or chauffeur's cache. On Linux x86_64 chauffeur downloads it when none is found. A value that is not JSON is stored as a string. Secret values are at most 16 KiB; when the deploy secret also comes from stdin (`--secret-stdin`), pass the value with `--from-file`. A deploy key cannot delete all of a game's data; do that on the website.
+`validate`, `test` and `dev` run the `games_sapi` binary from `--binary`, `SAPI_BINARY`, `PATH` or chauffeur's cache. On Linux x86_64 chauffeur downloads it when none is found. A value that is not JSON is stored as a string. Secret values are at most 16 KiB; when the deploy secret also comes from stdin (`--secret-stdin`), pass the value with `--from-file`. `data reset` needs `--scope` and `--confirm` with the game's id. A deploy key cannot delete all of a game's data; do that on the website.
 
 ```bash
 chauffeur sapi test --dir sapi

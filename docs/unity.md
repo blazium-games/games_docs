@@ -129,6 +129,15 @@ A client init that returns `OK` still has to have a logged-on user. The client s
 
 `TransferItem` is the player call. `SocketItem`, `UnsocketItem`, `SetItemStats`, and `UseItem` are forwarded to the library. The server still rejects those four on a player session. They need the owner, an accepted admin, or a mint key.
 
+## Tokens for the Scripted API and lobbies
+
+| Method | Returns |
+| --- | --- |
+| `RequestToken(audience)` | The library's JSON string for `"sapi"` or `"lobby"`: `ok`, `token`, `audience`, `game_uid`, `expires_at` and `expires_in`, or `ok: false` with `code` and `error`. |
+| `ForgetTokens()` | Drops held tokens, so the next request asks again. Call it after a `401`. |
+
+The library asks the host for the token and the host asks the platform. The package never mints a token and never sees the login token. A token is for this game and one audience, and it expires within minutes. Failure codes include `bad_audience`, `not_logged_on`, `no_host`, `server_mode`, `user_changed` and `host_too_old` (the engine build is older than tokens). A library older than SDK 2.1.0 returns `sdk_too_old`. `BlaziumSapi` and `BlaziumUnitySapi.Create()` use these calls for you; see [Scripted API](./scripted-api.md#calling-from-a-game). Without a client session, or in a dedicated server, no token is given.
+
 ## Lobbies
 
 These return the library's JSON string. The client sample passes `public` to `CreateLobby`.

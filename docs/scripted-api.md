@@ -92,11 +92,36 @@ The `auth` field of each logic decides who may run it.
 | `auth` | Caller |
 |---|---|
 | `anonymous` | Anyone, when anonymous calls are on for the game. A signed-in player's session is still read when sent. |
-| `user` (default) | A signed-in player: `Authorization: Bearer <session token>` from Blazium sign-in. |
+| `user` (default) | A signed-in player: `Authorization: Bearer <token>`. The token is a short-lived one for this game that the SDK or the web player requests for the signed-in player. See [Tokens](#tokens). |
 | `service` | Your own server, with a game server key in `X-Sapi-Key`. Add `X-Sapi-User` to act for one player. |
 | `signed` | A webhook signed with a secret you stored. See [Signed requests](./scripted-api-reference.md#signed-requests). |
 
 A game server key works on every logic. Create one with `request_server_key` over MCP; the secret is returned once. It is not the deploy key.
+
+### Tokens
+
+A game never sends the player's login session to the Scripted API. It sends a scoped token: an HS256 token for one audience (`sapi`) and one game, which expires after 10 minutes by default (the platform can set 1 to 15 minutes). The SDK and the web player ask for it. They never create one themselves, and a scoped token cannot be used to ask for another.
+
+| Where the game runs | How the token is requested |
+|---|---|
+| Godot addon, signed in | `BlaziumGames.request_scoped_token("sapi")` posts the login session to `POST /api/v1/private/games/{game id}/tokens` and keeps the answer until shortly before it expires. |
+| Unity and Unreal, native build | `BlaziumApi.RequestToken("sapi")` in the SDK asks the engine host, which asks the platform. The SDK hands game code the scoped token and never the login token. |
+| Browser (Godot web, Unity WebGL) | `POST /blazium/token` on the play origin, with `{"audience":"sapi"}`. See [Web player](./web-player.md#scripted-api-and-lobbies-in-the-browser). |
+
+The request body is `{"audience":"sapi"}` or `{"audience":"lobby"}`. A reply carries `token`, `audience`, `game_uid`, `expires_at` and `expires_in`, and is never cached. Only a plain login session can ask. These are refused:
+
+| Status | Meaning |
+|---|---|
+| `400` | The audience is not `sapi` or `lobby`, or the body is not JSON. |
+| `403` | The caller is not a plain login session (an MCP key, an OAuth token or another scoped token), or the player neither owns the game nor holds a license. |
+| `404` | No such game. |
+| `409` (`4097`) | The game's Scripted API (or lobby, for the `lobby` audience) is off, or staff turned it off. |
+| `429` | More than 30 requests a minute for one player. |
+| `503` (`5031`) | Staff turned scoped tokens off for the platform. |
+
+A token for `lobby` opens that game's lobby routes and nothing else, and a `sapi` token does not open the lobby. A token for another game is refused with `4034`.
+
+A token stops working when the login session it came from is signed out or expired, the player is banned, or the player changes their password, even before its own expiry. A call that gets `401` asks for a new token once and tries again.
 
 ## Test locally
 
@@ -162,6 +187,26 @@ Every write in a request is applied together when the handler returns. If the ha
 
 When a game is over a data limit after its plan ends or is downgraded, data stays readable and deletes work, but writes are refused with `4308` until the plan is back or enough data is deleted. `get_sapi_usage` and `chauffeur sapi usage` show `read_only`.
 
+### Reset data in bulk
+
+`chauffeur sapi data reset` and the MCP tool `reset_sapi_data` delete many keys in one call. Start with a dry run, which counts what would go and changes nothing:
+
+```bash
+chauffeur sapi data reset --scope channel --channel beta --prefix temp/ --dry-run <game id>
+chauffeur sapi data reset --scope channel --channel beta --prefix temp/ --confirm <game id>
+```
+
+| Option | Meaning |
+|---|---|
+| `--scope global` | Every key of the game's global scope. |
+| `--scope channel` | The keys of one release channel (`--channel`). Without `--channel`, every channel. |
+| `--scope user` | The keys of one player (`--user`). Without `--user`, every player; a prefix is not allowed then. |
+| `--prefix` | Only keys that start with this text. |
+| `--dry-run` | Count only. The reply is the same shape, and nothing is deleted or audited. |
+| `--confirm` | Required to delete. Give the game's id. |
+
+`--scope` is required. The reply is `ok`, `dry_run`, `scope`, `keys`, `bytes`, `users` and `channels`. A real reset is a destructive action: it goes through the same approval as deleting a secret and is written to the game's audit log as `data.reset`. A dry run needs no approval. chauffeur and MCP always name a scope. A request with no scope purges the whole game, including its stored logs, and a deploy key is refused for it. Over MCP, `reset_sapi_data` takes `uid`, `scope`, `channel`, `user`, `prefix`, `dry_run` and `confirm`, and needs `dry_run` or `confirm`.
+
 ## Leaderboards, schedules, secrets and config
 
 `board("name")` keeps one score per player with `submit`, `top`, `rank`, `around`, `count` and `reset`. Add `"boards"` to `uses`. Only schedules and service calls can reset a board.
@@ -182,18 +227,30 @@ The Godot addon has a `BlaziumSapi` node. Add it to a scene next to `BlaziumGame
 func _ready() -> void:
 	sapi.call_completed.connect(func(logic, status, body, request_id): print(logic, " ", body))
 	sapi.call_failed.connect(func(logic, status, key, message, request_id): push_warning(message))
-	sapi.call_logic("submit_score", {"score": 1200})
+	sapi.invoke("submit_score", {"score": 1200})
 ```
 
-It sends the player's session, the `blazium/sapi/channel` project setting as the channel, and an `Idempotency-Key` on every write. It retries `429` and `503` with backoff and uses the Discord proxy inside a Discord activity. Inside an activity, add the `/blazium/sapi` mapping on the Discord developer portal (see [Web player](./web-player.md)).
+`invoke(logic, args, opts)` is the call. `call_logic` is kept as an alias, because `call` is already a built-in GDScript method. `opts` takes `method` (`POST` by default, or `GET`, `PUT`, `PATCH`, `DELETE`) and `anonymous` (send no token).
+
+It sends a [scoped token](#tokens) for this game, never the login session, the `blazium/sapi/channel` project setting as the channel, and an `Idempotency-Key` on every write. It retries `429` and `503` with backoff, asks for a fresh token once after a `401`, and uses the Discord proxy inside a Discord activity. Inside an activity, add the `/blazium/sapi` mapping on the Discord developer portal (see [Web player](./web-player.md)). In a browser game it gets the token from the play origin.
+
+Unity and Unreal have the same client. In Unity, run it from a coroutine:
+
+```csharp
+var sapi = BlaziumUnitySapi.Create();
+var result = new BlaziumSapiResult();
+yield return sapi.Call("submit_score", "POST", "{\"score\":1200}", result);
+```
+
+`Channel` and `MaxRetries` are fields of `BlaziumSapi`. A native build asks the host through the SDK (`BlaziumApi.RequestToken("sapi")`), and a WebGL build asks `POST /blazium/token`. Unreal has the Blueprint node `UBlaziumSapi::CallLogic(Logic, Method, BodyJson, bAnonymous)` with `OnSuccess` and `OnFailure`. Both retry a `429` or `503` with the same `Idempotency-Key` and ask for a fresh token once after a `401`. The native SDK needs library version 2.1.0 or newer (an older library fails with `sdk_too_old` in Unity) and a Blazium engine build that can request tokens (an older build fails with `host_too_old`).
 
 Any other client can call the URL directly. Send `Idempotency-Key` on writes you might retry; the same key within 24 hours replays the first answer instead of running the logic again.
 
-The Unity and Unreal packages do not include a Scripted API client yet, because the native SDK does not hand the session token to game code. Call logic marked `anonymous` or `service` from those engines, or from your own server.
-
 ## Logs, usage and analytics
 
-`chauffeur sapi logs` and `get_sapi_logs` read recent `log.info` lines and errors, by logic, channel, level or request id. Each reply carries `X-Request-Id`. A script error tells the caller only the request id; the logs have the details.
+`chauffeur sapi logs` and `get_sapi_logs` read `log.info` lines and errors, by logic, channel, level or request id. Each reply carries `X-Request-Id`. A script error tells the caller only the request id; the logs have the details.
+
+Lines are stored in the database, so they survive a restart and a move of the game between servers. A plan keeps a number of lines per game for its retention (1,000 lines for 1 day on Free, 20,000 for 7 days on Grow, 100,000 for 30 days on Scale), and older lines are removed. Add `--since` and `--until` (a time, or for chauffeur how long ago, such as `30m`, `2h` or `7d`) to read a window. A page is at most 1,000 lines, oldest first. When it is full, the reply has a `next_cursor`: pass it as `--cursor` (`cursor` over MCP) to read the lines before it. Lines that were queued while the database was down or slow can be dropped, and the service counts them. The whole-game purge removes the stored logs as well.
 
 The **Analytics** page of the game shows Scripted API calls per day, errors, budget hits and the busiest logic. `chauffeur sapi usage` shows stored data against the plan.
 

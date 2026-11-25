@@ -31,6 +31,7 @@ Most public routes need no credentials. The rest take a header:
 | Deploy key | `X-Access-Token` and `X-Secret-Key` | Build registration. See [Deploy builds](./deploy.md). |
 | Game id | `X-App-Id` and `X-Build-Id` | Crash and event ingest. See [Crash reporting](./crash-reporting.md). |
 | Steam auth key | `Authorization: Bearer ...` | The `server` routes of [Steam auth verification](./steam-auth.md), from your own servers. |
+| Scoped game token | `Authorization: Bearer ...` | The [Scripted API](./scripted-api.md#tokens) and a game's lobby routes. A short-lived token for one game and one audience, which the SDK or the web player requests for the signed-in player. Refused everywhere else. |
 
 Player keys start with `bgames_play_` and are created at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). Player OAuth tokens come from `https://mcp.blazium.games/.well-known/oauth-authorization-server/player`. See [Player MCP](./mcp/player.md).
 

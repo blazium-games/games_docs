@@ -29,7 +29,7 @@ The addon signs in on the login websocket, then uses that session for the lobby 
 
 `transfer_item` is the player call. `socket_item`, `unsocket_item`, `set_item_stats`, and `use_item` fail on a player session. Those need the owner, an accepted admin, or a mint key. Unity and Unreal forward those four to the library, and the server still rejects a player session.
 
-The `BlaziumSapi` node calls the game's [Scripted API](./scripted-api.md) logic with the player's session. `call_logic` returns through `call_completed` and `call_failed`.
+The `BlaziumSapi` node calls the game's [Scripted API](./scripted-api.md) logic with a short-lived token for this game, not the login session. `invoke` returns through `call_completed` and `call_failed`. `call_logic` is the same method under the old name.
 
 Inside a Discord activity, the addon proxies login, lobby, API, and Scripted API calls.
 
@@ -65,7 +65,7 @@ UTF-8 JSON beside the player executable. Unity and Unreal do not write this file
 
 `game_uid` is the project id on blazium.games. No other keys are allowed.
 
-The native library talks to the Blazium launcher on the player's machine. The Unity package and the Unreal plugin do not call `api.blazium.online`. Lobby, ICE, Steam ticket, and bug report calls return JSON.
+The native library talks to the Blazium launcher on the player's machine. The Unity package and the Unreal plugin do not call `api.blazium.online` for sign-in. Their Scripted API clients call `sapi.blazium.online`. Lobby, ICE, Steam ticket, and bug report calls return JSON.
 
 ## Bug reports
 
@@ -77,7 +77,7 @@ A screenshot path has to stay under the game user directory (`user://` on Godot)
 
 Godot, Unity, and Unreal share ownership, achievement unlocks, stat writes, funnel events, a progress read of unlocks and stat values, `SetPresence` when the client may write presence, and the patch-note pull described in [Deploy builds](./deploy.md).
 
-The Godot addon also transfers an item and calls the Scripted API. Unity and Unreal export the item calls and the server progress read. They have no Scripted API client, because the native library does not hand the session token to game code; call anonymous or service logic over HTTP from those engines. `record_standard_events` on all three is one batch with zero times, the same kind of call the native library makes.
+The Godot addon also transfers an item. Unity and Unreal export the item calls and the server progress read. All three call the Scripted API: the SDK asks the host for a short-lived token for the game (`RequestToken` in the native library), and the Unity and Unreal clients send that token, never the login token. A browser build asks the play origin instead. See [Scripted API](./scripted-api.md#tokens). `record_standard_events` on all three is one batch with zero times, the same kind of call the native library makes.
 
 Inside a Discord activity, only the Blazium module and the Godot addon open the proxied login, lobby, and API addresses. Unity and Unreal do not. A Telegram Mini App uses the public hosts instead. See [Multiplayer](./multiplayer.md).
 
