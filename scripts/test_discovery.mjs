@@ -118,3 +118,9 @@ test("README, SKILL_TREE.md, and skills/ list the same skills", () => {
     assert.ok(skillNames.includes(name), `README.md lists ${name}, which is not in skills/`);
   }
 });
+test("generated files do not link to hosts that no longer resolve", () => {
+  const dead = ["dddbrowser.online", "rune.shoyo.work", "shoyo.work"];
+  for (const [path, text] of files) {
+    for (const host of dead) assert.ok(!text.includes(host), `${path} links to ${host}`);
+  }
+});

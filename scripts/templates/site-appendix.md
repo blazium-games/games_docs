@@ -97,6 +97,3 @@ Call initialize with no token. A new person follows the setup_account prompt: cr
 
 - [Blazium (game engine)](https://blazium.app): Blazium game engine is a free, open-source, community-driven game engine based on Godot 4.4.1, designed for developing 2D and 3D games, cross-platform projects, and XR experiences. It offers power, flexibility, and compatibility with Godot assets while removing compatibility-breaking features.
 - [Blazium Games](https://blazium.games): Blazium Games is the First-Stage Storefront.
-- [DDDBrowser](https://dddbrowser.online): DDDBrowser is a 3D scene browser that allows you to explore and interact with virtual worlds loaded from web URLs. It supports rich 3D scenes with models, lighting, audio, scripting, and portals that connect different scenes together.
-- [RUNE Interface](https://rune.shoyo.work): RUNE Interface is an automation tool with a visual editor, AI integration, and desktop-native performance.
-- [SHOYO.WORK](https://shoyo.work): SHOYO.WORK helps developers, freelancers & teams build professional portfolios to showcase projects with advanced analytics, customizable sections, and secure content. Supports individual & enterprise needs.
