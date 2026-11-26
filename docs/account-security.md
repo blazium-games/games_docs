@@ -10,10 +10,10 @@ Signing in to [blazium.games](https://blazium.games) takes two steps: your passw
 
 ## Usernames
 
-A username is 4 to 32 characters. It is also your chat nick and your developer site address, `<username>.blazium.games`, so some names are kept back for the platform:
+A username is 4 to 32 letters, digits, and hyphens, and does not start or end with a hyphen. It is also your chat nick and your developer site address, `<username>.blazium.games`, so some names are kept back for the platform:
 
 - Names the platform uses or plans to use as an address, such as `api`, `admin`, `mcp`, `status`, `docs`, `cdn`, and `support`, and the labels of its own services.
-- The brand words Blazium Games uses for itself. A name that only starts with one, such as `blazium_fan`, is allowed.
+- The brand words Blazium Games uses for itself. A name that only starts with one, such as `blazium-fan`, is allowed.
 - A deployment prefix on a kept-back name, such as `dev-api` or `staging-admin`.
 - A look-alike spelling of a kept-back name, such as `adm1n` or `supp0rt`.
 
