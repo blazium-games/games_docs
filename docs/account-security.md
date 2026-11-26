@@ -8,6 +8,17 @@ description: Passwords, the second sign-in step, authenticator apps, recovery co
 
 Signing in to [blazium.games](https://blazium.games) takes two steps: your password, then a second step. The second step is a code from your authenticator app if you set one up, or otherwise a 6-digit code we email you. For email-and-password sign-in without an authenticator, a browser that verified an emailed code is remembered for 30 days and isn't asked again. An authenticator code, and the second step of a GitHub, X, or Discord sign-in, are asked for every time. Signing in with GitHub, X, or Discord works the same way. See [Linked accounts and sign-in](./linked-accounts.md).
 
+## Usernames
+
+A username is 4 to 32 characters. It is also your chat nick and your developer site address, `<username>.blazium.games`, so some names are kept back for the platform:
+
+- Names the platform uses or plans to use as an address, such as `api`, `admin`, `mcp`, `status`, `docs`, `cdn`, and `support`, and the labels of its own services.
+- The brand words Blazium Games uses for itself. A name that only starts with one, such as `blazium_fan`, is allowed.
+- A deployment prefix on a kept-back name, such as `dev-api` or `staging-admin`.
+- A look-alike spelling of a kept-back name, such as `adm1n` or `supp0rt`.
+
+These rules apply when you sign up, finish setting up an account made through GitHub, X, or Discord, or rename your account. A name that is kept back is refused with error `4028` and no account is created. An account that already has a name keeps it and keeps signing in, chatting, and publishing. Choose another name if yours is refused.
+
 ## Passwords
 
 - 10 to 128 characters. A password that matches your email or username is refused.

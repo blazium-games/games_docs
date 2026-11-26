@@ -48,6 +48,7 @@ Skills, indexed in [SKILL_TREE.md](SKILL_TREE.md):
 | [blazium-games-unity](skills/blazium-games-unity/SKILL.md) | Unity package `com.blazium.games` |
 | [blazium-games-unreal](skills/blazium-games-unreal/SKILL.md) | Unreal plugin `BlaziumGames` |
 | [blazium-games-lobby-pack](skills/blazium-games-lobby-pack/SKILL.md) | Publishes a Luau lobby pack |
+| [blazium-games-sapi](skills/blazium-games-sapi/SKILL.md) | Writes, tests, and publishes Scripted API logic: stored data, leaderboards, and schedules |
 | [blazium-games-player](skills/blazium-games-player/SKILL.md) | Acts as a player: recommendations, catalog search, reviews, bug reports, friends |
 | [blazium-games-purchases](skills/blazium-games-purchases/SKILL.md) | Buys games and donates from the balance within spending limits |
 
