@@ -8,7 +8,7 @@
 //
 // --check writes nothing, prints each file that differs, and exits 1 on any difference.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildAll } from "./lib/discovery.mjs";
@@ -37,6 +37,23 @@ function emit(prefix, dir) {
     } else {
       mkdirSync(dirname(target), { recursive: true });
       writeFileSync(target, text);
+    }
+  }
+  if (prefix === "site") dropStaleSkills(dir);
+}
+
+// A skill that is removed from skills/ must not stay served from the root site.
+function dropStaleSkills(dir) {
+  const skillsDir = join(dir, ".well-known", "agent-skills");
+  if (!existsSync(skillsDir)) return;
+  const wanted = new Set([...files.keys()].filter(p => p.startsWith("site/.well-known/agent-skills/")).map(p => p.split("/")[3]));
+  for (const entry of readdirSync(skillsDir, { withFileTypes: true })) {
+    if (!entry.isDirectory() || wanted.has(entry.name)) continue;
+    if (check) {
+      console.error(`stale: ${join(skillsDir, entry.name)}`);
+      bad++;
+    } else {
+      rmSync(join(skillsDir, entry.name), { recursive: true, force: true });
     }
   }
 }
