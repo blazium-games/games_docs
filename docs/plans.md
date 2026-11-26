@@ -36,6 +36,10 @@ One sign-in application is included on Free. Another one needs Grow ($29/mo per 
 
 Until January 31, 2027, Grow is $10 per game per month for 3 months, or 20% off yearly at $278.40 per game per year. After that date the monthly Grow price is $29 per game.
 
+## Conversion add-on
+
+We can do the move for you. We convert your game to Blazium and set up hosting, crash reports, and distribution. You keep ownership and your own store accounts. It is a one-time fee, starting at $24.99. To ask for one, use the quote form on the Pricing page, then confirm your email address. We reply with your quote. See the launch offer above for the Grow price after you convert.
+
 ## Changes and failed renewals
 
 An upgrade, including monthly to annual, charges the new price immediately and does not credit unused time. A downgrade, annual to monthly, or a cancel to Free takes effect at the end of the period already paid. Until then the higher plan stays in force.
