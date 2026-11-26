@@ -74,7 +74,12 @@ jobs:
         working-directory: svc
         run: |
           node ../docs/scripts/discovery.mjs ${{ matrix.flag }} ${{ matrix.dir }}
-          echo "${{ github.sha }}" > docs-ref
+          # A change that leaves the generated files alone does not need a PR; the pin can stay behind.
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Generated files already match"
+          else
+            echo "${{ github.sha }}" > docs-ref
+          fi
       - name: Open or update PR
         if: steps.token.outputs.ok == 'true'
         working-directory: svc

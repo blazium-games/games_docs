@@ -1,0 +1,21 @@
+name: Discovery links
+
+# Requests every absolute URL in the generated llms.txt, skill.md and agent skills index.
+# A broken link on a Blazium host fails the run. Other sites only warn.
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-links.mjs
