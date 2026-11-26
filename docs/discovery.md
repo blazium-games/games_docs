@@ -45,7 +45,8 @@ Also published:
 
 These files are maps. They do not replace `robots.txt` or the sitemaps.
 
-- `https://blazium.games/llms.txt` describes the platform, its APIs, the blog, and its MCP servers. The same connect and sign-in steps are at `https://mcp.blazium.games/llms.txt` and [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt). The full guides are `https://blazium.games/llms-full.txt`, `https://mcp.blazium.games/llms-full.txt`, and [https://docs.blazium.games/llms-full.txt](https://docs.blazium.games/llms-full.txt). The blog is `https://blazium.games/blog`, the articles API is `https://api.blazium.online/api/v1/public/articles`, and the feed is `https://cdn.blazium.online/articles/rss.xml`.
+- `https://blazium.games/llms.txt` describes the platform, its APIs, the blog, its agent skills, and its MCP servers. The same connect and sign-in steps are at `https://mcp.blazium.games/llms.txt` and [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt). The full guides are `https://blazium.games/llms-full.txt`, `https://mcp.blazium.games/llms-full.txt`, and [https://docs.blazium.games/llms-full.txt](https://docs.blazium.games/llms-full.txt). The blog is `https://blazium.games/blog`, the articles API is `https://api.blazium.online/api/v1/public/articles`, and the feed is `https://cdn.blazium.online/articles/rss.xml`.
+- `https://blazium.games/skill.md` tells an agent which Blazium Games skill to load for which job. `https://blazium.games/.well-known/agent-skills/index.json` lists each skill with its URL and a sha256 digest of the file served there, and each skill is at `https://blazium.games/.well-known/agent-skills/<name>/SKILL.md`. They are served on the root site only. A developer site answers 404 for them. The sources are the [skills](https://github.com/blazium-games/games_docs/tree/master/skills) in this repository.
 - `https://<you>.blazium.games/llms.txt` lists that developer's indexable listings.
 - `https://<you>.blazium.games/<game>/llms.txt` summarizes one indexable listing.
 - [https://docs.blazium.games/llms.txt](https://docs.blazium.games/llms.txt) is a short map of these docs, starting with the MCP steps.
@@ -54,6 +55,10 @@ There is no training opt-out file. Public pages stay allowed for every user-agen
 
 The public site does not serve a Markdown twin of every page. The docs map above is the Markdown entry point.
 
+## Where these files come from
+
+The root site's `llms.txt`, `llms-full.txt`, `skill.md`, and agent skills index, and the MCP server's `llms.txt` and `llms-full.txt`, are generated from this repository with `node scripts/discovery.mjs`. The docs map `static/llms.txt` is the source of the shared connect steps, the skills are the source of `skill.md` and the index, and `scripts/templates/site-appendix.md` is the part only the root site carries. Each of the other two repositories pins the games_docs commit it was generated from and fails its tests when its files differ from that output. `llms.txt`, `llms-full.txt`, `skill.md`, and `humans.txt` are cached for an hour, so a regenerated file is live within an hour of a deploy.
+
 ## Developer discovery
 
 `https://blazium.games/.well-known/api-catalog` is an [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727) linkset (`application/linkset+json`). It links to these documents:
@@ -61,6 +66,7 @@ The public site does not serve a Markdown twin of every page. The docs map above
 - Docs: [https://docs.blazium.games/](https://docs.blazium.games/)
 - Status: [https://status.blazium.games/](https://status.blazium.games/)
 - [https://blazium.games/llms.txt](https://blazium.games/llms.txt)
+- Agent skills: [skill.md](https://blazium.games/skill.md) as a service-doc, and the [skills index](https://blazium.games/.well-known/agent-skills/index.json) as a describedby.
 - Developer server card: [https://mcp.blazium.games/.well-known/mcp/server-card.json](https://mcp.blazium.games/.well-known/mcp/server-card.json)
 - Player server card: [https://mcp.blazium.games/.well-known/mcp/player-server-card.json](https://mcp.blazium.games/.well-known/mcp/player-server-card.json)
 - OAuth protected-resource metadata (RFC 9728) for [the developer server](https://mcp.blazium.games/.well-known/oauth-protected-resource/mcp) and [the player server](https://mcp.blazium.games/.well-known/oauth-protected-resource/player)
@@ -75,6 +81,6 @@ Indexable store pages publish `VideoGame` or `SoftwareApplication` JSON-LD. Prof
 
 - **AsyncAPI.** The website's live updates are not a public interface. The public HTTP API has an [OpenAPI description](./api-reference.md). Signed-in account routes are left out of it; agents use the MCP servers, which publish server cards.
 - **ads.txt.** Blazium Games does not sell ad inventory.
-- **Apple or Android association files.** The desktop program people can download today is BlaziumLauncher for Windows, installed under the shared Blazium folder, not a mobile app.
+- **Apple or Android association files.** The desktop program people can download today is BlaziumLauncher for Windows and Linux, not a mobile app.
 - **ai.txt, identity.json, an A2A agent card, or an empty agent card.** Agents call the MCP servers, and those servers already publish server cards. An empty card would claim a protocol this site does not serve.
 - **A training opt-out file.** See the guidance section above.

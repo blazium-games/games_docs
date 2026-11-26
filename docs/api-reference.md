@@ -106,6 +106,9 @@ The asset library, signed-out downloads, and the OpenAPI document allow any orig
 | `GET /api/v1/public/shelves/{kind}` | A home page shelf, such as `new`, `browser_playable`, or `tonight`. `limit` is 1 to 24. See [Shelves](./listings.md#shelves). |
 | `GET /api/v1/public/tags/popular` | The most used tags. |
 | `GET /api/v1/public/sitemap` | Indexable listings and developers. |
+| `GET /api/v1/public/articles` | Blog posts, newest first. `limit` is 1 to 50 (default 20). `q` matches the title or description. See [Blog posts](#blog-posts). |
+| `GET /api/v1/public/articles/{slug}` | One post with its markdown body. |
+| `GET /api/v1/public/articles/{slug}/comments` | A post's comments. |
 | `GET /api/v1/public/store-rules` | Price limits and fees. |
 | `GET /api/v1/public/games/{game_id}` | A listing. |
 | `GET /api/v1/public/games/{game_id}/reviews` | Its reviews. |
@@ -131,5 +134,15 @@ The asset library, signed-out downloads, and the OpenAPI document allow any orig
 | `GET /api/v1/private/games/{game_uid}/sign-in-stats` | Counts of sign-ins opened, pending, and finished per day and method, for the game's team. |
 
 The sign-in service (`login.blazium.online`) has its own calls for a game that cannot hold a websocket: `POST /api/v1/session`, `GET /api/v1/session/{cid}`, and `DELETE /api/v1/session/{cid}`. See [Sign-in without the launcher](./standalone-sign-in.md#the-http-calls).
+
+## Blog posts
+
+Posts are written in the [games_articles](https://github.com/blazium-games/games_articles) repository and published to the CDN when a change merges. The API reads that catalog and caches it for about two minutes.
+
+Each post has `slug`, `title`, `description`, `date`, `cover`, and `author`. `title` is the whole headline as one sentence. A post whose headline has two lines also has `title_line2`, the second line, so a page can set the lines apart. `title_line2` and `author` are left out when a post has none. The post at `/api/v1/public/articles/{slug}` adds the markdown body.
+
+On [blazium.games/blog](https://blazium.games/blog), every second-level heading in a post has an anchor, so `/blog/{slug}#section-name` links to one section. The anchor is the heading in lowercase with everything except letters, digits, and spaces removed, and the words joined by hyphens. A heading that repeats gets `-2`, `-3`, and so on. Editing a heading changes its anchor, so link to a heading only when its wording is settled.
+
+The same posts are in the [RSS feed](https://cdn.blazium.online/articles/rss.xml) (`application/rss+xml`, titles joined into one sentence). Every page on blazium.games links to the feed with a `rel=alternate` tag, so feed readers find it from any page.
 
 File uploads go to `uploader.blazium.online` and are described in [Deploy builds](./deploy.md) and the [chauffeur CLI](./cli/index.md).

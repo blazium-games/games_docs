@@ -88,6 +88,8 @@ function checkSkills() {
   if (names.length === 0) fail('skills/: no skills found');
   const tree = existsSync(join(root, 'SKILL_TREE.md')) ? readFileSync(join(root, 'SKILL_TREE.md'), 'utf8') : '';
   if (!tree) fail('SKILL_TREE.md: missing');
+  const readme = existsSync(join(root, 'README.md')) ? readFileSync(join(root, 'README.md'), 'utf8') : '';
+  if (!readme) fail('README.md: missing');
 
   for (const name of names) {
     const file = join(skillsDir, name, 'SKILL.md');
@@ -104,6 +106,10 @@ function checkSkills() {
     if (!fm.description) fail(`${rel(file)}: missing description`);
     if (!fm.license) fail(`${rel(file)}: missing license`);
     if (tree && !tree.includes(`skills/${name}/SKILL.md`)) fail(`SKILL_TREE.md: does not link skills/${name}`);
+    if (readme && !readme.includes(`(skills/${name}/SKILL.md)`)) fail(`README.md: skills table does not list skills/${name}`);
+  }
+  for (const [, listed] of readme.matchAll(/\(skills\/([a-z0-9-]+)\/SKILL\.md\)/g)) {
+    if (!names.includes(listed)) fail(`README.md: lists skills/${listed}, which does not exist`);
   }
 }
 

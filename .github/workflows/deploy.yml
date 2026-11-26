@@ -24,6 +24,8 @@ jobs:
           node-version: 22
       - name: Check manifests, skills, links, server card coverage and doc counts
         run: node scripts/check-plugin.mjs
+      - name: Check the generated discovery files
+        run: node --test scripts/test_discovery.mjs
 
   build:
     name: Build Docusaurus
