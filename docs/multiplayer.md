@@ -33,3 +33,20 @@ chauffeur lobby status
 ```
 
 Packs are Luau only.
+
+## Lobby data
+
+On every plan a scripted lobby can keep data that outlives the lobby, in its own store. Free has a small quota (4 KiB per lobby); Grow and Scale raise it (16 KiB and 64 KiB), see [Lobby limits](./plans.md#lobby-limits). It is separate from the [Scripted API](./scripted-api.md)'s data: a key written in one is not visible in the other. Lobby scripts use the same names as Scripted API logic, so code moves between them:
+
+| Luau | What it is |
+|---|---|
+| `data.global`, `data.channel`, `data.user` | Keys for the whole game, one release channel, or one player. |
+| `data.lobby` | Keys that belong to one lobby and go away with it. |
+| `board(name)` | A leaderboard kept by the lobby service. |
+| `config.get(name, default)`, `secrets.get(name)` | Remote config and write-only secrets for lobby scripts. |
+
+List what the script uses in its `blazium.json`: `"data": { "read": ["user"], "write": ["user", "lobby"] }`, and `"uses"` for `secrets` and `sapi`. The writes of one callback apply together when it returns, and are dropped if it raises an error. A script that reads data the lobby has not loaded gets `data_unavailable`.
+
+To use the other store, a lobby script lists `"sapi"` in `uses` and calls `sapi.read(scope, key, user, fn)` to read one Scripted API value, or `sapi.call(logic, { action, body, user }, fn)` to run a Scripted API logic for a player in the lobby. Both are asynchronous, and `fn` receives `{ ok, status, body, error }`. A Scripted API logic with `"lobby"` in `uses` reaches back with `lobby.call`, `lobby.broadcast` and the other [lobby functions](./scripted-api-reference.md#platform). Calls between the two are not counted against the plan again. Both need the `lobby` and `lobby_data` [capabilities](./scripted-api-features.md#capabilities), which the owner turns on per game.
+
+Read and change lobby data from the terminal with `chauffeur lobby data`, `lobby config`, `lobby secret` and `lobby usage` (see [commands](./cli/commands.md#lobby-data)), or with `get_lobby_data`, `set_lobby_data` and the other [lobby data tools](./mcp/reference.md#lobby-data) over MCP. A reset of a whole scope needs `--confirm` with the game's id, and over MCP waits for the owner's approval.

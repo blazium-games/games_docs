@@ -12,7 +12,10 @@ How to write, test and publish a pack is on [Scripted API](./scripted-api.md). T
 
 ```text
 {METHOD} https://sapi.blazium.online/v1/{game_uid}/{logic}
+{METHOD} https://sapi.blazium.online/v1/{game_uid}/{logic}/{action}
 ```
+
+The optional `{action}` (it can have slashes, like `custom/craft`) is what comes after the logic name. The logic reads it as `req.action`, and it is part of what a [signed request](#signed-requests) and an `Idempotency-Key` cover. The [ready-made features](./scripted-api-features.md) use it.
 
 Inside a Discord activity the same path is under `https://{applicationId}.discordsays.com/.proxy/blazium/sapi`. The request body is at most 64 KiB. A JSON body is decoded into `req.body`. Any other body is in `req.raw`.
 
@@ -25,7 +28,7 @@ Inside a Discord activity the same path is under `https://{applicationId}.discor
 | `X-Blazium-Channel` | Release channel. `?channel=` works too. Default `stable`. |
 | `Idempotency-Key` | Replays the first answer for the same game, logic, caller and key for 24 hours. |
 
-Every answer carries `X-Request-Id`. A replayed answer adds `Idempotent-Replayed: true`. `429` and most `503` answers carry `Retry-After` in seconds.
+Every answer carries `X-Request-Id` and `X-Blazium-Server-Time`, the server clock in Unix seconds. A replayed answer adds `Idempotent-Replayed: true`. `429` and most `503` answers carry `Retry-After` in seconds.
 
 Browsers may call from the origins listed in the game's settings. Other origins get no `Access-Control-Allow-Origin` header. The web player and Discord proxy are same-origin and need no entry.
 
@@ -55,7 +58,7 @@ The path has no query string. A repeated nonce is refused.
 | `auth` | string | `anonymous`, `user` (default), `service` or `signed`. |
 | `methods` | list | Any of `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. Default `GET` and `POST`. |
 | `data` | table | `{ read = { ... }, write = { ... } }` with `global`, `channel` and `user`. Write implies read. |
-| `uses` | list | `boards`, `secrets`, `progress`, `items`, `http`, `webhook`. |
+| `uses` | list | `boards`, `secrets`, `progress`, `items`, `http`, `webhook`, `lobby`. |
 | `rate` | table | `{ per_user = 30, per_ip = 0, window = 60 }`. Zero means no extra limit. Window 1 to 86400 seconds. |
 | `schedule` | table | `{ cron = "*/15 * * * *", channel = "stable" }`. Five-field cron in UTC. |
 | `http` | table | `{ allow = { "api.example.com", "*.example.com" } }`. Required by `uses` `http` or `webhook`. |
@@ -68,7 +71,7 @@ An unknown field, scope, use or method fails validation.
 
 | Field | Meaning |
 |---|---|
-| `req.method`, `req.logic`, `req.game`, `req.channel`, `req.request_id`, `req.ip` | The call. |
+| `req.method`, `req.logic`, `req.action`, `req.game`, `req.channel`, `req.request_id`, `req.ip` | The call. |
 | `req.caller` | `anonymous`, `user`, `service`, `signed`, `schedule`, `admin` or `test`. |
 | `req.plan` | `free`, `premium` or `business`. |
 | `req.query`, `req.headers` | Strings. Header names are lowercase. |
@@ -122,7 +125,13 @@ Keys are 1 to 128 characters of letters, digits and `_ - . : /`. `data.user("id"
 | `items.list({ user })` | `items` | The player's items. |
 | `webhook.send(url, body, { secret, headers })` | `webhook` | POST to an allowed host. `secret` signs it. |
 | `api.http(request)` | `http` | An HTTPS call to an allowed host. Returns `{ ok, status, body, headers, json, error }`. |
-| `api.call(logic, body, { method, query })` | | Run another logic in the pack, nested up to 4 deep. |
+| `api.call(logic, body, { method, query })` | | Run another logic in the pack, nested up to 4 deep. `logic` can be `"logic/action"`. |
+| `lobby.list()`, `lobby.get(id)` | `lobby` | Open lobbies of the game, and one lobby with its peers, public data and tags. |
+| `lobby.broadcast(id, event, data)`, `lobby.send_user(user, event, data)` | `lobby` | Send an event to a lobby or to one player. Players see it as `sapi.<event>`. |
+| `lobby.kick(id, user, { ban_seconds })`, `lobby.set_data(id, key, value)` | `lobby` | Remove a player, or change one key of the lobby's public data (32 keys of 2 KiB). |
+| `lobby.call(id, name, body)` | `lobby` | Run a handler the lobby script registered with `lobby.rpc.register(name, fn)`. |
+
+`lobby` needs the `lobby` capability, which needs the Grow plan or above (see [features](./scripted-api-features.md#capabilities)). Each of these calls waits for the lobby service, so keep them few. Calls between a Scripted API script and a lobby script are not counted against the plan again, and they cannot loop without end: a chain of calls stops after a few steps with `deadline_exceeded`. The Scripted API's data and a lobby script's data are separate stores. A lobby script reads one value from the Scripted API with `sapi.read(scope, key, user, fn)` and runs a logic with `sapi.call(logic, { action, body, user }, fn)`.
 
 `progress`, `items.grant` and `webhook.send` are sent after the handler returns without an error. Without `user` they act for the signed-in player. Achievements, stats and events must list `scripted_api` among their [writers](./progress.md).
 
@@ -187,6 +196,8 @@ Errors use `{ "ok": false, "error": { "code": 4307, "key": "rate_limited", "mess
 | `4320` | `conflict` | 409 | Data kept changing during the request. Try again. |
 | `4321` | `not_found` | 404 | No such route. |
 | `4322` | `service_unavailable` | 503 | Busy, restarting, or sign-in cannot be checked. Try again. |
+| `4323` | `feature_disabled` | 403 | The [feature or capability](./scripted-api-features.md) is not turned on for the game. Nothing ran and the call was not counted against the plan. The error names it in `feature`. |
+| `4324` | `deadline_exceeded` | 504 | A call that waited on another part of the platform ran out of time. |
 
 The same codes come back through `api.blazium.online` when the website, chauffeur or MCP reach the Scripted API for you.
 
