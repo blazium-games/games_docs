@@ -27,7 +27,7 @@ Write clients that ignore fields they don't know.
 
 Developer and player servers 1.24:
 
-- The live cards list 233 developer tools and 100 player tools.
+- The live cards list 252 developer tools and 100 player tools.
 - [Scripted API](../scripted-api.md) tools: `get_sapi`, `set_sapi`, `list_sapi_packs`, `activate_sapi_pack`, `get_sapi_logs`, `get_sapi_usage`, `get_sapi_data`, `set_sapi_data`, `delete_sapi_data`, `reset_sapi_data`, `get_sapi_config`, `set_sapi_config`, `list_sapi_secrets`, `set_sapi_secret`, and `list_sapi_schedules`. Turning the Scripted API on, activating a pack, deleting a secret, and a real reset_sapi_data wait for the owner's approval. get_sapi_logs also takes until and cursor. The player tool list was unchanged.
 - `get_sign_in_funnel` reads the per-game sign-in funnel by day and method.
 - Progress writers accept `scripted_api`.
