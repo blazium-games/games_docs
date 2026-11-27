@@ -205,6 +205,8 @@ See [Multiplayer](../multiplayer.md).
 | `chauffeur sapi packs` | Stored packs |
 | `chauffeur sapi activate <checksum\|none> [--channel stable]` | Serve a stored pack on a channel, roll back, or stop the channel |
 | `chauffeur sapi logs [--logic] [--channel] [--level] [--since] [--until] [--cursor] [--request-id] [--limit 200]` | Stored script logs. `--since` and `--until` take a time or how long ago (`30m`, `2h`, `7d`). A full page prints a `next_cursor` for `--cursor` |
+| `chauffeur sapi analytics` | Calls, errors, refusals and latency, by logic and by day |
+| `chauffeur sapi audit [--limit n] [--before id]` | Every change made to the Scripted API, newest first |
 | `chauffeur sapi usage` | Stored data against the plan, and whether writes are blocked |
 | `chauffeur sapi config get\|set <name> <json>\|delete <name> [--channel] [--public]` | Remote config values |
 | `chauffeur sapi secret list\|set <name>\|delete <name> [--channel] [--from-file]` | Write-only secrets. `set` reads the value from stdin unless `--from-file` is given |
@@ -213,6 +215,11 @@ See [Multiplayer](../multiplayer.md).
 | `chauffeur sapi data export [--out file]` and `chauffeur sapi data import <file>` | Copy a scope to and from JSON |
 | `chauffeur sapi data copy --channel <from> --to <to>` | Copy one channel's data into another |
 | `chauffeur sapi data reset --scope global\|channel\|user [--channel] [--user] [--prefix] [--dry-run] --confirm <game id>` | Delete every key in a scope, or the keys under a prefix. `--dry-run` counts and changes nothing |
+| `chauffeur sapi pull [checksum\|active\|latest] --dir <path> [--channel] [--force]` | Download a stored pack and unpack it for editing. A local file that differs is kept unless `--force` |
+| `chauffeur sapi features` | Each [feature and capability](../scripted-api-features.md), and whether it is on for the game |
+| `chauffeur sapi feature status\|history` | What the owner has turned on, and who changed it |
+| `chauffeur sapi feature disable <feature> [--cascade]` | Turn a feature off. A deploy key can never turn one on |
+| `chauffeur sapi feature enable <feature>` | Prints what to ask the game owner and the link they use. It changes nothing |
 
 `validate`, `test` and `dev` run the `games_sapi` binary from `--binary`, `SAPI_BINARY`, `PATH` or chauffeur's cache. On Linux x86_64 chauffeur downloads it when none is found. A value that is not JSON is stored as a string. Secret values are at most 16 KiB; when the deploy secret also comes from stdin (`--secret-stdin`), pass the value with `--from-file`. `data reset` needs `--scope` and `--confirm` with the game's id. A deploy key cannot delete all of a game's data; do that on the website.
 
@@ -264,3 +271,19 @@ Rank, billing, and unlock stay fixed after a tier is created. `--active false` h
 ## What chauffeur doesn't do
 
 Promoting builds between channels, rolling back builds, changing prices and editing store page text happen on the website or through [MCP](../mcp/index.md). A deploy key can't do them.
+
+## Lobby data
+
+`chauffeur lobby data`, `config`, `secret` and `usage` manage the [lobby data](../multiplayer.md#lobby-data) of a scripted lobby. It is a separate store from `chauffeur sapi data`, and needs the Grow or Scale plan.
+
+| Command | Description |
+|---------|-------------|
+| `chauffeur lobby data list\|get\|set\|delete [--scope global\|channel\|user\|lobby] [--channel] [--user] [--lobby]` | Read and change stored data |
+| `chauffeur lobby data export [--out file]` | Write a scope as JSON |
+| `chauffeur lobby data reset --scope global\|channel\|user\|lobby [--dry-run] --confirm <game id>` | Delete many keys. A deploy key cannot delete all of a game's data |
+| `chauffeur lobby config get\|set <name> <json>\|delete <name> [--channel] [--public]` | Remote config for lobby scripts |
+| `chauffeur lobby secret list\|set <name>\|delete <name> [--channel] [--from-file]` | Write-only secrets, read with `secrets.get` |
+| `chauffeur lobby usage` | Stored data against the plan |
+| `chauffeur lobby analytics` | Lobbies opened, peaks, joins, requests turned away at the plan's caps, lobby data and script use |
+| `chauffeur lobby audit [--limit n] [--before id]` | Every change to lobby data, newest first |
+| `chauffeur lobby status` | Active pack, load result and the plan's lobby limits |

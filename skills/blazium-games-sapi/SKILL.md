@@ -21,7 +21,7 @@ A pack is a folder of `.luau` files. Top-level files are routes (1 to 64 charact
 return {
     auth = "user",                       -- anonymous | user | service | signed
     methods = { "POST" },
-    uses = { "boards", "progress" },     -- boards, secrets, progress, items, http, webhook
+    uses = { "boards", "progress" },     -- boards, secrets, progress, items, http, webhook, lobby
     data = { read = { "user" }, write = { "user" } },  -- global, channel, user
     rate = { per_user = 30, window = 60 },
     handler = function(req)
@@ -39,6 +39,16 @@ return {
 - `http` and `webhook` need `http = { allow = { "api.example.com" } }`.
 - Progress writes need `scripted_api` in the achievement, stat, or event writers (`set_achievements`, `set_stats`, `set_funnels`).
 - Secrets come from `secrets.get(name)` with `"secrets"` in `uses`. Never put a secret value in the pack.
+
+## Features
+
+Ten ready-made features (`hub`, `daily`, `wheel`, `chests`, `quests`, `leaderboards`, `competitions`, `economy`, `lives`, `meta`) answer sub-paths such as `POST /v1/{game_uid}/daily/claim`; the sub-path is `req.action`. A feature runs only after the game owner turns it on from the website. Adding files to a pack turns nothing on.
+
+- `get_sapi_features` lists what is on, what each needs and which are sensitive. `get_sapi_feature_history` shows who changed it.
+- `enable_sapi_feature` changes nothing: give the owner the link it returns. Never ask for the owner's password or try to work around it. A deploy key and an MCP key can turn a feature off (`disable_sapi_feature`, with `cascade` for features that need it), never on.
+- A call to a feature that is off answers `403` `feature_disabled` (`4323`) before any script runs. Treat it as "ask the owner", not as a bug in the script.
+- To edit a live pack, `get_sapi_pack_files` and `get_sapi_file` read it, `chauffeur sapi pull --dir sapi` downloads it, then test and publish again.
+- A game that started before features existed keeps running every feature until the owner chooses to manage them.
 
 ## Test, then publish
 
@@ -60,6 +70,7 @@ Promote by activating the same checksum on `stable`: `activate_sapi_pack` with t
 - `get_sapi_data`, `set_sapi_data`, and `delete_sapi_data` change one key at a time. `reset_sapi_data` deletes many: pass `scope` (`global`, `channel` or `user`) and optional `channel`, `user`, `prefix`, with `dry_run` to count first, then `confirm` to delete (the owner approves). `chauffeur sapi data reset` does the same. Deleting all of a game's data is website-only.
 - `set_sapi_config` sets remote config (`public: true` serves it at `/v1/{game_uid}/_config`). `set_sapi_secret` stores write-only secrets; no tool returns a value.
 - `list_sapi_schedules` shows cron logic and recent runs.
+- Lobby scripts have their own data store (`get_lobby_data`, `set_lobby_data`, `reset_lobby_data`, `get_lobby_config`, `list_lobby_secrets`, `get_lobby_usage`; Grow and above). It is separate from the Scripted API's data. Lobby scripts reach the Scripted API with `sapi.read` and `sapi.call`, and Scripted API logic reaches lobby scripts with `lobby.call`, once the owner turns on the `lobby` capability.
 
 ## Calling it
 

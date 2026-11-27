@@ -24,13 +24,25 @@ Rows are kept until they are 5 years old, so a later upgrade can read them again
 
 ## What each plan adds
 
-Free includes a store page (draft, private, link-only, or public), selling (editions, bundles, donations, keys, and patron tiers), builds on stable, beta, and dev with virus scanning and rollback, the browser player and Discord Activities, crash reports tied to each build, the in-game bug reporter when you turn it on, analytics and funnels, and MCP for Cursor, VS Code, and Claude Code, plus the CLI. Distribution on Free is the Blazium store, the web player, and BlaziumLauncher. Lobby limits on Free are still being finalized.
+Free includes a store page (draft, private, link-only, or public), selling (editions, bundles, donations, keys, and patron tiers), builds on stable, beta, and dev with virus scanning and rollback, the browser player and Discord Activities, crash reports tied to each build, the in-game bug reporter when you turn it on, analytics and funnels, and MCP for Cursor, VS Code, and Claude Code, plus the CLI. Distribution on Free is the Blazium store, the web player, and BlaziumLauncher. Free also includes lobbies (relay, or scripted with Luau, with a small lobby data quota), with the limits in [Lobby limits](#lobby-limits) below.
 
-Grow adds lobbies (relay, or scripted with Luau), STUN/TURN relay, achievement and stats settings, more than one sign-in app per game, and 360 days of analytics, crash, and bug history. Grow also includes distribution beyond the Blazium store, web player, and launcher: Discord Activities are already on every plan, and Grow adds YouTube Playables, TikTok, WhatsApp, CrazyGames, Facebook, Google Play / Android, Windows Store, Epic Games Store, Steam, Game Jolt, and iOS. For Steam, that store still gets the info and permissions it requires. Epic and the other stores work the same way.
+Grow adds larger lobby limits (the [lobby data store](./multiplayer.md#lobby-data) and calls between lobby scripts and the Scripted API are on every plan, with bigger quotas), STUN/TURN relay, achievement and stats settings, more than one sign-in app per game, and 360 days of analytics, crash, and bug history. Grow also includes distribution beyond the Blazium store, web player, and launcher: Discord Activities are already on every plan, and Grow adds YouTube Playables, TikTok, WhatsApp, CrazyGames, Facebook, Google Play / Android, Windows Store, Epic Games Store, Steam, Game Jolt, and iOS. For Steam, that store still gets the info and permissions it requires. Epic and the other stores work the same way.
 
 Scale adds anticheat settings for that game. Anticheat is by request. Free and Grow do not include anticheat settings. This page does not sell anticheat and does not set a license price. Scale history is 5 years.
 
 One sign-in application is included on Free. Another one needs Grow ($29/mo per game); Scale includes it.
+
+## Lobby limits
+
+Every plan has lobbies. The limits grow with the plan so a game that is succeeding has room to keep growing:
+
+| Plan | Open lobbies per game | Players per lobby | Open lobbies per host | Lobby data per lobby | STUN/TURN relay |
+|---|---|---|---|---|---|
+| Free | 32 | 4 | 2 | 4 KiB | No |
+| Grow | 128 | 16 | 4 | 16 KiB | Yes |
+| Scale | 1,024 | 32 | 8 | 64 KiB | Yes |
+
+A lobby request over a limit is refused with a message that names the limit and the plan that raises it; lobbies already open are never closed by a downgrade. Keys per lobby follow the data limits in the [Scripted API](./scripted-api.md) and lobby data store. The Lobby tab on your game's edit page shows your limits and how close the game is to them, and \chauffeur lobby analytics\ or the \get_lobby_analytics\ MCP tool shows how many lobbies were turned away at a cap.
 
 ## Launch offer
 

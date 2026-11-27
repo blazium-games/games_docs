@@ -14,15 +14,18 @@ https://sapi.blazium.online/v1/{game_uid}/{logic}
 
 Use it for the parts of a game that need a server but not a dedicated one: score submission, daily rewards, inventory rules, matchmaking queues, season resets, or a webhook from your own tools. Logic can store data per game, per release channel and per player, keep leaderboards, run on a schedule, call allowed HTTPS hosts, and grant achievements, stats and items.
 
-The [Scripted API reference](./scripted-api-reference.md) lists every Luau function, header, error code and limit.
+A logic can also answer sub-paths, `https://sapi.blazium.online/v1/{game_uid}/{logic}/{action}`, which it reads as `req.action`. The [Scripted API reference](./scripted-api-reference.md) lists every Luau function, header, error code and limit.
+
+Blazium also has ten ready-made [features](./scripted-api-features.md) (daily rewards, a wheel, chests, quests, boards, competitions, a wallet, lives, ranks and a session start) that the game owner turns on one at a time.
 
 ## Turn it on
 
 Open the game in the editor and choose the **Scripted API** tab. Turn it on, and choose whether logic marked `auth = "anonymous"` may run without a signed-in player. Add the browser origins of any web page that calls it directly, such as `https://example.com`. The web player and Discord activities do not need an origin.
 
-Over MCP, `set_sapi` changes the same settings, and turning it on waits for the account owner's approval. A deploy key cannot turn it on.
+Over MCP, `set_sapi` changes the same settings, and turning it on waits for the account owner's approval. A deploy key cannot turn it on. The same tab has a **Features** panel: a ready-made feature runs only after the owner turns it on there (see [features](./scripted-api-features.md)).
 
 ## Write a pack
+
 
 A pack is a folder of `.luau` (or `.lua`) files:
 
@@ -246,13 +249,17 @@ yield return sapi.Call("submit_score", "POST", "{\"score\":1200}", result);
 
 Any other client can call the URL directly. Send `Idempotency-Key` on writes you might retry; the same key within 24 hours replays the first answer instead of running the logic again.
 
+## Edit a pack that is already published
+
+`chauffeur sapi pull --dir sapi` downloads the pack a channel runs (`--channel beta` for another channel, or give a checksum, `latest`) and unpacks it. It leaves a local file that differs alone unless you add `--force`. Over MCP, `get_sapi_pack_files` and `get_sapi_file` read the files of a stored pack without downloading it. Edit, run `chauffeur sapi test`, then `chauffeur sapi publish` and activate it again.
+
 ## Logs, usage and analytics
 
 `chauffeur sapi logs` and `get_sapi_logs` read `log.info` lines and errors, by logic, channel, level or request id. Each reply carries `X-Request-Id`. A script error tells the caller only the request id; the logs have the details.
 
 Lines are stored in the database, so they survive a restart and a move of the game between servers. A plan keeps a number of lines per game for its retention (1,000 lines for 1 day on Free, 20,000 for 7 days on Grow, 100,000 for 30 days on Scale), and older lines are removed. Add `--since` and `--until` (a time, or for chauffeur how long ago, such as `30m`, `2h` or `7d`) to read a window. A page is at most 1,000 lines, oldest first. When it is full, the reply has a `next_cursor`: pass it as `--cursor` (`cursor` over MCP) to read the lines before it. Lines that were queued while the database was down or slow can be dropped, and the service counts them. The whole-game purge removes the stored logs as well.
 
-The **Analytics** page of the game shows Scripted API calls per day, errors, budget hits and the busiest logic. `chauffeur sapi usage` shows stored data against the plan.
+The **Analytics** page of the game shows Scripted API calls per day, errors, budget hits and the busiest logic. The Scripted API tab shows the same numbers with what each plan limit turned away, and a change log of everything done to the API and who did it. `chauffeur sapi analytics` and `chauffeur sapi audit` (or `get_sapi_analytics` and `get_sapi_audit` over MCP) read them from the terminal; `chauffeur sapi usage` shows stored data against the plan.
 
 ## Plans
 
