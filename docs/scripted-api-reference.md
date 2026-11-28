@@ -237,4 +237,6 @@ The same codes come back through `api.blazium.online` when the website, chauffeu
 
 \* Internal calls (`api.call` and `lobby.*`) are counted separately from third-party outbound calls (`api.http`, `webhook.send`, `items.list`). During the current log-only period, internal calls exceeding the allowances above are counted and logged without blocking normal games.
 
+Where to see these numbers: `get_sapi_usage` and `chauffeur sapi usage` list the allowances (`outbound_per_request`, `outbound_per_hour`, `internal_per_request`, `internal_per_hour`). `get_sapi_analytics`, `chauffeur sapi analytics` and the activity panel on the game page show `outbound_calls` (third-party), `script_internal_calls` (calls your scripts made to Blazium) and `internal_would_reject` (calls that went over an internal allowance and were only logged). `internal_calls` is a different number: requests other Blazium services made to your game. Lobby scripts report the same three counters through `get_lobby_analytics`.
+
 A pack that is over the plan's pack, file or schedule limits is refused when it is published. When a plan ends, stored data stays readable and deletable, and writes are refused with `4308` while the game is over a data limit.

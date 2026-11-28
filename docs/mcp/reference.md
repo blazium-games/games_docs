@@ -80,7 +80,7 @@ See [Scripted API](../scripted-api.md). MCP never uploads a pack; `chauffeur sap
 | `get_sapi_logs` | `uid`, optional `logic`, `channel`, `level`, `request_id`, `since`, `until`, `cursor`, `limit` | Stored script logs, oldest first, at most 1000 lines a page. `since` and `until` take RFC 3339 or Unix milliseconds. When a page is full the reply has `next_cursor`; pass it as `cursor` for the older lines. Secret values are scrubbed |
 | `get_sapi_analytics` | `uid` | Calls, errors, refusals (storage, rate, run budget, feature off) and latency per day and per logic |
 | `get_sapi_audit` | `uid`, optional `limit`, `before` | Every change to the Scripted API (packs, settings, features, data, config, secrets, staff stops) with who made it, newest first. Follow `next_before` for older entries |
-| `get_sapi_usage` | `uid` | Stored data, keys, players and leaderboard entries against the plan. `read_only` is true while writes are blocked |
+| `get_sapi_usage` | `uid` | Stored data, keys, players and leaderboard entries against the plan, plus the outbound and internal call allowances. `read_only` is true while writes are blocked. The internal allowances only log for now |
 | `get_sapi_data` | `uid`, optional `scope`, `channel`, `user`, `prefix`, `after`, `limit` | One page of keys and values in a scope (`global`, `channel` or `user`), at most 200. Follow `next` |
 | `set_sapi_data` | `uid`, `key`, `value`, optional `scope`, `channel`, `user`, `ttl` | Writes one value. Obeys the plan's write limits. Covered by `mcp:catalog.write` |
 | `delete_sapi_data` | `uid`, `key`, optional `scope`, `channel`, `user` | Deletes one key. Deleting all of a game's data is done on the website. Covered by `mcp:catalog.write` |
@@ -109,7 +109,7 @@ See [Lobby data](../multiplayer.md#lobby-data). It is a separate store from the 
 | `reset_lobby_data` | `uid`, `scope`, optional `channel`, `user`, `lobby`, `prefix`, `dry_run`, `confirm` | Deletes many keys. A dry run counts and changes nothing. A real reset needs `confirm` and waits for the owner's approval. Covered by `mcp:catalog.write` |
 | `get_lobby_config`, `set_lobby_config` | `uid`, and for set `name`, `channel`, `value`, `public`, `delete` | Lobby remote config. Covered by `mcp:catalog.write` |
 | `list_lobby_secrets`, `set_lobby_secret` | `uid`, and for set `name`, `channel`, `value`, `delete` | Write-only secrets for lobby scripts. Deleting waits for the owner's approval. Covered by `mcp:keys.manage` |
-| `get_lobby_usage` | `uid` | Lobby data against the plan, with the plan's lobby limits |
+| `get_lobby_usage` | `uid` | Lobby data against the plan, with the plan's lobby limits and script call allowances |
 | `get_lobby_analytics` | `uid` | Lobbies opened and closed, peaks, joins, requests turned away at a plan cap, lobby data use and TURN use over the plan's history window |
 | `get_lobby_audit` | `uid`, optional `limit`, `before` | Every change to lobby data with who made it, newest first. Follow `next_before` for older entries. Secret values are never recorded |
 
