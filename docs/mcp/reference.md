@@ -109,7 +109,7 @@ See [Lobby data](../multiplayer.md#lobby-data). It is a separate store from the 
 | `reset_lobby_data` | `uid`, `scope`, optional `channel`, `user`, `lobby`, `prefix`, `dry_run`, `confirm` | Deletes many keys. A dry run counts and changes nothing. A real reset needs `confirm` and waits for the owner's approval. Covered by `mcp:catalog.write` |
 | `get_lobby_config`, `set_lobby_config` | `uid`, and for set `name`, `channel`, `value`, `public`, `delete` | Lobby remote config. Covered by `mcp:catalog.write` |
 | `list_lobby_secrets`, `set_lobby_secret` | `uid`, and for set `name`, `channel`, `value`, `delete` | Write-only secrets for lobby scripts. Deleting waits for the owner's approval. Covered by `mcp:keys.manage` |
-''s lobby limits |
+| `get_lobby_usage` | `uid` | Lobby data against the plan, with the plan's lobby limits and script call allowances |
 | `get_lobby_analytics` | `uid` | Lobbies opened and closed, peaks, joins, requests turned away at a plan cap, lobby data use and TURN use over the plan's history window |
 | `get_lobby_audit` | `uid`, optional `limit`, `before` | Every change to lobby data with who made it, newest first. Follow `next_before` for older entries. Secret values are never recorded |
 
