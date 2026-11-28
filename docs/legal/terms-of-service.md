@@ -9,7 +9,7 @@ Canonical version: https://blazium.games/terms-of-service
 
 # Terms of Service
 
-**Effective Date: November 4, 2026**
+**Effective Date: November 28, 2026**
 
 These Terms of Service ("Terms") are a contract between you and Divine Games, Inc.,
 a California corporation that runs its business from Arizona ("Divine Games," "we," "us," or "our").
@@ -102,7 +102,7 @@ license to use the Content as permitted by the Creator's settings (e.g., for per
 
 - **Prices.** Creators set the price of paid Content, from $0.99 to $500 USD. Creators of free Content can accept donations from $1 to $500 USD. All prices are in US dollars.
 - **What buyers pay.** The price, plus any sales tax, plus a card processing fee shown at checkout when paying by card. Paying from your account balance adds no processing fee.
-- **What Creators receive.** For each sale or donation we keep a sale fee of $0.25 plus 8% of the price. The rest is credited to the Creator's balance.
+- **What Creators receive.** For each sale or donation we keep a sale fee of $0.25 plus 8% of the price on every plan. The rest is credited to the Creator's balance.
 - **Donations.** A donation is a voluntary gift to a Creator, not a purchase, and it is not refundable (section 11). If a "donation" is really payment for something, it is a sale and must be treated as one.
 - **Payment processing.** Card payments, tax calculation, and payouts are handled by Stripe. USDC top-ups are settled through Coinbase's x402 facilitator and Stripe. Your use of these payment methods is also subject to their terms.
 - Buyers are responsible for reading the listing, including the license, supported platforms, and engine compatibility.
@@ -112,9 +112,9 @@ license to use the Content as permitted by the Creator's settings (e.g., for per
 
 Your account can hold money in three parts:
 
-- **Credit:** money you add by card or USDC ($5 to $500 per top-up), and refunds of purchases paid from your balance. Credit can be spent on Content on the Service. A top-up balance can be cashed out at the account's cash-out rate in section 10. A refund of a purchase paid from the balance cannot be cashed out. Credit is not refundable except where the law requires.
-- **Pending:** a Creator's earnings from sales that can still be refunded.
-- **Available:** a Creator's earnings from sales past the refund window. The refund window ends 7 days after the sale. Playtime does not release earnings sooner. Available earnings can be spent or cashed out once that window ends.
+- **Credit:** money you add by card or USDC ($5 to $500 per top-up), and refunds of purchases paid from your balance. Credit can be spent on Content on the Service. A top-up can be cashed out, subject to the cash-out fee for the best plan that account owns (8% + $0.25 on Free, 7% + $0.25 on Grow ($29/month per game), or 6% + $0.25 on Scale ($99/month per game)), and it is not refundable except where the law requires.
+- **Pending:** a Creator's earnings from a sale until 7 days after that sale. The buyer's refund right does not release them early.
+- **Available:** a Creator's earnings from a sale once that sale's refund window ends, 7 days after the sale. Those earnings can then be spent and cashed out. The buyer's refund right of 7 days or 2 hours of play, whichever comes first (section 11), is separate and does not release those earnings early. A refund is refused while a cash-out on the same account is open (section 11).
 
 - **Not a bank.** Your balance is a record of amounts we owe you or that you can spend on the Service. It is not a bank account or deposit, it does not earn interest, and it is not insured by the FDIC, the NCUA, or any government agency. We are not a bank, trust company, or credit union.
 - **Corrections and holds.** We may correct balance errors, and we may hold or reverse amounts linked to fraud, chargebacks, sanctions screening, or a breach of these Terms. Held amounts cannot be spent or cashed out.
@@ -123,10 +123,10 @@ Your account can hold money in three parts:
 
 ## 10. Cash-Outs
 
-- Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A Grow or Scale subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out at the account's cash-out rate in this section. USDC cash-out does not use Stripe.
-- Creators can cash out available earnings of $25 USD or more once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. The transfer goes only to the Express account on that same account. Stripe is available for United States accounts.
+- Blazium is the marketplace. The buyer pays Blazium. Blazium keeps $0.25 + 8% of the price on every plan. The rest is the creator's earnings. A game sale, a donation, and a patron charge credit the creator's balance and can be cashed out. A sale's earnings become available to cash out once that sale's refund window ends, 7 days after the sale. The buyer's refund right of 7 days or 2 hours of play, whichever comes first (section 11), is separate and does not release those earnings early. A refund is refused while a cash-out on the same account is open (section 11). A Grow ($29/month per game) or Scale ($99/month per game) subscription is charged to the subscriber and is not transferred to an Express account. A top-up becomes credit and can be cashed out, subject to the cash-out fee for the best plan that account owns (8% + $0.25 on Free, 7% + $0.25 on Grow ($29/month per game), or 6% + $0.25 on Scale ($99/month per game)). USDC cash-out does not use Stripe.
+- Creators can cash out available earnings of $25 USD or more. A sale's earnings become available to cash out once that sale's refund window ends, 7 days after the sale. The buyer's refund right of 7 days or 2 hours of play, whichever comes first (section 11), is separate and does not release those earnings early. A refund is refused while a cash-out on the same account is open (section 11). The transfer goes only to the Express account on that same account. Stripe is available for United States accounts.
 - To cash out you must complete Stripe's identity verification and tax information checks. You are responsible for supplying accurate information, such as your legal name, address, and tax forms. Stripe may refuse or delay payouts under its own rules, and we may hold cash-outs until verification is complete.
-- Each cash-out costs 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. The remaining amount is transferred to your Express account and then paid to your bank. Identity, tax, and bank details are entered on Stripe's hosted onboarding. The Express dashboard is where you see the payout to your bank. Blazium pays Stripe's processing fees and is responsible for a negative balance. A refund or dispute stays on Blazium's balance. Stripe does not reverse a transfer that was already sent.
+- Each cash-out costs 8% + $0.25 when every game you own is Free, 7% + $0.25 when the best plan you own is Grow ($29/month per game), or 6% + $0.25 when the best plan you own is Scale ($99/month per game). The remaining amount is transferred to your Express account and then paid to your bank. Identity, tax, and bank details are entered on Stripe's hosted onboarding. The Express dashboard is where you see the payout to your bank. Blazium pays Stripe's processing fees and is responsible for a negative balance. A refund or dispute stays on Blazium's balance. Stripe does not reverse a transfer that was already sent.
 - **Timing.** Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. Verification holds, tax-form holds, and Stripe's own reviews can add time after a payout is sent.
 - If a transfer fails or is reversed, the amount and fee are returned to your available balance.
 - We may refuse, delay, or reverse a cash-out that looks fraudulent, fails sanctions screening, or would leave your balance short of pending refunds and fees.
@@ -137,7 +137,10 @@ Your account can hold money in three parts:
 - A purchase can be refunded until **7 days** have passed or you have played the game for **2 hours**, whichever comes first.
 - **Donations are not refundable**, except where the law requires a refund or we reverse a donation tied to fraud. A chargeback on a donation is handled as described below.
 - Content you got from a game key or gift link was not bought, so there is nothing to refund.
-- To ask for a refund, email [support@blazium.games](mailto:support@blazium.games) from your account email. We may also refund outside this window at our discretion, for example for a broken build.
+- To ask for a refund, open your library, pick the game, and choose **Request a refund** while the game is inside its window. You can also email [support@blazium.games](mailto:support@blazium.games) from your account email. Blazium staff can accept or decline the request. You keep the game and can keep playing while it is open. If nobody decides, the refund is approved automatically after 64 business hours (weekdays from 8:00am to 5:00pm Pacific).
+- A refund is refused when the window has passed, the purchase is unpaid or a request on it was already decided, a cash-out on your account is open, or the game was replaced by an upgrade or another edition.
+- An AI agent cannot request a refund or check on one unless Blazium staff turn MCP refunds on for your account. Each request an agent makes then still waits for your approval.
+- We may also refund outside this window at our discretion, for example for a broken build.
 - A refund credits your Blazium account with the price plus tax, minus the platform fee. The card processing fee and the platform fee are not returned. Nothing is sent to a card, a bank, or a USDC address. Getting money out is a payout you request.
 - A refund of a purchase is credited to your account balance, which cannot be cashed out.
 - When a purchase is refunded, the license is revoked and the Creator's earnings from that sale are taken back. The platform fee is not returned.
@@ -155,7 +158,7 @@ Your account can hold money in three parts:
 - You can let AI tools connected through our MCP server act for you. Anything an agent does on your account is done by you.
 - An agent can only buy if you granted it the `player:buy` permission on the player server (developer tokens for your whole account can also buy until October 28, 2026). By default each agent's purchase waits until you approve it by emailed link or code.
 - At [MCP settings](https://blazium.games/settings/mcp) you can let an agent spend on its own: without a limit, or up to a monthly, yearly, or one-time limit of up to $1,000 (UTC periods). Anything beyond that still needs your approval. Agents can only pay from your account balance, never by card, and cannot change their own limits.
-- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can send you to Balance. `start_payout_setup` and `get_payout_dashboard_link` return that page. You open Stripe from Set up payouts with Stripe. A cash-out always waits until you approve it, whether the agent used a developer key or a player key. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. The cash-out fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. The transfer goes only to the Express account on that same account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](https://blazium.games/settings/mcp) if something looks wrong.
+- An agent with access to your wallet (the `player:buy` permission on the player server, or `mcp:write` or `mcp:money` on the developer server) can send you to Balance. `start_payout_setup` and `get_payout_dashboard_link` return that page. You open Stripe from Set up payouts with Stripe. A cash-out always waits until you approve it, whether the agent used a developer key or a player key. The cash-out fee is 8% + $0.25 on Free, 7% + $0.25 on Grow ($29/month per game), or 6% + $0.25 on Scale ($99/month per game), from the best plan that account owns. The transfer goes only to the Express account on that same account, and we email you after every cash-out an agent makes. Only give that access to agents you trust, and revoke their keys at [MCP settings](https://blazium.games/settings/mcp) if something looks wrong.
 - Purchases an agent makes within the limits you set, or that you approve, are purchases made by you. The refund rules in section 11 apply to them the same way.
 
 ## 14. User-Generated Content (UGC)
@@ -180,7 +183,7 @@ We may remove Content, suspend accounts, or terminate access for violations.
 ## 16. Community Guidelines and Reports
 
 - Be respectful. No harassment, threats, or disruptive behavior.
-- Chat follows the [Chat Rules](https://blazium.games/chat-rules). Breaking them can lock your account out of chat, suspend it, or lead to harsher action.
+- Chat follows the [Chat Rules](./chat-rules.md). Breaking them can lock your account out of chat, suspend it, or lead to harsher action.
 - You can report Content, Users, and reviews with the report buttons on the Service. Reports are input to our own decisions; filing one does not oblige us to act on it or to explain what we decided.
 - We may moderate and remove offending content or accounts at our discretion.
 
@@ -202,7 +205,7 @@ We may remove Content, suspend accounts, or terminate access for violations.
 - **Staff review.** Our staff review each paid notice and may ask the sender or the uploader for more information. Whether a claim is valid, and what to do about it, is our decision alone (section 17). If we decide a claim is valid, we may disable or remove the Content named in it, and we may suspend or ban the account that uploaded it. If we decide a claim is not valid, we close it and leave the Content as posted. Filing a notice does not mean the Content will be removed, and we do not owe the sender or the uploader an explanation or an appeal.
 - **Records are preserved during a claim.** While a claim is open, we keep a record of each named listing and file as it was when the notice was filed, even if the uploader changes or deletes it.
 - **The uploader's part.** If a notice names your Content, you may answer the sender directly, send us anything relevant to the review by emailing [dmca@blazium.games](mailto:dmca@blazium.games) with the claim reference in the subject, and delete a listing or any of its builds yourself at any time. You are responsible for your Content and remain liable to rights holders for it (sections 6 and 25).
-- **Not legal advice.** Forwarding a notice or deciding a claim is not legal advice and not an admission by us, the sender, or the uploader that Content does or does not infringe. We do not process formal counter-notices. Action on an account is decided claim by claim; we do not run a fixed repeat-infringer policy.
+- **Not legal advice.** Forwarding a notice or deciding a claim is not legal advice and not an admission by us, the sender, or the uploader that Content does or does not infringe. A person named on an open notice can send a written counter-statement, which we record and email to the claimant. A counter-statement does not restore content and does not start a statutory waiting period. Action on an account is decided claim by claim; we do not run a fixed repeat-infringer policy.
 
 ## 18. Seizure of Assets for Abuse
 
@@ -220,6 +223,7 @@ Version 2026-09-30. These terms apply in addition to the rest of these Terms whe
 - **Your projects.** You are responsible for every project you own or help run, including its builds, store page, prices, and support. You may only upload builds and media you have the right to distribute.
 - **Honest listings.** Your store page, taxonomy, content warnings, adult rating, "made with" label, and generative-AI disclosure (section 21) must be accurate and kept up to date. Mods, plugins, and tools must name the game they are for, and you must have the right to distribute them for that game.
 - **Turning it off.** You can turn off developer mode after you transfer or delete your projects and leave the project teams you help run. Your earnings and past sales records are kept.
+- **Sale earnings.** A sale's earnings become available to cash out once that sale's refund window ends, 7 days after the sale. The buyer's refund right of 7 days or 2 hours of play, whichever comes first (section 11), is separate and does not release those earnings early. A refund is refused while a cash-out on the same account is open (section 11).
 - **Enforcement.** We may unlist projects, turn off developer mode, or suspend accounts that break these developer terms.
 
 ## 20. Content Ratings and Adult Content
@@ -262,7 +266,7 @@ You will defend and indemnify us and our directors, officers, employees, and age
 - You may stop using the Service and close your account at any time.
 - We may terminate or suspend your access for violations of these Terms or under sections 17, 17.1, and 18. We do not close accounts just because a third party asked; a paid copyright notice is reviewed and decided by our staff (section 17.1).
 - Upon termination, your right to use the Service ends, but licenses to previously downloaded Content persist, except licenses revoked under section 11.
-- If your account is closed, contact [support@blazium.games](mailto:support@blazium.games) to cash out any available earnings to a verified payout account, less fees, pending refunds, and chargeback reserves, unless United States law requires us to hold them. A top-up balance can be cashed out at the account's cash-out rate in section 10. Credit from a refund is not paid out in cash.
+- If your account is closed, contact [support@blazium.games](mailto:support@blazium.games) to cash out any available earnings to a verified payout account, less fees, pending refunds, and chargeback reserves, unless United States law requires us to hold them. A top-up can be cashed out, subject to the cash-out fee for the best plan that account owns (8% + $0.25 on Free, 7% + $0.25 on Grow ($29/month per game), or 6% + $0.25 on Scale ($99/month per game)).
 - Sections that by their nature should survive, including governing law, venue, legal process, balance reconciliation, licenses already granted, disclaimers, limitation of liability, and indemnity, survive the end of your use.
 
 ## 27. Changes to Terms
