@@ -32,6 +32,7 @@ const sidebars = {
       items: [
         'creators/faq',
         'creators/pricing',
+        'plans',
         'storefront/create-a-project',
         'listings',
         'graphical_assets_guidelines',
@@ -112,6 +113,7 @@ const sidebars = {
           items: [
             'mcp/player',
             'mcp/access-and-keys',
+            'mcp/approvals',
             'mcp/oauth',
             'mcp/reference',
             'mcp/versioning',
@@ -130,8 +132,10 @@ const sidebars = {
           ],
         },
         'multiplayer',
+        'standalone-sign-in',
         'scripted-api',
         'scripted-api-reference',
+        'scripted-api-features',
         'progress',
         'web-player',
         'inventory',

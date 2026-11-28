@@ -12,7 +12,8 @@ function engineRedirects() {
     name: 'engine-redirects',
     async postBuild({outDir}) {
       const html = '<!doctype html><meta http-equiv="refresh" content="0; url=/docs/engines"><link rel="canonical" href="/docs/engines"><script>location.replace("/docs/engines")</script>';
-      for (const slug of ['unity', 'godot']) {
+      // docs/unity.md is a real page again (Unity and the native library), so only the old Godot URL redirects.
+      for (const slug of ['godot']) {
         const dir = path.join(outDir, 'docs', slug);
         fs.mkdirSync(dir, {recursive: true});
         fs.writeFileSync(path.join(dir, 'index.html'), html);
