@@ -229,7 +229,7 @@ A non-2xx HTTP response sets `res.ok = false` with the numeric `res.status` and 
 | Internal calls (`sapi.call`, `sapi.read`) per callback* | 16 | 64 | 256 |
 | Internal calls per hour* | 20,000 | 500,000 | 5,000,000 |
 
-\* Internal calls (`sapi.call`, `sapi.read`) are counted separately from third-party HTTP calls and are currently tracked in log-only mode without blocking normal games.
+\* Internal calls (`sapi.call`, `sapi.read`) are counted separately from third-party HTTP calls and are currently tracked in log-only mode without blocking normal games. `get_lobby_usage` lists the allowances (`outbound_per_request`, `internal_per_request`, `internal_per_hour`). `get_lobby_analytics` and the lobby activity panel show `outbound_calls`, `script_internal_calls` and `internal_would_reject`, the number of calls that went over an internal allowance and were only logged.
 
 ## Publishing with `chauffeur lobby`
 

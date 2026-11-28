@@ -190,7 +190,7 @@ Full reference: [Scripted API](../../../docs/scripted-api.md). MCP never uploads
 | `list_sapi_packs` | `uid` | | Checksum, channel, size, publisher, the channels each serves, and its logic list |
 | `activate_sapi_pack` | `uid`, `checksum`, optional `channel` | write | Serves a stored pack on a channel (default `stable`). An empty checksum stops the channel. Also how you roll back |
 | `get_sapi_logs` | `uid`, optional `logic`, `channel`, `level`, `request_id`, `since`, `until`, `cursor`, `limit` | | Stored script logs, oldest first. Follow `next_cursor`. Secret values are scrubbed |
-| `get_sapi_usage` | `uid` | | Stored data, keys, players and leaderboard entries against the plan |
+| `get_sapi_usage` | `uid` | | Stored data, keys, players and leaderboard entries against the plan, plus the outbound and internal call allowances (internal only logs for now) |
 | `get_sapi_data` | `uid`, optional `scope`, `channel`, `user`, `prefix`, `after`, `limit` | | One page of keys and values in a scope, at most 200. Follow `next` |
 | `set_sapi_data` | `uid`, `key`, `value`, optional `scope`, `channel`, `user`, `ttl` | write | Writes one value. Obeys the plan's write limits |
 | `delete_sapi_data` | `uid`, `key`, optional `scope`, `channel`, `user` | write | Deletes one key |
@@ -220,7 +220,7 @@ The store of games_slobby, separate from the Scripted API's data and with the sa
 | `reset_lobby_data` | `uid`, `scope`, optional `channel`, `user`, `lobby`, `prefix`, `dry_run`, `confirm` | | Deletes many keys. A dry run counts and changes nothing. A real reset needs `confirm` and waits for the owner's approval. Covered by `mcp:catalog.write` |
 | `get_lobby_config`, `set_lobby_config` | `uid`, and for set `name`, `channel`, `value`, `public`, `delete` | | Lobby remote config. Covered by `mcp:catalog.write` |
 | `list_lobby_secrets`, `set_lobby_secret` | `uid`, and for set `name`, `channel`, `value`, `delete` | | Write-only secrets for lobby scripts. Deleting waits for the owner's approval. Covered by `mcp:keys.manage` |
-| `get_lobby_usage` | `uid` | | Lobby data against the plan, with the plan's lobby limits |
+| `get_lobby_usage` | `uid` | ''s lobby limits |
 | `get_lobby_analytics` | `uid` | | Lobbies opened and closed, peaks, joins, requests turned away at a plan cap, lobby data use and TURN use over the plan's history window |
 | `get_lobby_audit` | `uid`, optional `limit`, `before` | | Every change to lobby data with who made it, newest first. Follow `next_before` for older entries. Secret values are never recorded |
 
