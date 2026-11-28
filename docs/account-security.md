@@ -89,6 +89,16 @@ The code works for 10 minutes. You can ask for another after 30 seconds. A recov
 
 Session cookies are now limited to the exact site that set them (blazium.games, each developer's store page, and the MCP server each have their own). Everyone was signed out once when this changed. Sign in again and the store pages and MCP connections pick up your session as you visit them. The cookies are listed under [Permissions & Scopes > Cookies](./legal/permissions.md#cookies).
 
+## Logging out
+
+**Log out** on the website ends that browser's session and sends you to the home page. It works from any page, including after you were idle, and it clears your cookies even if the session had already ended. It does not sign your AI tools out.
+
+Your AI tools (Cursor, Claude, and any other MCP client) keep their own access until you end it. On **Settings, AI tools**, **Sign out of all AI tools** revokes every MCP key, access token and refresh token for the account, and each tool has to ask you to approve it again. Use it when you lose a laptop or an agent misbehaves. It leaves your website sessions alone. **Sign out everywhere** (`sign_out_everywhere`) ends every website session and leaves the AI tools as they are.
+
+## MCP activity log
+
+**Settings, AI tools** also lists the tool calls your agents made: the tool, whether it worked, the error, how long it took, the client, and the arguments with secrets removed. The tool's results are not stored. Calls are kept for 30 days, and you can download them. See the [MCP reference](./mcp/reference.md#mcp-activity-log).
+
 ## Your timezone
 
 Your timezone sets when daily limits and reports roll over. New accounts take it from your browser. Change it at [Settings](https://blazium.games/settings). Agents connected over MCP can set it with `set_timezone`, using your timezone, never the timezone of the machine they run on.

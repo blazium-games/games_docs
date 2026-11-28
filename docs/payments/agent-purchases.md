@@ -56,6 +56,7 @@ Agents always pay from the balance. If it is too low (`4020`), the agent can:
 
 | Code | Meaning |
 | --- | --- |
+| `4213` | A standing choice on this agent denies the action. See [Approvals](../mcp/approvals.md) |
 | `4214` | Waiting for your approval (not an error; HTTP 202) |
 | `4215` | You denied the request |
 | `4216` | Wrong or expired approval code |

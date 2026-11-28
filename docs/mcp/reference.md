@@ -239,6 +239,8 @@ Keys give a game to someone for free, for press, bundles, or giveaways. Each cod
 
 Over MCP, rotating an account or deploy key, deleting a deploy key, creating more than 100 game keys at once, adding a project admin, promoting to `stable`, turning the Scripted API on, activating or stopping a Scripted API pack, deleting a Scripted API secret, and deleting a game or build wait for the account owner, even with full access. The call returns HTTP 202 with `approval_required: true`, code `4214`, `email_sent`, and an `approval` object whose `uid` you pass as `approval_id` and whose `confirm_url` the owner can open. The owner also gets an email with the link and a 6-digit code. Once `get_approval` says `approved` (or after `confirm_approval` with the code), repeat the call with the same `idempotency_key`; without one, the same agent repeating the same action reuses the pending approval. Each approval works once and expires if nobody decides. Project tokens can't use `get_approval` or `confirm_approval` (`4030`), so approve those from the email. On the website these actions don't need an approval.
 
+When the client negotiated MCP protocol `2026-07-28` or later and advertises the `elicitation` capability, the call returns an input-required result instead: one prompt with `yes`, `no`, `always_yes`, and `always_no`. The answer is posted back with the retry. Always-ask actions (cash-out, payout address, key changes, add admin, delete game, project sign-in apps) never show the prompt and never take an always yes. A standing deny refuses the call with `4213`. See [Approvals](./approvals.md).
+
 ### Scopes
 
 `mcp:read` and `mcp:write` cover every developer tool except anticheat. OAuth consent can grant narrower scopes instead:
@@ -301,7 +303,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 232 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
+Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 253 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
@@ -320,9 +322,12 @@ Buying, wallet, and library are only on the [player server](./player.md), where 
 | `list_game_sales` | `uid` | Sales, donations, refunds, and seller earnings |
 | `get_sale_reporter` | `uid` | Reads sale and refund webhooks: enabled, webhook URLs, and that game's signing key. The key is not the review, crash, or bug reporter key. Covered by `mcp:money` |
 | `set_sale_reporter` | `uid`, optional `enabled`, `webhooks`, `refresh_signing_key` | Turns sale and refund webhooks on, replaces up to five https URLs, or refreshes the signing key. A refresh returns only the new key. Covered by `mcp:money` |
-| `start_payout_setup` | none | Returns the Balance page at blazium.games/settings/wallet. The human opens Stripe-hosted onboarding from Set up payouts with Stripe. Identity, tax, and bank details are entered on Stripe only after that. Needs a verified email. US accounts only. Account only, money write |
-| `get_payout_dashboard_link` | none | Returns the same Balance page. The human opens the Express dashboard from there. Account only, money write |
-| `cash_out` | `amount_cents` (at least 2500) | Cashes out available earnings to the Express account on that same account. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. Every agent cash-out, including a player key, returns `approval_required` and waits for the owner (retry with the same `idempotency_key`). The owner is emailed after each one. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Payouts are processed on weekdays from 8:00am to 5:00pm Pacific. `4095` finish payout setup, `4021` not enough available earnings, `4057` below the minimum. Account only, money write |
+| `start_payout_setup` | none | Returns the Earnings page at blazium.games/dashboard/earnings. The human opens Stripe-hosted onboarding from Set up payouts with Stripe. Identity, tax, and bank details are entered on Stripe only after that. Needs a verified email. US accounts only. Account only, money write |
+| `get_payout_dashboard_link` | none | Returns the same Earnings page. The human opens the Express dashboard from there. Account only, money write |
+| `cash_out` | `amount_cents` (at least 2500), optional `method` (`stripe`, `paypal`, `crypto`) | Cashes out available earnings to the payout method on that same account. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. PayPal can take up to 14 business days and crypto up to 28 business days, and the result carries `method` and `due_by`. Every agent cash-out returns `approval_required` and waits for the owner (retry with the same `idempotency_key`). The owner is emailed after each one. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Stripe payouts are processed on weekdays from 8:00am to 5:00pm Pacific. `4095` no ready payout method, `4021` not enough available earnings, `4057` below the minimum. Account only, money write |
+| `get_payout_methods` | none | Reads how the account collects money: Stripe (`payouts_ready`), PayPal (enabled, masked email), crypto (enabled, chain, address), the default method, and `can_charge`. Any one ready method satisfies the payment requirement. Account only, read |
+| `set_paypal_payouts` | `enabled`, `email` | Turns PayPal payouts on or off and saves the PayPal email. A PayPal cash-out can take up to 14 business days. Turning it on or changing the email asks the owner first. Account only, money write |
+| `set_crypto_payouts` | `enabled`, `chain` (`base` or `solana`), `address` | Turns crypto (USDC) payouts on (off by default) and saves the address. A crypto cash-out can take up to 28 business days. Turning it on or changing the address asks the owner first. Account only, money write |
 | `get_patron_status` | `developer` (optional) | Read-only memberships for the caller: tier, billing, status, period end, whether the 12 hour check is open, and license ids. No card data |
 | `list_patrons` | `page` (optional) | Developer only. Usernames, tiers, status, and since |
 | `get_patron` | `username` | Developer only. One patron's tier, status, and since |
@@ -423,6 +428,7 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `4094` | The total changed since the quote; confirm again with the human |
 | `4099` | The file is still being scanned, or the build has no clean file to promote |
 | `4212` | This token can't make purchases (project token, or a player token without `player:buy`) |
+| `4213` | A standing choice on this agent denies the action (HTTP 403). See [Approvals](./approvals.md) |
 | `4214` | Waiting for the human's approval (HTTP 202, returned as a normal result) |
 | `4215` | The human denied the request |
 | `4216` | Wrong or expired approval code |
@@ -495,57 +501,108 @@ Tool errors return `API <status>: <body>`. Some low codes (`4040`, `4050`–`405
 | `5032` | Payments, or a sign-in provider, aren't configured on the server |
 | `5033` | x402 top-ups aren't configured on the server |
 
-## Live server names
+## More tools
 
-- accept_invite
-- ack_patch_notices
-- buy_post
-- cancel_cash_out
-- cancel_membership
-- check_update
-- decline_invite
-- delete_article_comment
-- delete_web_player_poster
-- export_account
-- file_counter_notice
-- file_dmca_claim
-- get_asset_library_item
-- get_game_display_name
-- get_my_inventory
-- get_patch_notices
-- get_sign_in_funnel
-- get_sign_in_providers
-- list_article_comments
-- list_asset_library
-- list_changelog
-- list_connections
-- list_market
-- list_my_bug_reports
-- list_spare_copies
-- list_standing_choices
-- open_account_finish
-- open_password_settings
-- open_web_player_poster
-- redeem_spare_copy
-- report_cheater
-- report_game
-- report_player
-- request_refund
-- revoke_gift_link
-- revoke_key_code
-- revoke_key_pool
-- revoke_standing_choice
-- send_spare_copy
-- set_game_display_name
-- set_payout_currency
-- set_presence_sharing
-- set_profile_visibility
-- set_sign_in_providers
-- set_standing_choice
-- sign_out
-- sign_out_everywhere
-- start_connection
-- start_email_change
-- unfriend
-- unlink_connection
-- write_article_comment
+These tools are listed with the descriptions the live server publishes. Inputs are in each tool's schema, which your client reads when it connects.
+
+### Account, sign-in and privacy
+
+| Tool | What it does |
+|------|--------------|
+| `open_account_finish` | Returns the website page where the human finishes account setup, accepts changed terms, and sets up, replaces, or turns off an authenticator. An agent never does these steps for the human. When the human asks to skip the authenticator, call `skip_authenticator`. |
+| `open_password_settings` | Returns the website page where the human changes the password. Never ask the human for the new password in the chat. |
+| `start_email_change` | Email a confirmation code for a new address. The human enters that code on the website. This tool does not confirm the change. |
+| `sign_out` | Sign this token's website session out. |
+| `sign_out_everywhere` | Sign every session of this account out. Agent keys are not listed here; revoke those separately. |
+| `list_connections` | Sign-in accounts linked to this user. Passwords and access tokens are not returned. |
+| `start_connection` | Start linking GitHub, Discord, X, or Steam. Give the returned URL to the human. The human finishes it in the browser. |
+| `unlink_connection` | Unlink a sign-in account. Keep a password or another link so the account can still sign in. |
+| `set_profile_visibility` | Who can see this account's profile: public, private, or hidden. |
+| `set_presence_sharing` | Turn activity sharing on or off. Friends stop seeing live play when it is off. |
+| `get_game_display_name` | The display name this account uses inside one game. |
+| `set_game_display_name` | Set the display name this account uses inside one game. |
+| `unfriend` | Remove a friend, or cancel an outgoing request, by username. |
+| `list_mcp_activity` | List the tool calls this account's agents made over MCP, newest first: tool, outcome (`ok`, `error`, `approval`, `denied`), error code, duration, API requests made, `request_id`, client, and the arguments with secrets removed. Results are never stored. Kept 30 days. Filters: `game`, `tool`, `status`, `request_id`, `since`, `until`, `limit`, `cursor`. A token bound to one project must pass `game`. |
+| `export_account` | Download this account's portable copy: profile, purchases, licenses, wallet ledger, cash-outs, reviews, friendships, agent key prefixes, patron memberships, your MCP call log, and the API requests your agents made. Secrets are not included. |
+
+### MCP activity log
+
+Every tool call an agent makes on either server is recorded once its token is checked. A row has the tool, the server (developer or player), the outcome, the error code and text, the duration, how many API requests it made, the `request_id`, the client name, a one-line summary, and the arguments after redaction. Passwords, codes, keys, tokens, webhook URLs, and email addresses are blanked, text you typed is kept only as a length, and the whole argument text is cut at a fixed size. **Results are never stored.**
+
+Read it with `list_mcp_activity`, on **Settings, AI tools** (with a download), or, for one game, on the game's **MCP** tab. Rows are kept 30 days, at most the newest 5,000 per account, and are deleted with the account. When something fails, give support the `request_id` from the error or from this list: it joins the call to the API requests behind it, and our staff can read the same rows to find the fault.
+
+`initialize`, `tools/list`, and failed sign-ins are counted but not recorded.
+
+### Standing choices
+
+| Tool | What it does |
+|------|--------------|
+| `list_standing_choices` | Lists every standing allow or deny for this account, with its key, action, and game. Spend limit and developer mode stay on the website. |
+| `set_standing_choice` | Stores an allow or a deny for one action on this agent. Always-ask actions (cash-out, payout address, key changes, add admin, delete game, project sign-in apps) cannot be stored as allow. Always no wins. See [Approvals](./approvals.md). |
+| `revoke_standing_choice` | Removes one standing choice by `uid`. |
+
+### Wallet, purchases and patrons
+
+| Tool | What it does |
+|------|--------------|
+| `buy_post` | Buy one patron post. Requires confirm_total_cents from the post price and a unique idempotency_key. Past the spending limit it returns approval_required. |
+| `cancel_membership` | Stop renewing a patron membership. Access lasts until the period already paid for ends. |
+| `cancel_cash_out` | Cancel a cash-out that has not been sent and return it to the available balance. Waits for the account owner's approval. |
+| `set_payout_currency` | Choose usd or usdc for payouts. A new USDC address always asks the account owner. Waits for the account owner's approval. |
+| `request_refund` | Ask for a refund of one purchase (`purchase_uid`). Not listed unless Blazium staff turned MCP refunds on for the account; otherwise refused with `4084`, because a refund is a human action on the Library page. The owner approves each request. |
+| `get_refund_request` | Where a refund stands: the purchase, its refund window and the staff request. Same listing rule and `4084` as `request_refund`. |
+| `list_spare_copies` | Spare copies this account can send or redeem. |
+| `send_spare_copy` | Give a spare copy to another account. Waits for the account owner's approval. |
+| `redeem_spare_copy` | Redeem a spare copy onto this account. |
+| `get_my_inventory` | Items in this account's inventory. |
+| `list_market` | Public item market for a game. |
+
+### Reports and comments
+
+| Tool | What it does |
+|------|--------------|
+| `report_cheater` | Send a cheater report for a game this account plays. The report is filed as the signed-in player. |
+| `report_game` | Report a game page. owner is the page's account username or uid. |
+| `report_player` | Report a player profile. The signed-in account is the reporter. |
+| `list_my_bug_reports` | Bug reports this account filed. |
+| `list_article_comments` | Comments on a blog article. |
+| `write_article_comment` | Comment on a blog article. kind is suggestion, critique, question, or praise. |
+| `delete_article_comment` | Delete one of this account's article comments. |
+
+### Updates, changelogs and the asset library
+
+| Tool | What it does |
+|------|--------------|
+| `check_update` | Builds this account should have for a game, on the channel they follow. Compare file_uid and checksum with what is installed. |
+| `get_patch_notices` | Patch notices this account has not acknowledged for a game. |
+| `ack_patch_notices` | Mark patch notices as seen. |
+| `list_changelog` | Public changelog for a game. owner is the developer's username or uid. |
+| `list_asset_library` | Search the public asset library the editor uses. |
+| `get_asset_library_item` | One asset-library item, including its download when the caller may have it. |
+
+### Game settings and imports
+
+| Tool | What it does |
+|------|--------------|
+| `open_web_player_poster` | Poster images are uploaded on the website, not through MCP. Returns the page where the human uploads one. |
+| `delete_web_player_poster` | Remove the browser-player poster from a game. |
+| `get_sign_in_providers` | Which providers a game accepts for player sign-in. |
+| `set_sign_in_providers` | Replace the providers a game accepts for player sign-in: github, x, discord, steam, email. Also sets the web origins and return URIs that players outside the launcher may use. Send only the lists to change. Waits for the account owner's approval. |
+| `get_sign_in_funnel` | How many player sign-ins were opened, needed a step on the website, and finished for a game, per day and per sign-in method. Counts only, for the last days (1 to 90, default 30). |
+
+### Admin invites and key revocation
+
+| Tool | What it does |
+|------|--------------|
+| `accept_invite` | Accept a game admin invite. This asks the account owner first. Turning on developer mode still finishes on the website. |
+| `decline_invite` | Decline a game admin invite, or withdraw one you sent. |
+| `revoke_gift_link` | Revoke a gift link that has not been redeemed. Waits for the account owner's approval. |
+| `revoke_key_code` | Revoke one unused key code. A redeemed code keeps its license. Waits for the account owner's approval. |
+| `revoke_key_pool` | Revoke unused codes in a pool, or one campaign. Redeemed codes keep their licenses. Waits for the account owner's approval. |
+
+### Copyright notices
+
+| Tool | What it does |
+|------|--------------|
+| `file_dmca_claim` | Files a copyright (DMCA) claim. The filing fee is not refundable. Asks the account owner first, and payment finishes on the checkout page the response returns. |
+| `file_counter_notice` | Records a written statement on an open copyright notice that names this account, and emails it to the claimant. It does not restore content or start a waiting period. |

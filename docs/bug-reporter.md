@@ -37,6 +37,20 @@ Over the daily cap returns code `4291`.
 
 The Godot plugin, the Unity package, the Unreal plugin, and the C++ SDK expose two calls. `report_bug` is the short store-style report and does not send `X-Build-Id`, the log, or the screenshot. The longer in-game call (`report_ingame_bug` on the engine, `ReportInGameBug` on the native library) sends those fields. Godot, Unity, and Unreal take the extra fields on their `report_bug` entry point and send the in-game call when a build id or a screenshot path is set. A screenshot path has to sit under the game's user directory, and the read stops at 32 MiB. They send the Blazium JWT, or the Steam session from `sign_in_with_steam_ticket`, and they do not link Steamworks. See [Engines](./engines.md).
 
+## From the browser player
+
+A player of the browser build can report a bug from the **Report a bug** tab in the player (see [Browser player](./web-player.md#report-a-bug-from-the-player)). The tab appears only when the reporter is on for the game. It uses the play session, so it needs no Blazium login: signed-in and anonymous players can both report.
+
+The ticket goes through the same checks as an in-game report: the 4000-character message, the 512 KiB log, the per-game limits, the redaction of tokens and email addresses, and the webhooks. What differs:
+
+- The ticket has `source` `web_player`, `os` `web`, the build, and the engine and browser the page reported. `play_session` identifies the play session.
+- The log is the game's console output, with the page's tokens removed.
+- The screenshot is capped at 2 MiB.
+- An anonymous report has no reporter account. `contact_email` is set only if the player typed one, and only you and our staff can see it. You can reply to a signed-in reporter, or to that email.
+- Anonymous reports are limited to 3 per network address per game per day, one per play session every 5 minutes, and the usual per-game limits still apply. A daily cap per reporter does not apply to them.
+
+`list_bug_tickets`, `get_bug_ticket`, `get_bug_log`, and `chauffeur bugs` return these tickets with the extra fields.
+
 ## Webhooks
 
 A new report is delivered to every URL. Each URL is posted up to three times with the same signed body, and a 2xx stops the retries. The settings response includes `last_delivery` for each URL: the time, the HTTP status or error, and whether it succeeded.

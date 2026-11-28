@@ -27,6 +27,8 @@ Pick one web build as the full game. You can pick a different web build as the d
 | Someone who already has the game | Paid | Full build |
 | Signed-in player who does not have the game | Paid | The demo, if you set one. Otherwise the buy button |
 
+A card, the game page and an embed say what a visitor who is not signed in can expect. **Sign in to play** is shown when the browser build asks for a sign-in first, which is every game except a free one with anonymous downloads on. The same cards show **Browser demo** when the browser build is the demo. A signed-out visitor sees **Sign in to play** instead of a button that fails, and the **Play in browser** button stays readable on the page. See [Find a game](./storefront/find-a-game.md).
+
 An embed plays the build marked embed-supported. That build cannot be priced, and the launch does not grant a license. Adult listings and drafts cannot be embedded. Embed is off until you turn it on, and only a public page can be embedded. Turning on **Enable embedded game** refuses a listing price and every build price.
 
 ## Upload
@@ -96,7 +98,17 @@ A single-thread web build (`web_nothreads`) is no longer served with cross-origi
 
 Playables, Devvit, itch, Newgrounds, Yandex, CrazyGames, Poki, Meta Instant Games, and GameDistribution are checks on a browser pack. YouTube and those portals host the zip. Blazium does not submit it and does not call their ad or purchase APIs. A Playables pack cannot use `.br` or `.gz`, a threaded build, or WebGPU. Devvit files cannot contain an absolute URL. Meta accepts Instant Games SDK 8.0 for Facebook and Messenger. Instagram is not a launch. Facebook Web Games ended. A TikTok, Douyin, or WeChat pack is not played in the browser and is not a public download. The publisher downloads that zip from the Builds page. The Builds page also shows a host file URL for TikTok, Douyin, WeChat, YouTube, Reddit, Newgrounds, CrazyGames, Poki, Meta, and GameDistribution. That address returns the scanned zip. It is not the unlisted play link, it is not on the store page, and turning it off or rotating it makes the old address fail. Discord and Telegram do not get a file URL. Steam, GOG, Epic, and itch stay on Also on.
 
+Mark the browser demo with `is_demo` in the upload, with `chauffeur addfiles --demo`, on the Builds page, or with `set_web_player`. The store then shows a **Browser demo** tag on the card and **Play demo** on the game page.
+
 Each build can record its own price. A demo cannot be priced. A web demo is the browser demo. Any other demo is the downloadable demo. Only one build is the demo. A build marked embeddable, or designated for a launch host, cannot be priced. A store shelf (Steam, GOG, Epic, or itch) says where else the file is published and can still have a Blazium price. One build holds each host. Assigning that host to a second build removes it from the first. Send `designations`, `for_sale`, `price_cents`, `is_demo`, and `embed_supported` with the upload, or set them later on the Builds page. A designation does not run an export check. TikTok, Douyin, and WeChat need that host's mini-game pack. Discord, Telegram, and the other launch hosts need a browser pack. The recorded price is not a separate buy button. The game is still bought at the listing price.
+
+## Report a bug from the player
+
+When the bug reporter is on for the game (see [In-game bug reporter](./bug-reporter.md#from-the-browser-player)), the browser player shows a small **Report a bug** tab in the corner of the game. It is drawn by the player itself, so it appears on the store page, in an embed, in Discord and Telegram, and on a direct play link. While the reporter is off, the player records nothing.
+
+The form asks what went wrong and offers an optional contact email. It says what is attached: the game's console output and uncaught errors (newest 500 KiB), the browser, engine, and screen size, and, only if the player ticks it, a screenshot. The player can untick the log. Play tokens, keys, and email addresses are removed from the log before it is sent. Typing in the form does not reach the game.
+
+Anyone can file a report: a signed-in player, or an anonymous player of a free game with anonymous downloads on. Anonymous reports are limited to 3 per network address per game per day, and any one play session can send one report every 5 minutes. The play session has to be live, or have ended in the last 10 minutes.
 
 ## Plays
 

@@ -84,4 +84,4 @@ The HTTP status is `403`. See [error codes](./scripted-api-reference.md#error-co
 | Turn one off | `chauffeur sapi feature disable <feature> [--cascade]` | `disable_sapi_feature` |
 | Download the live scripts | `chauffeur sapi pull [checksum\|active\|latest] --dir <path>` | `get_sapi_pack_files`, `get_sapi_file` |
 
-Write the scripts locally, run `chauffeur sapi test`, publish with `chauffeur sapi publish`, and ask the owner to turn the feature on. The local emulator (`chauffeur sapi dev`) runs every feature, so you can test before the owner turns anything on.
+Write the scripts locally, run `chauffeur sapi test`, publish with `chauffeur sapi publish`, and ask the owner to turn the feature on. `chauffeur sapi test` runs the pack with the local binary, which does not wait for the owner. On the live game a feature runs only once the owner turns it on, and `chauffeur sapi dev --channel <name>` serves the pack on a live channel, so it follows the same rule.

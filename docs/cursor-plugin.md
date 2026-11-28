@@ -9,7 +9,7 @@ description: Install the official Blazium Games plugin for Cursor. It bundles th
 Blazium Games is a game publishing platform, with an infrastructure focus. The official Cursor plugin teaches an agent to do both. A token belongs to one server. It bundles:
 
 - The hosted [Blazium Games MCP server](./mcp/index.md) at `https://mcp.blazium.games/developer` (`https://mcp.blazium.games/mcp` still reaches it), and the [player server](./mcp/player.md) at `https://mcp.blazium.games/player`. Both connect with OAuth, so no key is stored in the plugin.
-- Skills that walk the agent through store pages, deploys, crash reporting, crash debugging, analytics, keys, playing, and purchases.
+- Skills that walk the agent through store pages, deploys, crash reporting, crash debugging, analytics, keys, playing, purchases, the Scripted API, lobbies, and the Godot, Unity, Unreal, and Blazium engine integrations.
 
 The docs repo remains the guide and the plugin source: [github.com/blazium-games/games_docs](https://github.com/blazium-games/games_docs) (MIT). The versioned release is [github.com/blazium-games/games_skill](https://github.com/blazium-games/games_skill), published as `npm install @blazium-games/skills`.
 
@@ -35,6 +35,12 @@ If you only want the MCP server without skills, use [Add to Cursor](cursor://any
 | `blazium-games-keys` | Inspects and rotates MCP and deploy keys ([Access and keys](./mcp/access-and-keys.md)) |
 | `blazium-games-player` | Acts for you as a player: recommendations, catalog search, reviews, bug reports, and friends ([Player MCP](./mcp/player.md)) |
 | `blazium-games-purchases` | Buys games and donates from your balance within your spending limits ([Agent purchases](./payments/agent-purchases.md)) |
+| `blazium-games-sapi` | Writes, tests, publishes, and runs [Scripted API](./scripted-api.md) Luau logic, with stored data, schedules, secrets, and remote config |
+| `blazium-games-lobby-pack` | Publishes a Luau lobby pack with chauffeur and checks it on the Scripted lobby tab ([Multiplayer](./multiplayer.md)) |
+| `blazium-games-module` | Blazium engine games: login, scripted lobbies, and ICE through the games module |
+| `blazium-games-plugin` | The Godot addon: login, lobby, ICE, bugs, ownership, progress, and item transfer |
+| `blazium-games-unity` | The Unity package `com.blazium.games` ([Unity](./unity.md)) |
+| `blazium-games-unreal` | The Unreal plugin `BlaziumGames`: login, lobby, bugs, progress, and the dedicated server |
 
 You only need to sign in to the server you use. The player server asks for its own consent the first time a player skill calls it.
 
@@ -71,5 +77,5 @@ Tick **Read-only access** on the consent page to let the agent read analytics, c
 | `403` with code `4031` | The connection is read-only. Reconnect without **Read-only access** |
 | `403` with code `4073` | The connection's preset doesn't cover that tool (for example **CI** can't edit the store page). Reconnect with a broader preset |
 | `403` with code `4030` | The connection is bound to one project, and the tool is account-level or for another game. Reconnect and choose **Account** |
-| A result with `approval_required` | The action waits for the account owner. Open the emailed link, then ask the agent to retry |
+| A result with `approval_required` | The action waits for the account owner. Open the emailed link, then ask the agent to retry. Clients that support MCP `2026-07-28` and `elicitation` may show one prompt instead ([Approvals](./mcp/approvals.md)) |
 | Skills do not appear | Check the plugin is enabled in Cursor Settings > Plugins |

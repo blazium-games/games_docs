@@ -25,9 +25,32 @@ Write clients that ignore fields they don't know.
 
 ## Recent additions
 
+Developer and player servers 1.28:
+
+- The live cards list 257 developer tools and 97 player tools.
+- Payouts and earnings are developer-only. The player server no longer lists `start_payout_setup`, `get_payout_dashboard_link`, `cash_out`, `cancel_cash_out` or `set_payout_currency`, and a player token that calls a payout route gets `4034`. The payout tools return the Earnings page (`/dashboard/earnings`).
+- New developer tools `get_payout_methods`, `set_paypal_payouts` (up to 14 business days) and `set_crypto_payouts` (off by default, up to 28 business days). A saved PayPal email or crypto address satisfies the payment requirement. `cash_out` takes an optional `method` and returns `method` and `due_by`.
+- Refunds are a human action. `request_refund` no longer only explains where to ask. It and the new `get_refund_request` are listed only for an account Blazium staff turned MCP refunds on for, and every other account gets `4084`. When on, the owner approves each request.
+
+Developer and player servers 1.27:
+
+- At 1.27 the cards listed 253 developer and 101 player-server tools.
+- `list_mcp_activity` is on both servers. It lists the tool calls your agents made, with the outcome, timing, `request_id`, and arguments with secrets removed. The same rows are on **Settings, AI tools** and in the account export. See the [MCP activity log](./reference.md#mcp-activity-log).
+- Shelf, search, and game-page results add `web_play_requires` and `has_browser_demo`. A web build can be marked the demo with `chauffeur addfiles --demo`.
+- A bug filed from the browser player has `source` `web_player` and can carry `contact_email`, `engine`, and `browser`. See [In-game bug reporter](../bug-reporter.md#from-the-browser-player).
+
+Developer and player servers 1.26:
+
+- At 1.26 the cards listed 252 developer and 100 player-server tools.
+- On the developer server, `get_sapi_analytics`, `get_sapi_audit`, `get_lobby_analytics`, and `get_lobby_audit` read how the [Scripted API](../scripted-api.md) and lobby data are used and every change made to them. `get_sapi_usage` and `get_lobby_usage` now include the lobby limits of the game's plan.
+- Approval prompts and standing choices are live: see [Approvals](./approvals.md). `list_standing_choices`, `set_standing_choice`, and `revoke_standing_choice` are on both servers, and `set_standing_choice` refuses an allow for an always-ask action.
+
+Developer and player servers 1.25:
+
+- On the developer server, the Scripted API feature tools: `get_sapi_features`, `get_sapi_feature_history`, `enable_sapi_feature` (returns the dashboard link for the owner), `disable_sapi_feature`, `get_sapi_pack_files`, and `get_sapi_file`. The lobby data tools `get_lobby_data`, `set_lobby_data`, `delete_lobby_data`, `reset_lobby_data`, `get_lobby_config`, `set_lobby_config`, `list_lobby_secrets`, `set_lobby_secret`, and `get_lobby_usage` arrived with them. See [Scripted API features](../scripted-api-features.md).
+
 Developer and player servers 1.24:
 
-- The live cards list 252 developer tools and 100 player tools.
 - [Scripted API](../scripted-api.md) tools: `get_sapi`, `set_sapi`, `list_sapi_packs`, `activate_sapi_pack`, `get_sapi_logs`, `get_sapi_usage`, `get_sapi_data`, `set_sapi_data`, `delete_sapi_data`, `reset_sapi_data`, `get_sapi_config`, `set_sapi_config`, `list_sapi_secrets`, `set_sapi_secret`, and `list_sapi_schedules`. Turning the Scripted API on, activating a pack, deleting a secret, and a real reset_sapi_data wait for the owner's approval. get_sapi_logs also takes until and cursor. The player tool list was unchanged.
 - `get_sign_in_funnel` reads the per-game sign-in funnel by day and method.
 - Progress writers accept `scripted_api`.
@@ -77,7 +100,7 @@ Developer and player servers 1.16:
 Developer and player servers 1.15:
 
 - New tools on both servers: `start_payout_setup` and `get_payout_dashboard_link` (Stripe links for the human) and `cash_out` (`amount_cents`). Agents with `player:buy`, `mcp:write`, or `mcp:money` can set up payouts and cash out to the account's own Stripe payout account without approval; the owner is emailed after each agent cash-out. `4083` no longer applies to payouts
-- `get_wallet` now returns `payouts` (`connected`, `payouts_ready`), `cash_outs`, and `rules.payout_arrival` (up to 72 business hours) to agents
+- `get_wallet` now returns `payouts` (`connected`, `payouts_ready`), `cash_outs`, and `rules.payout_arrival` to agents (it was worded as up to 72 business hours then; payouts are now processed on weekdays from 8:00am to 5:00pm Pacific)
 - Donations are no longer refundable, and purchase results show `refundable_until` as null for donations
 
 Developer and player servers 1.14:

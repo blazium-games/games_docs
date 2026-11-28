@@ -97,8 +97,8 @@ Top-ups add a processing fee (shown by `get_payment_options`). Credit from a top
 
 ## Rules to tell the human when relevant
 
-- Refunds are only through support@blazium.games: purchases within 7 days and before 2 hours of play. A refund is credited to your account balance, never to a card. Donations are not refundable.
-- With `player:buy` you can send the human to Balance (`start_payout_setup` and `get_payout_dashboard_link` return that page; the human opens Stripe from Set up payouts with Stripe). `cash_out` of available earnings ($25 minimum) waits for the owner, including a player key. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Money only goes to the Express account on that same account, the owner is emailed after each cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific.
+- A refund is a human action: the buyer chooses Request a refund in the Library on the website, within 7 days and before 2 hours of play, and is credited to the account balance, never to a card. An agent cannot ask for a refund or check one (`4084`) unless Blazium staff turned on MCP refunds for that account, and then the owner approves each request. Donations are not refundable.
+- Payouts and earnings belong to a developer account and are on the developer server only. The player server has no payout or cash-out tools; a player sees a balance (credit, top-ups, spendable).
 
 ## Docs
 

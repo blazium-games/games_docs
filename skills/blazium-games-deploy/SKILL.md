@@ -55,7 +55,7 @@ chauffeur reads `BLAZIUM_ACCESS_TOKEN` and `BLAZIUM_SECRET_KEY` from the environ
 4. Generate `addfiles.yml`: `chauffeur setfiles --version 1.0.0 --os windows --arch x86_64 --files ./export/windows`
 5. Upload the files, and symbols if the user has them: `chauffeur addfiles --asset addfiles.yml --symbols ./symbols`
 
-`addfiles` reuses the build with the same version, type, OS, arch, and channel (keeping its notes), zips the files, checksums them, and uploads them, in 16 MB chunks that resume after a dropped connection when over 64 MB. Keep `version` the same in both YAML files.
+`addfiles` reuses the build with the same version, type, OS, arch, and channel (keeping its notes), zips the files, checksums them, and uploads them, in 16 MB chunks that resume after a dropped connection when over 64 MB. Keep `version` the same in both YAML files. Add `--demo` to an `os=web` upload (or `demo: true` in `addfiles.yml`) to publish it as the browser demo; `--for-sale`/`--price-cents`, `--designations` and `--embed-supported` set the other web-player choices, and leaving them all out keeps what the website or `set_web_player` chose.
 
 Example `build.yml`:
 

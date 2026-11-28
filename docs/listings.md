@@ -210,7 +210,7 @@ The home page is built from shelves. Every shelf only takes public listings with
 
 `GET https://api.blazium.online/api/v1/public/shelves/{shelf}?os=windows&limit=12` returns a shelf without sign-in, and the player MCP `get_shelf` tool reads it. `limit` is 1 to 24 (default 12). An unknown shelf is a `404`, and a `limit` outside 1 to 24 is a `400`.
 
-Each listing on a shelf has its `uid`, `name`, `asset_type`, `status`, `tagline`, `vanity_name`, `thumbnail`, `price_cents`, `session_bucket`, `authorship`, launch `health`, the developer's `username` and `creator_avatar`, and two play fields: `has_browser_build` (a clean stable `web` build) and `has_downloads` (a clean stable build for any other platform).
+Each listing on a shelf has its `uid`, `name`, `asset_type`, `status`, `tagline`, `vanity_name`, `thumbnail`, `price_cents`, `session_bucket`, `authorship`, launch `health`, the developer's `username` and `creator_avatar`, and four play fields: 
 
 ## Build scans
 
@@ -252,7 +252,7 @@ On [Browse](https://blazium.games/browse) each filter is a group of checkboxes: 
 | `sort` | `relevance` (default, best match): listings with launch problems last, then the best text and tag match, then newest. `newest` or `updated` sort by date. Any other value means `relevance` |
 | `page`, `page_size` | `page_size` is 1 to 50, default 20 |
 
-Each result also has `creator_avatar` and the same `has_browser_build` and `has_downloads` play fields as [shelves](#shelves).
+Each result also has `creator_avatar` and the same play fields as [shelves](#shelves): `has_browser_build`, `has_downloads`, `web_play_requires`, and `has_browser_demo`.
 
 Adult listings are left out unless the signed-in player turned on adult content (see [Content rules](./content-rules.md#adult-content)).
 
