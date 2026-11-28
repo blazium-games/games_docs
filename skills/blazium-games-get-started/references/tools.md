@@ -149,6 +149,7 @@ Amounts are integer US cents. Agents pay only from the stored balance, and only 
 | `verify_email` | `code` | account, write | Verify the email with the code the human read from their inbox |
 | `set_timezone` | `timezone` | account, write | Replace the saved timezone with the human's IANA name, when it is empty or the human asks. Do not send the timezone of the machine running the agent. Unknown names: `4085` |
 | `get_security_status` | none | account, read | Authenticator `state` (`on`, `skipped`, `not_chosen`), `enabled_at`, `skipped_at`, `recovery_codes_left`, and `email_code_alternative`. Enroll, replace, and turn-off stay on the website |
+| `list_mcp_activity` | optional `game`, `tool`, `status`, `request_id`, `since`, `until`, `limit`, `cursor` | account, read | Tool calls this account's agents made over MCP, newest first, with outcome and request id. Kept 30 days |
 | `skip_authenticator` | none | account | Records that the human chose not to set up an authenticator. Call it only when the human asked. Later sign-in uses `confirm_account` with the email code |
 | `set_game_price` | `uid`, `price_cents` (0 or 99-50000), `donations_enabled` | write | Set price or donations. Owners and game admins only |
 | `list_game_sales` | `uid` | | Sales, donations, refunds, and seller earnings for a game you manage |

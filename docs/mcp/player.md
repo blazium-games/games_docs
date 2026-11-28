@@ -75,6 +75,7 @@ With `player:buy` an agent can send you to Balance and ask to cash out. `start_p
 | Tool | Inputs | Scope | Notes |
 |------|--------|-------|-------|
 | `get_account` | none | read | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open (`legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`, `gate`) |
+| `list_mcp_activity` | optional `tool`, `status`, `request_id`, `since`, `until`, `limit`, `cursor` | read | Tool calls this account's agents made over MCP, newest first, with outcome, timing, request id, and arguments with secrets removed. Kept 30 days |
 | `create_account` | `email`, optional `password`, `username`, `timezone`, `accept_legal` | none | Creates an account. Continue or Generate only when password is omitted. Enter a timezone or Use this machine when timezone is omitted |
 | `login` | `email`, optional `password` | none | The person types the password. Generate is not offered. The connection is elevated only when sign-in succeeds. `otp_required` means call `confirm_account` |
 | `confirm_account` | `email`, `code` | none | Exchanges the email code, elevates this connection, and returns this server's first `bgames_play_` key once. A later call does not rotate an existing key |

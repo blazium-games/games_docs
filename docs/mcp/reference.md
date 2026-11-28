@@ -15,6 +15,7 @@ This page covers the developer server at `https://mcp.blazium.games/developer`. 
 | Tool | Inputs | Notes |
 |------|--------|-------|
 | `get_profile` | none | Current user. Account only |
+| `list_mcp_activity` | optional `game`, `tool`, `status`, `request_id`, `since`, `until`, `limit`, `cursor` | Tool calls this account's agents made over MCP, newest first, with outcome, timing, request id, and arguments with secrets removed. Kept 30 days |
 | `list_games` | none | Games you own or administer, and pending admin invites |
 | `get_game` | `uid` | One game's settings |
 | `get_lobby` | `uid` | Lobby settings and published packs: enabled, relay or scripted, TURN, the active checksum, and pack history |

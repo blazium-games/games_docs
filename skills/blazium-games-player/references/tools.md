@@ -7,6 +7,7 @@ Server: `https://mcp.blazium.games/player`. Scopes: `player:read`, `player:write
 | Tool | Scope | Purpose |
 |------|-------|---------|
 | `get_account` | read | Email verification, timezone, balances, what the account may do, and open website sign-in steps (`gate`, `legal_acceptance_required`, `setup_required`, `authenticator`) |
+| `list_mcp_activity` | read | Tool calls this account's agents made over MCP, newest first, with outcome and request id. Kept 30 days |
 | `create_account` | none | Creates an account. No bearer. Send `accept_legal` only after the person agrees. The account stays a player |
 | `confirm_account` | none | Finishes signup with the email code and returns the first `bgames_play_` key once. No bearer |
 | `request_email_code` | write | Email a verification code to the human |
