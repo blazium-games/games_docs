@@ -40,7 +40,7 @@ chauffeur addfiles --asset addfiles.yml
 
 - `genbuild` writes `build.yml`, and `setfiles` writes `addfiles.yml`.
 - `build` registers the build and prints its `build_id` as `BLAZIUM_GAMES_BUILD_ID`. The same version, type, OS, arch, and channel update the existing build.
-- `addfiles` reuses the matching build, zips the files, computes a SHA-256 checksum, and uploads them. Files over 64 MB go up in resumable 16 MB chunks.
+- `addfiles` reuses the matching build, zips the files, computes a SHA-256 checksum, and uploads them. Files over 64 MB go up in resumable 16 MB chunks. Add `--demo` to an `os=web` upload to publish it as the browser demo (see [Commands](./cli/commands.md#chauffeur-addfiles)).
 
 `build.yml`:
 

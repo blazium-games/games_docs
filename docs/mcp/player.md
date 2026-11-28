@@ -58,23 +58,28 @@ Create a player key at [blazium.games/settings/mcp](https://blazium.games/settin
 |---|---|
 | `player:read` | Account, wallet, ledger, payment options, top-up status, quotes, purchase status, library, download links, approvals, agent policy, the files you can see for a game, recommendations, your review, friends and what they're playing, chat token status |
 | `player:write` | Email verification, play time, confirming an approval with the emailed code, joining or leaving a beta, reviews, tag suggestions, taste feedback, bug reports, friend requests, presence and activity sharing, chat sign-in and chat tokens |
-| `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game`, payout setup and `cash_out` |
+| `player:buy` | Card and x402 top-ups, `purchase_game`, `donate_to_game` |
 
 A route outside this list returns `4033`. A missing `player:buy` returns `4212`; any other missing scope returns `4031`.
 
 ## Spending limits and approval
 
-Purchases always come from your stored balance. Set a limit per agent at [blazium.games/settings/mcp](https://blazium.games/settings/mcp): ask every time, unlimited, monthly, yearly, or a one-time budget. Anything beyond the limit waits for you to approve it by email link or code. See [Agent purchases](../payments/agent-purchases.md).
+Purchases always come from your stored balance. Set a limit per agent at [blazium.games/settings/mcp](https://blazium.games/settings/mcp): ask every time, unlimited, monthly, yearly, or a one-time budget. Anything beyond the limit waits for you to approve it by email link or code, or by one prompt in your AI client when it supports MCP `2026-07-28` and `elicitation`. Always yes never skips the limit. See [Approvals](./approvals.md) and [Agent purchases](../payments/agent-purchases.md).
 
-## Payouts and cash-out
+## Payouts and earnings
 
-With `player:buy` an agent can send you to Balance and ask to cash out. `start_payout_setup` and `get_payout_dashboard_link` return that page. You open Stripe from Set up payouts with Stripe, and identity, tax, and bank details are entered on Stripe only after that. A cash-out waits for you, including a player key. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. The fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Money only goes to the Express account on that same account, we email you after each agent cash-out, and payouts are processed on weekdays from 8:00am to 5:00pm Pacific. See [Agent payouts](../payments/wallet-and-cash-out.md#agent-payouts).
+A player has no earnings, payouts or cash-out. The player server lists no payout tools, and a player token that calls a payout route gets `4034`. A developer account collects money on the developer server with Stripe, PayPal (up to 14 business days) or crypto (up to 28 business days). See [Wallet and cash-out](../payments/wallet-and-cash-out.md).
+
+## Refunds
+
+A refund is a human action on the Library page of the website. `request_refund` and `get_refund_request` are listed only for an account Blazium staff turned MCP refunds on for. On every other account the refund routes answer `4084`. When they are on, the account owner approves each request. See [Refunds](../payments/refunds.md).
 
 ## Tools
 
 | Tool | Inputs | Scope | Notes |
 |------|--------|-------|-------|
 | `get_account` | none | read | Email verification, timezone, balances, what the account may do, and the website sign-in steps still open (`legal_acceptance_required`, `legal_changes`, `setup_required`, `authenticator`, `gate`) |
+| `list_mcp_activity` | optional `tool`, `status`, `request_id`, `since`, `until`, `limit`, `cursor` | read | Tool calls this account's agents made over MCP, newest first, with outcome, timing, request id, and arguments with secrets removed. Kept 30 days |
 | `create_account` | `email`, optional `password`, `username`, `timezone`, `accept_legal` | none | Creates an account. Continue or Generate only when password is omitted. Enter a timezone or Use this machine when timezone is omitted |
 | `login` | `email`, optional `password` | none | The person types the password. Generate is not offered. The connection is elevated only when sign-in succeeds. `otp_required` means call `confirm_account` |
 | `confirm_account` | `email`, `code` | none | Exchanges the email code, elevates this connection, and returns this server's first `bgames_play_` key once. A later call does not rotate an existing key |
@@ -84,7 +89,7 @@ With `player:buy` an agent can send you to Balance and ask to cash out. `start_p
 | `set_timezone` | `timezone` | write | Sets your IANA timezone, replacing the saved one. The agent uses your zone, not the machine it is running on |
 | `get_security_status` | none | read | Whether an authenticator app protects your account, and how many recovery codes are left |
 | `skip_authenticator` | none | write | Records that you chose not to set up an authenticator. An agent calls this only when you asked. Later sign-in uses `confirm_account` with the email code |
-| `get_wallet` | none | read | Credit, pending, and available balances, fee and refund rules, payout status, and recent cash-outs |
+| `get_wallet` | none | read | Credit and spendable balances and the fee and refund rules. A player has no pending balance, payouts or cash-outs |
 | `list_wallet_transactions` | `limit` (1-200), `before` | read | Ledger entries, newest first |
 | `get_payment_options` | none | read | Card top-up and x402 USDC networks with fees |
 | `create_top_up_link` | `amount_cents` | buy | Card Checkout link for you to add balance |
@@ -98,9 +103,6 @@ With `player:buy` an agent can send you to Balance and ask to cash out. `start_p
 | `get_library` | none | read | Games you own, with refund windows and play time |
 | `get_download_link` | `file_id` | read | 5-minute signed URL for a Windows, Linux, or content-pack file. A web build is hosted and is not downloaded. |
 | `get_agent_policy` | none | read | This agent's limit mode, limit, and spend in the period |
-| `start_payout_setup` | none | buy | Returns the Balance page. You open Stripe from Set up payouts with Stripe |
-| `get_payout_dashboard_link` | none | buy | Returns the Balance page, where you open the Express dashboard |
-| `cash_out` | `amount_cents` | buy | Cashes out available earnings ($25 minimum) to your own Express account and waits for your approval. Sale earnings can be cashed out once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. You're emailed after each one |
 | `get_patron_status` | `developer` (optional) | read | Your patron memberships. No card data |
 | `search_catalog` | `q`, `asset_type`, `genres`, `tags`, `tone`, `ai_uses`, `exclude_types`, `exclude_genres`, `exclude_tone`, `exclude_tags`, `exclude_warnings`, `exclude_ai_uses`, `session_bucket`, `net`, `players`, `os`, `arch`, `engine`, `engine_version`, `renderer`, `license`, `authorship`, `sort`, `page`, `page_size` | read | Public games, tools, mods, and assets with a score, scan state, platforms, made-with label, content warnings, AI disclosure, launch-health band, and a short reason for each match. Several values in one filter match any of them (comma-separate `asset_type`, `session_bucket`, `net`, `os`, and `authorship`); the `exclude_` filters leave out listings with any of their values. `sort` is `relevance` (default, best match), `newest`, or `updated`. Adult listings appear only if you turned on adult content. See [Listings and search](../listings.md#search) |
 | `list_articles` | `limit` (1-50, default 20), `query` | read | Newest published blog posts. `query` matches the title or description. Returns slug, title, description, date, and URL. Does not post or delete comments |
@@ -195,49 +197,85 @@ A host that supports MCP Apps shows an interactive view beside the tool result. 
 
 Buying, wallet, and library are only on this server. `get_library` is the library tool here. A developer token that purchases or tops up gets `4034`.
 
-## Live server names
+## More tools
 
-- accept_invite
-- ack_patch_notices
-- buy_post
-- cancel_cash_out
-- cancel_membership
-- check_update
-- decline_invite
-- delete_article_comment
-- export_account
-- file_counter_notice
-- file_dmca_claim
-- get_asset_library_item
-- get_game_display_name
-- get_my_inventory
-- get_patch_notices
-- list_article_comments
-- list_asset_library
-- list_changelog
-- list_connections
-- list_market
-- list_my_bug_reports
-- list_spare_copies
-- list_standing_choices
-- open_account_finish
-- open_password_settings
-- pledge
-- redeem_spare_copy
-- report_cheater
-- report_game
-- report_player
-- request_refund
-- revoke_standing_choice
-- send_spare_copy
-- set_game_display_name
-- set_payout_currency
-- set_profile_visibility
-- set_standing_choice
-- sign_out
-- sign_out_everywhere
-- start_connection
-- start_email_change
-- unfriend
-- unlink_connection
-- write_article_comment
+These tools are listed with the descriptions the live server publishes. Inputs are in each tool's schema, which your client reads when it connects.
+
+### Account, sign-in and privacy
+
+| Tool | What it does |
+|------|--------------|
+| `open_account_finish` | Returns the website page where the human finishes account setup, accepts changed terms, and sets up, replaces, or turns off an authenticator. An agent never does these steps for the human. When the human asks to skip the authenticator, call `skip_authenticator`. |
+| `open_password_settings` | Returns the website page where the human changes the password. Never ask the human for the new password in the chat. |
+| `start_email_change` | Email a confirmation code for a new address. The human enters that code on the website. This tool does not confirm the change. |
+| `sign_out` | Sign this token's website session out. |
+| `sign_out_everywhere` | Sign every session of this account out. Agent keys are not listed here; revoke those separately. |
+| `list_connections` | Sign-in accounts linked to this user. Passwords and access tokens are not returned. |
+| `start_connection` | Start linking GitHub, Discord, X, or Steam. Give the returned URL to the human. The human finishes it in the browser. |
+| `unlink_connection` | Unlink a sign-in account. Keep a password or another link so the account can still sign in. |
+| `set_profile_visibility` | Who can see this account's profile: public, private, or hidden. |
+| `get_game_display_name` | The display name this account uses inside one game. |
+| `set_game_display_name` | Set the display name this account uses inside one game. |
+| `unfriend` | Remove a friend, or cancel an outgoing request, by username. |
+| `list_mcp_activity` | List the tool calls this account's agents made over MCP, newest first: tool, outcome (`ok`, `error`, `approval`, `denied`), error code, duration, API requests made, `request_id`, client, and the arguments with secrets removed. Results are never stored. Kept 30 days. Filters: `game`, `tool`, `status`, `request_id`, `since`, `until`, `limit`, `cursor`. A token bound to one project must pass `game`. |
+| `export_account` | Download this account's portable copy: profile, purchases, licenses, wallet ledger, cash-outs, reviews, friendships, agent key prefixes, patron memberships, your MCP call log, and the API requests your agents made. Secrets are not included. |
+
+### Standing choices
+
+| Tool | What it does |
+|------|--------------|
+| `list_standing_choices` | Lists every standing allow or deny for this account, with its key, action, and game. Spend limit and developer mode stay on the website. |
+| `set_standing_choice` | Stores an allow or a deny for one action on this agent. Always-ask actions (cash-out, payout address, key changes, add admin, delete game, project sign-in apps) cannot be stored as allow. Always no wins. See [Approvals](./approvals.md). |
+| `revoke_standing_choice` | Removes one standing choice by `uid`. |
+
+### Wallet, purchases and patrons
+
+| Tool | What it does |
+|------|--------------|
+| `buy_post` | Buy one patron post. Requires confirm_total_cents from the post price and a unique idempotency_key. Past the spending limit it returns approval_required. |
+| `pledge` | Join a developer's patron tier from the wallet or by card. Past this agent's spending limit it returns approval_required. idempotency_key is required. |
+| `cancel_membership` | Stop renewing a patron membership. Access lasts until the period already paid for ends. |
+| `request_refund` | Ask for a refund of one purchase (`purchase_uid`). Listed only for an account staff turned MCP refunds on for; otherwise refused with `4084`. The account owner approves each request. |
+| `get_refund_request` | Where a refund stands. Same listing rule and `4084` as `request_refund`. |
+| `list_spare_copies` | Spare copies this account can send or redeem. |
+| `send_spare_copy` | Give a spare copy to another account. Waits for the account owner's approval. |
+| `redeem_spare_copy` | Redeem a spare copy onto this account. |
+| `get_my_inventory` | Items in this account's inventory. |
+| `list_market` | Public item market for a game. |
+
+### Reports and comments
+
+| Tool | What it does |
+|------|--------------|
+| `report_cheater` | Send a cheater report for a game this account plays. The report is filed as the signed-in player. |
+| `report_game` | Report a game page. owner is the page's account username or uid. |
+| `report_player` | Report a player profile. The signed-in account is the reporter. |
+| `list_my_bug_reports` | Bug reports this account filed. |
+| `list_article_comments` | Comments on a blog article. |
+| `write_article_comment` | Comment on a blog article. kind is suggestion, critique, question, or praise. |
+| `delete_article_comment` | Delete one of this account's article comments. |
+
+### Updates, changelogs and the asset library
+
+| Tool | What it does |
+|------|--------------|
+| `check_update` | Builds this account should have for a game, on the channel they follow. Compare file_uid and checksum with what is installed. |
+| `get_patch_notices` | Patch notices this account has not acknowledged for a game. |
+| `ack_patch_notices` | Mark patch notices as seen. |
+| `list_changelog` | Public changelog for a game. owner is the developer's username or uid. |
+| `list_asset_library` | Search the public asset library the editor uses. |
+| `get_asset_library_item` | One asset-library item, including its download when the caller may have it. |
+
+### Admin invites and key revocation
+
+| Tool | What it does |
+|------|--------------|
+| `accept_invite` | Accept a game admin invite. This asks the account owner first. Turning on developer mode still finishes on the website. |
+| `decline_invite` | Decline a game admin invite, or withdraw one you sent. |
+
+### Copyright notices
+
+| Tool | What it does |
+|------|--------------|
+| `file_dmca_claim` | Files a copyright (DMCA) claim. The filing fee is not refundable. Asks the account owner first, and payment finishes on the checkout page the response returns. |
+| `file_counter_notice` | Records a written statement on an open copyright notice that names this account, and emails it to the claimant. It does not restore content or start a waiting period. |

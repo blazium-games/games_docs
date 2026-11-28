@@ -35,7 +35,8 @@ If a shelf fails to load, the page says "Some sections could not be loaded. Relo
 
 Each card shows the title, the developer, a short tagline and the price (or **Free**). Depending on the game, it can also show:
 
-- **Play in browser** for a browser pack, **Demo** for a web demo, or **Download** for Windows, Linux, and content packs. Web files are not downloaded.
+- **Play in browser** for a browser pack, **Browser demo** when the browser build is the demo, or **Download** for Windows, Linux, and content packs. Web files are not downloaded.
+- **Sign in to play** next to **Play in browser** when a visitor who is not signed in has to sign in before the game starts. A free game with anonymous downloads on has no such tag, because anyone can play it. The game page and the embed show the same tag.
 - **In development** or **Prototype**.
 - How long a session usually lasts and how many players it supports.
 - How it was made: **Made by people**, **People with AI agents** or **Mostly AI agents**, as the developer states it.

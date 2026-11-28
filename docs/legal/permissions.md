@@ -9,11 +9,10 @@ Canonical version: https://blazium.games/permissions
 
 # Permissions & Scopes
 
-**Effective Date: November 3, 2026**
+**Effective Date: November 28, 2026**
 
 This page lists every permission Blazium Games asks for, why we need it, and what we will never do with it.
 It sits alongside our [Privacy Policy](https://blazium.games/privacy-policy), [Subprocessors](./subprocessors.md), and the API disclosures for [GitHub](./github-api-disclosure.md), [X](./x-api-disclosure.md), [Discord](./discord-api-disclosure.md), and [Steam](./steam-api-disclosure.md).
-For step-by-step instructions, see the [Linked accounts and sign-in](../linked-accounts.md) guide.
 
 ## Linked accounts and sign-in
 
@@ -26,6 +25,14 @@ You can link GitHub, X, and Discord from [Linked accounts](https://blazium.games
 - Linking while you are already signed in, at Linked accounts, only attaches the service. It does not create an account.
 - Once you unlink an account, it can no longer be used to log in.
 - If your account has no password, you must keep at least one account linked.
+
+## Project sign-in
+
+A project can register an OAuth application so its players can sign in, or create a Blazium account, and link it. One application is included on Free. Another one needs Grow ($29/mo per game); Scale includes it.
+
+A linked app receives the account's user id, the username when one is set, and the avatar URL when one is set. Email is shared only when that application has email turned on, the request includes the email scope, and the email is verified. An unverified email is not released. The token cannot call MCP or spend money.
+
+You can revoke a link from [Linked apps](https://blazium.games/settings/apps). Revoking deletes that application's tokens for your account. The developer does not get a list of every linked player's email.
 
 ## GitHub
 
@@ -130,12 +137,12 @@ When you approve a tool, it gets a token for one server only, with one or more o
 
 ### How it is limited
 - The consent screen has a **Read-only access** option. Tick it and the tool only gets `mcp:read` (or `player:read`); any attempt to change data is refused.
-- On the developer server you can pick a narrower preset on the consent screen (store page, CI, crash triage, bugs, Steam, keys, money, anticheat, or read-only), so the tool only gets the scopes that job needs. Anticheat is its own preset. Full access does not include it. See [Anticheat](../anticheat.md).
+- On the developer server you can pick a narrower preset on the consent screen (store page, CI, crash triage, keys, money, or read-only), so the tool only gets the scopes that job needs.
 - On the player server the tool can't buy unless you tick **Allow purchases**.
 - Over MCP, rotating or creating MCP and deploy keys, deleting a deploy key, promoting a build to stable, deleting a game or build, creating more than 100 game keys at once, and adding a project admin wait until you approve them by the emailed link or code, even with full access.
 - A token is either for your whole account or for a single game (project). A project token is refused (error 4030) for any other game and for account-level actions: your profile, balance, wallet, library, account analytics, MCP keys, creating games, and buying.
 - Access tokens last 1 hour. Refresh tokens last 30 days from when you approved the tool. Each refresh issues a new refresh token and the old one stops working; if an old one is used again, the whole chain is revoked and the tool has to ask you again. All of them stop working if your account is deleted.
-- Every request made with an MCP key or token is recorded in an audit log (key, game, method, and path).
+- Every tool call made with an MCP key or token is recorded in an activity log: the tool, the game, the outcome, the timing, the client name, and a redacted summary of the arguments (secrets, codes, webhook URLs and emails are blanked, and typed text is kept only as a length; results are not stored). The API requests behind it (key, game, method, and path) are recorded too. You can read and download your own log, and you can end every AI tool's access with **Sign out of all AI tools**. Calls are kept for 30 days.
 
 ### We will never
 - Accept a read-only token for a change.
@@ -147,11 +154,12 @@ AI tools connected through MCP can buy games and send donations for you, but onl
 
 ### How it is limited
 - Every agent starts on **Ask me each time**: each purchase or donation waits until you approve it by the emailed link or code. Each MCP API key and each OAuth-connected app is a separate agent with its own setting.
-- At [blazium.games/settings/mcp](https://blazium.games/settings/mcp) you can let an agent spend on its own: unlimited, or up to a monthly, yearly, or one-time limit (up to $1,000, UTC periods). Anything beyond the limit waits for your approval. Agents cannot change their own limits.
+- At [MCP settings](https://blazium.games/settings/mcp) you can let an agent spend on its own: unlimited, or up to a monthly, yearly, or one-time limit (up to $1,000, UTC periods). Anything beyond the limit waits for your approval. Agents cannot change their own limits.
 - An approval covers one purchase, for the amount shown, and expires after 30 minutes.
 - The limit counts each purchase's total, including tax. Refunded purchases stop counting.
-- Buying needs a player token with `player:buy`. Read-only and single-game (project) tokens can never buy (error 4030). A developer token gets error 4034.
-- Agents pay only from your account balance, never by card. They cannot request refunds.
+- Buying needs a player token with `player:buy`, or until October 28, 2026 a developer token with `mcp:write` for your whole account. Read-only and single-game (project) tokens can never buy (error 4030).
+- From October 28, 2026 the developer server no longer buys: its buying tools are removed and direct requests get error 4034. Use the player server instead.
+- Agents pay only from your account balance, never by card. They cannot request refunds unless Blazium staff turn MCP refunds on for your account, and each request then waits for your approval.
 - Your email must be verified before agents can buy.
 - Each agent purchase is recorded with the agent that made it, and shows in your wallet transactions and library.
 
@@ -166,17 +174,17 @@ An agent can send you to Balance. A cash-out always waits until you approve it, 
 
 - Wallet access means a player token with `player:buy`, or a developer token with `mcp:write` or `mcp:money`. Read-only and single-game (project) tokens cannot.
 - `start_payout_setup` and `get_payout_dashboard_link` return the Balance page. You open Stripe from Set up payouts with Stripe. Identity, tax, and bank details are entered on Stripe only after you open that page, and they never pass through the agent or us.
-- An agent can ask to cash out available earnings of $25 or more once that sale's refund window ends, 7 days after the sale. Playtime does not release them sooner. The cash-out fee is 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. You approve each cash-out, including when the agent used a player key. The transfer goes only to the Express account on that same account.
+- An agent can ask to cash out available earnings of $25 or more. The cash-out fee is 8% + $0.25 on Free, 7% + $0.25 on Grow ($29/mo per game), or 6% + $0.25 on Scale ($99/mo per game), from the best plan that account owns. You approve each cash-out, including when the agent used a player key. The transfer goes only to the Express account on that same account.
 - We email you after every cash-out an agent makes, with the amount and the agent's name.
 - Your email must be verified before agents can set up payouts or cash out.
 - Payouts are processed on weekdays from 8:00am to 5:00pm Pacific.
-- To stop an agent, revoke its key or disconnect it at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
+- To stop an agent, revoke its key or disconnect it at [/settings/mcp](https://blazium.games/settings/mcp).
 
 ## Keys
 
-- **MCP keys** (account keys and project keys) are shown once when you create them and are stored only as a hash. You can rotate them at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) or on a game's MCP tab; rotating invalidates the previous key.
-- **Player keys** (starting `bgames_play_`) work only on the player server. They are shown once, stored only as a hash, and rotated at [blazium.games/settings/mcp](https://blazium.games/settings/mcp) separately from MCP keys.
-- **Deploy keys** are two values for one project: an access token and a secret. chauffeur and CI need both. The access token stays on the Deploy keys tab. The secret is shown once. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working.
+- **MCP keys** (account keys and project keys) are shown once when you create them and are stored only as a hash. You can rotate them at [/settings/mcp](https://blazium.games/settings/mcp) or on a game's MCP tab; rotating invalidates the previous key.
+- **Player keys** (starting `bgames_play_`) work only on the player server. They are shown once, stored only as a hash, and rotated at [/settings/mcp](https://blazium.games/settings/mcp) separately from MCP keys.
+- **Deploy keys** are two values for one project: an access token and a secret. chauffeur and CI need both. The access token stays on the Deploy keys tab. The secret is shown once. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working. They can also list that game's bug reports and download their screenshot and log. They cannot read crash dumps or change a ticket's status.
 - **Steamworks Web API keys** that developers enter to import a game from Steam are used for that import and discarded. With Steam auth verification on, the key is stored encrypted, never shown again, and never available to AI agents.
 - **Steam auth keys** (128 characters) sign a game's Steam session tokens and let its servers call Blazium Games. They are stored encrypted, can be shown to the game's owner and admins on its Steam tab, and are never available to AI agents. Making a new one revokes every session token.
 
@@ -203,51 +211,16 @@ Sign-in cookies are always on because the site does not work without them. They 
 
 Game pages also keep a visit session ID in your browser's session storage. It is cleared when you close the tab.
 
-You can change your choice at any time with **Cookie settings** in the blazium.games footer. Declining removes the Google Analytics cookies.
+You can change your choice at any time with **Cookie settings** in the site footer. Declining removes the Google Analytics cookies.
 
 ## Revoking access
 
-- **Linked accounts:** unlink GitHub, X, or Discord at [blazium.games/settings/connections](https://blazium.games/settings/connections). An unlinked account can no longer log in. If you have no password, the last linked account cannot be removed until you set one or link another.
-- Removing Blazium Games in the other service's settings does not unlink it here. Unlink it at [blazium.games/settings/connections](https://blazium.games/settings/connections) to stop it logging in.
+- **Linked accounts:** unlink GitHub, X, or Discord at [/settings/connections](https://blazium.games/settings/connections). An unlinked account can no longer log in. If you have no password, the last linked account cannot be removed until you set one or link another.
+- Removing Blazium Games in the other service's settings does not unlink it here. Unlink it at [/settings/connections](https://blazium.games/settings/connections) to stop it logging in.
 - **GitHub:** remove Blazium Games under [GitHub > Settings > Applications > Authorized OAuth Apps](https://github.com/settings/applications).
 - **X:** remove Blazium Games under [X > Settings > Security and account access > Apps and sessions](https://x.com/settings/connected_apps).
 - **Discord:** remove Blazium Games under Discord **User Settings > Authorized Apps**.
-- **Steam:** OpenID gives Blazium Games no ongoing access, so there is nothing to remove on Steam. Unlink it at [blazium.games/settings/connections](https://blazium.games/settings/connections).
-- **Agent spending:** set any agent back to **Ask me each time** at [blazium.games/settings/mcp](https://blazium.games/settings/mcp).
-- **MCP keys and tokens:** rotate keys at [blazium.games/settings/mcp](https://blazium.games/settings/mcp). OAuth access tokens expire after 1 hour and refresh tokens after 30 days; all of them stop working when your account is deleted.
+- **Steam:** OpenID gives Blazium Games no ongoing access, so there is nothing to remove on Steam. Unlink it at [/settings/connections](https://blazium.games/settings/connections).
+- **Agent spending:** set any agent back to **Ask me each time** at [MCP settings](https://blazium.games/settings/mcp).
+- **MCP keys and tokens:** rotate keys at [/settings/mcp](https://blazium.games/settings/mcp). OAuth access tokens expire after 1 hour and refresh tokens after 30 days; all of them stop working when your account is deleted.
 - **Everything:** email [privacy@blazium.games](mailto:privacy@blazium.games) to delete your account. See the [Privacy Policy](https://blazium.games/privacy-policy#6-deleting-your-account).
-
-## For developers: how scopes behave
-
-These are the responses your MCP client, script, or CI job will see.
-
-| Situation | HTTP status | Error code | Message |
-| --- | --- | --- | --- |
-| A token without `mcp:write` makes anything other than a `GET` or `HEAD` request (for example `create_game`, `update_game`, `request_deploy_key`, `request_mcp_key`) | 403 | 4031 | This token is read-only |
-| A project token is used for a different game | 403 | 4030 | This token is limited to one project |
-| The game's owner turned off MCP access for admins, and an admin's token is used on it | 403 | 4080 | The project owner has turned off MCP access for admins |
-| A project token tries to buy | 403 | 4212 | This token can't make purchases |
-| A player token without `player:buy` tries to top up, buy, set up payouts, or cash out | 403 | 4212 | This token can't make purchases or cash out; reconnect and allow purchases |
-| A player token is used outside the player routes | 403 | 4033 | Player tokens cannot use this route |
-| A developer token is used on a player route | 403 | 4033 | Player routes need a player token |
-| A token holds both developer and player scopes | 403 | 4032 | This token mixes developer and player scopes |
-| A token's narrower developer scopes don't cover the route | 403 | 4073 | This token's scopes don't cover this route |
-| An agent purchase needs your approval (no limit set, or over the limit) | 202 | 4214 | Approval required; the response includes the approval |
-| An agent rotates or creates a key, promotes to stable, or deletes a game or build | 202 | 4214 | Approval required; the response includes the approval |
-| You denied the agent's request | 403 | 4215 | The account owner denied this request |
-| The agent sent a wrong or expired approval code | 400 | 4216 | Wrong or expired code |
-| An agent tries to pay by card | 403 | 4082 | Agents pay from the balance |
-| An MCP token is used to change agent limits | 403 | 4083 or 4081 | Only available on blazium.games |
-| The account's email is not verified and it tries to buy, download, set up payouts, or cash out | 403 | 4096 | Verify your email first |
-| The token expired, or the account was deleted | 401 | 4003 or 4007 | Invalid or expired authentication token, or User account not found |
-
-- Account MCP keys and website sessions carry both scopes. OAuth tokens carry what the user approved.
-- The MCP tools that only read (`get_game`, `list_games`, `get_game_analytics`, `list_game_crashes`, `get_deploy_info`, and so on) work with a read-only token.
-- `request_mcp_key` and `list_mcp_keys` need an account-level token, not a project token.
-
-### Deploy keys
-
-- A deploy key is two values for one project: an access token and a secret. chauffeur and CI need both. The access token is `BLAZIUM_ACCESS_TOKEN`, sent as `X-Access-Token`. It stays on the Deploy keys tab. The secret is `BLAZIUM_SECRET_KEY`, sent as `X-Secret-Key`. It is shown once. Copy it before you leave the page. It cannot be shown again.
-- `request_deploy_key` replaces the previous key and returns both values once, after the project owner approves. The access token can be copied later from the Deploy keys tab. The secret cannot. Creating a new deploy key replaces the previous one. Uploads that used the old key stop working.
-- Deploy keys can register builds, upload build files and debug symbols, upload store images, read the game's basic details (`chauffeur info`), and list that game's bug reports and download their screenshot and log (`chauffeur bugs`). They cannot edit the store page text or settings, read analytics or crash dumps, or change a ticket's status.
-- See [Deploy builds](../deploy.md) and [Access and keys](../mcp/access-and-keys.md).

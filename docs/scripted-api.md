@@ -133,10 +133,10 @@ A token stops working when the login session it came from is signed out or expir
 ```bash
 chauffeur sapi validate --dir my-pack --plan free
 chauffeur sapi test --dir my-pack
-chauffeur sapi dev --dir my-pack --port 8787
+chauffeur sapi dev --dir my-pack --channel beta
 ```
 
-`validate` checks the pack against a plan's limits. `test` runs every `*.test.luau` file:
+`validate` checks the pack against a plan's limits. Without the `games_sapi` binary it checks size and file limits only and says Luau was not compiled. `test` runs every `*.test.luau` file:
 
 ```lua
 -- scores.test.luau
@@ -149,9 +149,9 @@ return {
 }
 ```
 
-`dev` serves the folder at `http://127.0.0.1:8787/v1/dev/{logic}` (the game id is `dev`) and reloads when a file changes. Data stays in memory. The token `dev-user-1` signs in as a test player and `X-Sapi-Key: dev-service` acts as a server. `--users users.json` adds players as `{"tokens": {"token": {"id": "u1", "username": "ada"}}}`.
+There is no local server. `dev` validates the pack, then publishes it and activates it on the named channel of the live game, using the deploy key. `--channel` is required, so name a channel meant to run the pack (for example `beta`): players on that channel get the new logic, and its data is stored for real. Use a channel the game does not ship to everyone as your test environment.
 
-The emulator is the `games_sapi` Linux binary. chauffeur looks for it in `--binary`, `SAPI_BINARY`, `PATH`, and its own cache, and downloads it on Linux x86_64 when none is found. On Windows, run chauffeur inside WSL.
+`validate` and `test` run the `games_sapi` binary you already have: chauffeur looks in `--binary`, `SAPI_BINARY` and `PATH`. It downloads nothing. The binary is a Linux build; on Windows, run chauffeur inside WSL.
 
 ## Publish
 
