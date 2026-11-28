@@ -6,6 +6,10 @@ description: Every chauffeur command and flag, with examples.
 
 # Commands
 
+:::tip Scriptable Functionality
+For authoring guides, base script maps, `blazium.json`, payload cookbooks, and AI workflows used with `chauffeur sapi` and `chauffeur lobby`, see [Scriptable Functionality](../scriptable/index.md).
+:::
+
 Every command also takes the [global flags](./index.md#global-flags) (`--access`, `--secret-stdin`, `--url`, `--upload`, `--json`). `chauffeur <command> --help` prints the same reference, and `chauffeur gendocs --dir <folder>` writes it as Markdown so it always matches your binary.
 
 ## Builds and files

@@ -5,6 +5,10 @@ description: The ten ready-made Scripted API features, how each one is turned on
 ---
 # Scripted API features
 
+:::tip Scriptable Functionality
+See [Scriptable Functionality](./scriptable/index.md) and [Base Scripts](./scriptable/base-scripts.md) for routes, state keys, config tables, plan scaling, and customization patterns for all ten features.
+:::
+
 A Scripted API pack is a folder of Luau files, and a few jobs come up in nearly every game: a daily reward, a lucky wheel, chests, quests, boards, competitions, a wallet, lives, a rank ladder, and one call that starts a session. Blazium has a ready-made script for each of those. Each one answers fixed routes under your game, so a game client and your own scripts can rely on the same names.
 
 A feature only runs after the **game owner** turns it on. Adding the files to a pack does not turn anything on, and a pack can hold files for features that are still off.

@@ -55,12 +55,15 @@ The list shows each notice's reference, status, claimant, filing date and how ma
 - messages from our staff, such as a request for information
 - the decision, once there is one
 
-There is no formal counter-notice. What you can do:
+An open notice lets you send a written **counter-statement** (up to 16 KiB). We record it on the notice and email it to the claimant. A counter-statement **does not restore content** and **does not start a statutory waiting period**.
 
+What you can do when a notice names your content:
+
+- Send a written counter-statement on an `open` notice (including through the `file_counter_notice` developer MCP tool), which we record and email to the claimant.
 - Answer the claimant directly at their email address, if you want to.
 - Send us anything relevant, such as a license or proof that the work is yours, by emailing [dmca@blazium.games](mailto:dmca@blazium.games) with the reference in the subject.
 - Remove the listing or any of its builds yourself at any time from your dashboard.
 
-AI agents connected with the developer MCP tools can read the same notices with `list_copyright_notices` and `get_copyright_notice`. Nothing about a notice can be changed over MCP. See the [MCP reference](../mcp/reference.md#copyright-notices).
+AI agents connected with the developer MCP tools can read notices with `list_copyright_notices` and `get_copyright_notice`, record a counter-statement on an `open` notice with `file_counter_notice`, or start a paid notice checkout with `file_dmca_claim` (after the account owner approves). See the [MCP reference](../mcp/reference.md#copyright-notices).
 
 You remain responsible for what you upload. See [What you upload is yours to answer for](../deploy.md#what-you-upload-is-yours-to-answer-for).

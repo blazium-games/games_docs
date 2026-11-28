@@ -6,6 +6,10 @@ description: Run your own Luau logic for a game at sapi.blazium.online, with sto
 
 # Scripted API
 
+:::tip New guide
+See [Scriptable Functionality](./scriptable/index.md) for the full guide covering [base scripts](./scriptable/base-scripts.md), [Scripted API scripting](./scriptable/scripted-api-scripting.md), [payload contracts](./scriptable/payloads.md), and [AI authoring](./scriptable/ai-authoring.md).
+:::
+
 The Scripted API runs Luau logic you write for one game. Each top-level file in a pack is an HTTP route:
 
 ```text
@@ -274,8 +278,10 @@ The **Analytics** page of the game shows Scripted API calls per day, errors, bud
 | Time per call | 250 ms | 1 s | 2.5 s |
 | Schedules (shortest interval) | 2 (1 hour) | 10 (5 minutes) | 50 (1 minute) |
 | Leaderboards (entries each) | 2 (1,000) | 20 (50,000) | 100 (250,000) |
+| Third-party outbound calls per request / per hour | 2 / 120 (3 s, 64 KiB) | 4 / 5,000 (5 s, 256 KiB) | 8 / 50,000 (8 s, 1 MiB) |
+| Internal calls (`api.call`, `lobby.*`) per request / per hour* | 16 / 20,000 | 64 / 500,000 | 256 / 5,000,000 |
 | Log retention | 1 day | 7 days | 30 days |
 
-The [reference](./scripted-api-reference.md#limits) lists every limit, including per-scope data sizes and outbound calls.
+\* Internal calls are counted separately from third-party outbound calls and are currently tracked in log-only mode without blocking normal games. The [reference](./scripted-api-reference.md#limits) lists every limit, including per-scope data sizes and outbound calls.
 
 Staff can turn the Scripted API off for a game that abuses it. The tab then shows the reason, and calls return `4306`.

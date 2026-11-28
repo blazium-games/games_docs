@@ -136,6 +136,18 @@ const sidebars = {
         'scripted-api',
         'scripted-api-reference',
         'scripted-api-features',
+        {
+          type: 'category',
+          label: 'Scriptable Functionality',
+          link: { type: 'doc', id: 'scriptable/index' },
+          items: [
+            'scriptable/base-scripts',
+            'scriptable/scripted-api-scripting',
+            'scriptable/scripted-lobby-scripting',
+            'scriptable/payloads',
+            'scriptable/ai-authoring',
+          ],
+        },
         'progress',
         'web-player',
         'inventory',

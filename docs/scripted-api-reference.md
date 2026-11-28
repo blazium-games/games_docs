@@ -73,7 +73,7 @@ An unknown field, scope, use or method fails validation.
 |---|---|
 | `req.method`, `req.logic`, `req.action`, `req.game`, `req.channel`, `req.request_id`, `req.ip` | The call. |
 | `req.caller` | `anonymous`, `user`, `service`, `signed`, `schedule`, `admin` or `test`. |
-| `req.plan` | `free`, `premium` or `business`. |
+| `req.plan` | The game's plan slug (`"free"` on Free, or the tier slug for Grow and Scale). |
 | `req.query`, `req.headers` | Strings. Header names are lowercase. |
 | `req.body`, `req.raw` | Decoded JSON and the raw text. |
 | `req.user` | `{ id, username, avatar_url, owns_game }` for a signed-in player, or `nil`. |
@@ -131,7 +131,7 @@ Keys are 1 to 128 characters of letters, digits and `_ - . : /`. `data.user("id"
 | `lobby.kick(id, user, { ban_seconds })`, `lobby.set_data(id, key, value)` | `lobby` | Remove a player, or change one key of the lobby's public data (32 keys of 2 KiB). |
 | `lobby.call(id, name, body)` | `lobby` | Run a handler the lobby script registered with `lobby.rpc.register(name, fn)`. |
 
-`lobby` needs the `lobby` capability, which needs the Grow plan or above (see [features](./scripted-api-features.md#capabilities)). Each of these calls waits for the lobby service, so keep them few. Calls between a Scripted API script and a lobby script are not counted against the plan again, and they cannot loop without end: a chain of calls stops after a few steps with `deadline_exceeded`. The Scripted API's data and a lobby script's data are separate stores. A lobby script reads one value from the Scripted API with `sapi.read(scope, key, user, fn)` and runs a logic with `sapi.call(logic, { action, body, user }, fn)`.
+`lobby` needs the `lobby` capability, which needs the Grow plan or above (see [features](./scripted-api-features.md#capabilities)). Each of these calls waits for the lobby service, so keep them few. Cross-service internal calls (`api.call`, `lobby.*`, `sapi.call`, `sapi.read`) are counted separately from third-party HTTP calls (see [Limits](#limits)) and cannot loop without end: a chain of calls stops after 4 hops or when its deadline runs out (`deadline_exceeded`). The Scripted API's data and a lobby script's data are separate stores. A lobby script reads one value from the Scripted API with `sapi.read(scope, key, user, fn)` and runs a logic with `sapi.call(logic, { action, body, user }, fn)`.
 
 `progress`, `items.grant` and `webhook.send` are sent after the handler returns without an error. Without `user` they act for the signed-in player. Achievements, stats and events must list `scripted_api` among their [writers](./progress.md).
 
@@ -221,6 +221,8 @@ The same codes come back through `api.blazium.online` when the website, chauffeu
 | Outbound calls per hour | 120 | 5,000 | 50,000 |
 | Outbound timeout | 3 s | 5 s | 8 s |
 | Outbound response | 64 KiB | 256 KiB | 1 MiB |
+| Internal calls per request (`api.call`, `lobby.*`)* | 16 | 64 | 256 |
+| Internal calls per hour* | 20,000 | 500,000 | 5,000,000 |
 | Pack size | 256 KiB | 2 MiB | 8 MiB |
 | Logic files | 20 | 100 | 250 |
 | Packs kept | 3 | 10 | 25 |
@@ -232,5 +234,7 @@ The same codes come back through `api.blazium.online` when the website, chauffeu
 | Entries per leaderboard | 1,000 | 50,000 | 250,000 |
 | Log lines kept | 1,000 | 20,000 | 100,000 |
 | Log retention | 1 day | 7 days | 30 days |
+
+\* Internal calls (`api.call` and `lobby.*`) are counted separately from third-party outbound calls (`api.http`, `webhook.send`, `items.list`). During the current log-only period, internal calls exceeding the allowances above are counted and logged without blocking normal games.
 
 A pack that is over the plan's pack, file or schedule limits is refused when it is published. When a plan ends, stored data stays readable and deletable, and writes are refused with `4308` while the game is over a data limit.

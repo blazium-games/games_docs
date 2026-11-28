@@ -4,6 +4,10 @@ sidebar_position: 8
 
 # Multiplayer
 
+:::tip Scriptable Functionality
+For a full scripting reference covering `blazium.json`, lobby callbacks, `sapi.*`, `lobby.rpc.register`, `system.http_request`, and examples, see [Scriptable Functionality](./scriptable/index.md) and [Scripted Lobby Scripting](./scriptable/scripted-lobby-scripting.md).
+:::
+
 A Blazium game uses the engine module. A game built on another Godot engine vendors the public `games_plugin` addon and sets `blazium/game/game_uid` to the project id from the editor. Unity and Unreal games use the packages on [Engines](./engines.md). They call the native library instead of opening these sockets themselves.
 
 ## Sign-in
@@ -47,6 +51,16 @@ On every plan a scripted lobby can keep data that outlives the lobby, in its own
 
 List what the script uses in its `blazium.json`: `"data": { "read": ["user"], "write": ["user", "lobby"] }`, and `"uses"` for `secrets` and `sapi`. The writes of one callback apply together when it returns, and are dropped if it raises an error. A script that reads data the lobby has not loaded gets `data_unavailable`.
 
-To use the other store, a lobby script lists `"sapi"` in `uses` and calls `sapi.read(scope, key, user, fn)` to read one Scripted API value, or `sapi.call(logic, { action, body, user }, fn)` to run a Scripted API logic for a player in the lobby. Both are asynchronous, and `fn` receives `{ ok, status, body, error }`. A Scripted API logic with `"lobby"` in `uses` reaches back with `lobby.call`, `lobby.broadcast` and the other [lobby functions](./scripted-api-reference.md#platform). Calls between the two are not counted against the plan again. Both need the `lobby` and `lobby_data` [capabilities](./scripted-api-features.md#capabilities), which the owner turns on per game.
+To use the other store, a lobby script lists `"sapi"` in `uses` and calls `sapi.read(scope, key, user, fn)` to read one Scripted API value, or `sapi.call(logic, { action, body, user }, fn)` to run a Scripted API logic for a player in the lobby. Both are asynchronous, and `fn` receives `{ ok, status, body, error }`. A Scripted API logic with `"lobby"` in `uses` reaches back with `lobby.call`, `lobby.broadcast` and the other [lobby functions](./scripted-api-reference.md#platform). Both need the `lobby` and `lobby_data` [capabilities](./scripted-api-features.md#capabilities), which the owner turns on per game.
+
+## Lobby script call limits
+
+| Call type | Free | Grow | Scale |
+|---|---|---|---|
+| Third-party HTTP (`system.http_request`) per callback / per hour | 2 / 120 | 4 / 5,000 | 8 / 50,000 |
+| Third-party HTTP timeout / max response | 3 s / 64 KiB | 5 s / 256 KiB | 8 s / 1 MiB |
+| Internal calls (`sapi.call`, `sapi.read`) per callback / per hour* | 16 / 20,000 | 64 / 500,000 | 256 / 5,000,000 |
+
+\* Internal calls are counted separately from third-party HTTP calls and are currently tracked in log-only mode without blocking normal games. See [Scripted Lobby Scripting](./scriptable/scripted-lobby-scripting.md#limits) for runtime budgets and manifest rules.
 
 Read and change lobby data from the terminal with `chauffeur lobby data`, `lobby config`, `lobby secret` and `lobby usage` (see [commands](./cli/commands.md#lobby-data)), or with `get_lobby_data`, `set_lobby_data` and the other [lobby data tools](./mcp/reference.md#lobby-data) over MCP. A reset of a whole scope needs `--confirm` with the game's id, and over MCP waits for the owner's approval.
