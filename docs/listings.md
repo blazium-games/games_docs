@@ -210,7 +210,7 @@ The home page is built from shelves. Every shelf only takes public listings with
 
 `GET https://api.blazium.online/api/v1/public/shelves/{shelf}?os=windows&limit=12` returns a shelf without sign-in, and the player MCP `get_shelf` tool reads it. `limit` is 1 to 24 (default 12). An unknown shelf is a `404`, and a `limit` outside 1 to 24 is a `400`.
 
-Each listing on a shelf has its `uid`, `name`, `asset_type`, `status`, `tagline`, `vanity_name`, `thumbnail`, `price_cents`, `session_bucket`, `authorship`, launch `health`, the developer's `username` and `creator_avatar`, and four play fields: 
+Each listing on a shelf has its `uid`, `name`, `asset_type`, `status`, `tagline`, `vanity_name`, `thumbnail`, `price_cents`, `session_bucket`, `authorship`, launch `health`, the developer's `username` and `creator_avatar`, and four play fields: `has_browser_build` (a clean stable `web` build), `has_downloads` (a clean non-web build), `web_play_requires` (`sign_in` when a signed-out visitor must sign in, `none` when anyone can play, or empty with no browser build), and `has_browser_demo` (a demo build is set for the browser player).
 
 ## Build scans
 
