@@ -50,6 +50,30 @@ Ten ready-made features (`hub`, `daily`, `wheel`, `chests`, `quests`, `leaderboa
 - To edit a live pack, `get_sapi_pack_files` and `get_sapi_file` read it, `chauffeur sapi pull --dir sapi` downloads it, then test and publish again.
 - A game that started before features existed keeps running every feature until the owner chooses to manage them.
 
+## Start from the base scripts
+
+Do not write these ten features from scratch. Copy a base script, then adapt it. They live in `base/` of the public repo https://github.com/blazium-games/scripted_api_examples, next to `base/lib/` (`router`, `guard`, `state`, `plan`, `reward`). Reference: https://docs.blazium.games/docs/scriptable/base-scripts.
+
+- Prefer configuration to code: change the feature's config (`daily_config`, `wheel_config`, `economy_config`, and so on) with `set_sapi_config` or `chauffeur sapi config set <name> '<json>'`.
+- When you do copy a script, copy `lib/` with it, keep the `CALL:merge` action so guest sign-ins still merge, and add sub-routes such as `actions["POST:custom/craft"]`. Examples: `examples/extend-base-feature`, `examples/custom-feature`.
+- `CALL:*` actions are internal. They run through `api.call` inside the pack, and a public HTTP client cannot send them. Server-only routes check `guard.server(req)`.
+- `lives` needs `economy`. `economy` is marked sensitive.
+- The repo also has `examples/` recipes (submit a score, leaderboards, daily reset, idempotent claim, secrets and config, rate limiting, outbound HTTP, webhooks, progress, items, lobby calls), `payloads/` (envelope, headers, error codes `4300` to `4324`), and `types/sapi.d.luau` for `luau-lsp`. Its `AGENTS.md` and `llms.txt` are the authoring rules: read `AGENTS.md` before you write a pack. Use only globals and methods that appear in `types/sapi.d.luau`.
+- In examples, use placeholder hosts that end in `.invalid`, never a real hostname, key, or staff route.
+
+## Limits by plan
+
+| Limit | Free | Grow | Scale |
+|---|---|---|---|
+| Third-party calls (`api.http`, `webhook.send`, `items.list`) per request | 2 | 4 | 8 |
+| Third-party calls per hour | 120 | 5,000 | 50,000 |
+| Third-party timeout | 3 s | 5 s | 8 s |
+| Third-party response body | 64 KiB | 256 KiB | 1 MiB |
+| Internal calls (`api.call`, `lobby.*`) per request | 16 | 64 | 256 |
+| Internal calls per hour | 20,000 | 500,000 | 5,000,000 |
+
+Internal calls are counted apart from third-party calls. They are only logged for now, so do not rely on that. `api.call` and `lobby.call` chains stop at 4 levels, and a chain can end with `4324` `deadline_exceeded`. Every other limit (data, rate, time, memory, schedules, boards, logs) is in https://docs.blazium.games/docs/scripted-api-reference#limits. The same third-party and internal numbers apply to lobby scripts (`system.http_request`, `sapi.call`, `sapi.read`).
+
 ## Test, then publish
 
 Run these with the game's deploy key configured for chauffeur:
@@ -59,6 +83,15 @@ chauffeur sapi validate --dir sapi --plan free
 chauffeur sapi test --dir sapi
 chauffeur sapi publish --dir sapi --channel beta --activate
 ```
+
+How to validate and test, in this order:
+
+1. `validate --plan free` (or `grow`, `scale`) checks the pack against that plan's limits. Validate against the lowest plan the game must run on.
+2. `test` runs every `*.test.luau` file, which returns a table of test functions. Use `t.call(target, { user, service, method, body, query })` (`method = "CALL"` for internal actions), `t.clock.set` and `t.clock.advance` for cooldowns and day rollovers, and `t.eq` and `t.ok` to assert. Use a unique player id in each test, because storage persists across tests in one run.
+3. `dev` serves the pack locally, which is how you try a route before anything is published.
+4. Publish to `beta` with `--activate`, call it, read `get_sapi_logs`, then promote the same checksum to `stable`.
+
+`validate`, `test` and `dev` run the `games_sapi` binary. chauffeur finds it from `--binary`, `SAPI_BINARY`, `PATH`, or its cache, and downloads it on Linux x86_64. Add `*.test.luau` files for every recipe you copy.
 
 `chauffeur sapi dev --dir sapi` serves the pack locally at `http://127.0.0.1:8787/v1/dev/<logic>` with token `dev-user-1` and server key `dev-service`. The emulator is a Linux binary; on Windows run chauffeur in WSL. MCP never uploads a pack.
 
@@ -70,7 +103,7 @@ Promote by activating the same checksum on `stable`: `activate_sapi_pack` with t
 - `get_sapi_data`, `set_sapi_data`, and `delete_sapi_data` change one key at a time. `reset_sapi_data` deletes many: pass `scope` (`global`, `channel` or `user`) and optional `channel`, `user`, `prefix`, with `dry_run` to count first, then `confirm` to delete (the owner approves). `chauffeur sapi data reset` does the same. Deleting all of a game's data is website-only.
 - `set_sapi_config` sets remote config (`public: true` serves it at `/v1/{game_uid}/_config`). `set_sapi_secret` stores write-only secrets; no tool returns a value.
 - `list_sapi_schedules` shows cron logic and recent runs.
-- Lobby scripts have their own data store (`get_lobby_data`, `set_lobby_data`, `reset_lobby_data`, `get_lobby_config`, `list_lobby_secrets`, `get_lobby_usage`; Grow and above). It is separate from the Scripted API's data. Lobby scripts reach the Scripted API with `sapi.read` and `sapi.call`, and Scripted API logic reaches lobby scripts with `lobby.call`, once the owner turns on the `lobby` capability.
+- Lobby scripts have their own data store (`get_lobby_data`, `set_lobby_data`, `reset_lobby_data`, `get_lobby_config`, `list_lobby_secrets`, `get_lobby_usage`; every plan, with larger quotas on Grow and Scale). It is separate from the Scripted API's data. Lobby scripts reach the Scripted API with `sapi.read` and `sapi.call`, and Scripted API logic reaches lobby scripts with `lobby.call`, once the owner turns on the `lobby` capability.
 
 ## Calling it
 
