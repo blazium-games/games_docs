@@ -5,6 +5,10 @@ description: The ten ready-made Scripted API features, how each one is turned on
 ---
 # Scripted API features
 
+:::tip Scriptable Functionality
+See [Scriptable Functionality](./scriptable/index.md) and [Base Scripts](./scriptable/base-scripts.md) for routes, state keys, config tables, plan scaling, and customization patterns for all ten features.
+:::
+
 A Scripted API pack is a folder of Luau files, and a few jobs come up in nearly every game: a daily reward, a lucky wheel, chests, quests, boards, competitions, a wallet, lives, a rank ladder, and one call that starts a session. Blazium has a ready-made script for each of those. Each one answers fixed routes under your game, so a game client and your own scripts can rely on the same names.
 
 A feature only runs after the **game owner** turns it on. Adding the files to a pack does not turn anything on, and a pack can hold files for features that are still off.
@@ -84,4 +88,4 @@ The HTTP status is `403`. See [error codes](./scripted-api-reference.md#error-co
 | Turn one off | `chauffeur sapi feature disable <feature> [--cascade]` | `disable_sapi_feature` |
 | Download the live scripts | `chauffeur sapi pull [checksum\|active\|latest] --dir <path>` | `get_sapi_pack_files`, `get_sapi_file` |
 
-Write the scripts locally, run `chauffeur sapi test`, publish with `chauffeur sapi publish`, and ask the owner to turn the feature on. `chauffeur sapi test` runs the pack with the local binary, which does not wait for the owner. On the live game a feature runs only once the owner turns it on, and `chauffeur sapi dev --channel <name>` serves the pack on a live channel, so it follows the same rule.
+Write the scripts locally, run `chauffeur sapi test`, publish with `chauffeur sapi publish`, and ask the owner to turn the feature on. The local emulator (`chauffeur sapi dev`) runs every feature, so you can test before the owner turns anything on.

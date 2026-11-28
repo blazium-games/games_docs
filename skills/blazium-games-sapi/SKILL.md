@@ -60,7 +60,7 @@ chauffeur sapi test --dir sapi
 chauffeur sapi publish --dir sapi --channel beta --activate
 ```
 
-`chauffeur sapi dev --dir sapi --channel beta` validates, publishes and activates the pack on that channel of the live game; there is no local emulator. `--channel` is required on `dev`, `publish` and `activate`. `validate` and `test` use the `games_sapi` binary from `--binary`, `SAPI_BINARY` or `PATH` (Linux; use WSL on Windows). MCP never uploads a pack.
+`chauffeur sapi dev --dir sapi` serves the pack locally at `http://127.0.0.1:8787/v1/dev/<logic>` with token `dev-user-1` and server key `dev-service`. The emulator is a Linux binary; on Windows run chauffeur in WSL. MCP never uploads a pack.
 
 Promote by activating the same checksum on `stable`: `activate_sapi_pack` with the checksum from `list_sapi_packs`, or `chauffeur sapi activate <checksum> --channel stable`. Over MCP this waits for the owner's approval. Roll back by activating an older checksum. An empty checksum (`none` in chauffeur) stops a channel.
 

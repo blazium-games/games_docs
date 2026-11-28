@@ -6,6 +6,10 @@ description: Run your own Luau logic for a game at sapi.blazium.online, with sto
 
 # Scripted API
 
+:::tip New guide
+See [Scriptable Functionality](./scriptable/index.md) for the full guide covering [base scripts](./scriptable/base-scripts.md), [Scripted API scripting](./scriptable/scripted-api-scripting.md), [payload contracts](./scriptable/payloads.md), and [AI authoring](./scriptable/ai-authoring.md).
+:::
+
 The Scripted API runs Luau logic you write for one game. Each top-level file in a pack is an HTTP route:
 
 ```text
@@ -133,10 +137,10 @@ A token stops working when the login session it came from is signed out or expir
 ```bash
 chauffeur sapi validate --dir my-pack --plan free
 chauffeur sapi test --dir my-pack
-chauffeur sapi dev --dir my-pack --channel beta
+chauffeur sapi dev --dir my-pack --port 8787
 ```
 
-`validate` checks the pack against a plan's limits. Without the `games_sapi` binary it checks size and file limits only and says Luau was not compiled. `test` runs every `*.test.luau` file:
+`validate` checks the pack against a plan's limits. `test` runs every `*.test.luau` file:
 
 ```lua
 -- scores.test.luau
@@ -149,9 +153,9 @@ return {
 }
 ```
 
-There is no local server. `dev` validates the pack, then publishes it and activates it on the named channel of the live game, using the deploy key. `--channel` is required, so name a channel meant to run the pack (for example `beta`): players on that channel get the new logic, and its data is stored for real. Use a channel the game does not ship to everyone as your test environment.
+`dev` serves the folder at `http://127.0.0.1:8787/v1/dev/{logic}` (the game id is `dev`) and reloads when a file changes. Data stays in memory. The token `dev-user-1` signs in as a test player and `X-Sapi-Key: dev-service` acts as a server. `--users users.json` adds players as `{"tokens": {"token": {"id": "u1", "username": "ada"}}}`.
 
-`validate` and `test` run the `games_sapi` binary you already have: chauffeur looks in `--binary`, `SAPI_BINARY` and `PATH`. It downloads nothing. The binary is a Linux build; on Windows, run chauffeur inside WSL.
+The emulator is the `games_sapi` Linux binary. chauffeur looks for it in `--binary`, `SAPI_BINARY`, `PATH`, and its own cache, and downloads it on Linux x86_64 when none is found. On Windows, run chauffeur inside WSL.
 
 ## Publish
 
@@ -274,8 +278,10 @@ The **Analytics** page of the game shows Scripted API calls per day, errors, bud
 | Time per call | 250 ms | 1 s | 2.5 s |
 | Schedules (shortest interval) | 2 (1 hour) | 10 (5 minutes) | 50 (1 minute) |
 | Leaderboards (entries each) | 2 (1,000) | 20 (50,000) | 100 (250,000) |
+| Third-party outbound calls per request / per hour | 2 / 120 (3 s, 64 KiB) | 4 / 5,000 (5 s, 256 KiB) | 8 / 50,000 (8 s, 1 MiB) |
+| Internal calls (`api.call`, `lobby.*`) per request / per hour* | 16 / 20,000 | 64 / 500,000 | 256 / 5,000,000 |
 | Log retention | 1 day | 7 days | 30 days |
 
-The [reference](./scripted-api-reference.md#limits) lists every limit, including per-scope data sizes and outbound calls.
+\* Internal calls are counted separately from third-party outbound calls and are currently tracked in log-only mode without blocking normal games. The [reference](./scripted-api-reference.md#limits) lists every limit, including per-scope data sizes and outbound calls.
 
 Staff can turn the Scripted API off for a game that abuses it. The tab then shows the reason, and calls return `4306`.

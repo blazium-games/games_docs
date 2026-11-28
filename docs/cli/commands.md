@@ -6,6 +6,10 @@ description: Every chauffeur command and flag, with examples.
 
 # Commands
 
+:::tip Scriptable Functionality
+For authoring guides, base script maps, `blazium.json`, payload cookbooks, and AI workflows used with `chauffeur sapi` and `chauffeur lobby`, see [Scriptable Functionality](../scriptable/index.md).
+:::
+
 Every command also takes the [global flags](./index.md#global-flags) (`--access`, `--secret-stdin`, `--url`, `--upload`, `--json`). `chauffeur <command> --help` prints the same reference, and `chauffeur gendocs --dir <folder>` writes it as Markdown so it always matches your binary.
 
 ## Builds and files
@@ -206,11 +210,11 @@ See [Multiplayer](../multiplayer.md).
 |---------|--------------|
 | `chauffeur sapi validate --dir <path> [--plan free]` | Check a pack against a plan's limits with the local engine |
 | `chauffeur sapi test --dir <path>` | Run the pack's `*.test.luau` files |
-| `chauffeur sapi dev --dir <path> --channel <name>` | Validate the pack, publish it, and activate it on that channel of the live game |
-| `chauffeur sapi publish --dir <path> --channel <name> [--activate]` | Zip every `.lua` and `.luau` file and upload it as a pack |
+| `chauffeur sapi dev --dir <path> [--port 8787] [--users users.json]` | Serve the pack at `http://127.0.0.1:8787/v1/dev/<logic>` and reload on change |
+| `chauffeur sapi publish --dir <path> [--channel stable] [--activate]` | Zip every `.lua` and `.luau` file and upload it as a pack |
 | `chauffeur sapi status` | Settings, active pack per channel, and the plan's limits |
 | `chauffeur sapi packs` | Stored packs |
-| `chauffeur sapi activate <checksum\|none> --channel <name>` | Serve a stored pack on a channel, roll back, or stop the channel |
+| `chauffeur sapi activate <checksum\|none> [--channel stable]` | Serve a stored pack on a channel, roll back, or stop the channel |
 | `chauffeur sapi logs [--logic] [--channel] [--level] [--since] [--until] [--cursor] [--request-id] [--limit 200]` | Stored script logs. `--since` and `--until` take a time or how long ago (`30m`, `2h`, `7d`). A full page prints a `next_cursor` for `--cursor` |
 | `chauffeur sapi analytics` | Calls, errors, refusals and latency, by logic and by day |
 | `chauffeur sapi audit [--limit n] [--before id]` | Every change made to the Scripted API, newest first |
@@ -228,7 +232,7 @@ See [Multiplayer](../multiplayer.md).
 | `chauffeur sapi feature disable <feature> [--cascade]` | Turn a feature off. A deploy key can never turn one on |
 | `chauffeur sapi feature enable <feature>` | Prints what to ask the game owner and the link they use. It changes nothing |
 
-`validate` and `test` run the `games_sapi` binary from `--binary`, `SAPI_BINARY` or `PATH`; nothing is downloaded. `dev` needs no binary: it publishes to a live channel, and `--channel` is required on `dev`, `publish` and `activate` so a command never changes a live channel by default. A value that is not JSON is stored as a string. Secret values are at most 16 KiB; when the deploy secret also comes from stdin (`--secret-stdin`), pass the value with `--from-file`. `data reset` needs `--scope` and `--confirm` with the game's id. A deploy key cannot delete all of a game's data; do that on the website.
+`validate`, `test` and `dev` run the `games_sapi` binary from `--binary`, `SAPI_BINARY`, `PATH` or chauffeur's cache. On Linux x86_64 chauffeur downloads it when none is found. A value that is not JSON is stored as a string. Secret values are at most 16 KiB; when the deploy secret also comes from stdin (`--secret-stdin`), pass the value with `--from-file`. `data reset` needs `--scope` and `--confirm` with the game's id. A deploy key cannot delete all of a game's data; do that on the website.
 
 ```bash
 chauffeur sapi test --dir sapi

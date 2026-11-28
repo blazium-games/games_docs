@@ -6,6 +6,10 @@ description: Per-game plans, the sale fee, and how long an owner or admin can re
 
 # Free, Grow, and Scale
 
+:::tip Scriptable Functionality
+See [Scriptable Functionality](./scriptable/index.md) for how scriptable APIs and scripted lobbies scale across Free, Grow, and Scale, plus third-party and internal call limits.
+:::
+
 Each game or application has its own plan. A new game is Free. The public store page does not show the plan. Only the owner and an accepted admin can see it, on the project's Plan page. Either of them can start, upgrade, downgrade, or cancel it.
 
 The card is charged to the person who subscribes, monthly or annually, through Stripe. The marketplace fee is not added on top. On every plan, Blazium keeps $0.25 + 8% of a sale. A cash-out costs another 8% + $0.25 on Free, 7% + $0.25 on Grow, or 6% + $0.25 on Scale, from the best plan the account owns. Sale earnings can be cashed out once the refund window ends, 7 days after the sale. Playtime does not release them sooner. Buyers pay card processing.
@@ -42,7 +46,22 @@ Every plan has lobbies. The limits grow with the plan so a game that is succeedi
 | Grow | 128 | 16 | 4 | 16 KiB | Yes |
 | Scale | 1,024 | 32 | 8 | 64 KiB | Yes |
 
-A lobby request over a limit is refused with a message that names the limit and the plan that raises it; lobbies already open are never closed by a downgrade. Keys per lobby follow the data limits in the [Scripted API](./scripted-api.md) and lobby data store. The Lobby tab on your game's edit page shows your limits and how close the game is to them, and \chauffeur lobby analytics\ or the \get_lobby_analytics\ MCP tool shows how many lobbies were turned away at a cap.
+A lobby request over a limit is refused with a message that names the limit and the plan that raises it; lobbies already open are never closed by a downgrade. Keys per lobby follow the data limits in the [Scripted API](./scripted-api.md) and lobby data store. The Lobby tab on your game's edit page shows your limits and how close the game is to them, and `chauffeur lobby analytics` or the `get_lobby_analytics` MCP tool shows how many lobbies were turned away at a cap.
+
+## Scriptable call limits
+
+Both Scripted API logic (`api.http`, `webhook.send`, `items.list`, `api.call`, `lobby.*`) and scripted lobby callbacks (`system.http_request`, `sapi.call`, `sapi.read`) share these per-plan third-party and internal call allowances:
+
+| Limit | Free | Grow | Scale |
+|---|---|---|---|
+| Third-party calls per request / callback | 2 | 4 | 8 |
+| Third-party calls per hour | 120 | 5,000 | 50,000 |
+| Third-party HTTP timeout | 3 s | 5 s | 8 s |
+| Third-party HTTP max response body | 64 KiB | 256 KiB | 1 MiB |
+| Internal calls (`api.call`, `lobby.*`, `sapi.call`, `sapi.read`) per request / callback* | 16 | 64 | 256 |
+| Internal calls per hour* | 20,000 | 500,000 | 5,000,000 |
+
+\* Internal calls are counted separately from third-party outbound calls and are currently tracked in log-only mode without blocking normal games. See [Scripted API reference → Limits](./scripted-api-reference.md#limits) and [Scriptable Functionality](./scriptable/index.md) for storage, CPU, memory, and pack limits.
 
 ## Launch offer
 

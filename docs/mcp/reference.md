@@ -303,7 +303,7 @@ See [Listings and search](../listings.md) for the allowed values and the listing
 
 Amounts are integer US cents. See [Payments](../payments/index.md) for the rules behind these tools.
 
-Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 253 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
+Buying, wallet, and library are only on the [player server](./player.md), where the library tool is `get_library`. The developer server lists 257 tools. A developer token that purchases or tops up gets `4034`. Seller, payout, and patron tools stay here.
 
 | Tool | Inputs | Notes |
 |------|--------|-------|
